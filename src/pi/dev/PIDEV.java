@@ -7,6 +7,8 @@ package pi.dev;
 import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author gtsia
@@ -21,10 +23,18 @@ public class PIDEV {
       DBconnexion database = DBconnexion.getInstance();
 Connection connection = database.getConnection();
 
+String  name="name";
+    
+        try {
+            Statement stm = connection.createStatement();
+            String query ="INSERT INTO employee (id, name) VALUES ( '1', 'name')";
+            stm.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("failed");
+        }
+
         // TODO code application logic here
         
     }
-    //iwashere
-    //test push
-    int a=8;
-}
+    
+}   
