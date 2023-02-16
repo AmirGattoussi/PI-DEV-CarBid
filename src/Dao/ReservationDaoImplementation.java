@@ -5,7 +5,7 @@
  */
 package Dao;
 
-import Entities.Employee;
+import Entities.Reservation;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -13,39 +13,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *
- * @author gtsia
+ * @author neil
  */
-public class EmployeeDaoImplementation implements EmployeeDao{
+public class ReservationDaoImplementation implements ReservationDao{
 
     Connection cnx;
 
-    public EmployeeDaoImplementation()throws SQLException {
+    public ReservationDaoImplementation()throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
     }
+
     @Override
-    public void addEmployee(){
+    public void createReservation(){
         try {
             Statement stm = cnx.createStatement();
-            String query = "INSERT INTO employee (id, name) VALUES ( '2', 'yosr')";
+            String query = "INSERT INTO reservation(date, location, user, car, agent) VALUES('14-February-2023', 'Ariana', 'Amir', 'Ford', 'Samir')";
             stm.executeUpdate(query);
         }  catch (SQLException ex) {
-            Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservationDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
-    public void deleteEmployee() {
+    public void deleteReservation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateEmployee() {
+    public void updateReservation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Employee getEmployee() {
+    public Reservation getReservation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

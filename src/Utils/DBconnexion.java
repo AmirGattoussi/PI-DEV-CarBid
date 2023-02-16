@@ -9,7 +9,7 @@ import java.sql.*;
 
 /**
  *
- * @author gtsia
+ * @author neil
  */
 public class DBconnexion {
   
@@ -20,17 +20,15 @@ public class DBconnexion {
   private String password = "";
 
   private DBconnexion() throws SQLException {
-     try {
+    try {
       this.connection = DriverManager.getConnection(url, username, password);
-                System.out.println("Connextion etablie !");
+                System.out.println("Connextion established !");
 
-     }
-     catch (SQLException ex) {
-            System.out.println("Erreur de connextion");
+    }
+    catch (SQLException ex) {
+            System.out.println("Connextion error");
             System.out.println(ex.getMessage());
         }
-     
-    
   }
 
   public Connection getConnection() {

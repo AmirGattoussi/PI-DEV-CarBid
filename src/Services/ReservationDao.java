@@ -9,11 +9,11 @@ import Entities.*;
 
 /**
  *
- * @author gtsia
+ * @author neil
  */
-public interface EmployeeDao {
-    public void addEmployee();
-    public void deleteEmployee();
-    public void updateEmployee();
-    public Employee getEmployee();
+public interface ReservationDao {
+    public void createReservation();
+    public void deleteReservation();
+    public void updateReservation();
+    public Reservation getReservation();
 }

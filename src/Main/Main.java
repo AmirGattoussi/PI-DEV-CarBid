@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
 import Dao.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+// import java.util.logging.Level;
+// import java.util.logging.Logger;
 /**
  *
- * @author gtsia
+ * @author neil
  */
 public class Main {
 
@@ -21,10 +21,10 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException, IOException {
         
-      DBconnexion database = DBconnexion.getInstance();
+    DBconnexion database = DBconnexion.getInstance();
 Connection connection = database.getConnection();
-EmployeeDaoImplementation e= new EmployeeDaoImplementation();
-e.addEmployee();
+ReservationDaoImplementation e= new ReservationDaoImplementation();
+e.createReservation();
 
 /*String  name="name";
     
