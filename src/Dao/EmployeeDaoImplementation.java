@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author gtsia
  */
 public class EmployeeDaoImplementation implements EmployeeDao{
-      
+
     Connection cnx;
 
     public EmployeeDaoImplementation()throws SQLException {
@@ -50,12 +50,11 @@ public class EmployeeDaoImplementation implements EmployeeDao{
     }
 }
     /*@Override
-     public void ModifierAbonne(Abonne a) throws SQLException
+    public void ModifierAbonne(Abonne a) throws SQLException
     { 
-          PreparedStatement pst = cnx.prepareStatement(" update abonne set nomabonne = ? where nomabonne=?");
-                  
-           
-           pst.executeUpdate();
+        PreparedStatement pst = cnx.prepareStatement(" update abonne set nomabonne = ? where nomabonne=?");
+
+        pst.executeUpdate();
     }
     
     
