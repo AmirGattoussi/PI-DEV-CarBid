@@ -9,11 +9,11 @@ package Entities;
  *
  * @author gtsia
  */
-public class Employee {
+public class User {
     int id;
     String name;
 
-    public Employee(int id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }

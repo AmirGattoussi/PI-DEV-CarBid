@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 package Services;
+import Entities.*;
+
 
 /**
  *
  * @author gtsia
  */
 public interface UserDao {
-    public void login();
-    
+    public void addEmployee();
+    public void deleteEmployee();
+    public void updateEmployee();
+    public User getEmployee();
 }

@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 package Services;
-import Entities.*;
+
+import Entities.Auction;
 
 
 /**
  *
- * @author gtsia
+ * @author asus
  */
-public interface EmployeeDao {
-    public void addEmployee();
-    public void deleteEmployee();
-    public void updateEmployee();
-    public Employee getEmployee();
+public interface AuctionDao {
+    public void addAuction();
+    public void deleteAuction();
+    public void updateAuction();
+    public Auction getAuction(); 
 }

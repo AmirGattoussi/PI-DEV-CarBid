@@ -5,7 +5,7 @@
  */
 package Dao;
 
-import Entities.Employee;
+import Entities.User;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author gtsia
  */
-public class EmployeeDaoImplementation implements EmployeeDao{
+public class EmployeeDaoImplementation implements UserDao{
       
     Connection cnx;
 
@@ -45,7 +45,7 @@ public class EmployeeDaoImplementation implements EmployeeDao{
     }
 
     @Override
-    public Employee getEmployee() {
+    public User getEmployee() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
