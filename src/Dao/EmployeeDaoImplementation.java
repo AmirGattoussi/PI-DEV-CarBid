@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Entities.User;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author gtsia
  */
-public class EmployeeDaoImplementation implements EmployeeDao{
+public class EmployeeDaoImplementation implements UserDao{
       
     Connection cnx;
 
@@ -31,6 +32,21 @@ public class EmployeeDaoImplementation implements EmployeeDao{
             Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @Override
+    public void deleteEmployee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateEmployee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User getEmployee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
     /*@Override

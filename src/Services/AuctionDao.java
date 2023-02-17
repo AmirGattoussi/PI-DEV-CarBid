@@ -5,10 +5,16 @@
  */
 package Services;
 
+import Entities.Auction;
+
+
 /**
  *
- * @author gtsia
+ * @author asus
  */
-public interface EmployeeDao {
-    public void addEmployee();
+public interface AuctionDao {
+    public void addAuction();
+    public void deleteAuction();
+    public void updateAuction();
+    public Auction getAuction(); 
 }
