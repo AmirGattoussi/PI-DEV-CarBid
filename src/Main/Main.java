@@ -22,28 +22,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, IOException {
-
-        DBconnexion database = DBconnexion.getInstance();
-        Connection connection = database.getConnection();
-//EmployeeDaoImplementation e= new EmployeeDaoImplementation();
-//e.addEmployee();
-        AuctionDaoImplementation auc = new AuctionDaoImplementation();
-//auc.addAuction();
-//auc.deleteAuction();
-//auc.getAuction();
-        auc.updateAuction();
-
-        /*String  name="name";
-    
-        try {
-            Statement stm = connection.createStatement();
-            String query ="INSERT INTO employee (id, name) VALUES ( '1', 'name')";
-            stm.executeUpdate(query);
-        } catch (SQLException ex) {
-            System.out.println("failed");
-        }*/
-//first commit
-        // TODO code application logic here
+        System.out.println("yosr moalla");
     }
 
 }
