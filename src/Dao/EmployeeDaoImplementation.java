@@ -15,14 +15,14 @@ import java.util.logging.Logger;
  *
  * @author gtsia
  */
-public class EmployeeDaoImplementation implements UserDao{
+public class EmployeeDaoImplementation {
       
     Connection cnx;
 
     public EmployeeDaoImplementation()throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
     }
-    @Override
+    
     public void addEmployee(){
         try {
             Statement stm = cnx.createStatement();
@@ -34,17 +34,15 @@ public class EmployeeDaoImplementation implements UserDao{
 
     }
 
-    @Override
     public void deleteEmployee() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public void updateEmployee() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public User getEmployee() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -13,25 +13,39 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Entities.*;
+import Utils.DBconnexion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDao {
+    java.sql.Connection cnx;
+
     private Connection connection;
 
-    public UserDao(Connection connection) {
-        this.connection = connection;
+    public UserDao() throws SQLException {
+        this.cnx = DBconnexion.getInstance().getConnection();
     }
 
-    // CREATE operation
-    public void createUser(User user) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
 
-        statement.setString(1, user.getName());
+    // CREATE operation
+    
+    public void createUser(User user)  {
+        PreparedStatement statement;
+        try {
+
+            statement = cnx.prepareStatement(
+                    "INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+              statement.setString(1, user.getName());
         statement.setString(2, user.getEmail());
         statement.setString(3, user.getPassword());
 
         statement.executeUpdate();
-    }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+          }
 
     // READ operation
     public User getUserById(int id) throws SQLException {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
 import Dao.*;
+import Entities.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,10 +22,13 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException, IOException {
-        System.out.println("Amir");
+    public static void main(String[] args) throws SQLException  {
+        Connection cnx=DBconnexion.getInstance().getConnection();
     
-        System.out.println("yosr moalla");
+      /*UserDao userDao;
+        User amir = new User (1,"amir","Gattoussi","pass");
+        userDao = new UserDao();
+        userDao.createUser(amir);*/
     }
 
 }
