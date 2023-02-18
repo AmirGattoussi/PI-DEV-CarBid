@@ -4,16 +4,25 @@
  * and open the template in the editor.
  */
 package Services;
-import Entities.*;
+
+import Entities.Auction;
 
 
 /**
  *
- * @author gtsia
+ * @author asus
  */
+<<<<<<<< HEAD:src/Services/IUserDao.java
 public interface IUserDao {
     public void addEmployee();
     public void deleteEmployee();
     public void updateEmployee();
     public User getEmployee();
+========
+public interface AuctionDao {
+    public void addAuction();
+    public void deleteAuction();
+    public void updateAuction();
+    public Auction getAuction(); 
+>>>>>>>> yosr:src/Services/AuctionDao.java
 }
