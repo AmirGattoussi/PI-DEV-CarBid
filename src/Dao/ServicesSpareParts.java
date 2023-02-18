@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package Dao;
 import entities.SpareParts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import interfaces.InterfaceSpareParts;
+import Services.InterfaceSpareParts;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import tools.MyConnection;
+import Utils.DBconnexion;
 
 /**
  *
@@ -25,8 +25,8 @@ public class ServicesSpareParts  {
     Connection connection;
     Statement ste;
 
-    public ServicesSpareParts() {
-        connection = (Connection) MyConnection.getInstance().getCnx();
+    public ServicesSpareParts()throws SQLException {
+        this.connection= DBconnexion.getInstance().getConnection();
     }
     public ArrayList<SpareParts> afficher() {
         ArrayList<SpareParts> listpieces = new ArrayList<>();
