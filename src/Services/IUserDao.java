@@ -17,9 +17,3 @@ public void createUser(User user);
 public void updateUser(User user);
 public User getUserById(int id_user);}
 
-public interface AuctionDao {
-    public void addAuction();
-    public void deleteAuction();
-    public void updateAuction();
-    public Auction getAuction(); 
-}

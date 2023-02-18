@@ -14,17 +14,9 @@ import Entities.Auction;
  *
  * @author asus
  */
-<<<<<<<< HEAD:src/Services/AuctionDao.java
 public interface AuctionDao {
     public void addAuction();
     public void deleteAuction();
     public void updateAuction();
     public Auction getAuction(); 
-========
-public interface UserDao {
-    public void addEmployee();
-    public void deleteEmployee();
-    public void updateEmployee();
-    public User getEmployee();
->>>>>>>> yosr:src/Services/UserDao.java
 }
