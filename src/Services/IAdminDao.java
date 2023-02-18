@@ -13,9 +13,9 @@ import Entities.*;
  */
 public interface IAdminDao {
     
-     public void createAdmin(Admin);
-    public void deleteAdmin(Admin);
-    public void updateAdmin(Admin);
+    public void createAdmin(Admin admin);
+    public void deleteAdmin(Admin admin);
+    public void updateAdmin(Admin admin);
     public List<User> view_users();
     public List<User> sortUsers_byUsername();
     public List<User> searchUser_byUsername(String username);

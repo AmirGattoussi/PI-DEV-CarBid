@@ -29,46 +29,46 @@ Connection cnx;
     }
     @Override
     public void addAuction() {
- try {
+        try {
             Statement stm = cnx.createStatement();
             String query = "INSERT INTO auction VALUES ('3','12-07-01','17-08-01',25000,'canceled',37000)";
             stm.executeUpdate(query);
             System.out.println("added successfully");
         }  catch (SQLException ex) {
-            Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     @Override
     public void deleteAuction() {
- try {
+        try {
             Statement stm = cnx.createStatement();
             String query = "delete from auction where id_auction=2";
             stm.executeUpdate(query);
             System.out.println("deleted successfully");
         }  catch (SQLException ex) {
-            Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     @Override
     public void updateAuction() {
- try {
+        try {
             Statement stm = cnx.createStatement();
             String query = "update auction set end_date='07-07-19',highest_bid=70000,status='open' where id_auction=3";
             stm.executeUpdate(query);
             System.out.println("updated successfully");
         }  catch (SQLException ex) {
-            Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     @Override
     public Auction getAuction() {
- try {
+        try {
             Statement stm = cnx.createStatement();
             ResultSet resultSet = stm.executeQuery("SELECT * FROM auction WHERE id_auction = 1");
             if (resultSet.next()) {
@@ -84,9 +84,9 @@ Connection cnx;
                 System.out.println(auc.toString());
     return auc;
 }
-           return resultSet.getObject(0, Auction.class);
+        return resultSet.getObject(0, Auction.class);
         }  catch (SQLException ex) {
-            Logger.getLogger(EmployeeDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
     return null;
 }

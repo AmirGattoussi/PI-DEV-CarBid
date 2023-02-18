@@ -12,8 +12,8 @@ package Entities;
 public class Agent extends User{
 int id_agent;
 
-    public Agent(int id_agent, int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public Agent(int id_agent, int id_user, String name, String email, String password) {
+        super(id_user, name, email, password);
         this.id_agent = id_agent;
     }
 
