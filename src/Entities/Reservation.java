@@ -6,20 +6,21 @@
 package Entities;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author neil
  */
 public class Reservation {
-    private Date date;
+    private String date;
     private String location;
     private int user;
     private int car;
     private int agent;
 
 
-    public Reservation(Date date, String location, int user, int car, int agent) {
+    public Reservation(int user, int car, String date, String location, int agent) {
         this.date = date;
         this.location = location;
         this.user = user;
@@ -28,11 +29,11 @@ public class Reservation {
     }
 
     // get set for Date attribute
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -74,7 +75,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "reservation{" + "date=" + date + ", location=" + location + "user=" + user + ", car=" + car + ", agent=" + agent + '}';
+        return "reservation{" + "user=" + user + ", car=" + car + ", date=" + date + ", location=" + location + ", agent=" + agent + '}';
     }
     
 }

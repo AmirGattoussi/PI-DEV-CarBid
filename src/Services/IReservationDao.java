@@ -13,7 +13,7 @@ import Entities.*;
  */
 public interface IReservationDao {
     public void createReservation(Reservation reservation);
-    public void deleteReservation();
+    public void deleteReservation(int id_user, int id_car);
     public void updateReservation();
-    public Reservation getReservation();
+    public Reservation getReservation(int id_user, int id_car);
 }
