@@ -13,22 +13,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Entities.*;
+import Services.IUserDao;
 import Utils.DBconnexion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserDao {
+public class UserDao implements IUserDao{
     java.sql.Connection cnx;
-
-    private Connection connection;
-
-    public UserDao() throws SQLException {
+    //Connexion
+    public UserDao()  throws SQLException {
         this.cnx = DBconnexion.getInstance().getConnection();
     }
-
-
     // CREATE operation
     
+    @Override
     public void createUser(User user)  {
         PreparedStatement statement;
         try {
@@ -48,65 +46,93 @@ public class UserDao {
           }
 
     // READ operation
-    public User getUserById(int id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM users WHERE id = ?");
-
-        statement.setInt(1, id);
+    @Override
+    public User getUserById(int id_user)  {
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT * FROM user WHERE id_user = ?");
+              statement.setInt(1, id_user);
 
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return new User(
-                    resultSet.getInt("id"),
+                    resultSet.getInt("id_user"),
                     resultSet.getString("name"),
                     resultSet.getString("email"),
                     resultSet.getString("password")
             );
         }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
+
     }
-
-    public List<User> getAllUsers() throws SQLException {
-        List<User> users = new ArrayList<>();
-
-        PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM users");
+    
+    public User getUserByName(String name)  {
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT * FROM user WHERE name = ?");
+              statement.setString(1, name);
 
         ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            users.add(new User(
-                    resultSet.getInt("id"),
+        if (resultSet.next()) {
+            return new User(
+                    resultSet.getInt("id_user"),
                     resultSet.getString("name"),
                     resultSet.getString("email"),
                     resultSet.getString("password")
-            ));
+            );
         }
 
-        return users;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
+    
+    
+
+   
+    
 
     // UPDATE operation
-    public void updateUser(User user) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(
-                "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
-
-        statement.setString(1, user.getName());
+    @Override
+    public void updateUser(User user)  {
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "UPDATE user SET name = ?, email = ?, password = ? WHERE id_user = ?");
+             statement.setString(1, user.getName());
         statement.setString(2, user.getEmail());
         statement.setString(3, user.getPassword());
         statement.setInt(4, user.getId());
 
         statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
     }
-
     // DELETE operation
-    public void deleteUser(int id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(
-                "DELETE FROM users WHERE id = ?");
-
-        statement.setInt(1, id);
+    public void deleteUser(int id_user)  {
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "DELETE FROM user WHERE id_user = ?");
+             statement.setInt(1, id_user);
 
         statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
     }
 }
 

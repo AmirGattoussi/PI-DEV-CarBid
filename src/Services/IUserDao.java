@@ -12,8 +12,7 @@ import Entities.*;
  * @author gtsia
  */
 public interface IUserDao {
-    public void addEmployee();
-    public void deleteEmployee();
-    public void updateEmployee();
-    public User getEmployee();
+    public void createUser(User user);
+    public void updateUser(User user);
+    public User getUserById(int id_user);
 }

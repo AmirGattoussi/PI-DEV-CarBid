@@ -13,24 +13,24 @@ import java.util.*;
  * @author gtsia
  */
 public class User {
-    private int id;
+    private int id_user;
     private String name;
     private String email;
     private String password;
 
-    public User(int id, String name, String email, String password) {
-        this.id = id;
+    public User(int id_user, String name, String email, String password) {
+        this.id_user = id_user;
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
     public int getId() {
-        return id;
+        return id_user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_user) {
+        this.id_user= id_user;
     }
 
     public String getName() {
@@ -57,11 +57,13 @@ public class User {
         this.password = password;
     }
 
-    
-    
     @Override
     public String toString() {
-        return "employee{" + "id=" + id + ", name=" + name + '}';
+        return "User{" + "id_user=" + id_user + ", name=" + name + ", email=" + email + ", password=" + password + '}';
     }
+
+    
+    
+  
     
 }
