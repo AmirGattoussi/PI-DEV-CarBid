@@ -22,11 +22,11 @@ public class DBconnexion {
   private DBconnexion() throws SQLException {
     try {
       this.connection = DriverManager.getConnection(url, username, password);
-                System.out.println("Connextion established !");
+                System.out.println("Established connection !");
 
     }
     catch (SQLException ex) {
-            System.out.println("Connextion error");
+            System.out.println("Connection error");
             System.out.println(ex.getMessage());
         }
   }

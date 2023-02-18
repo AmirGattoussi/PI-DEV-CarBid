@@ -15,22 +15,28 @@ import java.util.logging.Logger;
  *
  * @author neil
  */
-public class ReservationDaoImplementation implements ReservationDao{
+public class ReservationDao implements IReservationDao{
 
     Connection cnx;
 
-    public ReservationDaoImplementation()throws SQLException {
+    public ReservationDao()throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
     }
 
     @Override
-    public void createReservation(){
+    public void createReservation(Reservation reservation){
+        PreparedStatement statement;
         try {
-            Statement stm = cnx.createStatement();
-            String query = "INSERT INTO reservation(date, location, user, car, agent) VALUES('14-February-2023', 'Ariana', 'Amir', 'Ford', 'Samir')";
-            stm.executeUpdate(query);
+            statement = cnx.prepareStatement("INSERT INTO reservation (id_user, id_car, date, location, id_agent) VALUES (?, ?, ?, ?, ?)");
+            statement.setInt(1, reservation.getUser());
+            statement.setInt(2, reservation.getCar());
+            statement.setDate(3, (Date)reservation.getDate());
+            statement.setString(4, reservation.getLocation());
+            statement.setInt(5, reservation.getAgent());
+            
+            statement.executeUpdate();
         }  catch (SQLException ex) {
-            Logger.getLogger(ReservationDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

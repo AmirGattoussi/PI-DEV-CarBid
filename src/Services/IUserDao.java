@@ -9,11 +9,10 @@ import Entities.*;
 
 /**
  *
- * @author neil
+ * @author gtsia
  */
-public interface ReservationDao {
-    public void createReservation();
-    public void deleteReservation();
-    public void updateReservation();
-    public Reservation getReservation();
+public interface IUserDao {
+    public void createUser(User user);
+    public void updateUser(User user);
+    public User getUserById(int id_user);
 }

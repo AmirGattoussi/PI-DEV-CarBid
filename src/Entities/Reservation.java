@@ -5,21 +5,21 @@
  */
 package Entities;
 
-import java.util.Date;
+import java.sql.*;
 
 /**
  *
  * @author neil
  */
 public class Reservation {
-    Date date;
-    String location;
-    String user;
-    String car;
-    String agent;
+    private Date date;
+    private String location;
+    private int user;
+    private int car;
+    private int agent;
 
 
-    public Reservation(Date date, String location, String user, String car, String agent) {
+    public Reservation(Date date, String location, int user, int car, int agent) {
         this.date = date;
         this.location = location;
         this.user = user;
@@ -32,7 +32,7 @@ public class Reservation {
         return date;
     }
 
-    public void setId(Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -46,29 +46,29 @@ public class Reservation {
     }
 
     // get set for user attribute
-    public String getUser() {
+    public int getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
     // get set for car attribute
-    public String getCar() {
+    public int getCar() {
         return car;
     }
 
-    public void setCar(String car) {
+    public void setCar(int car) {
         this.car = car;
     }
 
     // get set for agent attribute
-    public String getAgent() {
+    public int getAgent() {
         return agent;
     }
 
-    public void setAgent(String agent) {
+    public void setAgent(int agent) {
         this.agent = agent;
     }
 
