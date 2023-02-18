@@ -5,7 +5,7 @@
  */
 package Services;
 
-import Entities.Auction;
+import Entities.User;
 
 
 /**
