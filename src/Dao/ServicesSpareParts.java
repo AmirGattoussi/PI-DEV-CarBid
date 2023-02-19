@@ -61,14 +61,14 @@ public class ServicesSpareParts  {
         String req_select="SELECT * FROM `pidev`.`spareparts`";
         ResultSet res = ste.executeQuery(req_select);
         while(res.next()){
-            int Id = res.getInt(1);
+            int id_sparepart = res.getInt(1);
             String Type = res.getString(2);
             int Pou = res.getInt(3);
             String Description = res.getString(4);
             double Price = res.getDouble(5);
             String Typec = res.getString(6);
          //   SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
-         SpareParts s = new SpareParts(Id, Type,Pou, Description,  Price, Typec);
+         SpareParts s = new SpareParts(id_sparepart, Type,Pou, Description,  Price, Typec);
             listpieces.add(s);
         }
         }catch(SQLException ex){
@@ -81,7 +81,7 @@ public class ServicesSpareParts  {
    
     
     public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = connection.prepareStatement("INSERT INTO `pidev`.`spareparts` (`Id`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES (?,?,?,?,?,?)");
+        PreparedStatement pre = connection.prepareStatement("INSERT INTO `carbid`.`spareparts` (`id_sparepart`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES (?,?,?,?,?,?)");
 
         pre.setInt(1, u.getId());
           pre.setString(2, u.getType());
@@ -98,7 +98,7 @@ public class ServicesSpareParts  {
      public void delete(int id) {
 
         try {
-            PreparedStatement pre = connection.prepareStatement("delete from spareparts where Id = ?");
+            PreparedStatement pre = connection.prepareStatement("delete from carbid where id_sparepart = ?");
             pre.setInt(1, id);
             pre.executeUpdate();
         } catch (SQLException ex) {
@@ -110,7 +110,7 @@ public class ServicesSpareParts  {
       public void modify(SpareParts u) {
 
         try {
-            PreparedStatement pre = connection.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where Id = ?");
+            PreparedStatement pre = connection.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
 
             pre.setInt(6, u.getId());
 
@@ -135,7 +135,7 @@ public class ServicesSpareParts  {
 
         try {
             
-     PreparedStatement pre = connection.prepareStatement("select * from spareparts where Id = ?");
+     PreparedStatement pre = connection.prepareStatement("select * from carbid where id_sparepart = ?");
 
  
             pre.setInt(1, id);
