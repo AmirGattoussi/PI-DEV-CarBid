@@ -10,7 +10,7 @@ package Entities;
  * @author Yasmine
  */
 public class SpareParts {
-    private int id_sparepart;
+    private int Id;
     private String Type;
      private int Pou;
     private String Description;
@@ -18,8 +18,8 @@ public class SpareParts {
     private String Typec;
    
    
-     public SpareParts(int id_sparepart, String Type,  int Pou, String Description, double Price, String Typec) {
-        this.id_sparepart = id_sparepart;
+     public SpareParts(int Id, String Type,  int Pou, String Description, double Price, String Typec) {
+        this.Id = Id;
         this.Type = Type;
          this.Pou = Pou;
         this.Description = Description;
@@ -37,7 +37,7 @@ public class SpareParts {
    
 
     public int getId() {
-        return id_sparepart;
+        return Id;
     }
 
     public String getType() {
@@ -62,7 +62,7 @@ public class SpareParts {
 
   
     public void setId(int Id) {
-        this.id_sparepart = Id;
+        this.Id = Id;
     }
 
     public void setType(String Type) {
@@ -88,7 +88,7 @@ public void setPrice(double Price) {
     
     @Override
     public String toString() {
-        return "SpareParts{" + "id_sparepart=" + id_sparepart + ", Type=" + Type + ", Pou=" + Pou + ", description=" + Description + ", Price=" + Price + ", Typec=" + Typec + '}';
+        return "SpareParts{" + "Id=" + Id + ", Type=" + Type + ", Pou=" + Pou + ", description=" + Description + ", Price=" + Price + ", Typec=" + Typec + '}';
     }
 
    
