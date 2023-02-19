@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 package Services;
-import Entities.*;
+
+import Entities.User;
 
 
 /**
  *
- * @author gtsia
+ * @author asus
  */
-public interface EmployeeDao {
-    public void addEmployee();
-    public void deleteEmployee();
-    public void updateEmployee();
-    public Employee getEmployee();
-}
+public interface IUserDao {
+public void createUser(User user);
+public void updateUser(User user);
+public User getUserById(int id_user);}
+
