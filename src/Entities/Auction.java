@@ -23,17 +23,18 @@ public class Auction {
     private List<Bid> bids;
 
     public Auction(Date startDate, Date endDate, float startingPrice, float highestBid, String status, int carId) {
-      
+
         this.startDate = startDate;
         this.endDate = endDate;
         this.startingPrice = startingPrice;
         this.highestBid = highestBid;
         this.status = status;
-        this.carId=carId;
-       
+        this.carId = carId;
+
     }
 
-    public Auction(int idAuction, Date startDate, Date endDate, float startingPrice, float highestBid, String status, int carId) {
+    public Auction(int idAuction, Date startDate, Date endDate, float startingPrice, float highestBid, String status,
+            int carId) {
         this.idAuction = idAuction;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,10 +44,11 @@ public class Auction {
         this.carId = carId;
     }
 
- 
     @Override
     public String toString() {
-        return "Auction{" + "id_auction=" + idAuction + ", start_date=" + startDate + ", end_date=" + endDate + ", starting_price=" + startingPrice + ", highest_bid=" + highestBid + ", status=" + status + ", carId=" + carId+ ", bids=" + bids + '}';
+        return "Auction{" + "id_auction=" + idAuction + ", start_date=" + startDate + ", end_date=" + endDate
+                + ", starting_price=" + startingPrice + ", highest_bid=" + highestBid + ", status=" + status
+                + ", carId=" + carId + ", bids=" + bids + '}';
     }
 
     public int getIdAuction() {
@@ -113,10 +115,4 @@ public class Auction {
         this.bids = bids;
     }
 
-
-    
-    
-
-    
-    
 }

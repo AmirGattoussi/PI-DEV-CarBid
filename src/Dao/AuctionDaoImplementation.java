@@ -23,11 +23,12 @@ import java.util.logging.Logger;
  * @author asus
  */
 public class AuctionDaoImplementation implements AuctionDao {
-Connection cnx;
+    Connection cnx;
 
-    public AuctionDaoImplementation()throws SQLException {
+    public AuctionDaoImplementation() throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
     }
+
     @Override
  public void addAuction(Auction auction) {
         PreparedStatement statement;

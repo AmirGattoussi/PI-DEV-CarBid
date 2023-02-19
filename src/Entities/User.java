@@ -16,15 +16,15 @@ public class User {
     private String password;
     private int phone_number;
     private String location;
-    public User(int id_user, String name, String email, String password,int phone_number) {
+
+    public User(int id_user, String name, String email, String password, int phone_number) {
         this.id_user = id_user;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone_number = phone_number;
-        
-    }
 
+    }
 
     public User(int id_user, String name, String email, String password, int phone_number, String location) {
         this.id_user = id_user;
@@ -40,7 +40,7 @@ public class User {
     }
 
     public void setId(int id_user) {
-        this.id_user= id_user;
+        this.id_user = id_user;
     }
 
     public String getName() {
@@ -82,11 +82,11 @@ public class User {
     public void setLocation(String location) {
         this.location = location;
     }
+
     @Override
     public String toString() {
-        return "User{" + "id_user=" + id_user + ", name=" + name + ", email=" + email + ", password=" + password + ", phone_number=" + phone_number + '}';
+        return "User{" + "id_user=" + id_user + ", name=" + name + ", email=" + email + ", password=" + password
+                + ", phone_number=" + phone_number + '}';
     }
-
-   
 
 }

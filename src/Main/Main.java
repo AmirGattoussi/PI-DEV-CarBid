@@ -36,10 +36,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author neil
+ * @author code-connect
  */
 public class Main extends Application {
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -57,11 +56,11 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException, IOException {
         launch(args);
-        //User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
+        // User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
 
-        //UserDao user=new UserDao();
-        //user.createUser(amir2);
-        //user.login("mail@", "passamir");
+        // UserDao user=new UserDao();
+        // user.createUser(amir2);
+        // user.login("mail@", "passamir");
     }
 
 }
