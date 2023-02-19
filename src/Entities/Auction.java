@@ -21,10 +21,11 @@ public class Auction {
     private String status;
     private List<Bid> bids;
 
- 
     @Override
     public String toString() {
-        return "Auction{" + "id_auction=" + id_auction + ", start_date=" + start_date + ", end_date=" + end_date + ", starting_price=" + starting_price + ", highest_bid=" + highest_bid + ", status=" + status + ", bids=" + bids + '}';
+        return "Auction{" + "id_auction=" + id_auction + ", start_date=" + start_date + ", end_date=" + end_date
+                + ", starting_price=" + starting_price + ", highest_bid=" + highest_bid + ", status=" + status
+                + ", bids=" + bids + '}';
     }
 
     public int getId_auction() {
@@ -83,18 +84,15 @@ public class Auction {
         this.bids = bids;
     }
 
-    public Auction(int id_auction, Date start_date, Date end_date, float starting_price, float highest_bid, String status) {
+    public Auction(int id_auction, Date start_date, Date end_date, float starting_price, float highest_bid,
+            String status) {
         this.id_auction = id_auction;
         this.start_date = start_date;
         this.end_date = end_date;
         this.starting_price = starting_price;
         this.highest_bid = highest_bid;
         this.status = status;
-        
-    }
-    
-    
 
-    
-    
+    }
+
 }

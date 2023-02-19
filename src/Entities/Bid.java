@@ -19,8 +19,9 @@ public class Bid {
     private String type;
     private float live_bid_amount;
     private float max_bid_amount;
-    
-    public Bid(int id_bid, User user, Auction auction, Date date, String type, float live_bid_amount, float max_bid_amount) {
+
+    public Bid(int id_bid, User user, Auction auction, Date date, String type, float live_bid_amount,
+            float max_bid_amount) {
         this.id_bid = id_bid;
         this.user = user;
         this.auction = auction;
@@ -88,9 +89,8 @@ public class Bid {
 
     @Override
     public String toString() {
-        return "Bid{" + "id_bid=" + id_bid + ", user=" + user + ", auction=" + auction + ", date=" + date + ", type=" + type + ", live_bid_amount=" + live_bid_amount + ", max_bid_amount=" + max_bid_amount + '}';
+        return "Bid{" + "id_bid=" + id_bid + ", user=" + user + ", auction=" + auction + ", date=" + date + ", type="
+                + type + ", live_bid_amount=" + live_bid_amount + ", max_bid_amount=" + max_bid_amount + '}';
     }
-    
-    
-    
+
 }

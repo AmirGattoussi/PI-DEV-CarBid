@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package Entities;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.*;
+// import java.sql.PreparedStatement;
+// import java.sql.SQLException;
+// import java.util.*;
 
 /**
  *

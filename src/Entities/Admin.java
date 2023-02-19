@@ -5,14 +5,12 @@
  */
 package Entities;
 
-
 /**
  *
  * @author gtsia
  */
 public class Admin extends User {
-int id_admin;
- 
+    int id_admin;
 
     public Admin(int id_admin, int id_user, String name, String email, String password) {
         super(id_user, name, email, password);
@@ -21,47 +19,47 @@ int id_admin;
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return super.toString(); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setPassword(String password) {
-        super.setPassword(password); //To change body of generated methods, choose Tools | Templates.
+        super.setPassword(password); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getPassword() {
-        return super.getPassword(); //To change body of generated methods, choose Tools | Templates.
+        return super.getPassword(); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setEmail(String email) {
-        super.setEmail(email); //To change body of generated methods, choose Tools | Templates.
+        super.setEmail(email); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getEmail() {
-        return super.getEmail(); //To change body of generated methods, choose Tools | Templates.
+        return super.getEmail(); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setName(String name) {
-        super.setName(name); //To change body of generated methods, choose Tools | Templates.
+        super.setName(name); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getName() {
-        return super.getName(); //To change body of generated methods, choose Tools | Templates.
+        return super.getName(); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setId(int id_user) {
-        super.setId(id_user); //To change body of generated methods, choose Tools | Templates.
+        super.setId(id_user); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getId() {
-        return super.getId(); //To change body of generated methods, choose Tools | Templates.
+        return super.getId(); // To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId_admin() {
@@ -71,6 +69,5 @@ int id_admin;
     public void setId_admin(int id_admin) {
         this.id_admin = id_admin;
     }
-    
-    
+
 }

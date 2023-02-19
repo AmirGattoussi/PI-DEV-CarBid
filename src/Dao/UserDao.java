@@ -10,8 +10,8 @@ package Dao;
  * @author gtsia
  */
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 import Entities.*;
 import Services.IUserDao;
 import Utils.DBconnexion;

@@ -31,7 +31,7 @@ public class ReservationDao implements IReservationDao{
     public void createReservation(Reservation reservation){
         PreparedStatement statement;
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
             try {
                 java.util.Date utilDate = format.parse(reservation.getDate());
                 java.sql.Date mysqlDate = new java.sql.Date(utilDate.getTime());

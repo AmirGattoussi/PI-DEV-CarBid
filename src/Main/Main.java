@@ -46,13 +46,13 @@ public class Main{
      */
 
     public static void main(String[] args) throws SQLException, IOException {
-    Reservation reserve = new Reservation(3, 1, "28/02/2023", "Ariana", 1);
+    Reservation reserve = new Reservation(3, 1, "03-28-2030", "Ariana", 1);
 
     DBconnexion database = DBconnexion.getInstance();
     Connection connection = database.getConnection();
 
     ReservationDao e = new ReservationDao();
-    // e.createReservation(reserve);
+    e.createReservation(reserve);
     // e.deleteReservation(3, 1);
     System.out.println(e.getReservation(3, 1));
     }
