@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package Services;
-import Entities.*;
 
+import java.sql.Date;
+import java.util.Optional;
+
+import Entities.*;
 
 /**
  *
@@ -13,7 +16,12 @@ import Entities.*;
  */
 public interface IReservationDao {
     public void createReservation(Reservation reservation);
+
     public void deleteReservation(int id_user, int id_car);
-    public void updateReservation();
+
+    public void updateReservationDate(int id_user, int id_car, String date);
+
+    public void updateReservationLocation(int id_user, int id_car, String location);
+
     public Reservation getReservation(int id_user, int id_car);
 }

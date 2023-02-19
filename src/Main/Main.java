@@ -24,37 +24,41 @@ import Entities.*;
 // import java.util.logging.Logger;
 /**
  *
- * @author neil
+ * @author code-connect
  */
-public class Main{
-// public static Stage stg;
-    
-//     @Override
-//     public void start(Stage primaryStage) throws IOException
-//     {
-//         this.stg = primaryStage;
-//         FXMLLoader loader= new FXMLLoader(getClass().getResource("../GUI/Main.fxml"));
-//         Parent root= loader.load();
-//         Scene scene= new Scene(root);
-        
-//         primaryStage.setTitle("CarBid");
-//         primaryStage.setScene(scene);
-//         primaryStage.show();
-//     }
+public class Main {
+    // public static Stage stg;
+
+    // @Override
+    // public void start(Stage primaryStage) throws IOException
+    // {
+    // this.stg = primaryStage;
+    // FXMLLoader loader= new
+    // FXMLLoader(getClass().getResource("../GUI/Main.fxml"));
+    // Parent root= loader.load();
+    // Scene scene= new Scene(root);
+
+    // primaryStage.setTitle("CarBid");
+    // primaryStage.setScene(scene);
+    // primaryStage.show();
+    // }
     /**
      * @param args the command line arguments
+     * @throws Exception
      */
 
-    public static void main(String[] args) throws SQLException, IOException {
-    Reservation reserve = new Reservation(3, 1, "03-28-2030", "Ariana", 1);
+    public static void main(String[] args) throws Exception {
+        Reservation reserve = new Reservation(3, 1, "15-11-2023", "Ariana", 1);
 
-    DBconnexion database = DBconnexion.getInstance();
-    Connection connection = database.getConnection();
+        // DBconnexion database = DBconnexion.getInstance();
+        // Connection connection = database.getConnection();
 
-    ReservationDao e = new ReservationDao();
-    e.createReservation(reserve);
-    // e.deleteReservation(3, 1);
-    System.out.println(e.getReservation(3, 1));
+        ReservationDao e = new ReservationDao();
+        // e.createReservation(reserve);
+        // e.deleteReservation(3, 1);
+        // e.updateReservationDate(3, 1, "15-11-2023");
+        // e.updateReservationLocation(3, 1, "Sousse Sahloul");
+        System.out.println(e.getReservation(3, 1));
     }
 
 }
