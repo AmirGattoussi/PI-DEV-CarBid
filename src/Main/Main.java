@@ -12,49 +12,43 @@ import Dao.*;
 import Entities.*;
 
 // import java.util.Date;
-// import java.util.logging.Level;
-// import java.util.logging.Logger;
-// import javafx.application.Application;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.stage.Stage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-// import java.util.logging.Level;
-// import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author neil
  */
-public class Main{
-// public static Stage stg;
-    
-//     @Override
-//     public void start(Stage primaryStage) throws IOException
-//     {
-//         this.stg = primaryStage;
-//         FXMLLoader loader= new FXMLLoader(getClass().getResource("../GUI/Main.fxml"));
-//         Parent root= loader.load();
-//         Scene scene= new Scene(root);
-        
-//         primaryStage.setTitle("CarBid");
-//         primaryStage.setScene(scene);
-//         primaryStage.show();
-//     }
+public class Main extends Application {
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Login.fxml"));
+        primaryStage.setTitle("Login");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
     /**
      * @param args the command line arguments
      */
 
     public static void main(String[] args) throws SQLException, IOException {
-    Reservation reserve = new Reservation(3, 1, "28/02/2023", "Ariana", 1);
+        launch(args);
+        //User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
 
-    DBconnexion database = DBconnexion.getInstance();
-    Connection connection = database.getConnection();
-
-    ReservationDao e = new ReservationDao();
-    // e.createReservation(reserve);
-    // e.deleteReservation(3, 1);
-    System.out.println(e.getReservation(3, 1));
+        //UserDao user=new UserDao();
+        //user.createUser(amir2);
+        //user.login("mail@", "passamir");
     }
 
 }

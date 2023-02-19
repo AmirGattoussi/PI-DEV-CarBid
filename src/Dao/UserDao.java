@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserDao implements IUserDao {
+
     java.sql.Connection cnx;
 
     // Connexion
@@ -33,10 +34,12 @@ public class UserDao implements IUserDao {
         try {
 
             statement = cnx.prepareStatement(
-                    "INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+                    "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
+            statement.setInt(4, user.getPhone_number());
+            statement.setString(5, user.getLocation());
 
             statement.executeUpdate();
 
@@ -61,7 +64,10 @@ public class UserDao implements IUserDao {
                         resultSet.getInt("id_user"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("password"));
+                        resultSet.getString("password"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("location")
+                );
             }
 
         } catch (SQLException ex) {
@@ -84,7 +90,10 @@ public class UserDao implements IUserDao {
                         resultSet.getInt("id_user"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("password"));
+                        resultSet.getString("password"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("location")
+                );
             }
 
         } catch (SQLException ex) {
@@ -100,11 +109,13 @@ public class UserDao implements IUserDao {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
-                    "UPDATE user SET name = ?, email = ?, password = ? WHERE id_user = ?");
+                    "UPDATE user SET name = ?, email = ?, password = ?, phone_number=? WHERE id_user = ?");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getId());
+            statement.setInt(5, user.getPhone_number());
+            statement.setString(6, user.getLocation());
 
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -127,4 +138,28 @@ public class UserDao implements IUserDao {
         }
 
     }
+
+    public boolean login(String email, String password) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carbid", "root", "")) {
+            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, email);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        System.out.println("Login successful");
+                        // User exists and password matches
+                        return true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception appropriately
+        }
+
+        // User does not exist or password is incorrect
+        return false;
+    }
+
 }
