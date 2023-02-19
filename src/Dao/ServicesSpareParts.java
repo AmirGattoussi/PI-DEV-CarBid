@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 package Dao;
-import entities.SpareParts;
+
+import Entities.SpareParts;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import Services.InterfaceSpareParts;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,19 +17,44 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Utils.DBconnexion;
+/*
+import entities.SpareParts;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import interfaces.InterfaceSpareParts;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tools.MyConnection;
+*/
+
 
 /**
  *
  * @author Yasmine
+ * 
+ * public class ReservationDao implements IReservationDao{
+
+    Connection cnx;
+
+    public ReservationDao()throws SQLException {
+        cnx = DBconnexion.getInstance().getConnection();
+    }
  */
 public class ServicesSpareParts  {
     Connection connection;
     Statement ste;
 
+    Connection cnx;
+
     public ServicesSpareParts()throws SQLException {
-        this.connection= DBconnexion.getInstance().getConnection();
+        cnx = DBconnexion.getInstance().getConnection();
     }
-    public ArrayList<SpareParts> afficher() {
+    public ArrayList<SpareParts> display() {
         ArrayList<SpareParts> listpieces = new ArrayList<>();
         try{
         ste= connection.createStatement();
@@ -52,22 +78,9 @@ public class ServicesSpareParts  {
         return listpieces;
     }
    
-   /* public void ajouter(SpareParts u) {
-        try {
-
-            ste = connection.createStatement();
-            String req = "INSERT INTO `pidev`.`spareparts` (`Id`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES ('" + u.getId() + "'+'" + u.getType() + "','" + u.getPou() + "','" + u.getDescription() + "','" + u.getPrice() + "','" + u.getTypec() + "');";
-            ste.executeUpdate(req);
-
-          
-        } catch (SQLException ex) {
-            System.out.println("Exception: " + ex.getMessage());
-        }
-
-    }
-*/
+   
     
-    public void ajouter2(SpareParts u) throws SQLException {
+    public void add(SpareParts u) throws SQLException {
         PreparedStatement pre = connection.prepareStatement("INSERT INTO `pidev`.`spareparts` (`Id`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES (?,?,?,?,?,?)");
 
         pre.setInt(1, u.getId());
@@ -82,7 +95,7 @@ public class ServicesSpareParts  {
 
     }
     
-     public void supprimer(int id) {
+     public void delete(int id) {
 
         try {
             PreparedStatement pre = connection.prepareStatement("delete from spareparts where Id = ?");
@@ -94,22 +107,22 @@ public class ServicesSpareParts  {
 
     }
      
-      public void modifier(SpareParts u) {
+      public void modify(SpareParts u) {
 
         try {
             PreparedStatement pre = connection.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where Id = ?");
 
-            pre.setInt(1, u.getId());
+            pre.setInt(6, u.getId());
 
-            pre.setString(2, u.getType());
+            pre.setString(1, u.getType());
 
-            pre.setInt(3, u.getPou());
+            pre.setInt(2, u.getPou());
 
-            pre.setString(4, u.getDescription());
+            pre.setString(3, u.getDescription());
 
-            pre.setDouble(5, u.getPrice());
+            pre.setDouble(4, u.getPrice());
 
-            pre.setString(6, u.getTypec());
+            pre.setString(5, u.getTypec());
 
             pre.executeUpdate();
         } catch (SQLException ex) {
@@ -142,4 +155,3 @@ public class ServicesSpareParts  {
      
 }
     
-
