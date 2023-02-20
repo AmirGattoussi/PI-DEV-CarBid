@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Dao;
-
+import java.lang.RuntimeException;
 import Entities.SpareParts;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -49,10 +49,14 @@ public class ServicesSpareParts  {
     Connection connection;
     Statement ste;
 
-    Connection cnx;
+   
 
-    public ServicesSpareParts()throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public ServicesSpareParts() {
+        try {
+            connection =  DBconnexion.getInstance().getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesSpareParts.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public ArrayList<SpareParts> display() {
         ArrayList<SpareParts> listpieces = new ArrayList<>();

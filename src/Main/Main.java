@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package Main;
-
+import java.sql.SQLException;
 import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
 import Dao.*;
 import Entities.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // import java.util.Date;
 // import java.util.logging.Level;
@@ -45,17 +48,23 @@ public class Main{
      * @param args the command line arguments
      */
 
+    
     public static void main(String[] args) throws SQLException, IOException {
-    Reservation reserve = new Reservation(3, 1, "28/02/2023", "Ariana", 1);
+        
+   /* Reservation reserve = new Reservation(3, 1, "28/02/2023", "Ariana", 1);
 
     DBconnexion database = DBconnexion.getInstance();
     Connection connection = database.getConnection();
 
-    ReservationDao e = new ReservationDao();
+      ReservationDao e = new ReservationDao();
+*/
+      ServicesSpareParts s=new ServicesSpareParts();
+     System.out.println(s.display());
       SpareParts p2 = new SpareParts(1,"moteur",3,"occasion",1200,"volswagen");
-    // e.createReservation(reserve);
+    s.add(p2);
+// e.createReservation(reserve);
     // e.deleteReservation(3, 1);
-    System.out.println(e.getReservation(3, 1));
+    //System.out.println(e.getReservation(3, 1));
     }
 
 }
