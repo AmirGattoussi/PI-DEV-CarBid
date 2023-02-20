@@ -14,46 +14,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import Dao.*;
-import Entities.Auction;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import Dao.AuctionDaoImplementation;
-import Entities.Bid;
-import com.sun.javafx.binding.BidirectionalContentBinding;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Entities.*;
 
-// import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author code-connect
  */
-public class Main extends Application{
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/home.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 400, 300));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/manageReservations.fxml"));
+        primaryStage.setTitle("Carbid");
+        primaryStage.setScene(new Scene(root, 750, 500));
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         launch(args);
     }
 
@@ -63,7 +41,7 @@ public class Main extends Application{
      */
 
     // public static void main(String[] args) throws Exception {
-    //     Reservation reserve = new Reservation(3, 1, "15-11-2023", "Ariana", 1);
+    //     Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
 
     //     // DBconnexion database = DBconnexion.getInstance();
     //     // Connection connection = database.getConnection();
@@ -73,7 +51,8 @@ public class Main extends Application{
     //     // e.deleteReservation(3, 1);
     //     // e.updateReservationDate(3, 1, "15-11-2023");
     //     // e.updateReservationLocation(3, 1, "Sousse Sahloul");
-    //     System.out.println(e.getReservation(3, 1));
+    //     // System.out.println(e.getReservation(3, 2));
+    //     System.out.println(e.filterReservationsByDate("15-11-2023"));
     // }
 
 }

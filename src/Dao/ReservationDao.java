@@ -13,10 +13,14 @@ import java.text.SimpleDateFormat;
 import Services.*;
 import Utils.DBconnexion;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.net.ssl.SSLException;
 
 /**
  *
@@ -136,5 +140,88 @@ public class ReservationDao implements IReservationDao {
 
         return null;
         // throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Reservation> filterReservationsByUser(int id_user) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation WHERE id_user=?");
+            statement.setInt(1, id_user);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                filteredData.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
+    }
+
+    @Override
+    public List<Reservation> filterReservationsByCar(int id_car) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation WHERE id_car=?");
+            statement.setInt(1, id_car);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                filteredData.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
+    }
+
+    @Override
+    public List<Reservation> filterReservationsByDate(String date) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                java.util.Date utilDate = format.parse(date);
+                java.sql.Date mysqlDate = new java.sql.Date(utilDate.getTime());
+
+                statement = cnx.prepareStatement("SELECT * FROM reservation WHERE date=?");
+                statement.setDate(1, mysqlDate);
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    filteredData.add(new Reservation(
+                            resultSet.getInt("id_user"),
+                            resultSet.getInt("id_car"),
+                            resultSet.getString("date"),
+                            resultSet.getString("location"),
+                            resultSet.getInt("id_agent")));
+                }
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
     }
 }
