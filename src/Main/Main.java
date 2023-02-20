@@ -52,6 +52,7 @@ public class Main{
     Connection connection = database.getConnection();
 
     ReservationDao e = new ReservationDao();
+      SpareParts p2 = new SpareParts(1,"moteur",3,"occasion",1200,"volswagen");
     // e.createReservation(reserve);
     // e.deleteReservation(3, 1);
     System.out.println(e.getReservation(3, 1));
