@@ -14,7 +14,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import Dao.*;
-import Entities.*;
+import Entities.Auction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Dao.AuctionDaoImplementation;
+import Entities.Bid;
+import com.sun.javafx.binding.BidirectionalContentBinding;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+// import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author code-connect

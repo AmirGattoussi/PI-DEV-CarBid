@@ -1,5 +1,9 @@
 /build/
 .vscode
 /nbproject/private/
+<<<<<<< HEAD
 carbid.sql
 /Downloaded_Libraries
+=======
+nbproject/private/private.xml
+>>>>>>> 80c072eebb228a1e43927b69b2cd9bd8bcbbd3cb

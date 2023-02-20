@@ -15,8 +15,8 @@ import Entities.Auction;
  * @author asus
  */
 public interface AuctionDao {
-    public void addAuction();
-    public void deleteAuction();
-    public void updateAuction();
-    public Auction getAuction(); 
+    public void addAuction(Auction auction);
+    public void deleteAuction(int id);
+    public void updateAuction(int id, float highestBid,String status);
+    public Auction getAuction(int id); 
 }

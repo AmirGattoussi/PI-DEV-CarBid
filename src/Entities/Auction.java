@@ -13,59 +13,90 @@ import java.util.List;
  * @author asus
  */
 public class Auction {
-    private int id_auction;
-    private Date start_date;
-    private Date end_date;
-    private float starting_price;
-    private float highest_bid;
+    private int idAuction;
+    private Date startDate;
+    private Date endDate;
+    private float startingPrice;
+    private float highestBid;
     private String status;
+    private int carId;
     private List<Bid> bids;
+
+    public Auction(Date startDate, Date endDate, float startingPrice, float highestBid, String status, int carId) {
+
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startingPrice = startingPrice;
+        this.highestBid = highestBid;
+        this.status = status;
+        this.carId = carId;
+
+    }
+
+    public Auction(int idAuction, Date startDate, Date endDate, float startingPrice, float highestBid, String status,
+            int carId) {
+        this.idAuction = idAuction;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startingPrice = startingPrice;
+        this.highestBid = highestBid;
+        this.status = status;
+        this.carId = carId;
+    }
 
     @Override
     public String toString() {
-        return "Auction{" + "id_auction=" + id_auction + ", start_date=" + start_date + ", end_date=" + end_date
-                + ", starting_price=" + starting_price + ", highest_bid=" + highest_bid + ", status=" + status
-                + ", bids=" + bids + '}';
+        return "Auction{" + "id_auction=" + idAuction + ", start_date=" + startDate + ", end_date=" + endDate
+                + ", starting_price=" + startingPrice + ", highest_bid=" + highestBid + ", status=" + status
+                + ", carId=" + carId + ", bids=" + bids + '}';
     }
 
-    public int getId_auction() {
-        return id_auction;
+    public int getIdAuction() {
+        return idAuction;
     }
 
-    public void setId_auction(int id_auction) {
-        this.id_auction = id_auction;
+    public int getCarId() {
+        return carId;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setIdAuction(int idAuction) {
+        this.idAuction = idAuction;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public float getStarting_price() {
-        return starting_price;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setStarting_price(float starting_price) {
-        this.starting_price = starting_price;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
-    public float getHighest_bid() {
-        return highest_bid;
+    public float getStartingPrice() {
+        return startingPrice;
     }
 
-    public void setHighest_bid(float highest_bid) {
-        this.highest_bid = highest_bid;
+    public void setStartingPrice(float startingPrice) {
+        this.startingPrice = startingPrice;
+    }
+
+    public float getHighestBid() {
+        return highestBid;
+    }
+
+    public void setHighestBid(float highestBid) {
+        this.highestBid = highestBid;
     }
 
     public String getStatus() {
@@ -82,17 +113,6 @@ public class Auction {
 
     public void setBids(List<Bid> bids) {
         this.bids = bids;
-    }
-
-    public Auction(int id_auction, Date start_date, Date end_date, float starting_price, float highest_bid,
-            String status) {
-        this.id_auction = id_auction;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.starting_price = starting_price;
-        this.highest_bid = highest_bid;
-        this.status = status;
-
     }
 
 }
