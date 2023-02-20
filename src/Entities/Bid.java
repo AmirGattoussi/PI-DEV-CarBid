@@ -12,46 +12,39 @@ import java.sql.Date;
  * @author asus
  */
 public class Bid {
-    private int id_bid;
-    private User user;
-    private Auction auction;
+    private int idBid;
+    private int userId;
+    private int idAuction;
     private Date date;
     private String type;
-    private float live_bid_amount;
-    private float max_bid_amount;
-    
-    public Bid(int id_bid, User user, Auction auction, Date date, String type, float live_bid_amount, float max_bid_amount) {
-        this.id_bid = id_bid;
-        this.user = user;
-        this.auction = auction;
+    private float liveBidAmount;
+    private float maxBidAmount;
+
+    public Bid(int id_bid, int userId, int idAuction, Date date, String type, float liveBidAmount, float maxBidAmount) {
+        this.idBid = id_bid;
+        this.userId = userId;
+        this.idAuction = idAuction;
         this.date = date;
         this.type = type;
-        this.live_bid_amount = live_bid_amount;
-        this.max_bid_amount = max_bid_amount;
+        this.liveBidAmount = liveBidAmount;
+        this.maxBidAmount = maxBidAmount;
     }
 
-    public int getId_bid() {
-        return id_bid;
+    public Bid(int userId, int idAuction, Date date, String type, float liveBidAmount, float maxBidAmount) {
+        this.userId = userId;
+        this.idAuction = idAuction;
+        this.date = date;
+        this.type = type;
+        this.liveBidAmount = liveBidAmount;
+        this.maxBidAmount = maxBidAmount;
     }
 
-    public void setId_bid(int id_bid) {
-        this.id_bid = id_bid;
+    public int getIdBid() {
+        return idBid;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Auction getAuction() {
-        return auction;
-    }
-
-    public void setAuction(Auction auction) {
-        this.auction = auction;
+    public void setIdBid(int idBid) {
+        this.idBid = idBid;
     }
 
     public Date getDate() {
@@ -70,27 +63,45 @@ public class Bid {
         this.type = type;
     }
 
-    public float getLive_bid_amount() {
-        return live_bid_amount;
+    public float getLiveBidAmount() {
+        return liveBidAmount;
     }
 
-    public void setLive_bid_amount(float live_bid_amount) {
-        this.live_bid_amount = live_bid_amount;
+    public void setLiveBidAmount(float liveBidAmount) {
+        this.liveBidAmount = liveBidAmount;
     }
 
-    public float getMax_bid_amount() {
-        return max_bid_amount;
+    public float getMaxBidAmount() {
+        return maxBidAmount;
     }
 
-    public void setMax_bid_amount(float max_bid_amount) {
-        this.max_bid_amount = max_bid_amount;
+    public void setMaxBidAmount(float maxBidAmount) {
+        this.maxBidAmount = maxBidAmount;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getIdAuction() {
+        return idAuction;
+    }
+
+    public void setIdAuction(int idAuction) {
+        this.idAuction = idAuction;
     }
 
     @Override
     public String toString() {
-        return "Bid{" + "id_bid=" + id_bid + ", user=" + user + ", auction=" + auction + ", date=" + date + ", type=" + type + ", live_bid_amount=" + live_bid_amount + ", max_bid_amount=" + max_bid_amount + '}';
+        return "Bid{" + "idBid=" + idBid + ", userId=" + userId + ", idAuction=" + idAuction + ", date=" + date
+                + ", type=" + type + ", liveBidAmount=" + liveBidAmount + ", maxBidAmount=" + maxBidAmount + '}';
     }
-    
-    
-    
+
+    public Bid() {
+    }
+
 }

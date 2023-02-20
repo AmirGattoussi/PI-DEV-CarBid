@@ -9,11 +9,11 @@ package Entities;
  *
  * @author gtsia
  */
-public class Agent extends User{
+/**public class Agent extends User{
 int id_agent;
 
-    public Agent(int id_agent, int id_user, String name, String email, String password) {
-        super(id_user, name, email, password);
+    public Agent(int id_agent, int id_user, String name, String email, String password,int phone_number, String location) {
+        super(id_user, name, email, password,phone_number,location);
         this.id_agent = id_agent;
     }
 
@@ -26,4 +26,4 @@ int id_agent;
     }
     
     
-}
+}*/

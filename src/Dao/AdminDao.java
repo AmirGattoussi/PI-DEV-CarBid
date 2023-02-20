@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Dao;
+
 import Services.IAdminDao;
 import Utils.*;
 import Entities.Admin;
@@ -21,62 +22,61 @@ import java.util.logging.Logger;
  *
  * @author gtsia
  */
-public class AdminDao implements IAdminDao{
+public class AdminDao implements IAdminDao {
+
     Connection cnx;
 
-    public AdminDao()throws SQLException {
+    public AdminDao() throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
     }
 
     @Override
-    
-       public void createAdmin(Admin admin) {
+
+    public void createAdmin(Admin admin) {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
                     "INSERT INTO user (name, email, password,id_admin) VALUES (?, ?, ?,?)");
-              statement.setString(1, admin.getName());
-        statement.setString(2, admin.getEmail());
-        statement.setString(3, admin.getPassword());
-        statement.setInt(4, admin.getId_admin());
+            statement.setString(1, admin.getName());
+            statement.setString(2, admin.getEmail());
+            statement.setString(3, admin.getPassword());
+            statement.setInt(4, admin.getId_admin());
 
-        
-
-        statement.executeUpdate();
+            statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
-      
+
         }
 
-      
     }
- //To change body of generated methods, choose Tools | Templates.
+    //To change body of generated methods, choose Tools | Templates.
 
     @Override
-     public List<User> view_users() {
+    public List<User> view_users() {
         List<User> users = new ArrayList<>();
 
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
                     "SELECT * FROM user");
-             ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            users.add(new User(
-                    resultSet.getInt("id_user"),
-                    resultSet.getString("name"),
-                    resultSet.getString("email"),
-                    resultSet.getString("password")
-            ));
-        }
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                users.add(new User(
+                        resultSet.getInt("id_user"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("location")
+                ));
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-                return users;
+        return users;
 
     }
-       
 
     @Override
     public List<User> sortUsers_byUsername() {
@@ -102,6 +102,5 @@ public class AdminDao implements IAdminDao{
     public void updateAdmin(Admin admin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }
