@@ -58,7 +58,7 @@ public class ServicesSpareParts  {
         ArrayList<SpareParts> listpieces = new ArrayList<>();
         try{
         ste= connection.createStatement();
-        String req_select="SELECT * FROM `pidev`.`spareparts`";
+        String req_select="SELECT * FROM `carbid`.`spareparts`";
         ResultSet res = ste.executeQuery(req_select);
         while(res.next()){
             int id_sparepart = res.getInt(1);
