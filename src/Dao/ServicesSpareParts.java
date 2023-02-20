@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Dao;
-import entities.SpareParts;
+import Entities.SpareParts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

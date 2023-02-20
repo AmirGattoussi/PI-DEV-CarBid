@@ -1,3 +1,5 @@
 /build/
 .vscode
 /nbproject/private/
+carbid.sql
+/Downloaded_Libraries

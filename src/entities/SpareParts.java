@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package Entities;
 
 /**
  *
@@ -16,23 +16,19 @@ public class SpareParts {
     private String Typec;
     private int Pou;
     private double Price;
-     public SpareParts(int Id, String Type,  int Pou, String Description, double Price, String Typec) {
+
+    public SpareParts(int Id, String Type, int Pou, String Description, double Price, String Typec) {
         this.Id = Id;
         this.Type = Type;
-         this.Pou = Pou;
+        this.Pou = Pou;
         this.Description = Description;
-        
-       
+
         this.Price = Price;
         this.Typec = Typec;
     }
 
-   
-
     public SpareParts() {
     }
-
-   
 
     public int getId() {
         return Id;
@@ -84,10 +80,8 @@ public class SpareParts {
 
     @Override
     public String toString() {
-        return "SpareParts{" + "Id=" + Id + ", Type=" + Type + ", Description=" + Description + ", Typec=" + Typec + ", Pou=" + Pou + ", Price=" + Price + '}';
+        return "SpareParts{" + "Id=" + Id + ", Type=" + Type + ", Description=" + Description + ", Typec=" + Typec
+                + ", Pou=" + Pou + ", Price=" + Price + '}';
     }
 
-   
-    
-    
 }
