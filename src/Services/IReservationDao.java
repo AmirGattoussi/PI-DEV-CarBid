@@ -17,6 +17,8 @@ import Entities.*;
  * @author neil
  */
 public interface IReservationDao {
+
+    // CRUD methods
     public void createReservation(Reservation reservation);
 
     public void deleteReservation(int id_user, int id_car);
@@ -27,6 +29,9 @@ public interface IReservationDao {
 
     public Reservation getReservation(int id_user, int id_car);
 
+    public List<Reservation> getReservations();
+
+    // JOB methods
     public List<Reservation> filterReservationsByUser(int id_user);
 
     public List<Reservation> filterReservationsByCar(int id_car);

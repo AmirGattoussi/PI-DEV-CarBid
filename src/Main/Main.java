@@ -25,7 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/manageReservations.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../Controller/manageReservations.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root, 750, 500));
         primaryStage.show();
