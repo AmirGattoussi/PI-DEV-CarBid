@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="" minWidth="" prefHeight="458.0" prefWidth="728.0" style="-fx-min-width: 700; -fx-min-height: 500;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="458.0" prefWidth="728.0" style="-fx-min-width: 700; -fx-min-height: 500;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsController">
     <children>
         <Pane layoutX="121.0" layoutY="66.0" prefHeight="458.0" prefWidth="607.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 23; -fx-font-weight: 700;" text="Manage Reservations" />
-                <TableView fx:id="tableView" layoutX="22.0" layoutY="67.0" prefHeight="369.0" prefWidth="564.0">
+                <TableView fx:id="tableView" layoutX="22.0" layoutY="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                     <columns>
                         <TableColumn fx:id="userColumn" prefWidth="75.0" text="id user" />
                         <TableColumn fx:id="carColumn" prefWidth="75.0" text="id car" />
