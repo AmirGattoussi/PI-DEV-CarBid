@@ -67,7 +67,7 @@ public class ServicesSpareParts {
                 String Description = res.getString(4);
                 double Price = res.getDouble(5);
                 String Typec = res.getString(6);
-                //   SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
+                // SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
                 SpareParts s = new SpareParts(id_sparepart, Type, Pou, Description, Price, Typec);
                 listpieces.add(s);
             }
@@ -79,7 +79,8 @@ public class ServicesSpareParts {
     }
 
     public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = connection.prepareStatement("INSERT INTO `carbid`.`spareparts` (`id_sparepart`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES (?,?,?,?,?,?)");
+        PreparedStatement pre = connection.prepareStatement(
+                "INSERT INTO `carbid`.`spareparts` (`id_sparepart`,`Type`,`Pou`,`Description`,`Price`,`Typec`) VALUES (?,?,?,?,?,?)");
 
         pre.setInt(1, u.getId());
         pre.setString(2, u.getType());
@@ -107,7 +108,8 @@ public class ServicesSpareParts {
     public void modify(SpareParts u) {
 
         try {
-            PreparedStatement pre = connection.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
+            PreparedStatement pre = connection.prepareStatement(
+                    "Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
 
             pre.setInt(6, u.getId());
 

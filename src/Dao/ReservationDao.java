@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dao;
 
 import Entities.Reservation;
@@ -13,8 +8,8 @@ import java.text.SimpleDateFormat;
 import Services.*;
 import Utils.DBconnexion;
 
-import java.util.Date;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,11 +22,15 @@ public class ReservationDao implements IReservationDao {
     Connection cnx;
     PreparedStatement statement;
 
-    public ReservationDao() throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public ReservationDao() {
+        try {
+            cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    // CRUD function for creating a reservation
+    // CRUD method for creating a reservation
     @Override
     public void createReservation(Reservation reservation) {
         try {
@@ -58,7 +57,7 @@ public class ReservationDao implements IReservationDao {
         }
     }
 
-    // CRUD function for deleting a reservation
+    // CRUD method for deleting a reservation
     @Override
     public void deleteReservation(int id_user, int id_car) {
         try {
@@ -73,7 +72,7 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // CRUD functions for updating/modifying a reservation
+    // CRUD methods for updating/modifying a reservation
     @Override
     public void updateReservationDate(int id_user, int id_car, String date) {
         try {
@@ -113,7 +112,7 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // CRUD function for getting information for specific a reservation
+    // CRUD method for getting information for specific a reservation
     @Override
     public Reservation getReservation(int id_user, int id_car) {
         try {
@@ -136,5 +135,114 @@ public class ReservationDao implements IReservationDao {
 
         return null;
         // throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    // CRUD method for getting list of all reservations
+    @Override
+    public List<Reservation> getReservations() {
+        List<Reservation> data = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation");
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    // JOBS methods for filtering reservations
+    // Note: The following methods, all of them, return a List of reservations.
+    @Override
+    public List<Reservation> filterReservationsByUser(int id_user) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation WHERE id_user=?");
+            statement.setInt(1, id_user);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                filteredData.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
+    }
+
+    @Override
+    public List<Reservation> filterReservationsByCar(int id_car) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation WHERE id_car=?");
+            statement.setInt(1, id_car);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                filteredData.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
+    }
+
+    @Override
+    public List<Reservation> filterReservationsByDate(String date) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                java.util.Date utilDate = format.parse(date);
+                java.sql.Date mysqlDate = new java.sql.Date(utilDate.getTime());
+
+                statement = cnx.prepareStatement("SELECT * FROM reservation WHERE date=?");
+                statement.setDate(1, mysqlDate);
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    filteredData.add(new Reservation(
+                            resultSet.getInt("id_user"),
+                            resultSet.getInt("id_car"),
+                            resultSet.getString("date"),
+                            resultSet.getString("location"),
+                            resultSet.getInt("id_agent")));
+                }
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
     }
 }

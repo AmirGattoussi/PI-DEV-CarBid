@@ -1,5 +1,7 @@
 /build/
 .vscode
 /nbproject/private/
+carbid.sql
+/Downloaded_Libraries
 nbproject/private/private.xml
 src/entities/SpareParts.java

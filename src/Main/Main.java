@@ -8,31 +8,14 @@ package Main;
 import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import Dao.*;
-import Entities.Auction;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import Dao.AuctionDaoImplementation;
-import Entities.Bid;
-import com.sun.javafx.binding.BidirectionalContentBinding;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Entities.*;
 
-// import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,19 +31,28 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static void main(String[] args) throws Exception{
+        launch(args);
+    }
+
     /**
      * @param args the command line arguments
-     * @throws java.sql.SQLException
-     * @throws java.io.IOException
+     * @throws Exception
      */
 
-    public static void main(String[] args) throws SQLException, IOException {
-        launch(args);
-        // User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
+    // public static void main(String[] args) throws Exception {
+    //     Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
 
-        // UserDao user=new UserDao();
-        // user.createUser(amir2);
-        // user.login("mail@", "passamir");
-    }
+    //     // DBconnexion database = DBconnexion.getInstance();
+    //     // Connection connection = database.getConnection();
+
+    //     ReservationDao e = new ReservationDao();
+    //     // e.createReservation(reserve);
+    //     // e.deleteReservation(3, 1);
+    //     // e.updateReservationDate(3, 1, "15-11-2023");
+    //     // e.updateReservationLocation(3, 1, "Sousse Sahloul");
+    //     // System.out.println(e.getReservation(3, 2));
+    //     System.out.println(e.getReservations());
+    // }
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<StackPane alignment="CENTER" minHeight="500.0" minWidth="750.0" prefHeight="505.0"
+    prefWidth="817.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="Controller.manageReservationsController">
+    <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0"
+        style="-fx-font-size: 23; -fx-font-weight: 700;" text="Manage Reservations" />
+    <TableView fx:id="tableView" layoutX="22.0" layoutY="70.0" AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="70.0">
+        <columns>
+            <TableColumn fx:id="userColumn" prefWidth="75.0" text="id user" />
+            <TableColumn fx:id="carColumn" prefWidth="75.0" text="id car" />
+            <TableColumn fx:id="dateColumn" prefWidth="120.4364013671875" text="Date" />
+            <TableColumn fx:id="locationColumn" prefWidth="292.3636323181663"
+                text="Location" />
+            <TableColumn prefWidth="75.0" />
+        </columns>
+    </TableView>
+    <Button layoutX="619.0" layoutY="23.0" mnemonicParsing="false" text="Filter" />
+</StackPane>
