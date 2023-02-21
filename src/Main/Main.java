@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Main;
-
+import java.sql.SQLException;
 import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
@@ -16,10 +16,11 @@ import javafx.stage.Stage;
 import Dao.*;
 import Entities.*;
 
-
+// import java.util.logging.Level;
+// import java.util.logging.Logger;
 /**
  *
- * @author code-connect
+ * @author neil
  */
 public class Main extends Application {
 
