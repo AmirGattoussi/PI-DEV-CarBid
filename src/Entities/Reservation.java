@@ -15,17 +15,16 @@ package Entities;
 public class Reservation {
     private String date;
     private String location;
-    private int user;
-    private int car;
-    private int agent;
+    private int id_user;
+    private int id_car;
+    private int id_agent;
 
-
-    public Reservation(int user, int car, String date, String location, int agent) {
+    public Reservation(int id_user, int id_car, String date, String location, int id_agent) {
         this.date = date;
         this.location = location;
-        this.user = user;
-        this.car = car;
-        this.agent = agent;
+        this.id_user = id_user;
+        this.id_car = id_car;
+        this.id_agent = id_agent;
     }
 
     // get set for Date attribute
@@ -46,36 +45,37 @@ public class Reservation {
         this.location = location;
     }
 
-    // get set for user attribute
+    // get set for id_user attribute
     public int getUser() {
-        return user;
+        return id_user;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUser(int id_user) {
+        this.id_user = id_user;
     }
 
-    // get set for car attribute
+    // get set for id_car attribute
     public int getCar() {
-        return car;
+        return id_car;
     }
 
-    public void setCar(int car) {
-        this.car = car;
+    public void setCar(int id_car) {
+        this.id_car = id_car;
     }
 
-    // get set for agent attribute
+    // get set for id_agent attribute
     public int getAgent() {
-        return agent;
+        return id_agent;
     }
 
-    public void setAgent(int agent) {
-        this.agent = agent;
+    public void setAgent(int id_agent) {
+        this.id_agent = id_agent;
     }
 
     @Override
     public String toString() {
-        return "reservation{" + "user=" + user + ", car=" + car + ", date=" + date + ", location=" + location + ", agent=" + agent + '}';
+        return "reservation{" + "user=" + id_user + ", car=" + id_car + ", date=" + date + ", location=" + location
+                + ", agent=" + id_agent + '}';
     }
-    
+
 }

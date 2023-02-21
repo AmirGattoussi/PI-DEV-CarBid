@@ -9,30 +9,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500" minWidth="750" prefHeight="458.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsController">
-        <children>
-            <Pane layoutX="121.0" layoutY="66.0" prefHeight="458.0" prefWidth="607.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <children>
-                    <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 23; -fx-font-weight: 700;" text="Manage Reservations" />
-                    <TableView layoutX="22.0" layoutY="67.0" prefHeight="369.0" prefWidth="564.0">
-                        <columns>
-                            <TableColumn prefWidth="75.0" text="id user" />
-                            <TableColumn prefWidth="75.0" text="id car" />
-                            <TableColumn prefWidth="120.4364013671875" text="Date" />
-                            <TableColumn prefWidth="292.3636323181663" text="Location" />
-                        </columns>
-                    </TableView>
-                    <Button layoutX="543.0" layoutY="26.0" mnemonicParsing="false" text="Filter" />
-                </children>
-            </Pane>
-            <Pane prefHeight="401.0" prefWidth="121.0" style="-fx-background-color: #25c5b9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <children>
-                    <ImageView fitHeight="57.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../Images/logo.png" />
-                        </image>
-                    </ImageView>
-                </children>
-            </Pane>
-        </children>
-    </AnchorPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="" minWidth="" prefHeight="458.0" prefWidth="728.0" style="-fx-min-width: 700; -fx-min-height: 500;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsController">
+    <children>
+        <Pane layoutX="121.0" layoutY="66.0" prefHeight="458.0" prefWidth="607.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 23; -fx-font-weight: 700;" text="Manage Reservations" />
+                <TableView fx:id="tableView" layoutX="22.0" layoutY="67.0" prefHeight="369.0" prefWidth="564.0">
+                    <columns>
+                        <TableColumn fx:id="userColumn" prefWidth="75.0" text="id user" />
+                        <TableColumn fx:id="carColumn" prefWidth="75.0" text="id car" />
+                        <TableColumn fx:id="dateColumn" prefWidth="120.4364013671875" text="Date" />
+                        <TableColumn fx:id="locationColumn" prefWidth="292.3636323181663" text="Location" />
+                    </columns>
+                </TableView>
+                <Button layoutX="543.0" layoutY="26.0" mnemonicParsing="false" text="Filter" />
+            </children>
+        </Pane>
+        <Pane prefHeight="401.0" prefWidth="121.0" style="-fx-background-color: #25c5b9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="57.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

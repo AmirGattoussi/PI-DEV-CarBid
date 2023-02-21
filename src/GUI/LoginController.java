@@ -38,14 +38,15 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+
         // TODO
     }
 
     @FXML
     private void handleLogin() {
 
-        // call the login method from your CRUD implementation to check if the user exists
+        // call the login method from your CRUD implementation to check if the user
+        // exists
     }
 
 }

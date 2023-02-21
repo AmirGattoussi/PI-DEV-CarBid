@@ -14,13 +14,9 @@ import Services.*;
 import Utils.DBconnexion;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.net.ssl.SSLException;
 
 /**
  *
@@ -31,8 +27,12 @@ public class ReservationDao implements IReservationDao {
     Connection cnx;
     PreparedStatement statement;
 
-    public ReservationDao() throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public ReservationDao() {
+        try {
+            cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // CRUD method for creating a reservation

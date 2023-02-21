@@ -25,7 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../Controller/manageReservations.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root, 750, 500));
         primaryStage.show();
@@ -52,7 +52,7 @@ public class Main extends Application {
     //     // e.updateReservationDate(3, 1, "15-11-2023");
     //     // e.updateReservationLocation(3, 1, "Sousse Sahloul");
     //     // System.out.println(e.getReservation(3, 2));
-    //     System.out.println(e.filterReservationsByDate("15-11-2023"));
+    //     System.out.println(e.getReservations());
     // }
 
 }
