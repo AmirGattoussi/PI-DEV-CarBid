@@ -26,8 +26,12 @@ public class AdminDao implements IAdminDao {
 
     Connection cnx;
 
-    public AdminDao() throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public AdminDao() {
+        try {
+            cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -35,19 +39,48 @@ public class AdminDao implements IAdminDao {
     public void createAdmin(Admin admin) {
         PreparedStatement statement;
         try {
+            //Create withoud admin ID
             statement = cnx.prepareStatement(
-                    "INSERT INTO user (name, email, password,id_admin) VALUES (?, ?, ?,?)");
+                    "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
             statement.setString(2, admin.getEmail());
             statement.setString(3, admin.getPassword());
-            statement.setInt(4, admin.getId_admin());
+            statement.setInt(4, admin.getPhone_number());
+            statement.setString(5, admin.getLocation());
 
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+        int id_admin;
+        PreparedStatement statement2;
+        PreparedStatement statement3;
 
+        try {
+            //Get Id_admin from Id_User
+            statement2 = cnx.prepareStatement(
+                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND password = ? AND phone_number = ? AND location = ?");
+            statement2.setString(1, admin.getName());
+            statement2.setString(2, admin.getEmail());
+            statement2.setString(3, admin.getPassword());
+            statement2.setInt(4, admin.getPhone_number());
+            statement2.setString(5, admin.getLocation());
+            ResultSet resultSet = statement2.executeQuery();
+            //Set ID User to ID Admin
+            if (resultSet.next()) {
+                id_admin = resultSet.getInt("id_user");
+                System.out.println(id_admin);
+                statement3 = cnx.prepareStatement(
+                        "UPDATE user SET id_admin = ? WHERE id_user = ?");
+                statement3.setInt(1, id_admin);
+                statement3.setInt(2, id_admin);
+                statement3.executeUpdate();
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     //To change body of generated methods, choose Tools | Templates.
 

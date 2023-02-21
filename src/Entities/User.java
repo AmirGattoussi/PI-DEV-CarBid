@@ -10,12 +10,21 @@ package Entities;
  * @author gtsia
  */
 public class User {
+
     private int id_user;
     private String name;
     private String email;
     private String password;
     private int phone_number;
     private String location;
+
+    public User(String name, String email, String password, int phone_number, String location) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone_number = phone_number;
+        this.location = location;
+    }
 
     public User(int id_user, String name, String email, String password, int phone_number) {
         this.id_user = id_user;

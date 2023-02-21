@@ -32,7 +32,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import tools.MyConnection;
  */
-
 /**
  *
  * @author Yasmine
@@ -87,7 +86,6 @@ public class ServicesSpareParts {
         pre.setInt(3, u.getPou());
         pre.setString(4, u.getDescription());
         pre.setDouble(5, u.getPrice());
-
         pre.setString(6, u.getTypec());
 
         pre.executeUpdate();
