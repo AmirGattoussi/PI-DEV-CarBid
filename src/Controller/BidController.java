@@ -42,47 +42,47 @@ import Entities.Bid;
 
 public class BidController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    @FXML
-    private Button btn;
-  @FXML 
-  private TextField txt_live_bid; 
-  @FXML 
-  private TextField txt_max_bid; 
+  /**
+   * Initializes the controller class.
+   */
+  @FXML
+  private Button btn;
+  @FXML
+  private TextField txt_live_bid;
+  @FXML
+  private TextField txt_max_bid;
   @FXML
   private Button btn_confirm;
-   
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
 
-    }    
-     @FXML
-    void addBidLive(ActionEvent event) throws SQLException {
-        try{
-        Bid bid = new Bid();
-        //bid.setLiveBidAmount(Float.parseFloat(txt_live_bid.getText()));
-        if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty())) ) {
-          Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter only a live bid amount.");
-                alert.showAndWait();}}
-        catch( NumberFormatException ex){
-             System.out.println(ex.getMessage());   
-                }
-        
-        if(!(txt_live_bid.getText().matches("[0-9]*")) && (!(txt_live_bid.getText().isEmpty()) ) ) {
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
 
-            Alert alert = new Alert(AlertType.WARNING);
-             alert.setTitle("Invalid Input");
-             alert.setHeaderText(null);
-             alert.setContentText("Please enter only a number.");
-             alert.showAndWait();
-        
+  }
+
+  @FXML
+  void addBidLive(ActionEvent event) throws SQLException {
+    try {
+      Bid bid = new Bid();
+      // bid.setLiveBidAmount(Float.parseFloat(txt_live_bid.getText()));
+      if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty()))) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Invalid Input");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter only a live bid amount.");
+        alert.showAndWait();
+      }
+    } catch (NumberFormatException ex) {
+      System.out.println(ex.getMessage());
     }
+
+    if (!(txt_live_bid.getText().matches("[0-9]*")) && (!(txt_live_bid.getText().isEmpty()))) {
+
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setTitle("Invalid Input");
+      alert.setHeaderText(null);
+      alert.setContentText("Please enter only a number.");
+      alert.showAndWait();
+
     }
-    }  
-
-
+  }
+}
