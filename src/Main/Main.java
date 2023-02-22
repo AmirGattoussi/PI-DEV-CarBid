@@ -26,8 +26,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/AdminPage.fxml"));
-        primaryStage.setTitle("Login");
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Login.fxml"));
+        primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -41,19 +41,6 @@ public class Main extends Application {
      * @throws Exception
      */
 
-    // public static void main(String[] args) throws Exception {
-    //     Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
-
-    //     // DBconnexion database = DBconnexion.getInstance();
-    //     // Connection connection = database.getConnection();
-
-    //     ReservationDao e = new ReservationDao();
-    //     // e.createReservation(reserve);
-    //     // e.deleteReservation(3, 1);
-    //     // e.updateReservationDate(3, 1, "15-11-2023");
-    //     // e.updateReservationLocation(3, 1, "Sousse Sahloul");
-    //     // System.out.println(e.getReservation(3, 2));
-    //     System.out.println(e.getReservations());
-    // }
+    
 
 }
