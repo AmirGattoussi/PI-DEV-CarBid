@@ -16,8 +16,10 @@ import java.util.List;
  * @author asus
  */
 public interface BidDao {
-     public void addLiveBid(Bid bid);
-     public void addMaxBid(Bid bid);
+    public void addLiveBid(Bid bid);
+
+    public void addMaxBid(Bid bid);
+
     public void deleteBid(int id);
     public void updateBid(int idBid ,Date date, String type, float liveBidAmount,float maxBidAmount);
     public Bid getBid(int id); 
