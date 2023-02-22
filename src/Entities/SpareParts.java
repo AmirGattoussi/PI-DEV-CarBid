@@ -10,88 +10,78 @@ package Entities;
  * @author Yasmine
  */
 public class SpareParts {
-    private int id_sparepart;
-    private String Type;
-     private int Pou;
-    private String Description;
-     private double Price;
-    private String Typec;
-   
-   
-     public SpareParts(int id_sparepart, String Type,  int Pou, String Description, double Price, String Typec) {
-        this.id_sparepart = id_sparepart;
-        this.Type = Type;
-         this.Pou = Pou;
-        this.Description = Description;
-        
-       
-        this.Price = Price;
-        this.Typec = Typec;
-    }
 
-   
+    private int id_sparepart;
+    private String type;
+    private int pou;
+    private String description;
+    private double price;
+    private String typec;
+
+    public SpareParts(int id_sparepart, String type, int pou, String description, double price, String typec) {
+        this.id_sparepart = id_sparepart;
+        this.type = type;
+        this.pou = pou;
+        this.description = description;
+
+        this.price = price;
+        this.typec = typec;
+    }
 
     public SpareParts() {
     }
-
-   
 
     public int getId() {
         return id_sparepart;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
+
     public int getPou() {
-        return Pou;
+        return pou;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
-  public double getPrice() {
-        return Price;
+
+    public double getPrice() {
+        return price;
     }
 
     public String getTypec() {
-        return Typec;
+        return typec;
     }
 
-    
-
-  
     public void setId(int Id) {
         this.id_sparepart = Id;
     }
 
-    public void setType(String Type) {
-        this.Type = Type;
-    }
-     public void setPou(int Pou) {
-        this.Pou = Pou;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-public void setPrice(double Price) {
-        this.Price = Price;
+    public void setPou(int pou) {
+        this.pou = pou;
     }
 
-    public void setTypec(String Typec) {
-        this.Typec = Typec;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-   
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-    
+    public void setTypec(String typec) {
+        this.typec = typec;
+    }
+
     @Override
     public String toString() {
-        return "SpareParts{" + "id_sparepart=" + id_sparepart + ", Type=" + Type + ", Pou=" + Pou + ", description=" + Description + ", Price=" + Price + ", Typec=" + Typec + '}';
+        return "SpareParts{" + "id_sparepart=" + id_sparepart + ", Type=" + type + ", Pou=" + pou + ", description=" + description + ", Price=" + price + ", typec=" + typec + '}';
     }
 
-   
-    
-    
 }

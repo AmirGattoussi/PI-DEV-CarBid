@@ -4,6 +4,17 @@
  */
 package Dao;
 
+import Entities.Command;
+import Entities.SpareParts;
+import Utils.DBconnexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Yasmine
@@ -21,18 +32,16 @@ public class ServicesCommand {
         List<Command> listpieces = new ArrayList<>();
         try {
             ste = cnx.createStatement();
-            String req_select = "SELECT * FROM `carbid`.`commands`";
+            String req_select = "SELECT * FROM `carbid`.`command`";
             ResultSet res = ste.executeQuery(req_select);
             while (res.next()) {
-                int Id = res.getInt(1);
-                String Type = res.getString(2);
-                int Pou = res.getInt(3);
-                String Description = res.getString(4);
-                double Price = res.getDouble(5);
-                String Typec = res.getString(6);
+                int id_command = res.getInt(1);
+                int id_user = res.getInt(2);
+                int id_sparepart = res.getInt(3);
+               
                 //   SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
-                SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
-                listpieces.add(s);
+                //SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
+                //listpieces.add(s);
 
             }
         } catch (SQLException ex) {
@@ -42,17 +51,13 @@ public class ServicesCommand {
         return listpieces;
     }
 
-    public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`id_sparepart`, `Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?,?)");
+    public void add(Command u) throws SQLException {
+        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
 
-        pre.setInt(1, u.getId());
-        pre.setString(2, u.getType());
-        pre.setInt(3, u.getPou());
-        pre.setString(4, u.getDescription());
-        pre.setDouble(5, u.getPrice());
-
-        pre.setString(6, u.getTypec());
-
+        pre.setInt(1, u.getId_command());
+        pre.setInt(2, u.getId_user());
+        pre.setInt(3, u.getId_sparepart());
+        
         pre.executeUpdate();
         /*
            if ((text_live_id.getText().isEmpty()) && (!(txt_main_price.getText().isEmpty())) ) {
@@ -68,7 +73,7 @@ public class ServicesCommand {
     public void delete(int id) {
 
         try {
-            PreparedStatement pre = cnx.prepareStatement("delete from spareparts where id_sparepart = ?");
+            PreparedStatement pre = cnx.prepareStatement("delete from command where id_command = ?");
             pre.setInt(1, id);
             pre.executeUpdate();
         } catch (SQLException ex) {
@@ -80,20 +85,15 @@ public class ServicesCommand {
     public void modify(SpareParts u) {
 
         try {
-            PreparedStatement pre = cnx.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
+            PreparedStatement pre = cnx.prepareStatement("Update command set id_user=?,id_sparepart=? where id_command = ?");
 
-            pre.setInt(6, u.getId());
+            //pre.setInt(3, u.getId_command());
 
-            pre.setString(1, u.getType());
+//            pre.setString(1, u.getId_user());
 
-            pre.setInt(2, u.getPou());
+  //          pre.setInt(2, u.getId_sparepart());
 
-            pre.setString(3, u.getDescription());
-
-            pre.setDouble(4, u.getPrice());
-
-            pre.setString(5, u.getTypec());
-
+           
             pre.executeUpdate();
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
@@ -104,7 +104,7 @@ public class ServicesCommand {
 
         try {
 
-            PreparedStatement pre = cnx.prepareStatement("select * from spareparts where id_sparepart = ?");
+            PreparedStatement pre = cnx.prepareStatement("select * from command where id_command= ?");
 
             pre.setInt(1, id);
             ResultSet result = pre.executeQuery();
