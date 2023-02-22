@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,11 +34,10 @@ public class BidDaoImplementation implements BidDao {
  public void addLiveBid(Bid bid)  {
       try {
           PreparedStatement statement = cnx.prepareStatement(
-                  "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, ?,'Live', ?,0)");
+                  "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, now(),'Live', ?,0)");
         statement.setInt(1, bid.getUserId());
         statement.setInt(2, bid.getIdAuction());
-        statement.setDate(3, bid.getDate());
-	statement.setFloat(4, bid.getLiveBidAmount());
+	statement.setFloat(3, bid.getLiveBidAmount());
 	statement.executeUpdate();
 	System.out.println("added successfully");
       } catch (SQLException ex) {
@@ -52,12 +53,11 @@ public class BidDaoImplementation implements BidDao {
         PreparedStatement statement;
       try {
           statement = cnx.prepareStatement(
-                  "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, ?,'Max', ?, ?)");
+                  "INSERT INTO bid (userId,idAuction,date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, now(),'Max', ?, ?)");
          statement.setInt(1, bid.getUserId());
         statement.setInt(2, bid.getIdAuction());
-        statement.setDate(3, bid.getDate());
-	statement.setFloat(4, bid.getLiveBidAmount());
-	statement.setFloat(5, bid.getMaxBidAmount());
+	statement.setFloat(3, bid.getLiveBidAmount());
+	statement.setFloat(4, bid.getMaxBidAmount());
 	statement.executeUpdate();
 	System.out.println("added successfully");  
       } catch (SQLException ex) {
@@ -97,6 +97,7 @@ return null;
 @Override
  public void updateBid(int idBid ,Date date, String type, float liveBidAmount,float maxBidAmount )  {
       try {
+          
           PreparedStatement statement = cnx.prepareStatement(
                   "UPDATE bid SET  date= ?, type = ?,liveBidAmount= ?, maxBidAmount = ? WHERE idBid = ?");
             statement.setDate(1, date);
@@ -127,5 +128,33 @@ public void deleteBid(int id) {
           Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
+@Override
+    public List<Bid> getAllBids() {
+        List<Bid> data = new ArrayList<Bid>();
+    PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM bid");
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new Bid(
+                       resultSet.getInt("idBid"),
+		    resultSet.getInt("userId"),
+		    resultSet.getInt("idAuction"),
+                    resultSet.getDate("date"),
+                    resultSet.getString("type"),
+                    resultSet.getFloat("liveBidAmount"),
+		    resultSet.getFloat("maxBidAmount") 
+                
+                ));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+  
 }
 

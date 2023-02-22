@@ -34,13 +34,13 @@ public class AuctionDaoImplementation implements AuctionDao {
         PreparedStatement statement;
     try {
         statement = cnx.prepareStatement(
-                "INSERT INTO auction (startDate, endDate, startingPrice,highestBid,status,carId) VALUES (?, ?, ?, ?, ?, ?)");
+                "INSERT INTO auction (startDate, endDate, startingPrice,highestBid,status,idCar) VALUES (?, ?, ?, ?, ?, ?)");
      statement.setDate(1, auction.getStartDate());
         statement.setDate(2, auction.getEndDate());
         statement.setFloat(3, auction.getStartingPrice());
 	statement.setFloat(4, auction.getHighestBid());
 	statement.setString(5, auction.getStatus());
-        statement.setInt(6, auction.getCarId());
+        statement.setInt(6, auction.getIdCar());
 	statement.executeUpdate();
 	System.out.println("added successfully");
     
@@ -69,7 +69,7 @@ public Auction getAuction(int id)  {
                     resultSet.getFloat("startingPrice"),
 		    resultSet.getFloat("highestBid"),
                     resultSet.getString("status"),
-                    resultSet.getInt("carId")
+                    resultSet.getInt("idCar")
                     
             );
             
@@ -119,5 +119,31 @@ public void deleteAuction(int id) {
         
 
     }
+
+  @Override
+    public Float getHighestBidById(int id) {
+ try {
+          PreparedStatement statement = cnx.prepareStatement(
+                  "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");     
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+       float floatValue = resultSet.getFloat("highestBid");
+        return floatValue;}
+        else {
+            System.out.println("error");
+        }
+       
+
+        
+          
+      } catch (SQLException ex) {
+          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ return null;
+    }
+
+
+
 }
 
