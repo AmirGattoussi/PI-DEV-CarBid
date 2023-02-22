@@ -13,7 +13,7 @@ import Entities.Auction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Dao.AuctionDaoImplementation;
-import Entities.Bid;
+import Entities.*;
 import com.sun.javafx.binding.BidirectionalContentBinding;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -40,14 +40,25 @@ import java.util.logging.Logger;
  */
 public class Main extends Application {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Login.fxml"));
-        primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-    }
-
+   @Override
+   public void start(Stage primaryStage) throws Exception {
+       Parent root = FXMLLoader.load(getClass().getResource("../View/DisplayCar.fxml"));
+       primaryStage.setTitle("DisplayCar");
+       primaryStage.setScene(new Scene(root));
+       primaryStage.show();
+ 
+   
+  
+   
+   
+   }
+       
+   
+   
+   
+   
+   
+   
     /**
      * @param args the command line arguments
      * @throws java.sql.SQLException
@@ -55,12 +66,13 @@ public class Main extends Application {
      */
 
     public static void main(String[] args) throws SQLException, IOException {
-        launch(args);
-        // User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
+       launch(args);
+         User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
 
-        // UserDao user=new UserDao();
-        // user.createUser(amir2);
-        // user.login("mail@", "passamir");
+        UserDao user=new UserDao();
+        user.createUser(amir2);
+         user.login("mail@", "passamir");
     }
 
+   
 }

@@ -12,47 +12,62 @@ import java.util.Objects;
  * @author rima
  */
 public class Cars {
-   private int id;
-   private String model;
-   private String color;
-   private String type;
-   private String make;
-   private String description;
-   private Float mileage;
-   private int year; 
-   private Float fiscalpower;
-   private String transmission;
-   private String loss ;
-   private String primarydamage ;
-   private String secondarydamage ;
-   private String fueltype;
-      
- 
-   
+
+    private int id_car;
+    private String model;
+    private String color;
+    private String type;
+    private String make;
+    private String description;
+    private Float mileage;
+    private int year;
+    private Float fiscalpower;
+    private String transmission;
+    private String loss;
+    private String primarydamage;
+    private String secondarydamage;
+    private String fueltype;
+
     public Cars() {
-       
+
     }
-   
-   public Cars(int id,String model, String color,String type,String make,String description,Float mileage,int year,Float fiscalpower,String transmission,String loss,
-String primarydamage, String secondarydamage,String fueltype) {
-       this.id=id;
-       this.model=model;
-       this.color=color;
-       this.type=type;
-       this.make=make;
-       this.description=description;
-       this.mileage=mileage;
-       this.year=year;
-       this.fiscalpower=fiscalpower;
-       this.transmission=transmission;
-       this.loss=loss;
-       this.primarydamage=primarydamage;
-       this.secondarydamage=secondarydamage;
-       
+
+    public Cars(String model, String color, String type, String make, String description, Float mileage, int year, Float fiscalpower, String transmission, String loss, String primarydamage, String secondarydamage, String fueltype) {
+        this.model = model;
+        this.color = color;
+        this.type = type;
+        this.make = make;
+        this.description = description;
+        this.mileage = mileage;
+        this.year = year;
+        this.fiscalpower = fiscalpower;
+        this.transmission = transmission;
+        this.loss = loss;
+        this.primarydamage = primarydamage;
+        this.secondarydamage = secondarydamage;
+        this.fueltype = fueltype;
+    }
+
+    public Cars(int id_car, String model, String color, String type, String make, String description, Float mileage, int year, Float fiscalpower, String transmission, String loss,
+            String primarydamage, String secondarydamage, String fueltype) {
+        this.id_car = id_car;
+        this.model = model;
+        this.color = color;
+        this.type = type;
+        this.make = make;
+        this.description = description;
+        this.mileage = mileage;
+        this.year = year;
+        this.fiscalpower = fiscalpower;
+        this.transmission = transmission;
+        this.loss = loss;
+        this.primarydamage = primarydamage;
+        this.secondarydamage = secondarydamage;
+        this.fueltype= fueltype;
     }
 
     public int getId() {
-        return id; 
+        return id_car;
     }
 
     public String getModel() {
@@ -103,8 +118,8 @@ String primarydamage, String secondarydamage,String fueltype) {
         return secondarydamage;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_car) {
+        this.id_car = id_car;
     }
 
     public void setModel(String model) {
@@ -162,23 +177,20 @@ String primarydamage, String secondarydamage,String fueltype) {
     public void setFueltype(String fueltype) {
         this.fueltype = fueltype;
     }
-   
-    
-   
-   @Override
+
+    @Override
     public String toString() {
-        return "Cars{" + "id=" + id + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make + ",description=" + description + ",mileage=" + mileage + ",yeae=" + year + ",fiscalpower=" +fiscalpower +
-                ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" +primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype +'}';
+        return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make + ",description=" + description + ",mileage=" + mileage + ",yeae=" + year + ",fiscalpower=" + fiscalpower
+                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + this.id;
+        hash = 23 * hash + this.id_car;
         return hash;
     }
 
-  
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -191,21 +203,10 @@ String primarydamage, String secondarydamage,String fueltype) {
             return false;
         }
         final Cars other = (Cars) obj;
-        if (this.id != other.id) {
+        if (this.id_car != other.id_car) {
             return false;
         }
         return true;
     }
-    
-    
-    
-    
-   
-    }
- 
-    
-   
-   
-   
-    
 
+}
