@@ -66,6 +66,7 @@ public class CarConfirmController implements Initializable {
     stage.setScene(new Scene(root));
     stage.setTitle("New View");
     stage.show();
+    
             } catch (IOException ex) {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
             }

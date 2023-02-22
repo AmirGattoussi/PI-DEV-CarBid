@@ -9,6 +9,7 @@ import Entities.Auction;
 import Entities.Bid;
 import Entities.User;
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface BidDao {
     public void deleteBid(int id);
     public void updateBid(int idBid ,Date date, String type, float liveBidAmount,float maxBidAmount);
     public Bid getBid(int id); 
+    public List<Bid> getAllBids();
+    
 }

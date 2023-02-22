@@ -21,10 +21,15 @@ import java.util.logging.Logger;
 public class UserDao implements IUserDao {
 
     java.sql.Connection cnx;
+    private static UserDao instance;
 
     // Connexion
-    public UserDao() throws SQLException {
-        this.cnx = DBconnexion.getInstance().getConnection();
+    public UserDao() {
+        try {
+            this.cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     // CREATE operation
 
@@ -109,13 +114,12 @@ public class UserDao implements IUserDao {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
-                    "UPDATE user SET name = ?, email = ?, password = ?, phone_number=? WHERE id_user = ?");
+                    "UPDATE user SET name = ?, email = ?, password = ?, phone_number=?, location= ? WHERE id_user = ?");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getId());
-            statement.setInt(5, user.getPhone_number());
-            statement.setString(6, user.getLocation());
+            statement.setInt(4, user.getPhone_number());
+            statement.setString(5, user.getLocation());
 
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -140,26 +144,67 @@ public class UserDao implements IUserDao {
     }
 
     public boolean login(String email, String password) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carbid", "root", "")) {
-            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, email);
-                statement.setString(2, password);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        System.out.println("Login successful");
-                        // User exists and password matches
-                        return true;
-                    }
-                }
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // establish a connection to the database
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carbid", "root", "");
+
+            // prepare a statement to query the database for a user with the given username and password
+            statement = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            // execute the query and check if the result set contains any rows
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
             }
         } catch (SQLException e) {
+            // handle any exceptions that occur while querying the database
             e.printStackTrace();
-            // Handle the exception appropriately
-        }
+            return false;
 
-        // User does not exist or password is incorrect
-        return false;
+        }
     }
 
+    public boolean resetPassword(String email, String newPassword) {
+        PreparedStatement stmt = null;
+        try {
+            // Open connection to database
+
+            // Prepare SQL statement to update password
+            stmt = cnx.prepareStatement("UPDATE user SET password=? WHERE email=?");
+            stmt.setString(1, newPassword);
+            stmt.setString(2, email);
+
+            // Execute SQL statement and check if any rows were affected
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 1) {
+                return true; // Password reset successfully
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close database resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+            try {
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return false; // Password reset failed
+
+    }
 }

@@ -8,6 +8,11 @@ package Main;
 import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import Dao.*;
 import Entities.SpareParts;
 import java.util.logging.Level;
@@ -90,19 +95,11 @@ public class Main extends Application {
     */   
     /**
      * @param args the command line arguments
+     * @throws Exception
      */
 
-   /** 
-    Reservation reserve = new Reservation(3, 1, "28/02/2023", "Ariana", 1);
+    
 
-    DBconnexion database = DBconnexion.getInstance();
-    Connection connection = database.getConnection();
-
-    ReservationDao e = new ReservationDao();
-    // e.createReservation(reserve);
-    // e.deleteReservation(3, 1);
-    System.out.println(e.getReservation(3, 1));
-   */ 
 }
 /*
       ServicesSpareParts s=new ServicesSpareParts();

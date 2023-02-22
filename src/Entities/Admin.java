@@ -10,10 +10,15 @@ package Entities;
  * @author gtsia
  */
 public class Admin extends User {
+
     int id_admin;
 
-    public Admin(int id_admin, int id_user, String name, String email, String password,int phone_number, String location) {
-        super(id_user, name, email, password,phone_number,location);
+    public Admin(String name, String email, String password, int phone_number, String location) {
+        super(name, email, password, phone_number, location);
+    }
+
+    public Admin(int id_admin, int id_user, String name, String email, String password, int phone_number, String location) {
+        super(id_user, name, email, password, phone_number, location);
         this.id_admin = id_admin;
     }
 
