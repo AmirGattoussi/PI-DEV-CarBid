@@ -68,6 +68,7 @@ public class LoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("You have successfully logged in!");
             alert.showAndWait();
+           int passThroughUserID = user.getUserIdAtLogin(emailIn, passwordIn);
         } else {
             // login failed, display error message on screen
             Alert alert = new Alert(AlertType.ERROR);

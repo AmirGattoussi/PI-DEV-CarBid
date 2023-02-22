@@ -207,4 +207,25 @@ public class UserDao implements IUserDao {
         return false; // Password reset failed
 
     }
+
+    public int getUserIdAtLogin(String email, String password) {
+        PreparedStatement statement;
+        int loggedInID=0;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT id_user FROM user WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                loggedInID = resultSet.getInt("id_user");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return loggedInID;
+
+    }
 }
