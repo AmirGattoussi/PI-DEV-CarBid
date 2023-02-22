@@ -6,6 +6,11 @@
 package Utils;
 import java.sql.*;
 
+
+/**
+ *
+ * @author neil
+ */
 public class DBconnexion {
   
   private static DBconnexion instance;
@@ -15,17 +20,15 @@ public class DBconnexion {
   private String password = "";
 
   private DBconnexion() throws SQLException {
-     try {
+    try {
       this.connection = DriverManager.getConnection(url, username, password);
-                System.out.println("Connextion etablie !");
+                System.out.println("Established connection !");
 
-     }
-     catch (SQLException ex) {
-            System.out.println("Erreur de connextion");
+    }
+    catch (SQLException ex) {
+            System.out.println("Connection error");
             System.out.println(ex.getMessage());
         }
-     
-    
   }
 
   public Connection getConnection() {

@@ -19,5 +19,4 @@ public interface AuctionDao {
     public void deleteAuction(int id);
     public void updateAuction(int id, float highestBid,String status);
     public Auction getAuction(int id); 
-    public Float getHighestBidById(int id); 
 }

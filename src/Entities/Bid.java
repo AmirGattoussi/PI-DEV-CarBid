@@ -104,20 +104,4 @@ public class Bid {
     public Bid() {
     }
 
-    public Bid(int userId, int idAuction, float liveBidAmount) {
-        this.userId = userId;
-        this.idAuction = idAuction;
-        this.liveBidAmount = liveBidAmount;
-    }
-
-    public Bid(int userId, int idAuction, float liveBidAmount, float maxBidAmount) {
-        this.userId = userId;
-        this.idAuction = idAuction;
-        this.liveBidAmount = liveBidAmount;
-        this.maxBidAmount = maxBidAmount;
-    }
-    
-
-    
-    
 }
