@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,20 +13,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BidController">
-   <children >
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="769.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BidController">
+   <children>
       <Label layoutX="70.0" layoutY="107.0" text="Current Bid">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Text layoutX="95.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 TND">
+      <Text fx:id="txt_highest_bid" layoutX="95.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 ">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3f3d56" height="470.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#25c5b9" height="57.0" stroke="BLACK" strokeType="INSIDE" width="769.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3f3d56" height="463.0" layoutY="63.0" stroke="#3f3d56" strokeType="INSIDE" width="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#25c5b9" height="63.0" stroke="#25c5b9" strokeType="INSIDE" width="769.0" />
       <ImageView fitHeight="57.0" fitWidth="95.0" layoutX="679.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo.png" />
@@ -66,12 +67,15 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox layoutX="390.0" layoutY="367.0" mnemonicParsing="false" text="I agree to the terms and conditions" />
-      <RadioButton layoutX="390.0" layoutY="298.0" mnemonicParsing="false" text="Live Bid" />
-      <RadioButton layoutX="558.0" layoutY="298.0" mnemonicParsing="false" text="Max Bid" />
+      <CheckBox fx:id="btn_terms" layoutX="390.0" layoutY="367.0" mnemonicParsing="false" text="I agree to the terms and conditions" />
+      <RadioButton fx:id="radio_btn_live" layoutX="390.0" layoutY="298.0" mnemonicParsing="false" text="Live Bid">
+         <toggleGroup>
+            <ToggleGroup fx:id="bid_group" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radio_btn_max" layoutX="558.0" layoutY="298.0" mnemonicParsing="false" text="Max Bid" toggleGroup="$bid_group" />
       <TextField fx:id="txt_live_bid" layoutX="390.0" layoutY="324.0" />
       <TextField fx:id="txt_max_bid" layoutX="558.0" layoutY="324.0" />
-      <Button fx:id="btn_confirm" layoutX="390.0" layoutY="408.0" mnemonicParsing="false" onAction="#addBidLive" prefHeight="25.0" prefWidth="141.0" text="Confirm"  />
+      <Button fx:id="btn_confirm" layoutX="390.0" layoutY="408.0" mnemonicParsing="false" onAction="#addBid" prefHeight="25.0" prefWidth="141.0" text="Confirm" />
       <Button layoutX="578.0" layoutY="408.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Cancel" />
       <Text layoutX="70.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60000 TND">
          <font>

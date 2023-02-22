@@ -37,13 +37,14 @@ import javafx.stage.Stage;
  *
  * @author neil
  */
-public class Main extends Application{
-        private Stage stage;
+public class Main extends Application {
+    private Stage stage;
     private Parent parent;
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.stage=primaryStage;
-        parent=FXMLLoader.load(getClass().getResource("/View/CarConfirm.fxml"));
+        parent=FXMLLoader.load(getClass().getResource("/View/Bid_management.fxml"));
         Scene scene=new Scene(parent);
         stage.setScene(scene);
         stage.show();      
@@ -53,7 +54,20 @@ public class Main extends Application{
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, IOException {
-        launch(args);
+      launch(args);
+ 
+//BidDaoImplementation bid= new BidDaoImplementation();
+//AuctionDaoImplementation auc=new AuctionDaoImplementation();
+ //Auction auction = new Auction(new Date (123,5,19),new Date(124,6,5), 4444, 1111, "closed", 1);
+          //auc.addAuction(auction);
+          //System.out.println(auc.getAuction(3).toString());
+          // auc.updateAuction(3, 1212, "open");
+         // auc.deleteAuction(3);
+//System.out.println(auc.getHighestBidById(4));
+          
+                    //System.out.println(auc.getAuction(6));
+
+
     }
 
     /**
