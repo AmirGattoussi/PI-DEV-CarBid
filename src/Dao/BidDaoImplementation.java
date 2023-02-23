@@ -5,9 +5,8 @@
  */
 package Dao;
 
-import Entities.Auction;
+import Entities.*;
 import Entities.Bid;
-import Entities.User;
 import Services.BidDao;
 import Utils.DBconnexion;
 import java.sql.Connection;
@@ -15,6 +14,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -124,4 +125,32 @@ public class BidDaoImplementation implements BidDao {
             Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public List<Bid> getAllBids() {
+        List<Bid> data = new ArrayList<Bid>();
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM bid");
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new Bid(
+                        resultSet.getInt("idBid"),
+                        resultSet.getInt("userId"),
+                        resultSet.getInt("idAuction"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("type"),
+                        resultSet.getFloat("liveBidAmount"),
+                        resultSet.getFloat("maxBidAmount")
+
+                ));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
 }

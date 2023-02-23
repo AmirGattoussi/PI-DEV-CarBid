@@ -171,4 +171,61 @@ public class UserDao implements IUserDao {
 
         }
     }
+
+    public boolean resetPassword(String email, String newPassword) {
+        PreparedStatement stmt = null;
+        try {
+            // Open connection to database
+
+            // Prepare SQL statement to update password
+            stmt = cnx.prepareStatement("UPDATE user SET password=? WHERE email=?");
+            stmt.setString(1, newPassword);
+            stmt.setString(2, email);
+
+            // Execute SQL statement and check if any rows were affected
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 1) {
+                return true; // Password reset successfully
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close database resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+            try {
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return false; // Password reset failed
+
+    }
+
+    public int getUserIdAtLogin(String email, String password) {
+        PreparedStatement statement;
+        int loggedInID=0;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT id_user FROM user WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                loggedInID = resultSet.getInt("id_user");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return loggedInID;
+
+    }
 }

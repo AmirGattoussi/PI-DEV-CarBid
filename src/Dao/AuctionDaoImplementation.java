@@ -5,8 +5,7 @@
  */
 package Dao;
 
-import Entities.Auction;
-import Entities.User;
+import Entities.*;
 import Services.AuctionDao;
 import Utils.DBconnexion;
 import java.sql.Connection;
@@ -112,4 +111,25 @@ public class AuctionDaoImplementation implements AuctionDao {
         }
 
     }
+
+    @Override
+    public Float getHighestBidById(int id) {
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                float floatValue = resultSet.getFloat("highestBid");
+                return floatValue;
+            } else {
+                System.out.println("error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

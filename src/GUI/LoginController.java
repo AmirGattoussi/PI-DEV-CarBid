@@ -48,6 +48,8 @@ public class LoginController implements Initializable {
      * @param url
      * @param rb
      */
+    UserDao user = new UserDao();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -56,7 +58,6 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         // perform login validation
-        UserDao user = new UserDao();
         String emailIn = email.getText();
         String passwordIn = password.getText();
         boolean valid = user.login(emailIn, passwordIn);
@@ -67,6 +68,7 @@ public class LoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("You have successfully logged in!");
             alert.showAndWait();
+           int passThroughUserID = user.getUserIdAtLogin(emailIn, passwordIn);
         } else {
             // login failed, display error message on screen
             Alert alert = new Alert(AlertType.ERROR);
@@ -91,4 +93,21 @@ public class LoginController implements Initializable {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     @FXML
+    private void handleResetLink (ActionEvent event)  {
+    }
+        /* try {
+            PasswordResetDialogController dialog = new PasswordResetDialogController();
+            dialog.showAndWait();
+
+            // Display a success message
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Password Reset");
+            alert.setHeaderText(null);
+            alert.setContentText("Your password has been reset. Please check your email for the new password.");
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }
