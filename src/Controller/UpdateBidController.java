@@ -54,13 +54,29 @@ public class UpdateBidController implements Initializable {
 
     @FXML
     private void updateBidAct(ActionEvent event) {
-       try {
-          if ((txt_live.getText().isEmpty()) || (txt_status.getText().isEmpty())) {
+      
+          if (txt_live.getText().isEmpty()) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Invalid Input");
                     alert.setHeaderText(null);
-                    alert.setContentText("Please enter only a live bid amount");
+                    alert.setContentText("Please enter a live bid amount");
+                    alert.showAndWait();
+                } 
+           else if ((txt_status.getText().isEmpty())) {
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a status");
+                    alert.showAndWait();
+                } 
+            else if ((txt_max.getText().isEmpty())) {
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a max bid amount");
                     alert.showAndWait();
                 } 
           else if (!(txt_max.getText().matches("[0-9]*")) || (!(txt_live.getText().matches("[0-9]*")))) {
@@ -90,14 +106,7 @@ public class UpdateBidController implements Initializable {
                 alert.showAndWait();
 
             }
-            else if (txt_max.getText().isEmpty()) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter the status");
-                    alert.showAndWait();
-                } 
+          else{ 
            try {
             BidDaoImplementation bidDao = new BidDaoImplementation();
             LocalDate localDate = date_field.getValue();
@@ -114,9 +123,8 @@ public class UpdateBidController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);}
            
-       }catch (Exception ex){
-               System.out.println(ex.getMessage());
-           }
+          }
+       
 
         
 

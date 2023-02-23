@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="664.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BidController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="664.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BidManagementController">
    <children>
       <TableView fx:id="tableViewBids" layoutX="60.0" layoutY="127.0" prefHeight="273.0" prefWidth="522.0">
         <columns>

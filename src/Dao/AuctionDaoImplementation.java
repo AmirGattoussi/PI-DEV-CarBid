@@ -120,22 +120,37 @@ public void deleteAuction(int id) {
     }
 
   @Override
-    public Float getHighestBidById(int id) {
+    public Float getHighestBidById(int idCar) {
  try {
           PreparedStatement statement = cnx.prepareStatement(
-                  "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");     
-        statement.setInt(1, id);
+                  "SELECT highestBid FROM auction WHERE auction.idCar = ?");     
+        statement.setInt(1, idCar);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
        float floatValue = resultSet.getFloat("highestBid");
         return floatValue;}
         else {
-            System.out.println("error");
-        }
-       
+            System.out.println("error id");
+        }  
+      } catch (SQLException ex) {
+          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ return null;
+    }
 
-        
-          
+    @Override
+    public Date getDeadline(int idAuction) {
+try {
+          PreparedStatement statement = cnx.prepareStatement(
+                  "SELECT endDate FROM auction WHERE auction.idAuction = ?");     
+        statement.setInt(1, idAuction);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+       Date deadline = resultSet.getDate("endDate");
+        return deadline;}
+        else {
+            System.out.println("error");
+        }  
       } catch (SQLException ex) {
           Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
       }

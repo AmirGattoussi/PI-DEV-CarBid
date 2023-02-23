@@ -8,6 +8,7 @@ import Entities.*;
 
 
 import Entities.Auction;
+import java.sql.Date;
 
 
 /**
@@ -19,5 +20,6 @@ public interface AuctionDao {
     public void deleteAuction(int id);
     public void updateAuction(int id, float highestBid,String status);
     public Auction getAuction(int id); 
-    public Float getHighestBidById(int id); 
+    public Float getHighestBidById(int idCar); 
+    public Date getDeadline(int idAuction);
 }

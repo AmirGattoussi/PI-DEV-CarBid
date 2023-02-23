@@ -14,6 +14,7 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Dao.AuctionDaoImplementation;
 import Dao.BidDaoImplementation;
 import java.io.IOException;
 import java.net.URL;
@@ -39,12 +40,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import Entities.Bid;
+import Entities.User;
 import java.sql.Date;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -52,6 +65,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 public class BidController implements Initializable {
@@ -60,121 +74,152 @@ public class BidController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
+    private Button btn_confirm;
+    @FXML
+    private CheckBox btn_terms;
+    @FXML
     private Button btn;
     @FXML
     private TextField txt_live_bid;
     @FXML
     private TextField txt_max_bid;
     @FXML
-    private Button btn_confirm;
-    @FXML
-    private CheckBox btn_terms;
-    @FXML
     private RadioButton radio_btn_live;
     @FXML
     private RadioButton radio_btn_max;
-    //@FXML 
-    //private TextField txt_highest_bid;
     @FXML
-    private TableView<Bid> tableViewBids;
+    private Text txt_highest_bid;
     @FXML
-    private TableColumn<Bid, Integer> bidColumn;
+    private ListView list_v;
+    @FXML 
+    private TableView table_view_history;
+        @FXML
+    private TableColumn<User, String> user_column;
+    @FXML
+    private TableColumn<Bid, Date> date_column;
+    @FXML
+    private TableColumn<Bid, Float> live_column;
+    @FXML
+    private Text txt_time;
+    private int userId;
+    private int carId;
+    private int auctionId;
 
-    @FXML
-    private TableColumn<Bid, Integer> userColumn;
+  
 
-    @FXML
-    private TableColumn<Bid, Integer> auctionColumn;
+    public BidController(int userId, int carId,int auctionId) {
+        this.userId = userId;
+         this.carId = carId;
+        this.auctionId = auctionId;
+    }
 
-    @FXML
-    private TableColumn<Bid, Date> dateColumn;
+    
+    
 
-    @FXML
-    private TableColumn<Bid, String> typeColumn;
-    @FXML
-    private TableColumn<Bid, Float> liveColumn;
-    @FXML
-    private TableColumn<Bid, Float> maxColumn;
-    @FXML
-    private TableColumn<ImageView, String> editColumn;
-    @FXML
-    private Button btn_delete;
+    /*
+  public int setValueCar(int carId) {
+        
+        System.out.println("carrrr in setValue"+carId);
+        this.carId = carId;
+     return carId;
+    }
+     public int getCarId() {
+          System.out.println("getttter "+ carId);
+        return carId;
+    }
+ public void setValueUser(int userId) {
+        this.userId = userId;
+      
+    }
+  public void doSomething() {
+       setValueCar();
+        
+    }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+**/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
 
-            BidDaoImplementation bidDao = new BidDaoImplementation();
-            List<Bid> data = bidDao.getAllBids();
-            ObservableList<Bid> observableBidList = FXCollections.observableList(data);
+            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
 
-            bidColumn.setCellValueFactory(new PropertyValueFactory<>("idBid"));
-            userColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
-            auctionColumn.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
-            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-            liveColumn.setCellValueFactory(new PropertyValueFactory<>("liveBidAmount"));
-            maxColumn.setCellValueFactory(new PropertyValueFactory<>("maxBidAmount"));
+            Float highest = aucDao.getHighestBidById(carId);
+            System.out.println(highest);
+            txt_highest_bid.setText(Float.toString(highest));
 
-            tableViewBids.setItems(observableBidList);
+        } catch (SQLException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
+        try {
+            
+             BidDaoImplementation bidDao = new BidDaoImplementation(); 
+             List<Bid>data = bidDao.getBidsById(auctionId); 
+           
+             
+            System.out.println(data.get(0));
+          ObservableList<Bid> observableBidList =FXCollections.observableList(data);
+            user_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+         date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+          live_column.setCellValueFactory(new
+          PropertyValueFactory<>("liveBidAmount"));
+        table_view_history.setItems(observableBidList);
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-
-    @FXML
-    private void deleteBidAction(ActionEvent event) {
+        
         try {
-            BidDaoImplementation bidDao = new BidDaoImplementation();
-            Bid selectedBid = tableViewBids.getSelectionModel().getSelectedItem();
-
-            if (selectedBid != null) {
-
-                tableViewBids.getItems().remove(selectedBid);
-                bidDao.deleteBid(selectedBid.getIdBid());
-            }
+            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+                Date deadline = aucDao.getDeadline(auctionId);
+//                LocalDateTime localDateTime = deadline.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+/*
+Timeline timeline = new Timeline(
+    new KeyFrame(Duration.seconds(1), event -> {
+        Instant now = Instant.now();
+        Instant deadlineInstant = deadline.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Duration duration = Duration.between(now, deadlineInstant);
+            long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+        long seconds = duration.getSeconds() % 60;
+        String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        txt_time.setText(remainingTime);
+    })
+);
+timeline.setCycleCount(Timeline.INDEFINITE);
+timeline.play();
+**/
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
+ 
 
+ 
+    
+    
     }
-
-    @FXML
-    private void updateBidAction(ActionEvent event) {
+    /*
+private void refreshScene(ActionEvent event) {
+    
         try {
-            
-            
-            Bid selectedBid = tableViewBids.getSelectionModel().getSelectedItem();
-   Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/updateBid.fxml"));
-            Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
+            Parent root = (Parent) loader.load();
+              BidController controller = loader.getController();
             Scene scene = new Scene(root);
-            UpdateBidController controller = loader.getController();
+          
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            controller.setValue(selectedBid.getIdBid());
-            BidDaoImplementation bidDao;
-            
-          
-
-// Refresh the table view with the updated data from the database
-/**
-            ObservableList<Bid> data = (ObservableList<Bid>) bidDao.getAllBids();
-            tableViewBids.setItems(data);
-            
-            * */
-            
-        } 
-        catch (IOException ex) {
-                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
+**/
     @FXML
-    void addBid(ActionEvent event) throws SQLException {
+    void addBid(ActionEvent event) throws SQLException, IOException {
         if (radio_btn_live.isSelected()) {
             try {
                 //Bid bid = new Bid();
@@ -203,18 +248,18 @@ public class BidController implements Initializable {
                     alert.setContentText("Please agree to the terms and conditions");
                     alert.showAndWait();
 
-                } /*
-         if(Float.parseFloat(txt_live_bid.getText())>=Float.parseFloat( txt_highest_bid.getText()))  {
+                } else if (Float.parseFloat(txt_live_bid.getText()) <= Float.parseFloat(txt_highest_bid.getText())) {
 
-            Alert alert = new Alert(AlertType.WARNING);
-             alert.setTitle("Invalid Input");
-             alert.setHeaderText(null);
-             alert.setContentText("Please enter a higher max bid amount");
-             alert.showAndWait();
-        
-    }   **/ else {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a live bid amount bigger than the current bid");
+                    alert.showAndWait();
+
+                } else {
                     BidDaoImplementation bid_dao = new BidDaoImplementation();
-                    bid_dao.addLiveBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText())));
+                    bid_dao.addLiveBid(new Bid(2, 4, Float.parseFloat(txt_live_bid.getText())));
+                  //  refreshScene(event);
                 }
             } catch (NumberFormatException ex) {
                 System.out.println(ex.getMessage());
@@ -264,4 +309,9 @@ public class BidController implements Initializable {
         }
 
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
 }
