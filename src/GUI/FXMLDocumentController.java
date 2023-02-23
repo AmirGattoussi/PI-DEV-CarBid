@@ -72,9 +72,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btn_main_refresh;
     @FXML
-    private TextField look_for_sp;
-    @FXML
     private TextField text_main_typec;
+    @FXML
+    private TextField look_for_spt;
 
     /**
      * Initializes the controller class.
@@ -99,8 +99,7 @@ public class FXMLDocumentController implements Initializable {
             //tablespareparts.setItems(list);
            // tablespareparts.setVisible(true);//baad ma 3ammart el lista bich t7otha fil tableau fil graphique
            // tablespareparts.setEditable(true);//t9olo les element fil tableau etidable wella la!,
-            // password.setCellFactory(TextFieldTableCell.forTableColumn());
-            //email.setCellFactory(TextFieldTableCell.forTableColumn());
+            
 
             /*ObservableList selectedCells = tablespareparts.getSelectionModel().getSelectedCells();
             selectedCells.addListener(new ListChangeListener() {
@@ -135,6 +134,7 @@ public class FXMLDocumentController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Please enter  data.");
                 alert.showAndWait();}
+              System.out.println("type et typec manquant!!!");
             SpareParts u = new SpareParts(id, type, pou, description, price, typec);
             System.out.println(u);
             us.add(u);
@@ -209,6 +209,12 @@ public class FXMLDocumentController implements Initializable {
         this.text_main_description.setText(Description);
         this.text_main_price.setText(String.valueOf(Price));
         this.text_main_typec.setText(TypeC);
+    }
+
+    @FXML
+    private void GetSparePartsById(ActionEvent event) {
+      
+        
     }
 
 }
