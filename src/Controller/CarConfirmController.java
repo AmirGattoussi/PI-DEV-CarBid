@@ -38,7 +38,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class CarConfirmationController implements Initializable {
+public class CarConfirmController implements Initializable {
 
     /**
      * Initializes the controller class.

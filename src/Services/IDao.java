@@ -15,7 +15,7 @@ public interface IDao<cars> {
     public void insert(Cars car);
     public void delete(Cars car);
     public List<Cars> displayAll();
-    public Cars displayById(int id_car);
+    public Cars displayById(int id);
     
     public boolean update(Cars car);
 }
