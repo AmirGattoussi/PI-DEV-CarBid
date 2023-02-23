@@ -45,7 +45,7 @@ public class CarConfirmController implements Initializable {
     @FXML
     private Button btn;
     public int userId = 2;
-    public int carId = 2;
+    public int carId = 1;
     public int auctionId=2;
 
     @Override

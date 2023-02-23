@@ -25,5 +25,5 @@ public interface BidDao {
     public Bid getBid(int id); 
     public List<Bid> getAllBids();
     public List<Bid> getBidsById(int id);
-    
+    public int getNumberBids(int idCar); 
 }
