@@ -28,23 +28,31 @@ public class BidDaoImplementation implements BidDao {
 
     public BidDaoImplementation() throws SQLException {
         cnx = DBconnexion.getInstance().getConnection();
-    }
+    } 
+@Override
+ public void addLiveBid(Bid bid)  {
+      try {
+          PreparedStatement statement = cnx.prepareStatement(
+                  "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, now(),'Live', ?,0)");
+       
+          PreparedStatement statement2 = cnx.prepareStatement(
+                  "update auction set highestBid= ? WHERE auction.idAuction = ?");
+          
+          
+        statement.setInt(1, bid.getUserId());
+        statement.setInt(2, bid.getIdAuction());
+	statement.setFloat(3, bid.getLiveBidAmount());
+        statement2.setFloat(1, bid.getLiveBidAmount());
+         statement2.setInt(2, bid.getIdAuction());
+	
+	statement.executeUpdate();
+        statement2.executeUpdate();
+	System.out.println("added successfully");
+      } catch (SQLException ex) {
+          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+      }
 
-    @Override
-    public void addLiveBid(Bid bid) {
-        try {
-            PreparedStatement statement = cnx.prepareStatement(
-                    "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, ?,'Live', ?,0)");
-            statement.setInt(1, bid.getUserId());
-            statement.setInt(2, bid.getIdAuction());
-            statement.setDate(3, bid.getDate());
-            statement.setFloat(4, bid.getLiveBidAmount());
-            statement.executeUpdate();
-            System.out.println("added successfully");
-        } catch (SQLException ex) {
-            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+      
     }
 
     @Override
@@ -153,4 +161,36 @@ public class BidDaoImplementation implements BidDao {
         return data;
     }
 
+    @Override
+    public List<Bid> getBidsById(int id) {
+
+  List<Bid> data = new ArrayList<Bid>();
+    PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement("SELECT name,date,liveBidAmount FROM bid b join auction a join user u WHERE b.idAuction=a.idAuction and a.idAuction=? and u.id_user =b.userId ORDER by 3 DESC;");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+           
+            while (resultSet.next()) {
+                data.add(new Bid(
+                    
+		    resultSet.getString("name"),
+		    
+                  resultSet.getDate("date"),
+                  
+                    resultSet.getFloat("liveBidAmount")
+		
+                
+                ));
+               
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+
+    }
+
+  
 }

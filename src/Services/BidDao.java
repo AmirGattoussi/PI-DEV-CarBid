@@ -24,4 +24,6 @@ public interface BidDao {
     public void updateBid(int idBid ,Date date, String type, float liveBidAmount,float maxBidAmount);
     public Bid getBid(int id); 
     public List<Bid> getAllBids();
+    public List<Bid> getBidsById(int id);
+    
 }
