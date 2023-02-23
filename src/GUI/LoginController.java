@@ -12,8 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import Dao.*;
+import Utils.PasswordHasher;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 /**
@@ -34,7 +35,7 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private TextField email;
     @FXML
@@ -49,6 +50,8 @@ public class LoginController implements Initializable {
      * @param rb
      */
     UserDao user = new UserDao();
+    AdminDao admin = new AdminDao();
+    AgentDao agent = new AgentDao();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,7 +63,9 @@ public class LoginController implements Initializable {
         // perform login validation
         String emailIn = email.getText();
         String passwordIn = password.getText();
-        boolean valid = user.login(emailIn, passwordIn);
+        String hashedPassword=PasswordHasher.hash(passwordIn);
+        System.out.println(hashedPassword);
+        boolean valid = user.login(emailIn, hashedPassword);
         if (valid) {
             // login successful, display success message on screen
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -68,7 +73,23 @@ public class LoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("You have successfully logged in!");
             alert.showAndWait();
-           int passThroughUserID = user.getUserIdAtLogin(emailIn, passwordIn);
+            int passThroughUserID = user.getUserIdAtLogin(emailIn, passwordIn);
+            // Login to Admin Interface
+            if (admin.isAdmin(passThroughUserID)) {
+                Parent root = FXMLLoader.load(getClass().getResource("AdminPage.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) loginBtn.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } //Login to Agent Interface
+            else if (agent.isAgent(passThroughUserID)) {
+                Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) loginBtn.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
+
         } else {
             // login failed, display error message on screen
             Alert alert = new Alert(AlertType.ERROR);
@@ -93,10 +114,11 @@ public class LoginController implements Initializable {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     @FXML
-    private void handleResetLink (ActionEvent event)  {
+
+    @FXML
+    private void handleResetLink(ActionEvent event) {
     }
-        /* try {
+    /* try {
             PasswordResetDialogController dialog = new PasswordResetDialogController();
             dialog.showAndWait();
 

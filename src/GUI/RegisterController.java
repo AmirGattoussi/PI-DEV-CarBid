@@ -90,7 +90,14 @@ public class RegisterController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please make sure passwords match");
             alert.showAndWait();
-        } // TODO: Save the user information to database or file
+        }
+        else if (name.contains(name)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Passwords do not match");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure passwords match");
+            alert.showAndWait();
+        }// TODO: Save the user information to database or file
         else {
             if (accountChoice.equals("Standard User")) {
                 int phoneInt;

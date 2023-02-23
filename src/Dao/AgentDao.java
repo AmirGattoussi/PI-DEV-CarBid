@@ -81,4 +81,29 @@ public class AgentDao {
         }
     }
 
+    public boolean isAgent(int userId) {
+
+        try {
+            // create a PreparedStatement to execute a query
+            PreparedStatement statement = cnx.prepareStatement("SELECT id_agent FROM user WHERE id_user = ?");
+            statement.setInt(1, userId);
+
+            // execute the query and retrieve the results
+            ResultSet resultSet = statement.executeQuery();
+
+            // if the result set contains a non-null value for admin_id, the user is an admin
+            if (resultSet.next()) {
+                int adminId = resultSet.getInt("id_agent");
+                return (adminId != 0);
+            }
+
+            // if the result set is empty, the user is not found in the database
+            // throw an exception to indicate this
+            throw new SQLException("User not found in database");
+        } catch (SQLException ex) {
+            Logger.getLogger(AgentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

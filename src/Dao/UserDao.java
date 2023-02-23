@@ -15,6 +15,7 @@ import java.sql.*;
 import Entities.*;
 import Services.IUserDao;
 import Utils.DBconnexion;
+import Utils.PasswordHasher;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +43,7 @@ public class UserDao implements IUserDao {
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
+            statement.setString(3, PasswordHasher.hash(user.getPassword()));
             statement.setInt(4, user.getPhone_number());
             statement.setString(5, user.getLocation());
 
@@ -210,7 +211,7 @@ public class UserDao implements IUserDao {
 
     public int getUserIdAtLogin(String email, String password) {
         PreparedStatement statement;
-        int loggedInID=0;
+        int loggedInID = 0;
         try {
             statement = cnx.prepareStatement(
                     "SELECT id_user FROM user WHERE email = ? AND password = ?");
