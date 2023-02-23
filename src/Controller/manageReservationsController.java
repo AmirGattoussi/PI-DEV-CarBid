@@ -61,7 +61,7 @@ public class manageReservationsController implements Initializable {
         e.printStackTrace();
         }
     }
-
+    @FXML
     public void handleClicks(ActionEvent event) {
         if (event.getSource() == filterBtn) {
             System.out.println("Filter!");
