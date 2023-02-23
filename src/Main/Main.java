@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Main;
 
 import java.io.IOException;
@@ -29,7 +24,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Stage stage;
     private Parent parent;
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.stage=primaryStage;

@@ -5,8 +5,7 @@
  */
 package Dao;
 
-import Entities.Auction;
-import Entities.User;
+import Entities.*;
 import Services.AuctionDao;
 import Utils.DBconnexion;
 import java.sql.Connection;
@@ -40,7 +39,7 @@ public class AuctionDaoImplementation implements AuctionDao {
             statement.setFloat(3, auction.getStartingPrice());
             statement.setFloat(4, auction.getHighestBid());
             statement.setString(5, auction.getStatus());
-            statement.setInt(6, auction.getIdCar());
+            statement.setInt(6, auction.getCarId());
             statement.executeUpdate();
             System.out.println("added successfully");
 
@@ -113,29 +112,24 @@ public class AuctionDaoImplementation implements AuctionDao {
 
     }
 
-  @Override
+    @Override
     public Float getHighestBidById(int id) {
- try {
-          PreparedStatement statement = cnx.prepareStatement(
-                  "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");     
-        statement.setInt(1, id);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-       float floatValue = resultSet.getFloat("highestBid");
-        return floatValue;}
-        else {
-            System.out.println("error");
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                float floatValue = resultSet.getFloat("highestBid");
+                return floatValue;
+            } else {
+                System.out.println("error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-
-        
-          
-      } catch (SQLException ex) {
-          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-      }
- return null;
+        return null;
     }
-
-
 
 }
