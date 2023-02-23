@@ -40,7 +40,7 @@ public class AuctionDaoImplementation implements AuctionDao {
             statement.setFloat(3, auction.getStartingPrice());
             statement.setFloat(4, auction.getHighestBid());
             statement.setString(5, auction.getStatus());
-            statement.setInt(6, auction.getCarId());
+            statement.setInt(6, auction.getIdCar());
             statement.executeUpdate();
             System.out.println("added successfully");
 
