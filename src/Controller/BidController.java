@@ -22,51 +22,36 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
-import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import Entities.Bid;
 import Entities.User;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
+//import javafx.util.Duration;
 
 public class BidController implements Initializable {
 
@@ -114,32 +99,37 @@ public class BidController implements Initializable {
     }
 
     
-    
+  private void startTimer() throws SQLException {
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+                Date deadline = aucDao.getDeadline(auctionId);
 
-    /*
-  public int setValueCar(int carId) {
-        
-        System.out.println("carrrr in setValue"+carId);
-        this.carId = carId;
-     return carId;
+               
+Instant instant =  deadline.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC);;
+ZoneId zone = ZoneId.systemDefault();
+LocalDate deadli = instant.atZone(zone).toLocalDate();
+        Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), event -> {
+    if (deadline != null) {
+        Instant now = Instant.now();
+        LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        Instant deadlineInstant = deadli.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Duration duration = java.time.Duration.between(now, deadlineInstant);
+        if (duration.isNegative()) {
+            txt_time.setText("Deadline has passed");
+        } else {
+            long hours = duration.toHours();
+            long minutes = duration.toMinutes() % 60;
+            long seconds = duration.getSeconds() % 60;
+            String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+            txt_time.setText(remainingTime);
+        }
     }
-     public int getCarId() {
-          System.out.println("getttter "+ carId);
-        return carId;
-    }
- public void setValueUser(int userId) {
-        this.userId = userId;
-      
-    }
-  public void doSomething() {
-       setValueCar();
-        
+}));
+timeline.setCycleCount(Animation.INDEFINITE);
+timeline.play();      
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-**/
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -171,32 +161,12 @@ public class BidController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        try {
-            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-                Date deadline = aucDao.getDeadline(auctionId);
-//                LocalDateTime localDateTime = deadline.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-/*
-Timeline timeline = new Timeline(
-    new KeyFrame(Duration.seconds(1), event -> {
-        Instant now = Instant.now();
-        Instant deadlineInstant = deadline.atStartOfDay(ZoneId.systemDefault()).toInstant();
-        Duration duration = Duration.between(now, deadlineInstant);
-            long hours = duration.toHours();
-        long minutes = duration.toMinutes() % 60;
-        long seconds = duration.getSeconds() % 60;
-        String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-        txt_time.setText(remainingTime);
-    })
-);
-timeline.setCycleCount(Timeline.INDEFINITE);
-timeline.play();
-**/
-        } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-        }
  
-
+        try {
+            startTimer();
+        } catch (SQLException ex) {
+            Logger.getLogger( ex.getMessage());
+        }
  
     
     

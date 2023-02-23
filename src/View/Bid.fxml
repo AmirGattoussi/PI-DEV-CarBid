@@ -38,7 +38,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Text fx:id="txt_time" layoutX="357.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="33:53:16">
+      <Text fx:id="txt_time" layoutX="357.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
          <font>
             <Font size="18.0" />
          </font>
