@@ -28,4 +28,6 @@ public interface IReservationDao {
     public List<Reservation> filterReservationsByCar(int id_car);
 
     public List<Reservation> filterReservationsByDate(String date);
+
+    public int getNumberOfReservations();
 }

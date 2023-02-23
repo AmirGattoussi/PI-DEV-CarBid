@@ -152,7 +152,7 @@
                             <children>
                                 <VBox alignment="CENTER" prefHeight="93.0" prefWidth="161.0">
                                     <children>
-                                        <Label text="0" textFill="#2a73ff">
+                                        <Label fx:id="totalNumberOfReservations" text="0" textFill="#2a73ff">
                                             <font>
                                                 <Font name="System Bold" size="26.0" />
                                             </font>

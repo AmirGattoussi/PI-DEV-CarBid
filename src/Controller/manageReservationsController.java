@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import Dao.ReservationDao;
 import Entities.Reservation;
+import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,41 +25,53 @@ import javafx.scene.layout.VBox;
 
 public class manageReservationsController implements Initializable {
 
-    @FXML private VBox reservationsPanel;
-    @FXML private Label  userColumn;
-    @FXML private Label  carColumn;
-    @FXML private Label dateColumn;
-    @FXML private Label  locationColumn;
-    @FXML private Button detailsBtn;
-    @FXML private Button cancelBtn;
-    @FXML private Button filterBtn;
+    ReservationDao r = new ReservationDao();
+
+    @FXML
+    private VBox reservationsPanel;
+    @FXML
+    private Label userColumn;
+    @FXML
+    private Label carColumn;
+    @FXML
+    private Label dateColumn;
+    @FXML
+    private Label locationColumn;
+    @FXML
+    private Button detailsBtn;
+    @FXML
+    private Button cancelBtn;
+    @FXML
+    private Button filterBtn;
+    @FXML
+    private Label totalNumberOfReservations;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ReservationDao r = new ReservationDao();
         List<Reservation> data = r.getReservations();
         ObservableList<Reservation> observableReservationList = FXCollections.observableList(data);
 
+        // updateReservationCounter();
+
         try {
-        for (Reservation reservation : observableReservationList) {
-        FXMLLoader fxmlLoader = new
-        FXMLLoader(getClass().getResource("../View/reservations.fxml"));
-        HBox hbox = fxmlLoader.load();
+            for (Reservation reservation : observableReservationList) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/reservations.fxml"));
+                HBox hbox = fxmlLoader.load();
 
-        Label userColumn = (Label) hbox.lookup("#userColumn");
-        userColumn.setText("" + reservation.getUser());
-        Label carColumn = (Label) hbox.lookup("#carColumn");
-        carColumn.setText("" + reservation.getCar());
-        Label dateColumn = (Label) hbox.lookup("#dateColumn");
-        dateColumn.setText("" + reservation.getDate());
-        Label locationColumn = (Label) hbox.lookup("#locationColumn");
-        locationColumn.setText("" + reservation.getLocation());
+                Label userColumn = (Label) hbox.lookup("#userColumn");
+                userColumn.setText("" + reservation.getUser());
+                Label carColumn = (Label) hbox.lookup("#carColumn");
+                carColumn.setText("" + reservation.getCar());
+                Label dateColumn = (Label) hbox.lookup("#dateColumn");
+                dateColumn.setText("" + reservation.getDate());
+                Label locationColumn = (Label) hbox.lookup("#locationColumn");
+                locationColumn.setText("" + reservation.getLocation());
 
-        reservationsPanel.getChildren().add(hbox);
-        }
+                reservationsPanel.getChildren().add(hbox);
+            }
         } catch (IOException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -67,5 +80,10 @@ public class manageReservationsController implements Initializable {
             System.out.println("Filter!");
         }
     }
+
+    // public void updateReservationCounter(){
+    //     totalNumberOfReservations.requestLayout();
+    //     totalNumberOfReservations.setText(""+ r.getNumberOfReservations());
+    // }
 
 }

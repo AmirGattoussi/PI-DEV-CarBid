@@ -34,10 +34,13 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMinWidth(1025);
+        primaryStage.setMinHeight(600);
         primaryStage.show();
     }
 
     public static void main(String[] args) throws Exception {
+        launch(args);
         // Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
 
         // // DBconnexion database = DBconnexion.getInstance();
