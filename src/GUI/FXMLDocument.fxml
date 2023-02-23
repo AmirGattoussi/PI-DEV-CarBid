@@ -38,7 +38,7 @@
          </columns>
       </TableView>
       <Button fx:id="btn_main_refresh" layoutX="1750.0" layoutY="789.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #FF7A30;" text="Refresh" />
-      <TextField fx:id="look_for_sp" layoutX="408.0" layoutY="746.0" onKeyPressed="#chercher" prefHeight="31.0" prefWidth="302.0" promptText="Chercher" />
+      <TextField fx:id="look_for_spt" layoutX="408.0" layoutY="746.0" onAction="#GetSparePartsById" onKeyPressed="#chercher" prefHeight="31.0" prefWidth="302.0" promptText="Chercher" />
       <Label layoutX="501.0" layoutY="702.0" prefHeight="21.0" prefWidth="157.0" text="Look for a spare part : " />
       <Pane layoutX="-6.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: black;" styleClass="backgroundAdmin">
          <children>
