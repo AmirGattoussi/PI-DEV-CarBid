@@ -1,19 +1,13 @@
 package Controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.naming.ldap.ManageReferralControl;
-
-import com.mysql.cj.admin.ServerController;
-
 import Dao.ReservationDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;

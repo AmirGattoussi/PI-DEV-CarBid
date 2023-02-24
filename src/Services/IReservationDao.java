@@ -22,12 +22,12 @@ public interface IReservationDao {
 
     public List<Reservation> getReservations();
 
+    public int getNumberOfReservations();
+
     // JOB methods
     public List<Reservation> filterReservationsByUser(int id_user);
 
     public List<Reservation> filterReservationsByCar(int id_car);
 
     public List<Reservation> filterReservationsByDate(String date);
-
-    public int getNumberOfReservations();
 }

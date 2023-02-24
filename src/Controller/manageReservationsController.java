@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import Dao.ReservationDao;
 import Entities.Reservation;
-import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
