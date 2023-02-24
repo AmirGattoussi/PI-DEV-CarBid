@@ -79,27 +79,6 @@ public class BidDaoImplementation implements BidDao {
      
     }
 
-@Override
-public Bid getBid (int id)  {
-      try {
-          PreparedStatement statement = cnx.prepareStatement(
-                  "SELECT * FROM bid WHERE idBid = ?");     
-        statement.setInt(1, id);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return new Bid(
-                    resultSet.getInt("idBid"),
-		    resultSet.getInt("userId"),
-		    resultSet.getInt("idAuction"),
-                    resultSet.getDate("date"),
-                    resultSet.getString("type"),
-                    resultSet.getFloat("liveBidAmount"),
-		    resultSet.getFloat("maxBidAmount")           
-            );
-        }
-
-    }
-
     @Override
     public Bid getBid(int id) {
         try {
