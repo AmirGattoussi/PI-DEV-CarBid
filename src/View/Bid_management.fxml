@@ -48,12 +48,12 @@
             </LinearGradient>
          </stroke>
       </Text>
-      <ImageView fitHeight="59.0" fitWidth="77.0" layoutX="588.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="81.0" layoutX="588.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo.png" />
          </image>
       </ImageView>
-      <Circle fill="#ff1f1f" layoutX="605.0" layoutY="247.0" radius="15.0" stroke="#ff1f1f" strokeType="INSIDE" />
+      <Circle fill="#ff1f1f" layoutX="605.0" layoutY="247.0" radius="16.0" stroke="#ff1f1f" strokeType="INSIDE" />
       <Button fx:id="btn_delete" layoutX="590.0" layoutY="235.0" mnemonicParsing="false" onAction="#deleteBidAction" prefHeight="19.0" prefWidth="30.0" style="-fx-shape: circle;">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="18.0" />
@@ -61,7 +61,7 @@
       </Button>
       <StackPane layoutX="550.0" layoutY="149.0" prefHeight="101.0" prefWidth="111.0">
          <children>
-            <Circle fill="#53ee06" radius="15.0" stroke="#53ee06" strokeType="INSIDE" />
+            <Circle fill="#53ee06" radius="16.0" stroke="#53ee06" strokeType="INSIDE" />
             <Button mnemonicParsing="false" onAction="#updateBidAction" prefHeight="38.0" prefWidth="47.0" style="-fx-shape: circle;" textFill="#53ee06">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20.0" />

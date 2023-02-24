@@ -44,6 +44,10 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -51,6 +55,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 //import javafx.util.Duration;
 
 public class BidController implements Initializable {
@@ -76,9 +81,9 @@ public class BidController implements Initializable {
     private Text txt_highest_bid;
     @FXML
     private ListView list_v;
-    @FXML 
+    @FXML
     private TableView table_view_history;
-        @FXML
+    @FXML
     private TableColumn<User, String> user_column;
     @FXML
     private TableColumn<Bid, Date> date_column;
@@ -86,49 +91,46 @@ public class BidController implements Initializable {
     private TableColumn<Bid, Float> live_column;
     @FXML
     private Text txt_time;
+    @FXML
+    private Text bids_number;
+    private BidController controller;
     private int userId;
     private int carId;
     private int auctionId;
 
-  
-
-    public BidController(int userId, int carId,int auctionId) {
+    public BidController(int userId, int carId, int auctionId) {
         this.userId = userId;
-         this.carId = carId;
+        this.carId = carId;
         this.auctionId = auctionId;
     }
 
-    
-  private void startTimer() throws SQLException {
+    private void startTimer() throws SQLException {
         AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-                Date deadline = aucDao.getDeadline(auctionId);
+        Date deadline = aucDao.getDeadline(auctionId);
 
-               
-Instant instant =  deadline.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC);;
-ZoneId zone = ZoneId.systemDefault();
-LocalDate deadli = instant.atZone(zone).toLocalDate();
+        Instant instant = deadline.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC);;
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDate deadli = instant.atZone(zone).toLocalDate();
         Timeline timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), event -> {
-    if (deadline != null) {
-        Instant now = Instant.now();
-        LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
-        Instant deadlineInstant = deadli.atStartOfDay(ZoneId.systemDefault()).toInstant();
-        Duration duration = java.time.Duration.between(now, deadlineInstant);
-        if (duration.isNegative()) {
-            txt_time.setText("Deadline has passed");
-        } else {
-            long hours = duration.toHours();
-            long minutes = duration.toMinutes() % 60;
-            long seconds = duration.getSeconds() % 60;
-            String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-            txt_time.setText(remainingTime);
-        }
+            if (deadline != null) {
+                Instant now = Instant.now();
+                LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+                Instant deadlineInstant = deadli.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                Duration duration = java.time.Duration.between(now, deadlineInstant);
+                if (duration.isNegative()) {
+                    txt_time.setText("Deadline has passed");
+                } else {
+                    long hours = duration.toHours();
+                    long minutes = duration.toMinutes() % 60;
+                    long seconds = duration.getSeconds() % 60;
+                    String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                    txt_time.setText(remainingTime);
+                }
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
-}));
-timeline.setCycleCount(Animation.INDEFINITE);
-timeline.play();      
-    }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,48 +138,50 @@ timeline.play();
         try {
 
             AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-
             Float highest = aucDao.getHighestBidById(carId);
-            System.out.println(highest);
             txt_highest_bid.setText(Float.toString(highest));
-
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
         try {
-            
-             BidDaoImplementation bidDao = new BidDaoImplementation(); 
-             List<Bid>data = bidDao.getBidsById(auctionId); 
-           
-             
-            System.out.println(data.get(0));
-          ObservableList<Bid> observableBidList =FXCollections.observableList(data);
+
+            BidDaoImplementation bidDao = new BidDaoImplementation();
+            int count = bidDao.getNumberBids(carId);
+            bids_number.setText(String.valueOf(count));
+        } catch (SQLException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
+        try {
+
+            BidDaoImplementation bidDao = new BidDaoImplementation();
+            List<Bid> data = bidDao.getBidsById(auctionId);
+
+            ObservableList<Bid> observableBidList = FXCollections.observableList(data);
             user_column.setCellValueFactory(new PropertyValueFactory<>("name"));
-         date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
-          live_column.setCellValueFactory(new
-          PropertyValueFactory<>("liveBidAmount"));
-        table_view_history.setItems(observableBidList);
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            live_column.setCellValueFactory(new PropertyValueFactory<>("liveBidAmount"));
+            table_view_history.setItems(observableBidList);
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+
         try {
             startTimer();
         } catch (SQLException ex) {
-            Logger.getLogger( ex.getMessage());
+            Logger.getLogger(ex.getMessage());
         }
- 
-    
-    
+
     }
-    /*
+
+    /* 
 private void refreshScene(ActionEvent event) {
     
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
             Parent root = (Parent) loader.load();
-              BidController controller = loader.getController();
+              this.controller = loader.getController();
             Scene scene = new Scene(root);
           
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -228,8 +232,14 @@ private void refreshScene(ActionEvent event) {
 
                 } else {
                     BidDaoImplementation bid_dao = new BidDaoImplementation();
-                    bid_dao.addLiveBid(new Bid(2, 4, Float.parseFloat(txt_live_bid.getText())));
-                  //  refreshScene(event);
+                    bid_dao.addLiveBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText())));
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Add Bid");
+                    alert.setHeaderText(null);
+                    alert.setContentText("The bid is added successfully.");
+                    alert.showAndWait();
+                    //  refreshScene(event);
+                    refreshTextFields();
                 }
             } catch (NumberFormatException ex) {
                 System.out.println(ex.getMessage());
@@ -275,7 +285,46 @@ private void refreshScene(ActionEvent event) {
             } else {
                 BidDaoImplementation bid_dao = new BidDaoImplementation();
                 bid_dao.addMaxBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText()), Float.parseFloat(txt_max_bid.getText())));
+                // refreshScene(event);
+                refreshTextFields();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Add Bid");
+                alert.setHeaderText(null);
+                alert.setContentText("The bid is added successfully.");
+                alert.showAndWait();
             }
+        }
+
+    }
+
+    private void refreshTextFields() {
+        try {
+
+            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+            Float highest = aucDao.getHighestBidById(carId);
+            txt_highest_bid.setText(Float.toString(highest));
+
+            BidDaoImplementation bidDao = new BidDaoImplementation();
+            List<Bid> data = bidDao.getBidsById(auctionId);
+            ObservableList<Bid> observableBidList = FXCollections.observableList(data);
+            user_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            live_column.setCellValueFactory(new PropertyValueFactory<>("liveBidAmount"));
+            table_view_history.setItems(observableBidList);
+
+            table_view_history.refresh();
+        } catch (SQLException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
+        try {
+
+            BidDaoImplementation bidDao = new BidDaoImplementation();
+            int count = bidDao.getNumberBids(carId);
+            bids_number.setText(String.valueOf(count));
+        } catch (SQLException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
 
     }
