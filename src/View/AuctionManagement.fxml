@@ -53,5 +53,24 @@
             </Button>
          </children>
       </StackPane>
+      <FontAwesomeIconView fill="WHITE" glyphName="CAR" layoutX="13.0" layoutY="226.0" size="23.0" />
+      <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="16.0" layoutY="173.0" size="25.0" />
+      <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="15.0" layoutY="129.0" size="25.0" />
+      <ImageView fitHeight="40.0" fitWidth="46.0" layoutX="7.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/auction.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="55.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/bid.png" />
+         </image>
+      </ImageView>
+      <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" layoutX="15.0" layoutY="389.0" size="25.0" />
+      <StackPane layoutY="244.0" prefHeight="52.0" prefWidth="52.0">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-shape: RECTANGL;" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
