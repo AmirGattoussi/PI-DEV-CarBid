@@ -150,11 +150,8 @@ public class UserDao implements IUserDao {
         ResultSet resultSet = null;
 
         try {
-            // establish a connection to the database
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carbid", "root", "");
-
             // prepare a statement to query the database for a user with the given username and password
-            statement = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
+            statement = cnx.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
             statement.setString(1, email);
             statement.setString(2, password);
 
@@ -176,11 +173,11 @@ public class UserDao implements IUserDao {
     public boolean resetPassword(String email, String newPassword) {
         PreparedStatement stmt = null;
         try {
-            // Open connection to database
-
             // Prepare SQL statement to update password
             stmt = cnx.prepareStatement("UPDATE user SET password=? WHERE email=?");
-            stmt.setString(1, newPassword);
+
+            stmt.setString(1, PasswordHasher.hash(newPassword));
+            System.out.println(PasswordHasher.hash(newPassword));
             stmt.setString(2, email);
 
             // Execute SQL statement and check if any rows were affected
@@ -195,12 +192,6 @@ public class UserDao implements IUserDao {
             try {
                 if (stmt != null) {
                     stmt.close();
-                }
-            } catch (SQLException ex) {
-            }
-            try {
-                if (cnx != null) {
-                    cnx.close();
                 }
             } catch (SQLException ex) {
             }
@@ -229,4 +220,31 @@ public class UserDao implements IUserDao {
         return loggedInID;
 
     }
+
+    public boolean doesUserExist(String email) {
+        try {
+
+            // Prepare SQL statement
+            String sql = "SELECT COUNT(*) FROM user WHERE email = ?";
+            PreparedStatement statement = cnx.prepareStatement(sql);
+            statement.setString(1, email);
+
+            // Execute SQL query and get result
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+
+            // Close database connection and statement
+            resultSet.close();
+            statement.close();
+           
+
+            // Return true if user exists, false otherwise
+            return count > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
