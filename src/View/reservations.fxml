@@ -6,11 +6,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="reservation" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity"
-    minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="750.0"
-    style="-fx-background-color: #EBE8F9; -fx-background-radius: 5; -fx-background-insets: 0;"
-    xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-    stylesheets="@../Styles/reservationStyle.css" fx:controller="Controller.reservationsController">
+<HBox fx:id="reservation" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="750.0" style="-fx-background-color: #EBE8F9; -fx-background-radius: 5; -fx-background-insets: 0;" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.reservationsController">
     <children>
         <Label fx:id="userColumn" prefHeight="18.0" prefWidth="99.0" text="id user" />
         <Label fx:id="carColumn" prefHeight="18.0" prefWidth="84.0" text="id car">
@@ -18,7 +14,7 @@
                 <Insets />
             </HBox.margin>
         </Label>
-        <Label fx:id="dateColumn" prefHeight="18.0" prefWidth="125.0" text="15/11/2023">
+        <Label fx:id="dateColumn" prefHeight="18.0" prefWidth="125.0" text="date">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
@@ -28,14 +24,12 @@
                 <Insets />
             </HBox.margin>
         </Label>
-        <Button fx:id="detailsBtn" mnemonicParsing="false" prefHeight="22.0" prefWidth="70.0"
-            styleClass="details-btn" text="Details" onAction="#handleClicks">
+        <Button fx:id="detailsBtn" mnemonicParsing="false" onAction="#handleClicks" prefHeight="22.0" prefWidth="70.0" styleClass="details-btn" text="Details">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Button>
-        <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="22.0" prefWidth="70.0"
-            styleClass="cancel-btn" text="Cancel" onAction="#handleClicks">
+        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleClicks" prefHeight="22.0" prefWidth="70.0" styleClass="cancel-btn" text="Cancel">
             <HBox.margin>
                 <Insets left="10.0" />
             </HBox.margin>

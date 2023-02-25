@@ -55,7 +55,6 @@ public class reservationsController implements Initializable {
             System.out.println("Details!");
         }
         if (event.getSource() == cancelBtn) {
-            // System.out.println("Cancel!");
             showAlert();
         }
         if (event.getSource() == filterBtn) {
@@ -64,7 +63,7 @@ public class reservationsController implements Initializable {
     }
 
     @FXML
-    private void refreshView() {
+    public void refreshView() {
         Parent parent = reservation.getParent();
         if (parent instanceof Pane) {
             ((Pane) parent).getChildren().remove(reservation);

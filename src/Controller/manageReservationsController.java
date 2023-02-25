@@ -12,9 +12,11 @@ import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,7 +24,7 @@ import javafx.scene.layout.VBox;
  * @author neil
  */
 
-public class manageReservationsController extends reservationsController {
+public class manageReservationsController implements Initializable {
 
     ReservationDao r = new ReservationDao();
 
@@ -46,6 +48,10 @@ public class manageReservationsController extends reservationsController {
     private Label totalNumberOfReservations;
     @FXML
     private Button refreshBtn;
+    @FXML
+    private Pane pnlManageReservations;
+    @FXML
+    private Pane pnlReservationDetails;
 
     int currentCount = r.getNumberOfReservations();
 
@@ -67,7 +73,7 @@ public class manageReservationsController extends reservationsController {
 
             // Animate the refresh button when pressed.
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(.5), refreshBtn);
-            rotateTransition.setByAngle(360);
+            rotateTransition.setByAngle(-360);
             rotateTransition.play();
             // System.out.println("Refresh!");
         }

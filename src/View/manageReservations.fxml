@@ -113,7 +113,7 @@
                         <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="819.0" />
                         <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
                         <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
-                        <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
+                        <Pane fx:id="pnlManageReservations" prefHeight="554.0" prefWidth="793.0">
                             <children>
                                 <Label layoutX="31.0" layoutY="29.0" style="-fx-font-weight: 700" text="Manage Reservations">
                                     <font>

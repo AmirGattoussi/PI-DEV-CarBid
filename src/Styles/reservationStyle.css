@@ -5,6 +5,8 @@
 }
 
 .side-navbar:hover {
+    -fx-cursor: hand;
+    cursor: hand;
     -fx-background-color: #dbdbdb;
     background-color: #dbdbdb;
 }
@@ -25,8 +27,8 @@
 }
 
 .details-btn:hover {
-    -fx-cursor: pointer;
-    cursor: pointer;
+    -fx-cursor: hand;
+    cursor: hand;
 }
 
 .details-btn:pressed {
@@ -48,6 +50,11 @@
     -fx-background-color: transparent;
     background-color: transparent;
     -fx-text-fill: #2A73FF;
+}
+
+.alert-no-button:hover {
+    -fx-cursor: hand;
+    cursor: hand;
 }
 
 .alert-no-button:pressed {
@@ -72,8 +79,8 @@
 }
 
 .cancel-btn:hover {
-    -fx-cursor: pointer;
-    cursor: pointer;
+    -fx-cursor: hand;
+    cursor: hand;
 }
 
 .cancel-btn:pressed {
@@ -95,6 +102,11 @@
     -fx-background-color: transparent;
     background-color: transparent;
     -fx-text-fill: #ff0000;
+}
+
+.alert-yes-button:hover {
+    -fx-cursor: hand;
+    cursor: hand;
 }
 
 .alert-yes-button:pressed {
@@ -127,6 +139,10 @@
     cursor: pointer;
 }
 
+.filter-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
 
 .filter-btn:pressed {
     -fx-border-color: #2A73FF;
@@ -145,6 +161,11 @@
 .refresh-btn{
     -fx-background-color: transparent;
     background-color: transparent;
+}
+
+.refresh-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
 }
 
 .increment-button,
