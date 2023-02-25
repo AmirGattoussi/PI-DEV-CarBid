@@ -24,6 +24,11 @@
     -fx-text-fill: #2A73FF;
 }
 
+.details-btn:hover {
+    -fx-cursor: pointer;
+    cursor: pointer;
+}
+
 .details-btn:pressed {
     -fx-border-color: #2A73FF;
     border-color: #2A73FF;
@@ -64,6 +69,11 @@
     -fx-background-color: transparent;
     background-color: transparent;
     -fx-text-fill: #ff0000;
+}
+
+.cancel-btn:hover {
+    -fx-cursor: pointer;
+    cursor: pointer;
 }
 
 .cancel-btn:pressed {
@@ -112,6 +122,12 @@
     font-weight: bold;
 }
 
+.filter-btn:hover {
+    -fx-cursor: pointer;
+    cursor: pointer;
+}
+
+
 .filter-btn:pressed {
     -fx-border-color: #2A73FF;
     border-color: #2A73FF;
@@ -124,6 +140,11 @@
     -fx-background-radius: 5;
     -fx-text-fill: white;
     font-weight: bold;
+}
+
+.refresh-btn{
+    -fx-background-color: transparent;
+    background-color: transparent;
 }
 
 .increment-button,

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author neil
  */
-public class Main extends Application {
+public class Main extends Application{
     private Stage stage;
     private Parent parent;
 
@@ -41,19 +41,19 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
         launch(args);
-        // Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
+    //     Reservation reserve = new Reservation(3, 2, "17-10-2023", "Ariana", 1);
 
-        // // DBconnexion database = DBconnexion.getInstance();
-        // // Connection connection = database.getConnection();
+    //     // DBconnexion database = DBconnexion.getInstance();
+    //     // Connection connection = database.getConnection();
 
-        // ReservationDao e = new ReservationDao();
-        // // e.createReservation(reserve);
-        // // e.deleteReservation(3, 1);
-        // // e.updateReservationDate(3, 1, "15-11-2023");
-        // // e.updateReservationLocation(3, 1, "Sousse Sahloul");
-        // // System.out.println(e.getReservation(3, 2));
-        // System.out.println(e.getReservations());
-    }
+    //     ReservationDao e = new ReservationDao();
+    //     e.createReservation(reserve);
+    //     // e.deleteReservation(3, 1);
+    //     // e.updateReservationDate(3, 1, "15-11-2023");
+    //     // e.updateReservationLocation(3, 1, "Sousse Sahloul");
+    //     System.out.println(e.getReservation(3, 2));
+    //     // System.out.println(e.getReservations());
+    // }
 
     /**
      * @param args the command line arguments
@@ -109,3 +109,4 @@ public class Main extends Application {
  * //s.add(p2);
  * //s.modify(p3);
  */
+}

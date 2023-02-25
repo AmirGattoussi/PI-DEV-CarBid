@@ -69,16 +69,6 @@ public class reservationsController implements Initializable {
         if (parent instanceof Pane) {
             ((Pane) parent).getChildren().remove(reservation);
         }
-
-        // try {
-        //     FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/manageReservations.fxml"));
-        //     Parent root = loader.load();
-        //     manageReservationsController controller = loader.getController();
-        //     controller.updateReservationCounter();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
-
     }
 
     @FXML
