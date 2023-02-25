@@ -1,4 +1,4 @@
-package GUI;
+package Controller;
 
 import Dao.UserDao;
 import java.net.URL;

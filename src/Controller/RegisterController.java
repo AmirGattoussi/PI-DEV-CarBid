@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Controller;
 
 import Dao.AdminDao;
 import Dao.AgentDao;
@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,7 +70,6 @@ public class RegisterController implements Initializable {
     void register(ActionEvent event) throws IOException {
         String accountChoice;
         accountChoice = (String) choiceBox.getValue();
-        System.out.println(accountChoice);
 
         String name = NameTextField.getText();
         String email = EmailTextField.getText();
@@ -77,6 +77,9 @@ public class RegisterController implements Initializable {
         String location = LocationTextField.getText();
         String password = PasswordTextField.getText();
         String confirm = RepeatTextField.getText();
+        boolean isEmail = Pattern.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b", email); //Email Check
+//Beginning of entry field checks
+//Empty Fields Check
 
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || location.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -84,15 +87,43 @@ public class RegisterController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please fill in all fields");
             alert.showAndWait();
-        } else if (!password.equals(confirm)) {
+        } //Password Repeat Check
+        else if (!password.equals(confirm)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Passwords do not match");
             alert.setHeaderText(null);
             alert.setContentText("Please make sure passwords match");
             alert.showAndWait();
-        } // TODO: Save the user information to database or file
+        }// Email Format Check
+        else if (!isEmail) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid email");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure email is valid");
+            alert.showAndWait();
+        } //Number and character check on name
+        else if (!name.matches("[a-zA-Z]+")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Name");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure name is valid (No numbers or special characters)");
+            alert.showAndWait();
+        } else if (!phone.matches("\\d{8}")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Phone Number");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure phone number is valid");
+            alert.showAndWait();
+        } else if (password.length() < 8) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Password");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure the password is at least 8 characters long");
+            alert.showAndWait();
+        } //Begin User Adding
         else {
-            if (accountChoice.equals("Standard User")) {
+            if //Account Type Choice
+                    (accountChoice.equals("Standard User")) {
                 int phoneInt;
                 phoneInt = Integer.parseInt(phone);
                 User user = new User(name, email, password, phoneInt, location);
@@ -103,7 +134,7 @@ public class RegisterController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Thank you for registering!");
                 alert.showAndWait();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/login.fxml"));
                 Parent loginParent;
                 try {
                     loginParent = loader.load();
@@ -125,7 +156,7 @@ public class RegisterController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Thank you for registering!");
                 alert.showAndWait();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../login.fxml"));
                 Parent loginParent;
                 try {
                     loginParent = loader.load();
@@ -148,7 +179,7 @@ public class RegisterController implements Initializable {
                 alert.setContentText("Thank you for registering!");
                 alert.showAndWait();
                 //GO back to login
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/login.fxml"));
                 Parent loginParent;
                 try {
                     loginParent = loader.load();

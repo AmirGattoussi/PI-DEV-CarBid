@@ -6,6 +6,9 @@
 package Dao;
 
 import Entities.*;
+import Entities.Auction;
+import Entities.Bid;
+import Entities.User;
 import Services.AuctionDao;
 import Utils.DBconnexion;
 import java.sql.Connection;
@@ -14,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,55 +86,102 @@ public class AuctionDaoImplementation implements AuctionDao {
     }
 
     @Override
-    public void updateAuction(int id, float highestBid, String status) {
+    public void updateAuction(int id, float highestBid,String status,Date endDate) {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
-                    "UPDATE auction SET  highestBid= ?, status = ? WHERE idAuction = ?");
+                    "UPDATE auction SET  highestBid= ?, status = ? endDate=? WHERE idAuction = ?");
             statement.setFloat(1, highestBid);
             statement.setString(2, status);
-            statement.setInt(3, id);
-            statement.executeUpdate();
-            System.out.println("updated successfully");
+            statement.setDate(3, endDate);
+            statement.setInt(4, id);
+        statement.executeUpdate();
+        System.out.println("updated successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
-    @Override
-    public void deleteAuction(int id) {
+@Override
+public void deleteAuction(int id) {
         PreparedStatement statement;
-        try {
-            statement = cnx.prepareStatement(
-                    "DELETE FROM auction WHERE idAuction = ?");
-            statement.setInt(1, id);
-            statement.executeUpdate();
-            System.out.println("deleted successfully");
-        } catch (SQLException ex) {
-            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        statement = cnx.prepareStatement(
+                "DELETE FROM auction WHERE idAuction = ?");
+        statement.setInt(1, id);
+        statement.executeUpdate();
+	System.out.println("deleted successfully");
+    } catch (SQLException ex) {
+        Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
 
     }
 
+  @Override
+    public Float getHighestBidById(int idCar) {
+ try {
+          PreparedStatement statement = cnx.prepareStatement(
+                  "SELECT highestBid FROM auction WHERE auction.idCar = ?");     
+        statement.setInt(1, idCar);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+       float floatValue = resultSet.getFloat("highestBid");
+        return floatValue;}
+        else {
+            System.out.println("error id");
+        }  
+      } catch (SQLException ex) {
+          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ return null;
+    }
+
     @Override
-    public Float getHighestBidById(int id) {
-        try {
-            PreparedStatement statement = cnx.prepareStatement(
-                    "SELECT highestBid FROM auction join bid on auction.idAuction = bid.idAuction WHERE auction.idAuction = ?");
-            statement.setInt(1, id);
+    public Date getDeadline(int idAuction) {
+try {
+          PreparedStatement statement = cnx.prepareStatement(
+                  "SELECT endDate FROM auction WHERE auction.idAuction = ?");     
+        statement.setInt(1, idAuction);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+       Date deadline = resultSet.getDate("endDate");
+        return deadline;}
+        else {
+            System.out.println("error");
+        }  
+      } catch (SQLException ex) {
+          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ return null;
+    }
+
+    @Override
+    public List<Auction> getAllAuctions() {
+         List<Auction> data = new ArrayList<Auction>();
+    PreparedStatement statement;
+  try {
+            statement = cnx.prepareStatement("SELECT * FROM auction");
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                float floatValue = resultSet.getFloat("highestBid");
-                return floatValue;
-            } else {
-                System.out.println("error");
+            while (resultSet.next()) {
+                data.add(new Auction(
+                    resultSet.getInt("idAuction"),
+		    resultSet.getDate("startDate"),
+                    resultSet.getDate("endDate"),
+                    resultSet.getFloat("startingPrice"),
+                    resultSet.getFloat("highestBid"),
+                    resultSet.getString("status"),
+                    resultSet.getInt("idCar")
+                
+                ));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return data;
+
     }
+
 
 }
