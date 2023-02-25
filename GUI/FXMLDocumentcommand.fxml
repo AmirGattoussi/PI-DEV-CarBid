@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -14,32 +16,49 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickMouseec" prefHeight="1001.0" prefWidth="1934.0">
          <children>
-            <TextField fx:id="text_cmd_id_command" layoutX="460.0" layoutY="361.0" prefHeight="31.0" prefWidth="199.0" />
-            <TextField fx:id="text_cmd_id_user" layoutX="460.0" layoutY="426.0" prefHeight="31.0" prefWidth="199.0" />
-            <TextField fx:id="text_cmd_id_sparepart" layoutX="460.0" layoutY="491.0" prefHeight="31.0" prefWidth="199.0" />
-            <Label layoutX="345.0" layoutY="361.0" prefHeight="21.0" prefWidth="111.0" text="id_command  " />
-            <Label layoutX="334.0" layoutY="431.0" prefHeight="21.0" prefWidth="132.0" text="id_user  " />
-            <Label layoutX="349.0" layoutY="496.0" prefHeight="21.0" prefWidth="88.0" text="id_sparepart  " />
-            <Button fx:id="btn_main_add_cmd" layoutX="833.0" layoutY="789.0" mnemonicParsing="false" onAction="#addcommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #6EFF5E;" text="Add" />
-            <Button fx:id="btn_main_modify_cmd" layoutX="1004.0" layoutY="789.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
-            <Button fx:id="btn_main_display_cmd" layoutX="1173.0" layoutY="789.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="284.0" style="-fx-background-color: #4AAFE8;" text="Display" />
-            <Button fx:id="btn_main_delete_cmd" layoutX="1542.0" layoutY="789.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
-            <TableView fx:id="tablecommand" layoutX="769.0" layoutY="106.0" onMouseClicked="#clickMousee" prefHeight="640.0" prefWidth="1157.0">
+            <TextField fx:id="text_cmd_id_user" layoutX="466.0" layoutY="426.0" prefHeight="31.0" prefWidth="199.0" />
+            <TextField fx:id="text_cmd_id_sparepart" layoutX="466.0" layoutY="485.0" prefHeight="31.0" prefWidth="199.0" />
+            <Label layoutX="364.0" layoutY="431.0" prefHeight="21.0" prefWidth="132.0" text="id_user  : " />
+            <Label layoutX="359.0" layoutY="490.0" prefHeight="21.0" prefWidth="88.0" text="id_sparepart  : " />
+            <Button fx:id="btn_main_add_cmd" layoutX="1340.0" layoutY="214.0" mnemonicParsing="false" onAction="#addcommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #6EFF5E;" text="Add" />
+            <Button fx:id="btn_main_modify_cmd" layoutX="1340.0" layoutY="329.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
+            <Button fx:id="btn_main_display_cmd" layoutX="1336.0" layoutY="442.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #4AAFE8;" text="Display" />
+            <Button fx:id="btn_main_delete_cmd" layoutX="1344.0" layoutY="558.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
+            <TableView fx:id="tablecommand" layoutX="773.0" layoutY="203.0" onMouseClicked="#clickMousee" prefHeight="640.0" prefWidth="424.0">
                <columns>
                   <TableColumn fx:id="id_tab_cmd" prefWidth="107.0" text="id_command" />
                   <TableColumn fx:id="id_user_tab_cmd" prefWidth="82.0" text="id_user" />
                   <TableColumn fx:id="id_sparepart_tab_cmd" prefWidth="131.0" text="id_sparepart" />
+                  <TableColumn fx:id="date_cr_tab_cmd" prefWidth="103.0" text="date_creation" />
                </columns>
             </TableView>
-            <Pane layoutX="-6.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: black;" styleClass="backgroundAdmin">
+            <TextField fx:id="text_cmd_id_command" layoutX="466.0" layoutY="364.0" prefHeight="31.0" prefWidth="199.0" />
+            <TextField fx:id="text_cmd_date_cr" layoutX="466.0" layoutY="543.0" prefHeight="31.0" prefWidth="199.0" />
+            <Label layoutX="364.0" layoutY="367.0" prefHeight="21.0" prefWidth="132.0" text="id_command :   " />
+            <Label layoutX="359.0" layoutY="548.0" prefHeight="21.0" prefWidth="88.0" text="date_creation  : " />
+            <Pane layoutX="-10.0" prefHeight="147.0" prefWidth="1984.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin">
                <children>
-                  <Hyperlink focusTraversable="false" layoutX="124.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" text="command" textAlignment="CENTER" textFill="WHITE">
+                  <Hyperlink focusTraversable="false" layoutX="124.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Hyperlink>
+                  <Pane layoutX="969.0" layoutY="58.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin">
+                     <children>
+                        <Hyperlink focusTraversable="false" layoutX="-20.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" text="COMMAND" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="303.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

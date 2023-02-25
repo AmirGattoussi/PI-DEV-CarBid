@@ -172,15 +172,15 @@ public class FXMLDocumentController implements Initializable {
            
             SpareParts uselected = (SpareParts) tablespareparts.getSelectionModel().getSelectedItem();
             ServicesSpareParts us = new ServicesSpareParts();
-            InformationsSupplementairesService InfosService = new InformationsSupplementairesService();
+       //     InformationsSupplementairesService InfosService = new InformationsSupplementairesService();
             int id = uselected.getId();
-            SpareParts u1 = us.ChercherParId(id);
-            InformationsSupplementaires inf1 = InfosService.chercherparid(id);
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherUser1.fxml"));
+            //SpareParts u1 = us.ChercherParId(id);
+           // InformationsSupplementaires inf1 = InfosService.chercherparid(id);
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
             Parent root =loader.load();
-            AfficherUser1Controller ctrl = loader.getController();
+        //    AfficherUser1Controller ctrl = loader.getController();
             System.out.println("Controller yeess");
-            ctrl.MyFunction(uselected.getNom(),uselected.getPrenom(),inf1.getTell(),uselected.getMail(),uselected.getPassword(),uselected.getRole());
+            ctrl.MyFunction(uselected.getId(),uselected.getType(),uselected.getPou(),uselected.getDescription(),uselected.getPrice(),,uselected.getTypec());
             
             Scene scene =new Scene(root);
             Stage stage =new Stage();
@@ -188,7 +188,7 @@ public class FXMLDocumentController implements Initializable {
             stage.show();
             
         } catch (IOException ex) {
-            Logger.getLogger(AfficherUser1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(display.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         */

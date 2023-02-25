@@ -68,8 +68,6 @@ public class FXMLDocumentcommandController implements Initializable {
     @FXML
     private Button btn_main_add_cmd;
     @FXML
-    private TextField look_for_sp;
-    @FXML
     private Button btn_main_modify_cmd;
     @FXML
     private Button btn_main_display_cmd;
@@ -79,7 +77,9 @@ public class FXMLDocumentcommandController implements Initializable {
     private Button btn_main_display_cmd1;
     */
     @FXML
-    private Button btn_refresh_cmd;
+    private TableColumn<Command,String> date_cr_tab_cmd;
+    @FXML
+    private TextField text_cmd_date_cr;
     
    
    
@@ -97,7 +97,7 @@ public class FXMLDocumentcommandController implements Initializable {
             id_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_command"));
            id_user_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_user"));
             id_sparepart_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_sparepart"));
-           
+           date_cr_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("date_cr"));
            tablecommand.setItems(list);
            // list.addAll(us.displaycommand());
             System.out.println(list);
@@ -156,10 +156,11 @@ public class FXMLDocumentcommandController implements Initializable {
         try {
             System.out.println("Bontton Ajouter Lu");
             ServicesCommand us = new ServicesCommand();
-            Integer id_cmd = Integer.parseInt(text_cmd_id_command.getText());
+          //  Integer id_cmd = Integer.parseInt(text_cmd_id_command.getText());
          Integer id_user = Integer.parseInt(text_cmd_id_user.getText());
          Integer id_spt = Integer.parseInt(text_cmd_id_sparepart.getText());
-           
+       //  String date_cr=String.parseString(text_cmd_date_cr.getText());
+           String date_cr=text_cmd_date_cr.getText();
               /*if ((type.isEmpty()) && !(typec.isEmpty()) ) {
           Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Invalid Input");
@@ -167,7 +168,8 @@ public class FXMLDocumentcommandController implements Initializable {
                 alert.setContentText("Please enter  data.");
                 alert.showAndWait();}
 */
-            Command u = new Command(id_cmd,id_user,id_spt);
+           // Command u = new Command(id_cmd,id_user,id_spt);
+          Command u = new Command(id_user,id_spt,date_cr);
             System.out.println(u);
             us.addcommand(u);
             //refresh(event);
@@ -187,9 +189,10 @@ public class FXMLDocumentcommandController implements Initializable {
           Integer id_cmd = Integer.parseInt(text_cmd_id_command.getText());
          Integer id_user = Integer.parseInt(text_cmd_id_user.getText());
          Integer id_spt = Integer.parseInt(text_cmd_id_sparepart.getText());
+          String date_cr=text_cmd_date_cr.getText();
            
         
-        Command c = new Command(id_cmd, id_user,id_spt);
+        Command c = new Command(id_cmd, id_user,id_spt,date_cr);
         sc.modifycommand(c);
         
         
