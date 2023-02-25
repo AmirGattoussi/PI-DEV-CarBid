@@ -37,10 +37,13 @@ public class ServicesCommand {
             while (res.next()) {
                 int id_command = res.getInt(1);
                 int id_user = res.getInt(2);
+                  
                 int id_sparepart = res.getInt(3);
-               
-                   Command s = new Command(id_command,id_user,id_sparepart);
-                //SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
+                String date_cr=res.getString(4);
+                 // int id_sparepart = res.getInt(2);
+                   Command s = new Command(id_command,id_user,id_sparepart,date_cr);
+                //Command s = new Command(id_user,id_sparepart);
+              
                 listpieces.add(s);
 
             }
@@ -52,11 +55,14 @@ public class ServicesCommand {
     }
 
     public void addcommand(Command u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
-
-        pre.setInt(1, u.getId_command());
-        pre.setInt(2, u.getId_user());
-        pre.setInt(3, u.getId_sparepart());
+        //PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
+PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`( `id_user`, `id_sparepart`,`date_cr`) VALUES (?,?,?)");
+      // pre.setInt(1, u.getId_command());
+       // pre.setInt(2, u.getId_user());
+        //pre.setInt(3, u.getId_sparepart());
+          pre.setInt(1, u.getId_user());
+        pre.setInt(2, u.getId_sparepart());
+         pre.setString(3, u.getDate_cr());
         
         pre.executeUpdate();
         /*
@@ -85,13 +91,14 @@ public class ServicesCommand {
     public void modifycommand(Command u) {
 
         try {
-            PreparedStatement pre = cnx.prepareStatement("Update command set id_user=?,id_sparepart=? where id_command = ?");
+            PreparedStatement pre = cnx.prepareStatement("Update command set id_user=?,id_sparepart=?,date_cr=? where id_command = ?");
 
-            pre.setInt(3, u.getId_command());
+            pre.setInt(4, u.getId_command());
 
          pre.setInt(1, u.getId_user());
 
           pre.setInt(2, u.getId_sparepart());
+          pre.setString(3, u.getDate_cr());
 
            
             pre.executeUpdate();
@@ -110,7 +117,7 @@ public class ServicesCommand {
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
-                Command u = new Command(result.getInt(1), result.getInt(2), result.getInt(3));
+                Command u = new Command(result.getInt(1), result.getInt(2), result.getInt(3),result.getString(4));
                 return u;
             }
         } catch (SQLException ex) {
