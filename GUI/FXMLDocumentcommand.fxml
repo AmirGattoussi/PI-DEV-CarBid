@@ -21,9 +21,9 @@
             <Label layoutX="364.0" layoutY="431.0" prefHeight="21.0" prefWidth="132.0" text="id_user  : " />
             <Label layoutX="359.0" layoutY="490.0" prefHeight="21.0" prefWidth="88.0" text="id_sparepart  : " />
             <Button fx:id="btn_main_add_cmd" layoutX="1340.0" layoutY="214.0" mnemonicParsing="false" onAction="#addcommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #6EFF5E;" text="Add" />
-            <Button fx:id="btn_main_modify_cmd" layoutX="1340.0" layoutY="329.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
-            <Button fx:id="btn_main_display_cmd" layoutX="1336.0" layoutY="442.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #4AAFE8;" text="Display" />
-            <Button fx:id="btn_main_delete_cmd" layoutX="1344.0" layoutY="558.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
+            <Button fx:id="btn_main_modify_cmd" layoutX="1340.0" layoutY="300.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
+            <Button fx:id="btn_main_display_cmd" layoutX="1340.0" layoutY="388.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #4AAFE8;" text="Display" />
+            <Button fx:id="btn_main_delete_cmd" layoutX="1344.0" layoutY="477.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
             <TableView fx:id="tablecommand" layoutX="773.0" layoutY="203.0" onMouseClicked="#clickMousee" prefHeight="640.0" prefWidth="424.0">
                <columns>
                   <TableColumn fx:id="id_tab_cmd" prefWidth="107.0" text="id_command" />
@@ -59,6 +59,8 @@
                   <Image url="@../Images/logo.png" />
                </image>
             </ImageView>
+            <Button fx:id="btn_main_refresh_cmd" layoutX="1344.0" layoutY="569.0" mnemonicParsing="false" onAction="#Refresh_cmd" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Refresh" />
+            <Button fx:id="btn_main_research_cmd" layoutX="1344.0" layoutY="655.0" mnemonicParsing="false" onAction="#GetcommandById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #fd3f92;" text="Research" />
          </children>
       </AnchorPane>
    </children>

@@ -80,6 +80,10 @@ public class FXMLDocumentcommandController implements Initializable {
     private TableColumn<Command,String> date_cr_tab_cmd;
     @FXML
     private TextField text_cmd_date_cr;
+    @FXML
+    private Button btn_main_refresh_cmd;
+    @FXML
+    private Button btn_main_research_cmd;
     
    
    
@@ -236,6 +240,41 @@ public class FXMLDocumentcommandController implements Initializable {
         this.text_cmd_id_sparepart.setText(String.valueOf(id_sp));
         
         
+        
+    }
+
+    @FXML
+    private void Refresh_cmd(ActionEvent event) throws SQLException {
+        
+        System.out.println("Bontton refresh Lu");
+        ServicesCommand us = new ServicesCommand();
+        ObservableList<Command> list = FXCollections.observableArrayList();
+        id_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_command"));
+           id_user_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+            id_sparepart_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("id_sparepart"));
+        date_cr_tab_cmd.setCellValueFactory(new PropertyValueFactory<>("date_cr"));
+        
+       
+        list.addAll(us.displaycommand());
+
+        tablecommand.setItems(list);
+        
+    }
+
+    @FXML
+    private void GetcommandById(ActionEvent event) throws SQLException {
+        
+          System.out.println("chercher_cmd ");
+        ServicesCommand us = new ServicesCommand();
+        ObservableList<Command> list = FXCollections.observableArrayList();
+
+     
+       list.addAll(us.GetcommandById(Integer.parseInt(text_cmd_id_command.getText())));
+
+        tablecommand.setItems(list);
+    
+
+        System.out.print("list value \n " + list);
         
     }
     

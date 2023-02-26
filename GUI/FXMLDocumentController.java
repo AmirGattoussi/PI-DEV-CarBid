@@ -75,6 +75,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField text_main_typec;
     @FXML
     private TextField look_for_spt;
+    @FXML
+    private Button btn_main_rech;
 
     /**
      * Initializes the controller class.
@@ -168,35 +170,41 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void display(ActionEvent event) {
-        /*
-        try {
+    private void display(ActionEvent event) throws SQLException {
+        
+      
            
             SpareParts uselected = (SpareParts) tablespareparts.getSelectionModel().getSelectedItem();
             ServicesSpareParts us = new ServicesSpareParts();
-       //     InformationsSupplementairesService InfosService = new InformationsSupplementairesService();
+          //  InformationsSupplementairesService InfosService = new InformationsSupplementairesService();
             int id = uselected.getId();
-            //SpareParts u1 = us.ChercherParId(id);
+         String type = uselected.getType();
+         int pou = uselected.getPou();
+        String description = uselected.getDescription();
+         Double price = uselected.getPrice();
+         String typec = uselected.getTypec();
+          //  User u1 = us.ChercherParId(id);
            // InformationsSupplementaires inf1 = InfosService.chercherparid(id);
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
-            Parent root =loader.load();
-        //    AfficherUser1Controller ctrl = loader.getController();
+         //    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+          //  Parent root =loader.load();
+           // AfficherUser1Controller ctrl = loader.getController();
             System.out.println("Controller yeess");
-            ctrl.MyFunction(uselected.getId(),uselected.getType(),uselected.getPou(),uselected.getDescription(),uselected.getPrice(),,uselected.getTypec());
+         //   ctrl.MyFunction(uselected.getNom(),uselected.getPrenom(),inf1.getTell(),uselected.getMail(),uselected.getPassword(),uselected.getRole());
             
-            Scene scene =new Scene(root);
-            Stage stage =new Stage();
-            stage.setScene(scene);
-            stage.show();
+            //Scene scene =new Scene(root);
+            //Stage stage =new Stage();
+            //stage.setScene(scene);
+            //stage.show();
             
-        } catch (IOException ex) {
-            Logger.getLogger(display.class.getName()).log(Level.SEVERE, null, ex);
+        //} catch (IOException ex) {
+           // Logger.getLogger(display().class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        */
         
+        
+       
 
-    }
+    
 
     @FXML
     private void delete(ActionEvent event) throws SQLException {
@@ -218,12 +226,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void Refresh(ActionEvent event) {
+    private void Refresh(ActionEvent event) throws SQLException {
        //
-        /*
+        
          System.out.println("Bontton refresh Lu");
         ServicesSpareParts us = new ServicesSpareParts();
-        ObservableList<User> list = FXCollections.observableArrayList();
+        ObservableList<SpareParts> list = FXCollections.observableArrayList();
         id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
             type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
             pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
@@ -233,8 +241,8 @@ public class FXMLDocumentController implements Initializable {
        
         list.addAll(us.display());
 
-        tableUsers.setItems(list);
-        */
+        tablespareparts.setItems(list);
+        
        // 
     }
 
@@ -259,7 +267,21 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void GetSparePartsById(ActionEvent event) {
+    private void GetSparePartsById(ActionEvent event) throws SQLException {
+        
+         System.out.println("chercher ");
+        ServicesSpareParts us = new ServicesSpareParts();
+        ObservableList<SpareParts> liste = FXCollections.observableArrayList();
+
+     
+       liste.addAll(us.GetSparePartsById(Integer.parseInt(text_main_id.getText())));
+
+        tablespareparts.setItems(liste);
+    
+
+        System.out.print("list value \n " + liste);
+
+        
       
         
     }
