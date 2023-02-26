@@ -126,5 +126,8 @@ PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`( `id_user`, 
         return null;
     }
     
+    
+    
+    
 
 }
