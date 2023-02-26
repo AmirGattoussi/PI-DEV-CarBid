@@ -27,7 +27,7 @@ public interface InterfaceCommand<T> {
        public void modifycommand(T  u) throws SQLException;
        
        
-           public SpareParts GetcommandById(int id) throws SQLException;
+           public Command GetcommandById(int id) throws SQLException;
     public ArrayList<T> displaycommand();
     
 }
