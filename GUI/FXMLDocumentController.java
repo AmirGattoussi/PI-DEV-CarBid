@@ -122,7 +122,8 @@ public class FXMLDocumentController implements Initializable {
         
         try {
             System.out.println("Bontton Ajouter Lu");
-            if ((text_main_type.getText().isEmpty()) || (text_main_typec.getText().isEmpty()) || (text_main_id.getText().isEmpty()) || (text_main_pou.getText().isEmpty()) || (text_main_description.getText().isEmpty()) || (text_main_price.getText().isEmpty())) {
+           // if ((text_main_type.getText().isEmpty()) || (text_main_typec.getText().isEmpty()) || (text_main_id.getText().isEmpty()) || (text_main_pou.getText().isEmpty()) || (text_main_description.getText().isEmpty()) || (text_main_price.getText().isEmpty())) {
+                 if ((text_main_type.getText().isEmpty()) || (text_main_typec.getText().isEmpty()) || (text_main_pou.getText().isEmpty()) || (text_main_description.getText().isEmpty()) || (text_main_price.getText().isEmpty())) {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText(null);
@@ -130,14 +131,15 @@ public class FXMLDocumentController implements Initializable {
                 alert.showAndWait();
             } else {
                 ServicesSpareParts us = new ServicesSpareParts();
-                Integer id = Integer.parseInt(text_main_id.getText());
+               // Integer id = Integer.parseInt(text_main_id.getText());
                 String type = text_main_type.getText();
                 Integer pou = Integer.parseInt(text_main_pou.getText());
                 String description = text_main_description.getText();
                 Double price = Double.parseDouble(text_main_price.getText());
                 String typec = text_main_typec.getText();
 
-                SpareParts u = new SpareParts(id, type, pou, description, price, typec);
+               // SpareParts u = new SpareParts(id, type, pou, description, price, typec);
+                 SpareParts u = new SpareParts( type, pou, description, price, typec);
                 us.add(u);
             }
             //refresh(event);
@@ -217,6 +219,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void Refresh(ActionEvent event) {
+       //
         /*
          System.out.println("Bontton refresh Lu");
         ServicesSpareParts us = new ServicesSpareParts();
@@ -228,11 +231,11 @@ public class FXMLDocumentController implements Initializable {
             price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
             typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
        
-        list.addAll(us.afficher());
+        list.addAll(us.display());
 
         tableUsers.setItems(list);
         */
-        
+       // 
     }
 
     @FXML
