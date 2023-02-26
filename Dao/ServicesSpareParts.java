@@ -87,15 +87,15 @@ public class ServicesSpareParts {
     }
 
     public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`id_sparepart`, `Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?,?)");
+        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?)");
 
-        pre.setInt(1, u.getId());
-        pre.setString(2, u.getType());
-        pre.setInt(3, u.getPou());
-        pre.setString(4, u.getDescription());
-        pre.setDouble(5, u.getPrice());
+     //   pre.setInt(1, u.getId());
+        pre.setString(1, u.getType());
+        pre.setInt(2, u.getPou());
+        pre.setString(3, u.getDescription());
+        pre.setDouble(4, u.getPrice());
 
-        pre.setString(6, u.getTypec());
+        pre.setString(5, u.getTypec());
 
         pre.executeUpdate();
         /*
