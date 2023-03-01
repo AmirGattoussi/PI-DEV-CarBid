@@ -6,3 +6,7 @@ carbid.sql
 nbproject/private/private.xml
 src/entities/SpareParts.java
 nbproject/private/private.xml
+src/Controller/reservationDetailsController.java
+src/Controller/reservationControllersManager.java
+src/View/reservations.fxml
+src/View/reservationDetails.fxml

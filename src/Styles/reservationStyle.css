@@ -158,7 +158,7 @@
     font-weight: bold;
 }
 
-.refresh-btn{
+.refresh-btn {
     -fx-background-color: transparent;
     background-color: transparent;
 }
@@ -166,6 +166,18 @@
 .refresh-btn:hover {
     -fx-cursor: hand;
     cursor: hand;
+}
+
+.details-pane-bg {
+    -fx-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.details-pane {
+    -fx-border-radius: 2;
+    border-radius: 2;
+    -fx-opacity: 1;
+    opacity: 1;
 }
 
 .increment-button,

@@ -24,11 +24,12 @@ import javafx.scene.layout.VBox;
 public class reservationsController implements Initializable {
 
     ReservationDao r = new ReservationDao();
+    reservationControllersManager mngr = new reservationControllersManager();
 
     @FXML
-    private Label userColumn;
+    public Label userColumn;
     @FXML
-    private Label carColumn;
+    public Label carColumn;
     @FXML
     private Label dateColumn;
     @FXML
@@ -52,22 +53,21 @@ public class reservationsController implements Initializable {
 
     public void handleClicks(ActionEvent event) {
         if (event.getSource() == detailsBtn) {
-            System.out.println("Details!");
+            mngr.showDetails();
+
         }
         if (event.getSource() == cancelBtn) {
             showAlert();
         }
-        if (event.getSource() == filterBtn) {
-            System.out.println("Filter!");
-        }
     }
 
     @FXML
-    public void refreshView() {
+    public void updateView() {
         Parent parent = reservation.getParent();
         if (parent instanceof Pane) {
             ((Pane) parent).getChildren().remove(reservation);
         }
+        mngr.updateCounter();
     }
 
     @FXML
@@ -111,7 +111,7 @@ public class reservationsController implements Initializable {
                 int id_car = Integer.parseInt(carColumn.getText());
                 r.deleteReservation(id_user, id_car);
 
-                refreshView();
+                updateView();
             }
         });
     }
