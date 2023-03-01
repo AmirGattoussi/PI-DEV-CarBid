@@ -200,14 +200,13 @@ public class UserDao implements IUserDao {
 
     }
 
-    public int getUserIdAtLogin(String email, String password) {
+    public int getUserIdAtLogin(String email) {
         PreparedStatement statement;
         int loggedInID = 0;
         try {
             statement = cnx.prepareStatement(
-                    "SELECT id_user FROM user WHERE email = ? AND password = ?");
+                    "SELECT id_user FROM user WHERE email = ?");
             statement.setString(1, email);
-            statement.setString(2, password);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

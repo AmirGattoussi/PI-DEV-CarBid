@@ -42,7 +42,7 @@ public class AgentDao {
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, agent.getName());
             statement.setString(2, agent.getEmail());
-            statement.setString(3, agent.getPassword());
+            statement.setString(3, PasswordHasher.hash(agent.getPassword()));
             statement.setInt(4, agent.getPhone_number());
             statement.setString(5, agent.getLocation());
 
@@ -58,12 +58,11 @@ public class AgentDao {
         try {
             //Get Id_agent from Id_User
             statement2 = cnx.prepareStatement(
-                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND password = ? AND phone_number = ? AND location = ?");
+                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, agent.getName());
             statement2.setString(2, agent.getEmail());
-            statement2.setString(3, agent.getPassword());
-            statement2.setInt(4, agent.getPhone_number());
-            statement2.setString(5, agent.getLocation());
+            statement2.setInt(3, agent.getPhone_number());
+            statement2.setString(4, agent.getLocation());
             ResultSet resultSet = statement2.executeQuery();
             //Set ID User to ID Agent
             if (resultSet.next()) {

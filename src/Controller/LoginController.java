@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
     UserDao user = new UserDao();
     AdminDao admin = new AdminDao();
     AgentDao agent = new AgentDao();
+    boolean valid = true;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,7 +72,7 @@ public class LoginController implements Initializable {
         String passwordIn = password.getText();
         String hashedPassword = PasswordHasher.hash(passwordIn);
         System.out.println(hashedPassword);
-        boolean valid = user.login(emailIn, hashedPassword);
+         valid = user.login(emailIn, hashedPassword);
         if (valid) {
             // login successful, display success message on screen
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -79,9 +80,10 @@ public class LoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("You have successfully logged in!");
             alert.showAndWait();
-            int passThroughUserID = user.getUserIdAtLogin(emailIn, passwordIn);
+            int passThroughUserID = user.getUserIdAtLogin(emailIn);
             // Login to Admin Interface
             if (admin.isAdmin(passThroughUserID)) {
+                System.out.println("Admin page in");
                 Parent root = FXMLLoader.load(getClass().getResource("../View/AdminPage.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
