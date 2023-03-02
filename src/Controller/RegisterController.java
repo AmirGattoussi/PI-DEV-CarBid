@@ -156,7 +156,7 @@ public class RegisterController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Thank you for registering!");
                 alert.showAndWait();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/login.fxml"));
                 Parent loginParent;
                 try {
                     loginParent = loader.load();

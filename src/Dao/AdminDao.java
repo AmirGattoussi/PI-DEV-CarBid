@@ -46,7 +46,7 @@ public class AdminDao implements IAdminDao {
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
             statement.setString(2, admin.getEmail());
-            statement.setString(3, admin.getPassword());
+            statement.setString(3, PasswordHasher.hash(admin.getPassword()));
             statement.setInt(4, admin.getPhone_number());
             statement.setString(5, admin.getLocation());
 
@@ -62,12 +62,11 @@ public class AdminDao implements IAdminDao {
         try {
             //Get Id_admin from Id_User
             statement2 = cnx.prepareStatement(
-                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND password = ? AND phone_number = ? AND location = ?");
+                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, admin.getName());
             statement2.setString(2, admin.getEmail());
-            statement2.setString(3, admin.getPassword());
-            statement2.setInt(4, admin.getPhone_number());
-            statement2.setString(5, admin.getLocation());
+            statement2.setInt(3, admin.getPhone_number());
+            statement2.setString(4, admin.getLocation());
             ResultSet resultSet = statement2.executeQuery();
             //Set ID User to ID Admin
             if (resultSet.next()) {
