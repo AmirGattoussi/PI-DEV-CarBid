@@ -76,6 +76,9 @@
          </image>
       </ImageView>
       <Button fx:id="btn_main_rech" layoutX="555.0" layoutY="632.0" mnemonicParsing="false" onAction="#GetSparePartsById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Research" />
+      <TextField fx:id="tfNom" layoutX="253.0" layoutY="550.0" prefHeight="31.0" prefWidth="199.0" />
+      <Button fx:id="btn_pdf" layoutX="316.0" layoutY="625.0" mnemonicParsing="false" onAction="#GeneratePdf" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="telecharger pdf" />
+      <Label layoutX="261.0" layoutY="507.0" prefHeight="21.0" prefWidth="169.0" text="Type/Typec  filtered/ordered : " />
       
    </children>
 </AnchorPane>
