@@ -15,12 +15,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import Dao.ServicesSpareParts;
 import Entities.SpareParts;
+import Utils.PdfAPI;
+import com.itextpdf.text.DocumentException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -74,7 +80,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField text_main_typec;
     @FXML
-    private TextField look_for_spt;
+    private Button btn_main_rech;
+    @FXML
+    private TextField tfNom;
+    @FXML
+    private Button btn_pdf;
 
     /**
      * Initializes the controller class.
@@ -94,24 +104,43 @@ public class FXMLDocumentController implements Initializable {
             price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
             typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
             tablespareparts.setItems(list);
-           // list.addAll(us.display());
-            //System.out.println(list);
-            //tablespareparts.setItems(list);
-           // tablespareparts.setVisible(true);//baad ma 3ammart el lista bich t7otha fil tableau fil graphique
-           // tablespareparts.setEditable(true);//t9olo les element fil tableau etidable wella la!,
-            
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Filter Par Nom et Par Role
+            // Wrap the ObservableList in a FilteredList (initially display all data).
+            FilteredList<SpareParts> filteredData = new FilteredList<>(list, b -> true);
 
-            /*ObservableList selectedCells = tablespareparts.getSelectionModel().getSelectedCells();
-            selectedCells.addListener(new ListChangeListener() {
-                @Override
-                public void onChanged(ListChangeListener.Change c) {
-                    SpareParts uselected = (SpareParts) tablespareparts.getSelectionModel().getSelectedItem();//wa9teli t7ot el sourie 3ala ligne fil tableau (wdli hiya el user )selectionne
-                    System.out.println("selected value " + uselected);
+            // 2. Set the filter Predicate whenever the filter changes.
+            tfNom.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(spareparts -> {
+                    // If filter text is empty, display all persons.
 
-                }
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
 
+                    // Compare first name and last name of every user with filter text.
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (spareparts.getType().toLowerCase().contains(lowerCaseFilter)) {
+                        return true; // Filter matches first name.
+                    } else if (spareparts.getTypec().toLowerCase().contains(lowerCaseFilter)) {
+                        return true; // Filter matches last name.
+                    } else {
+                        return false; // Does not match.
+                    }
+                });
             });
-*/
+
+            // 3. Wrap the FilteredList in a SortedList. 
+            SortedList<SpareParts> sortedData = new SortedList<>(filteredData);
+
+            // 4. Bind the SortedList comparator to the TableView comparator.
+            // 	  Otherwise, sorting the TableView would have no effect.
+            sortedData.comparatorProperty().bind(tablespareparts.comparatorProperty());
+
+            // 5. Add sorted (and filtered) data to the table.
+            tablespareparts.setItems(sortedData);
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } catch (SQLException e) {
         }
 
@@ -119,25 +148,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void add(ActionEvent event) {
+
         try {
             System.out.println("Bontton Ajouter Lu");
-            ServicesSpareParts us = new ServicesSpareParts();
-            Integer id = Integer.parseInt(text_main_id.getText());
-            String type = text_main_type.getText();
-            Integer pou = Integer.parseInt(text_main_pou.getText());
-            String description = text_main_description.getText();
-            Double price = Double.parseDouble(text_main_price.getText());
-            String typec = text_main_typec.getText();
-              if ((type.isEmpty()) && !(typec.isEmpty()) ) {
-          Alert alert = new Alert(AlertType.WARNING);
+            // if ((text_main_type.getText().isEmpty()) || (text_main_typec.getText().isEmpty()) || (text_main_id.getText().isEmpty()) || (text_main_pou.getText().isEmpty()) || (text_main_description.getText().isEmpty()) || (text_main_price.getText().isEmpty())) {
+            if ((text_main_type.getText().isEmpty()) || (text_main_typec.getText().isEmpty()) || (text_main_pou.getText().isEmpty()) || (text_main_description.getText().isEmpty()) || (text_main_price.getText().isEmpty())) {
+                Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText(null);
-                alert.setContentText("Please enter  data.");
-                alert.showAndWait();}
-              System.out.println("type et typec manquant!!!");
-            SpareParts u = new SpareParts(id, type, pou, description, price, typec);
-            System.out.println(u);
-            us.add(u);
+                alert.setContentText("Please enter data.");
+                alert.showAndWait();
+            } else {
+                ServicesSpareParts us = new ServicesSpareParts();
+                // Integer id = Integer.parseInt(text_main_id.getText());
+                String type = text_main_type.getText();
+                Integer pou = Integer.parseInt(text_main_pou.getText());
+                String description = text_main_description.getText();
+                Double price = Double.parseDouble(text_main_price.getText());
+                String typec = text_main_typec.getText();
+
+                // SpareParts u = new SpareParts(id, type, pou, description, price, typec);
+                SpareParts u = new SpareParts(type, pou, description, price, typec);
+                us.add(u);
+            }
             //refresh(event);
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,8 +197,31 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void display(ActionEvent event) {
+    private void display(ActionEvent event) throws SQLException {
 
+        SpareParts uselected = (SpareParts) tablespareparts.getSelectionModel().getSelectedItem();
+        ServicesSpareParts us = new ServicesSpareParts();
+        //  InformationsSupplementairesService InfosService = new InformationsSupplementairesService();
+        int id = uselected.getId();
+        String type = uselected.getType();
+        int pou = uselected.getPou();
+        String description = uselected.getDescription();
+        Double price = uselected.getPrice();
+        String typec = uselected.getTypec();
+        //  User u1 = us.ChercherParId(id);
+        // InformationsSupplementaires inf1 = InfosService.chercherparid(id);
+        //    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+        //  Parent root =loader.load();
+        // AfficherUser1Controller ctrl = loader.getController();
+        System.out.println("Controller yeess");
+        //   ctrl.MyFunction(uselected.getNom(),uselected.getPrenom(),inf1.getTell(),uselected.getMail(),uselected.getPassword(),uselected.getRole());
+
+        //Scene scene =new Scene(root);
+        //Stage stage =new Stage();
+        //stage.setScene(scene);
+        //stage.show();
+        //} catch (IOException ex) {
+        // Logger.getLogger(display().class.getName()).log(Level.SEVERE, null, ex);
     }
 
     @FXML
@@ -188,11 +244,24 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void Refresh(ActionEvent event) {
-    }
+    private void Refresh(ActionEvent event) throws SQLException {
+        //
 
-    @FXML
-    private void chercher(KeyEvent event) {
+        System.out.println("Bontton refresh Lu");
+        ServicesSpareParts us = new ServicesSpareParts();
+        ObservableList<SpareParts> list = FXCollections.observableArrayList();
+        id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
+        type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
+        pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
+        description_tab.setCellValueFactory(new PropertyValueFactory<>("description"));
+        price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
+        typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
+
+        list.addAll(us.display());
+
+        tablespareparts.setItems(list);
+
+        // 
     }
 
     @FXML
@@ -212,9 +281,33 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void GetSparePartsById(ActionEvent event) {
-      
-        
+    private void GetSparePartsById(ActionEvent event) throws SQLException {
+
+        System.out.println("chercher ");
+        ServicesSpareParts us = new ServicesSpareParts();
+        ObservableList<SpareParts> liste = FXCollections.observableArrayList();
+
+        liste.addAll(us.GetSparePartsById(Integer.parseInt(text_main_id.getText())));
+//liste.addAll(us.GetSparePartsById(Integer.parseInt(text_main_pou.getText())));
+        tablespareparts.setItems(liste);
+
+        System.out.print("list value \n " + liste);
+
+    }
+
+    @FXML
+    private void GeneratePdf(ActionEvent event) throws SQLException,FileNotFoundException, DocumentException, IOException {
+        PdfAPI pdf = new PdfAPI();
+
+        try {
+            pdf.listAllSpareParts();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
