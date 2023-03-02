@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class CarsDao implements IDao<Cars> {
 
-    private static CarsDao instance;
+    public CarsDao instance;
 
-    public static CarsDao getInstance() {
+    public CarsDao getInstance() {
         if (instance == null)
             try {
                 instance = new CarsDao();
@@ -39,7 +39,7 @@ public class CarsDao implements IDao<Cars> {
     private Statement st;
     private ResultSet rs;
 
-    private CarsDao() throws SQLException {
+    public CarsDao() throws SQLException {
         DBconnexion cs = DBconnexion.getInstance();
         try {
             st = cs.getConnection().createStatement();

@@ -11,6 +11,11 @@
     background-color: #dbdbdb;
 }
 
+.side-navbar:active {
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
 .side-navbar:pressed {
     -fx-background-color: #d4d4d4;
     background-color: #d4d4d4;
@@ -168,16 +173,26 @@
     cursor: hand;
 }
 
-.details-pane-bg {
+.close-btn {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.close-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* .details-pane-bg {
     -fx-opacity: 0.5;
     opacity: 0.5;
-}
+} */
 
 .details-pane {
     -fx-border-radius: 2;
     border-radius: 2;
-    -fx-opacity: 1;
-    opacity: 1;
+    /* -fx-opacity: 1;
+    opacity: 1; */
 }
 
 .increment-button,

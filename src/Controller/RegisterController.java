@@ -11,6 +11,7 @@ import Entities.User;
 import Dao.UserDao;
 import Entities.Admin;
 import Entities.Agent;
+import Utils.EmailVerif;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 
 /**
  * FXML Controller class
@@ -190,6 +192,11 @@ public class RegisterController implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            try {
+                EmailVerif.sendVerificationEmail(email, "verif");
+            } catch (MessagingException ex) {
+                Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
