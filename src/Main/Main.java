@@ -3,7 +3,6 @@ package Main;
 import java.io.IOException;
 import java.sql.*;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,8 +13,6 @@ import javafx.stage.Stage;
  * @author neil
  */
 public class Main extends Application{
-    private Stage stage;
-    private Parent parent;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
