@@ -8,5 +8,6 @@ src/entities/SpareParts.java
 nbproject/private/private.xml
 src/Controller/reservationDetailsController.java
 src/Controller/reservationControllersManager.java
+src/Controller/reservationsController.java
 src/View/reservations.fxml
 src/View/reservationDetails.fxml
