@@ -37,6 +37,13 @@ public class SpareParts {
         this.price = price;
         this.typec = typec;
     }
+
+    public SpareParts(String type, String description, double price, String typec) {
+        this.type = type;
+        this.description = description;
+        this.price = price;
+        this.typec = typec;
+    }
     
     
     
