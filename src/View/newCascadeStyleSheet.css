@@ -38,7 +38,7 @@ and open the template in the editor.
 }
 
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #444750, #38ACEC);
+    -fx-background-color:linear-gradient(to bottom right, #eef0f5, #38ACEC);
 }
 
 .shadow{
@@ -54,7 +54,7 @@ and open the template in the editor.
     -fx-alignment:CENTER-LEFT;
 }
 .logout-btn{
-    -fx-background-color:#862727;
+    -fx-background-color:#9e9999;
     -fx-background-radius:20px;
     -fx-cursor:hand;
 }

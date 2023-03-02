@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author rima
  */
-public class DisplayCarController implements Initializable {
+public class WishListController implements Initializable {
 
     /**
      * Initializes the controller class.

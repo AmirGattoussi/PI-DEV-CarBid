@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Dao;
 import Entities.*;
 import java.util.List;
 /**
@@ -12,10 +12,11 @@ import java.util.List;
  * @param <cars>
  */
 public interface IDao<cars> {
-    public void insert(Cars car);
-    public void delete(Cars car);
-    public List<Cars> displayAll();
-    public Cars displayById(int id_car);
+    public void insert(Car car);
+    public void delete(Car car);
+    public List<Car> displayAll();
+    public List<Car> displayAllList();
+    public Car displayById(int id_car);
     
-    public boolean update(Cars car);
+    public boolean update(Car car);
 }

@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.sql.*;
 import Utils.DBconnexion;
 import Dao.*;
-import Entities.Auction;
+
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Dao.AuctionDaoImplementation;
@@ -43,20 +44,14 @@ public class Main extends Application {
    @Override
    public void start(Stage primaryStage) throws Exception {
        Parent root = FXMLLoader.load(getClass().getResource("../View/DisplayCar.fxml"));
-       primaryStage.setTitle("DisplayCar");
+       //primaryStage.setTitle("AddCar");
        primaryStage.setScene(new Scene(root));
        primaryStage.show();
  
    
   
-   
-   
-   }
        
-   
-   
-   
-   
+       }
    
    
     /**
@@ -67,12 +62,26 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException, IOException {
        launch(args);
-         User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
+        /*  User amir2=new User(10,"amir2","mail@","passamir",20,"tunis");
 
         UserDao user=new UserDao();
         user.createUser(amir2);
          user.login("mail@", "passamir");
-    }
+
+
+/*       
+         Carwishlist wishlist = new Carwishlist();
+         wishlist.addCar("Tesla Model S");
+         wishlist.addCar("Porsche 911");
+         wishlist.addCar("Audi R8");
+         wishlist.removeCar("Porsche 911");
+         ArrayList<String> cars = wishlist.getCars();
+         
+         System.out.println("My car wishlist has "  + " cars:");
+         for (String car : cars) {
+             System.out.println(car); 
+
+    } */
 
    
-}
+}}

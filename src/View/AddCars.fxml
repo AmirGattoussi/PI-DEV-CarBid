@@ -5,65 +5,49 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCarController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddCarsController">
    <children>
       <BorderPane layoutX="162.0" layoutY="77.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="44.0" prefWidth="627.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="50.0" prefWidth="1040.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="-69.0" layoutY="-77.0" prefHeight="29.0" prefWidth="600.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label layoutX="72.0" layoutY="11.0" text="AddCar Manajment" />
-                        <ImageView fitHeight="36.0" fitWidth="39.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Downloads/Screenshot%202023-02-06%20200428.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane layoutX="216.0" layoutY="-77.0" prefHeight="41.0" prefWidth="824.0" style="-fx-background-color: #363948;" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="21.0" layoutY="32.0" mnemonicParsing="false" text="&lt; Back To Menu" />
                </children>
             </AnchorPane>
          </top>
          <left>
-            <AnchorPane prefHeight="355.0" prefWidth="146.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="1030.0" prefWidth="216.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="-2.0" prefHeight="1047.0" prefWidth="201.0" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="223.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="-2.0" layoutY="-67.0" prefHeight="1104.0" prefWidth="221.0" style="-fx-background-color: #363948;" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-67.0">
                      <children>
                         <Line endX="100.0" layoutX="100.0" layoutY="109.0" startX="-100.0" stroke="#efebeb" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="49.0" layoutY="117.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" styleClass="nav-btn" stylesheets="@newCascadeStyleSheet.css" text="Home" textAlignment="RIGHT">
-                           <effect>
-                              <Shadow>
-                                 <color>
-                                    <Color red="0.9725490212440491" green="0.9686274528503418" blue="0.9686274528503418" opacity="0.1899999976158142" />
-                                 </color>
-                              </Shadow>
-                           </effect>
-                           <font>
-                              <Font size="49.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="26.0" layoutY="351.0" minWidth="48.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" text="sign out" />
-                        <Label layoutX="72.0" layoutY="83.0" text="Welcome" textFill="#ebe8e8" />
-                        <ImageView fitHeight="33.0" fitWidth="29.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                        <Button layoutX="125.0" layoutY="558.0" minWidth="48.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" text="sign out" />
+                        <ImageView fitHeight="33.0" fitWidth="29.0" layoutX="20.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Downloads/25694.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="63.0" fitWidth="126.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <Label layoutX="57.0" layoutY="28.0" prefHeight="28.0" prefWidth="140.0" text="AddCar" textFill="#e8e5e5">
+                           <font>
+                              <Font name="Century Gothic" size="22.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="36.0" fitWidth="39.0" layoutX="15.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Downloads/icon.jpg" />
+                              <Image url="@../../../../../../Downloads/Screenshot%202023-02-06%20200428.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="btnhome" layoutX="59.0" layoutY="136.0" mnemonicParsing="false" onAction="#backhome" prefHeight="25.0" prefWidth="103.0" text="Home" />
                      </children>
                      <styleClass>
                         <String fx:value="nav-form" />
@@ -74,45 +58,59 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane prefHeight="600.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="10.0" layoutY="2.0" prefHeight="355.0" prefWidth="402.0" styleClass="white-bg" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="10.0" layoutY="2.0" prefHeight="1035.0" prefWidth="814.0" styleClass="white-bg" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                      <children>
-                        <AnchorPane layoutX="-3.0" prefHeight="1035.0" prefWidth="403.0" styleClass="white-bg" stylesheets="@newCascadeStyleSheet.css">
+                        <AnchorPane layoutX="-2.0" layoutY="-10.0" prefHeight="1055.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" styleClass="white-bg">
                            <children>
-                              <TextField layoutX="14.0" layoutY="34.0" prefHeight="26.0" prefWidth="86.0" promptText="Make" />
-                              <TextField layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="85.0" promptText=" Model:" />
-                              <TextField layoutX="14.0" layoutY="125.0" prefHeight="26.0" prefWidth="113.0" promptText="Year" />
-                              <TextField layoutX="14.0" layoutY="168.0" prefHeight="26.0" prefWidth="118.0" promptText="Transmission:" />
-                              <ComboBox layoutX="133.0" layoutY="82.0" prefHeight="27.0" prefWidth="104.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
-                              <ComboBox layoutX="131.0" layoutY="33.0" prefHeight="27.0" prefWidth="107.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
-                              <ComboBox layoutX="137.0" layoutY="218.0" prefHeight="27.0" prefWidth="94.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
-                              <TextField layoutX="14.0" layoutY="212.0" prefHeight="26.0" prefWidth="110.0" promptText="Type:" />
-                              <AnchorPane layoutX="459.0" layoutY="31.0" prefHeight="219.0" prefWidth="357.0" styleClass="white-bg" stylesheets="@newCascadeStyleSheet.css">
-                                 <children>
-                                    <ImageView fitHeight="230.0" fitWidth="316.0" layoutX="6.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../New%20Folder/Screenshot%202023-02-22%20144712.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </AnchorPane>
-                              <TextField layoutX="13.0" layoutY="262.0" prefHeight="26.0" prefWidth="134.0" promptText="Color" />
-                              <TextField layoutX="13.0" layoutY="505.0" prefHeight="26.0" prefWidth="139.0" promptText="Secondarydamage:" />
-                              <TextField layoutX="13.0" layoutY="461.0" prefHeight="26.0" prefWidth="140.0" promptText="Primarydamage:" />
-                              <TextField layoutX="13.0" layoutY="413.0" prefHeight="26.0" prefWidth="137.0" promptText="Loss:" />
-                              <TextField layoutX="13.0" layoutY="365.0" prefHeight="26.0" prefWidth="137.0" promptText="FiscalPower: " />
-                              <TextField layoutX="13.0" layoutY="315.0" prefHeight="26.0" prefWidth="137.0" promptText="mileage:" />
-                              <TextField layoutX="11.0" layoutY="553.0" prefHeight="26.0" prefWidth="139.0" promptText="FuelType:" />
-                              <Button layoutX="242.0" layoutY="679.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="161.0" text="delete" />
-                              <Button layoutX="440.0" layoutY="679.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="129.0" text="insert" />
-                              <Button layoutX="598.0" layoutY="679.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="148.0" text="Update" />
-                              <TextField layoutX="311.0" layoutY="479.0" prefHeight="26.0" prefWidth="131.0" promptText="Description:" />
-                              <TextField layoutX="451.0" layoutY="479.0" prefHeight="152.0" prefWidth="335.0" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
-                              <DatePicker layoutX="134.0" layoutY="128.0" prefHeight="26.0" prefWidth="101.0" promptText="........" />
-                              <Label layoutX="292.0" layoutY="53.0" prefHeight="18.0" prefWidth="153.0" text="choose file (JPG,JPEG)" />
-                              <Button layoutX="329.0" layoutY="80.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" text="import" textFill="#c4bfbf" />
-                           </children></AnchorPane>
+                              <TextField fx:id="tfMake" layoutX="14.0" layoutY="20.0" prefHeight="26.0" prefWidth="86.0" promptText="Make" />
+                              <TextField fx:id="tfModel" layoutX="14.0" layoutY="71.0" prefHeight="26.0" prefWidth="85.0" promptText=" Model:" />
+                              <TextField fx:id="tfYear" layoutX="12.0" layoutY="113.0" prefHeight="26.0" prefWidth="113.0" promptText="Year" />
+                              <TextField fx:id="tfTrans" layoutX="10.0" layoutY="160.0" prefHeight="26.0" prefWidth="118.0" promptText="Transmission:" />
+                              <ComboBox layoutX="133.0" layoutY="70.0" prefHeight="27.0" prefWidth="104.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
+                              <ComboBox fx:id="idCh" layoutX="130.0" layoutY="19.0" prefHeight="27.0" prefWidth="107.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
+                              <ComboBox layoutX="141.0" layoutY="204.0" prefHeight="27.0" prefWidth="94.0" promptText="choose" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
+                              <TextField fx:id="tfType" layoutX="14.0" layoutY="205.0" prefHeight="26.0" prefWidth="110.0" promptText="Type:" />
+                              <TextField fx:id="tfColor" layoutX="15.0" layoutY="249.0" prefHeight="26.0" prefWidth="134.0" promptText="Color" />
+                              <TextField fx:id="tfSd" layoutX="185.0" layoutY="288.0" prefHeight="26.0" prefWidth="139.0" promptText="Secondarydamage:" />
+                              <TextField fx:id="tfPd" layoutX="180.0" layoutY="249.0" prefHeight="26.0" prefWidth="140.0" promptText="Primarydamage:" />
+                              <TextField fx:id="tfLoss" layoutX="14.0" layoutY="385.0" prefHeight="26.0" prefWidth="137.0" promptText="Loss:" />
+                              <TextField fx:id="tfFP" layoutX="14.0" layoutY="335.0" prefHeight="26.0" prefWidth="137.0" promptText="FiscalPower: " />
+                              <TextField fx:id="tfMileage" layoutX="14.0" layoutY="288.0" prefHeight="26.0" prefWidth="137.0" promptText="mileage:" />
+                              <TextField fx:id="tfFt" layoutX="185.0" layoutY="335.0" prefHeight="26.0" prefWidth="139.0" promptText="FuelType:" />
+                              <Button fx:id="btnInsert" layoutX="295.0" layoutY="509.0" mnemonicParsing="false" onAction="#insert" prefHeight="30.0" prefWidth="129.0" text="insert" />
+                              <TextField fx:id="tfDesc" layoutX="445.0" layoutY="385.0" prefHeight="152.0" prefWidth="335.0" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
+                              <DatePicker layoutX="137.0" layoutY="113.0" prefHeight="26.0" prefWidth="101.0" promptText="........" />
+                              <Label layoutX="335.0" layoutY="29.0" prefHeight="18.0" prefWidth="153.0" text="choose file (JPG,JPEG)" />
+                              <Button layoutX="364.0" layoutY="54.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" text="import" textFill="#c4bfbf" />
+
+                                    <ImageView fitHeight="200.0" fitWidth="273.0" layoutX="521.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/damcar.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="565.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="662.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../Downloads/resizer%20(2).jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="511.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../Downloads/resizer%20(3).jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="360.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../Downloads/resizer%20(4).jpg" />
+                                 </image>
+                              </ImageView>
+                              <RadioButton layoutX="145.0" layoutY="152.0" mnemonicParsing="false" text="auto" />
+                              <RadioButton layoutX="145.0" layoutY="178.0" mnemonicParsing="false" text="manually" />
+                              <Label layoutX="363.0" layoutY="389.0" prefHeight="17.0" prefWidth="73.0" text="Description" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </children>
