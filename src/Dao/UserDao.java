@@ -109,6 +109,32 @@ public class UserDao implements IUserDao {
 
     }
 
+    public User getUserByMail(String email) {
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT * FROM user WHERE email = ?");
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getInt("id_user"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("location")
+                );
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
     // UPDATE operation
     @Override
     public void updateUser(User user) {
@@ -236,7 +262,6 @@ public class UserDao implements IUserDao {
             // Close database connection and statement
             resultSet.close();
             statement.close();
-           
 
             // Return true if user exists, false otherwise
             return count > 0;

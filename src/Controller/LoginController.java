@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import Dao.*;
+import Entities.CurrentUser;
+import Entities.User;
 import Utils.PasswordHasher;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -71,8 +73,7 @@ public class LoginController implements Initializable {
         String emailIn = email.getText();
         String passwordIn = password.getText();
         String hashedPassword = PasswordHasher.hash(passwordIn);
-        System.out.println(hashedPassword);
-         valid = user.login(emailIn, hashedPassword);
+        valid = user.login(emailIn, hashedPassword);
         if (valid) {
             // login successful, display success message on screen
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -81,9 +82,12 @@ public class LoginController implements Initializable {
             alert.setContentText("You have successfully logged in!");
             alert.showAndWait();
             int passThroughUserID = user.getUserIdAtLogin(emailIn);
+            // Get the user object from the database
+            User loggedUser = user.getUserByMail(emailIn);
+            // Set the currently logged-in user in the CurrentUser class
+            CurrentUser.setUser(loggedUser);
             // Login to Admin Interface
             if (admin.isAdmin(passThroughUserID)) {
-                System.out.println("Admin page in");
                 Parent root = FXMLLoader.load(getClass().getResource("../View/AdminPage.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
@@ -200,7 +204,5 @@ public class LoginController implements Initializable {
 
         dialog.showAndWait();
     }
-
-  
 
 }

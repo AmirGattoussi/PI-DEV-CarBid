@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import Entities.CurrentUser;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -39,6 +41,8 @@ public class AdminPageController implements Initializable {
     private TableColumn<User, String> roleColumn;
     @FXML
     private TableView userTableView;
+    @FXML
+    private Label adminNameLabel;
 
     /**
      * Initializes the controller class.
@@ -57,6 +61,7 @@ public class AdminPageController implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         userTableView.setItems(observableUserList);
+        adminNameLabel.setText(CurrentUser.getUser().getName());
 
     }
 
