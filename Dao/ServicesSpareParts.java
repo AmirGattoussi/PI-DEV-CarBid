@@ -149,8 +149,9 @@ public class ServicesSpareParts {
         try {
 
             PreparedStatement pre = cnx.prepareStatement("select * from spareparts where id_sparepart = ?");
-
+//PreparedStatement pre = cnx.prepareStatement("select * from spareparts where pou = ?");
             pre.setInt(1, id);
+             // pre.setInt(3,pou );
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
