@@ -93,7 +93,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
-            } //Login to Agent Interface
+            } // Login to Agent Interface
             else if (agent.isAgent(passThroughUserID)) {
                 Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
                 Scene scene = new Scene(root);
@@ -164,13 +164,16 @@ public class LoginController implements Initializable {
 
         // Validate the input when the fields are changed
         emailField.textProperty().addListener((observable, oldValue, newValue) -> {
-            resetButton.setDisable(newValue.trim().isEmpty() || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty());
+            resetButton.setDisable(newValue.trim().isEmpty() || passwordField.getText().isEmpty()
+                    || confirmPasswordField.getText().isEmpty());
         });
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-            resetButton.setDisable(newValue.trim().isEmpty() || emailField.getText().isEmpty() || confirmPasswordField.getText().isEmpty());
+            resetButton.setDisable(newValue.trim().isEmpty() || emailField.getText().isEmpty()
+                    || confirmPasswordField.getText().isEmpty());
         });
         confirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
-            resetButton.setDisable(newValue.trim().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty());
+            resetButton.setDisable(
+                    newValue.trim().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty());
         });
 
         dialog.getDialogPane().setContent(gridPane);

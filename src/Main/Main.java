@@ -3,24 +3,25 @@ package Main;
 import java.io.IOException;
 import java.sql.*;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
-
-    private Stage stage;
-    private Parent parent;
+/**
+ *
+ * @author neil
+ */
+public class Main extends Application{
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        this.stage = primaryStage;
-        parent = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../View/mainNavigation.fxml"));
+        primaryStage.setTitle("Carbid");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setMinWidth(1025);
+        primaryStage.setMinHeight(600);
+        primaryStage.show();
     }
 
     /**

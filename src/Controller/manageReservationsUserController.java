@@ -1,20 +1,17 @@
 package Controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Dao.ReservationDao;
-import Entities.Reservation;
+import Entities.*;
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,25 +26,21 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.effect.BlurType;
 
-/**
- *
- * @author neil
- */
-
-public class manageReservationsController implements Initializable {
+public class manageReservationsUserController extends manageReservationsController{
 
     ReservationDao r = new ReservationDao();
+    int currentUserID = 3;//CurrentUser.getUser().getId();
+    // CarsDao car = new CarsDao();
 
     @FXML
     private VBox reservationsPanel;
     @FXML
-    private Label userColumn;
-    @FXML
     private Label carColumn;
+    @FXML
+    private Label carModelColumn;
     @FXML
     private Label dateColumn;
     @FXML
@@ -71,7 +64,7 @@ public class manageReservationsController implements Initializable {
     @FXML
     public Pane pnlReservationDetails;
 
-    int currentCount = r.getNumberOfReservations();
+    int currentCount = r.filterReservationsByUser(currentUserID).size();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,13 +90,12 @@ public class manageReservationsController implements Initializable {
                 System.out.println("Filter!");
             }else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
-                    
+                    System.out.println("Details!!");
                 }else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
-                        userColumn = (Label) hbox.getChildren().get(0);
-                        carColumn = (Label) hbox.getChildren().get(1);
-                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()), Integer.parseInt(carColumn.getText()));
+                        carColumn = (Label) hbox.getChildren().get(0);
+                        deleteReservationAlert(hbox, currentUserID, Integer.parseInt(carColumn.getText()));
                     }
                 }
             }
@@ -121,7 +113,7 @@ public class manageReservationsController implements Initializable {
         } else {
             pnlManageReservations.lookup("#noReservationYet").setVisible(false);
             for (Reservation reserv : observableReservationList) {
-                HBox reservation = generateReservationRow(reserv.getUser(), reserv.getCar(), reserv.getDate(),
+                HBox reservation = generateReservationRow(reserv.getCar(), "car", reserv.getDate(),
                         reserv.getLocation());
                 reservationsPanel.getChildren().add(reservation);
             }
@@ -150,12 +142,12 @@ public class manageReservationsController implements Initializable {
     }
 
     public ObservableList<Reservation> returnLatestTable(){
-        return FXCollections.observableList(r.getReservations());
+        return FXCollections.observableList(r.filterReservationsByUser(currentUserID));
     }
 
     // This method generates fxml code for reservation row
     @FXML
-    public HBox generateReservationRow(int usr, int car, String date, String location) {
+    public HBox generateReservationRow(int car, String car_model, String date, String location) {
         HBox reservation = new HBox();
         reservation.setStyle("-fx-background-color: #EBE8F9; -fx-background-radius: 5; -fx-background-insets: 0;");
 
@@ -176,19 +168,19 @@ public class manageReservationsController implements Initializable {
         reservation.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setAlignment(Pos.CENTER);
 
-        Label userColumn = new Label();
-        userColumn.setPrefSize(99, 18);
-        userColumn.setId("userColumn");
         Label carColumn = new Label();
-        carColumn.setPrefSize(84, 18);
+        carColumn.setPrefSize(99, 18);
         carColumn.setId("carColumn");
+        Label carModelColumn = new Label();
+        carModelColumn.setPrefSize(134, 18);
+        carModelColumn.setId("carModelColumn");
         Label dateColumn = new Label();
         dateColumn.setPrefSize(125, 18);
         Label locationColumn = new Label();
-        locationColumn.setPrefSize(308, 18);
+        locationColumn.setPrefSize(258, 18);
 
-        userColumn.setText("" + usr);
         carColumn.setText("" + car);
+        carModelColumn.setText("" + car_model);
         dateColumn.setText("" + date);
         locationColumn.setText("" + location);
 
@@ -215,7 +207,7 @@ public class manageReservationsController implements Initializable {
         reservation.setEffect(dropShadow);
 
         reservation.setPadding(new Insets(20, 20, 20, 20));
-        reservation.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, details_btn, cancelBtn);
+        reservation.getChildren().addAll(carColumn, carModelColumn, dateColumn, locationColumn, details_btn, cancelBtn);
         return reservation;
     }
 
@@ -279,7 +271,6 @@ public class manageReservationsController implements Initializable {
 
     // This method updates the UI reservation counter
     public void updateReservationCounter() {
-        totalNumberOfReservations.setText("" + r.getNumberOfReservations());
+        totalNumberOfReservations.setText("" + returnLatestTable().size());
     }
-
 }
