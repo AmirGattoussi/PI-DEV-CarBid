@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#clickMousee" prefHeight="662.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+   <children>
+      <TextField fx:id="text_main_id" layoutX="409.0" layoutY="216.0" prefHeight="31.0" prefWidth="88.0" />
+      <TextField fx:id="text_main_type" layoutX="567.0" layoutY="216.0" prefHeight="31.0" prefWidth="88.0" />
+      <TextField fx:id="text_main_pou" layoutX="388.0" layoutY="330.0" prefHeight="31.0" prefWidth="79.0" />
+      <TextField fx:id="text_main_description" layoutX="538.0" layoutY="330.0" prefHeight="31.0" prefWidth="124.0" />
+      <TextField fx:id="text_main_price" layoutX="368.0" layoutY="441.0" prefHeight="31.0" prefWidth="79.0" />
+      <Label layoutX="434.0" layoutY="180.0" prefHeight="21.0" prefWidth="38.0" text="Id" />
+      <Label layoutX="582.0" layoutY="180.0" prefHeight="21.0" prefWidth="58.0" text="Type" />
+      <Label layoutX="407.0" layoutY="293.0" prefHeight="21.0" prefWidth="58.0" text="Pou" />
+      <Label layoutX="567.0" layoutY="282.0" prefHeight="21.0" prefWidth="88.0" text="Description" />
+      <Label layoutX="385.0" layoutY="399.0" prefHeight="21.0" prefWidth="103.0" text="Price" />
+      <Label layoutX="553.0" layoutY="399.0" prefHeight="21.0" prefWidth="58.0" text="Typec" />
+      <Button fx:id="btn_main_add" layoutX="685.0" layoutY="530.0" mnemonicParsing="false" onAction="#add" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #f5ae07;" text="Add" />
+      <Button fx:id="btn_main_modify" layoutX="961.0" layoutY="530.0" mnemonicParsing="false" onAction="#modify" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #05e6d3;" text="Modify" />
+      <Button fx:id="btn_main_display" layoutX="685.0" layoutY="639.0" mnemonicParsing="false" onAction="#display" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #4AAFE8;" text="Display" />
+      <Button fx:id="btn_main_delete" layoutX="961.0" layoutY="584.0" mnemonicParsing="false" onAction="#delete" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
+      <TableView fx:id="tablespareparts" layoutX="682.0" layoutY="34.0" onMouseClicked="#clickMousee" prefHeight="398.0" prefWidth="484.0">
+         <columns>
+            <TableColumn fx:id="id_tab" prefWidth="70.0" text="Id" visible="false" />
+            <TableColumn fx:id="type_tab" prefWidth="99.0" text="Type" />
+            <TableColumn fx:id="pou_tab" prefWidth="107.0" text="Pou" />
+            <TableColumn fx:id="description_tab" prefWidth="115.0" text="Description" />
+            <TableColumn fx:id="price_tab" prefWidth="92.0" text="Price" />
+            <TableColumn fx:id="typec_tab" prefWidth="69.0" text="Type_car" />
+         </columns>
+      </TableView>
+      <Button fx:id="btn_main_refresh" layoutX="961.0" layoutY="639.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF7A30;" text="Refresh" />
+      <Pane layoutX="334.0" layoutY="44.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: #fd3f92;" styleClass="backgroundAdmin">
+         <children>
+            <Hyperlink focusTraversable="false" layoutX="124.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" text="SpareParts" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+      <TextField fx:id="text_main_typec" layoutX="520.0" layoutY="441.0" prefHeight="31.0" prefWidth="124.0" />
+      <ImageView fitHeight="118.0" fitWidth="132.0" layoutX="88.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/image.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="103.0" layoutX="1200.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/image_volan.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="132.0" layoutX="1180.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/sp_4.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1112.0" layoutY="570.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/sp5.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="109.0" fitWidth="111.0" layoutX="154.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/im_sp8.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btn_main_rech" layoutX="685.0" layoutY="584.0" mnemonicParsing="false" onAction="#GetSparePartsById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Research" />
+      <TextField fx:id="tfNom" layoutX="381.0" layoutY="539.0" prefHeight="31.0" prefWidth="169.0" />
+      <Button fx:id="btn_pdf" layoutX="826.0" layoutY="577.0" mnemonicParsing="false" onAction="#GeneratePdf" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="telecharger pdf" />
+      <Label layoutX="381.0" layoutY="498.0" prefHeight="21.0" prefWidth="169.0" text="Type/Typec  filtered/ordered : " />
+      <Button fx:id="btn_states" layoutX="545.0" layoutY="577.0" mnemonicParsing="false" onAction="#showstates" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #f5ae07;" text="show states" />
+      
+   </children>
+</AnchorPane>
