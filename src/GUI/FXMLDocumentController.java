@@ -91,9 +91,7 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         try {
-
             ServicesSpareParts us = new ServicesSpareParts();
             List<SpareParts> splist = us.display();
             ObservableList<SpareParts> list = FXCollections.observableArrayList(splist);
@@ -105,26 +103,26 @@ public class FXMLDocumentController implements Initializable {
             typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
             tablespareparts.setItems(list);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Filter Par Nom et Par Role
+//Filter Par type et Par typec
             // Wrap the ObservableList in a FilteredList (initially display all data).
             FilteredList<SpareParts> filteredData = new FilteredList<>(list, b -> true);
 
             // 2. Set the filter Predicate whenever the filter changes.
             tfNom.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(spareparts -> {
-                    // If filter text is empty, display all persons.
+                    // If filter text is empty, display all spareparts.
 
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
 
-                    // Compare first name and last name of every user with filter text.
+                    
                     String lowerCaseFilter = newValue.toLowerCase();
 
                     if (spareparts.getType().toLowerCase().contains(lowerCaseFilter)) {
-                        return true; // Filter matches first name.
+                        return true; // Filter matches type .
                     } else if (spareparts.getTypec().toLowerCase().contains(lowerCaseFilter)) {
-                        return true; // Filter matches last name.
+                        return true; // Filter matches typec.
                     } else {
                         return false; // Does not match.
                     }
