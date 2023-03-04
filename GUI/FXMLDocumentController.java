@@ -311,10 +311,23 @@ public class FXMLDocumentController implements Initializable {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void statesSP(ActionEvent event) {
+         try {
+            //taawed thezzek lel inscription
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
+            Parent root = loader.load();
+            btn_states.getScene().setRoot(root);
+           
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 public void calculerNombreParType() throws SQLException {
 
         int NbrMoteur = 0;
-        int NbrDécorvolan = 0;
+        int NbrDec = 0;
         /*
          private int id_sparepart;
     private String type;
@@ -340,29 +353,14 @@ public void calculerNombreParType() throws SQLException {
                 NbrMoteur += 1;
 
             }
-            if ("décor volan".equals(sp.getType())) {
-                NbrDécorvolan += 1;
+            if ("dÃ©cor volan".equals(sp.getType())) {
+                NbrDec += 1;
             }
         }
         System.out.println(NbrMoteur);
-        System.out.println(NbrDécorvolan);
+        System.out.println(NbrDec);
 
     }
 
-    @FXML
-    private void showstates(ActionEvent event) {
-        try {
-            //taawed thezzek lel inscription
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
-            Parent root = loader.load();
-            btn_states.getScene().setRoot(root);
-           
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }
-
-
+  
 }

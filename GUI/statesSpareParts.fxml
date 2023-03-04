@@ -3,9 +3,8 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUI.StatesSparePartsController">
+<AnchorPane id="AnchorPane" prefHeight="859.0" prefWidth="1353.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StatesSparePartsController">
    <children>
-      <PieChart fx:id="statesSP" layoutX="60.0" layoutY="7.0" />
+      <PieChart fx:id="statesSP" layoutX="392.0" layoutY="46.0" prefHeight="533.0" prefWidth="644.0" />
    </children>
 </AnchorPane>
