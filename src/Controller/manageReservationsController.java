@@ -171,7 +171,7 @@ public class manageReservationsController implements Initializable {
             e.printStackTrace();
         }
 
-        reservation.setPrefSize(750, 53);
+        reservation.setPrefSize(835, 53);
         reservation.setMinSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setAlignment(Pos.CENTER);

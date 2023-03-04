@@ -19,8 +19,8 @@ public class Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("../View/mainNavigation.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMinWidth(1025);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(1100);
+        primaryStage.setMinHeight(725);
         primaryStage.show();
     }
 
