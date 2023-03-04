@@ -163,7 +163,7 @@ public class ServicesSpareParts {
         }
         return null;
     }
-    public int CountSPPerType(String Type) {
+      public int CountSPPerType(String Type) {
 
         int i = 0;
         String requete = "SELECT * FROM spareparts where type= ?  ";
@@ -184,5 +184,6 @@ public class ServicesSpareParts {
         }
         return i;
     }
+
 
 }
