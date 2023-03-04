@@ -5,7 +5,7 @@
  */
 package Dao;
 
-import Entities.Cars;
+import Entities.Car;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author rima
  */
-public class CarsDao implements IDao<Cars> {
+public class CarsDao implements IDao<Car> {
 
     public CarsDao instance;
 
@@ -49,8 +49,8 @@ public class CarsDao implements IDao<Cars> {
     }
 
     @Override
-    public void insert(Cars car) {
-        String req = "insert into Cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype) values ('"
+    public void insert(Car car) {
+        String req = "insert into Car (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype) values ('"
                 + car.getModel() + "','" + car.getColor() + "', '"
                 + "'" + car.getMake() + "','" + car.getDescription() + "','" + car.getLoss() + "','" + car.getType()
                 + "','" + car.getTransmission() + "',"
@@ -64,9 +64,9 @@ public class CarsDao implements IDao<Cars> {
     }// To change body of generated methods, choose Tools | Templates.
 
     @Override
-    public void delete(Cars car) {
-        String req = "delete from Cars where id=" + car.getId();
-        Cars p = displayById(car.getId());
+    public void delete(Car car) {
+        String req = "delete from Car where id=" + car.getId();
+        Car p = displayById(car.getId());
 
         if (p != null)
             try {
@@ -82,14 +82,14 @@ public class CarsDao implements IDao<Cars> {
     }
 
     @Override
-    public List<Cars> displayAll() {
-        String req = "select * from Cars";
-        List<Cars> list = new ArrayList<>();
+    public List<Car> displayAll() {
+        String req = "select * from Car";
+        List<Car> list = new ArrayList<>();
 
         try {
             rs = st.executeQuery(req);
             while (rs.next()) {
-                Cars p = new Cars();
+                Car p = new Car();
                 p.setId(rs.getInt(1));
                 p.setColor(rs.getString("color"));
                 p.setDescription(rs.getString("description"));
@@ -116,9 +116,9 @@ public class CarsDao implements IDao<Cars> {
     }
 
     @Override
-    public Cars displayById(int id) {
-        String req = "select * from Cars where id =" + id;
-        Cars p = new Cars();
+    public Car displayById(int id) {
+        String req = "select * from Car where id =" + id;
+        Car p = new Car();
         try {
             rs = st.executeQuery(req);
             // while(rs.next()){
@@ -147,8 +147,8 @@ public class CarsDao implements IDao<Cars> {
     }
 
     @Override
-    public boolean update(Cars car) {
-        String qry = "UPDATE Cars SET model = '" + car.getModel() + "', color = '" + car.getColor() + "',  make = '"
+    public boolean update(Car car) {
+        String qry = "UPDATE Car SET model = '" + car.getModel() + "', color = '" + car.getColor() + "',  make = '"
                 + car.getMake() + "', type = '" + car.getType() + "', fueltype = '" + car.getFueltype()
                 + "', descrition = '" + car.getDescription() + "', primarydamage = '" + car.getPrimarydamage() + "',"
                 + "   transmission = '" + car.getTransmission() + "',  fiscalpower = '" + car.getFiscalpower()
