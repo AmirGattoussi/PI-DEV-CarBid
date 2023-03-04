@@ -18,6 +18,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -48,50 +50,45 @@ public class reservationDetailsController implements Initializable {
     @FXML
     private Label locationLabel;
     @FXML
-    private VBox mapContainer;
+    private Pane mapContainer;
 
     private double latitude;
     private double longitude;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // VBox mapContainer = new VBox();
 
-        // JXMapViewer mapViewer = new JXMapViewer();
-        // mapViewer.setZoom(10);
-        // mapViewer.setAddressLocation(new GeoPosition(latitude, longitude));
-        // DefaultTileFactory tileFactory = new DefaultTileFactory(new OSMTileFactoryInfo());
-        // mapViewer.setTileFactory(tileFactory);
+        String apiKey = "UrH7rF0Ljp3pAfsxkpI-uq_gWQ8kDb_Ddo2TxpCNTYo";
+        // center= (lon, lat)
+        String center = "10.1874636,36.899229";
+        String baseUrl = "https://atlas.microsoft.com/map/static/png";
+        int zoom = 16;
+        String marker = "pin-s-l+000FF(" + center + ")";
 
-        // JComponent mapViewComponent = mapViewer.getView(); // Get the JComponent representing the map view
-        // Node mapViewNode = new SwingNode(); // Create a SwingNode to wrap the JComponent
-        // ((SwingNode) mapViewNode).setContent(mapViewComponent);
+        // Build the URL for the Azure Maps static map API
+        String apiUrl = baseUrl + "?api-version=1.0&subscription-key=" + apiKey +
+        "&center=" + center + "&zoom=" + zoom + "&iconset=pin&iconcolor=000FF&style=main" + "&pushpin=" + marker;
 
-        // mapContainer.getChildren().add(mapViewNode);
+        try {
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        Image image = new Image(conn.getInputStream());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(435);
+        imageView.setFitHeight(435);
 
-        // ********************************
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5);
+        dropShadow.setWidth(5);
+        dropShadow.setHeight(5);
+        dropShadow.setBlurType(BlurType.GAUSSIAN);
+        mapContainer.setEffect(dropShadow);
 
-        // String apiKey = "UrH7rF0Ljp3pAfsxkpI-uq_gWQ8kDb_Ddo2TxpCNTYo";
-        // String center = "-122.3321,47.6062";
-        // String baseUrl = "https://atlas.microsoft.com/map/static/png";
-        // int zoom = 12;
-        // String size = "368,407";
-
-        // // Build the URL for the Azure Maps static map API
-        // String apiUrl = baseUrl + "?api-version=1.0&subscription-key=" + apiKey +
-        // "&center=" + center + "&zoom=" + zoom + "&size=" + size;
-
-        // try {
-        // URL url = new URL(apiUrl);
-        // HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        // conn.setRequestMethod("GET");
-        // Image image = new Image(conn.getInputStream());
-        // ImageView imageView = new ImageView(image);
-
-        // mapContainer.getChildren().add(imageView);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
+        mapContainer.getChildren().add(imageView);
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
 
         // ReservationDao r = new ReservationDao();
         // UserDao u = new UserDao();

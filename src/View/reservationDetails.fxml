@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="576.0" prefWidth="816.0" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.reservationDetailsController">
+<AnchorPane prefHeight="689.0" prefWidth="893.0" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.reservationDetailsController">
    <children>
       <Pane fx:id="pnlReservationDetails" prefHeight="500.0" prefWidth="800.0" styleClass="details-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox layoutX="29.0" layoutY="46.0" prefHeight="297.0" prefWidth="382.0" spacing="50.0">
+            <VBox layoutX="29.0" layoutY="46.0" prefHeight="627.0" prefWidth="382.0" spacing="350.0">
                <children>
                   <VBox prefHeight="227.0" prefWidth="316.0" spacing="40.0">
                      <children>
@@ -30,27 +30,27 @@
                                  <children>
                                     <Label fx:id="userNameField" text="User name:">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Italic" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="userPhoneField" text="User phone number:">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Italic" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="carModelField" text="Car model:">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Italic" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="dateField" text="Reservation date:">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Italic" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="locationField" text="Location:">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font name="System Italic" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -66,7 +66,7 @@
                   <Insets left="20.0" right="20.0" />
                </padding>
             </VBox>
-            <Button fx:id="closeBtn" layoutX="769.0" layoutY="14.0" onAction="#handleClicks" prefHeight="20.0" prefWidth="15.0" styleClass="close-btn">
+            <Button fx:id="closeBtn" layoutX="846.0" layoutY="14.0" onAction="#handleClicks" prefHeight="20.0" prefWidth="15.0" styleClass="close-btn">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,8 +75,7 @@
                   </ImageView>
                </graphic>
             </Button>
-
-            <VBox fx:id="mapContainer" layoutX="408.0" layoutY="46.0" prefHeight="407.0" prefWidth="368.0" />
+            <Pane fx:id="mapContainer" layoutX="411.0" layoutY="46.0" prefHeight="435.0" prefWidth="435.0" />
             
          </children>
       </Pane>
