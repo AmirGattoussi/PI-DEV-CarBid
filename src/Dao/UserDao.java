@@ -16,6 +16,8 @@ import Entities.*;
 import Services.IUserDao;
 import Utils.DBconnexion;
 import Utils.PasswordHasher;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -271,4 +273,46 @@ public class UserDao implements IUserDao {
         }
     }
 
+    public int getNumberOfUsers() 
+    {
+        int count = 0;
+        PreparedStatement statement;
+
+        try {
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM reservation");
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+     public List<User> view_users() {
+        List<User> users = new ArrayList<>();
+
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT * FROM user");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                users.add(new User(
+                        resultSet.getInt("id_user"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("location")
+                ));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+
+    }
 }

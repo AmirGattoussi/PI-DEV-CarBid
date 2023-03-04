@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
             CurrentUser.setUser(loggedUser);
             // Login to Admin Interface
             if (admin.isAdmin(passThroughUserID)) {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/AdminPage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/AdminHome.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
                 stage.setScene(scene);
