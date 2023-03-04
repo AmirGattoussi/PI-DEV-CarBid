@@ -3,19 +3,9 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.JComponent;
-
-import org.jxmapviewer.JXMapViewer;
-import org.jxmapviewer.OSMTileFactoryInfo;
-import org.jxmapviewer.viewer.DefaultTileFactory;
-import org.jxmapviewer.viewer.GeoPosition;
-
-import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
@@ -23,7 +13,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import java.net.HttpURLConnection;
 
 /**
@@ -52,8 +41,8 @@ public class reservationDetailsController implements Initializable {
     @FXML
     private Pane mapContainer;
 
-    private double latitude;
-    private double longitude;
+    // private double latitude;
+    // private double longitude;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
