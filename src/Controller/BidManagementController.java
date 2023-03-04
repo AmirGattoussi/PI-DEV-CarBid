@@ -101,10 +101,17 @@ public class BidManagementController implements Initializable {
             Bid selectedBid = tableViewBids.getSelectionModel().getSelectedItem();
 
             if (selectedBid != null) {
-
                 tableViewBids.getItems().remove(selectedBid);
                 bidDao.deleteBid(selectedBid.getIdBid());
             }
+            else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an item");
+            alert.showAndWait();
+
+        }
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -140,6 +147,25 @@ public class BidManagementController implements Initializable {
         }
 
     }
+     @FXML
+    private void redirAuction(ActionEvent event) {
+     
+            try {
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AuctionManagement.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AuctionManagementController controller = loader.getController();
+                stage.setScene(scene);
+                stage.show();
+                
+                
+
+            } catch (IOException ex) {
+                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
   
 }
   

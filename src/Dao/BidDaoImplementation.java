@@ -39,7 +39,6 @@ public class BidDaoImplementation implements BidDao {
 
             PreparedStatement statement2 = cnx.prepareStatement(
                     "update auction set highestBid= ? WHERE auction.idAuction = ?");
-
             statement.setInt(1, bid.getUserId());
             statement.setInt(2, bid.getIdAuction());
             statement.setFloat(3, bid.getLiveBidAmount());
@@ -48,11 +47,11 @@ public class BidDaoImplementation implements BidDao {
 
             statement.executeUpdate();
             statement2.executeUpdate();
+
             System.out.println("added successfully");
         } catch (SQLException ex) {
             Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
@@ -75,7 +74,6 @@ public class BidDaoImplementation implements BidDao {
         } catch (SQLException ex) {
             Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
@@ -170,15 +168,20 @@ public class BidDaoImplementation implements BidDao {
         List<Bid> data = new ArrayList<Bid>();
         PreparedStatement statement;
         try {
-            statement = cnx.prepareStatement("SELECT name,date,liveBidAmount FROM bid b join auction a join user u WHERE b.idAuction=a.idAuction and a.idAuction=? and u.id_user =b.userId ORDER by 3 DESC;");
+            statement = cnx.prepareStatement(
+                    "SELECT name,date,liveBidAmount FROM bid b join auction a join user u WHERE b.idAuction=a.idAuction and a.idAuction=? and u.id_user =b.userId ORDER by 3 DESC;");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 data.add(new Bid(
+
                         resultSet.getString("name"),
+
                         resultSet.getDate("date"),
+
                         resultSet.getFloat("liveBidAmount")
+
                 ));
 
             }
@@ -196,7 +199,8 @@ public class BidDaoImplementation implements BidDao {
         PreparedStatement statement;
         int count = 0;
         try {
-            statement = cnx.prepareStatement("SELECT count(*) FROM bid b join auction a WHERE b.idAuction=a.idAuction and a.idCar=?;");
+            statement = cnx.prepareStatement(
+                    "SELECT count(*) FROM bid b join auction a WHERE b.idAuction=a.idAuction and a.idCar=?;");
             statement.setInt(1, idCar);
             ResultSet resultSet = statement.executeQuery();
 
@@ -207,6 +211,29 @@ public class BidDaoImplementation implements BidDao {
             Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    @Override
+    public Bid getMaxBidById(int id) {
+    try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT b.userId,max(maxBidAmount) FROM bid b join auction a WHERE b.idAuction =a.idAuction and a.idAuction=? GROUP by b.idAuction;");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+              if (resultSet.next()) {
+                  return new Bid(
+                    resultSet.getInt("userId"), resultSet.getFloat("max(maxBidAmount)"));
+                
+
+            }
+
+            return null;
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    
     }
 
 }

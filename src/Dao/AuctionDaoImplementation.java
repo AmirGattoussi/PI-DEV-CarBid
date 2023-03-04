@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Api.MailApi;
 import Entities.*;
 import Entities.Auction;
 import Entities.Bid;
@@ -17,8 +18,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +33,7 @@ import java.util.logging.Logger;
  * @author asus
  */
 public class AuctionDaoImplementation implements AuctionDao {
+
     Connection cnx;
 
     public AuctionDaoImplementation() throws SQLException {
@@ -72,7 +79,6 @@ public class AuctionDaoImplementation implements AuctionDao {
                         resultSet.getFloat("highestBid"),
                         resultSet.getString("status"),
                         resultSet.getInt("carId")
-
                 );
 
             }
@@ -86,93 +92,91 @@ public class AuctionDaoImplementation implements AuctionDao {
     }
 
     @Override
-    public void updateAuction(int id, float highestBid,String status,Date endDate) {
+    public void updateAuction(int id, float highestBid, String status, Date endDate) {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
-                    "UPDATE auction SET  highestBid= ?, status = ? endDate=? WHERE idAuction = ?");
+                    "UPDATE auction SET  `highestBid` = ?, `status` = ?,endDate = ? WHERE `auction`.`idAuction` = ?;");
             statement.setFloat(1, highestBid);
             statement.setString(2, status);
             statement.setDate(3, endDate);
             statement.setInt(4, id);
-        statement.executeUpdate();
-        System.out.println("updated successfully");
+            statement.executeUpdate();
+            System.out.println("updated successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-@Override
-public void deleteAuction(int id) {
+    @Override
+    public void deleteAuction(int id) {
         PreparedStatement statement;
-    try {
-        statement = cnx.prepareStatement(
-                "DELETE FROM auction WHERE idAuction = ?");
-        statement.setInt(1, id);
-        statement.executeUpdate();
-	System.out.println("deleted successfully");
-    } catch (SQLException ex) {
-        Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
+        try {
+            statement = cnx.prepareStatement(
+                    "DELETE FROM auction WHERE idAuction = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            System.out.println("deleted successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
-  @Override
+    @Override
     public Float getHighestBidById(int idCar) {
- try {
-          PreparedStatement statement = cnx.prepareStatement(
-                  "SELECT highestBid FROM auction WHERE auction.idCar = ?");     
-        statement.setInt(1, idCar);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-       float floatValue = resultSet.getFloat("highestBid");
-        return floatValue;}
-        else {
-            System.out.println("error id");
-        }  
-      } catch (SQLException ex) {
-          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-      }
- return null;
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT highestBid FROM auction WHERE auction.idCar = ?");
+            statement.setInt(1, idCar);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                float floatValue = resultSet.getFloat("highestBid");
+                return floatValue;
+            } else {
+                System.out.println("error id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public Date getDeadline(int idAuction) {
-try {
-          PreparedStatement statement = cnx.prepareStatement(
-                  "SELECT endDate FROM auction WHERE auction.idAuction = ?");     
-        statement.setInt(1, idAuction);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-       Date deadline = resultSet.getDate("endDate");
-        return deadline;}
-        else {
-            System.out.println("error");
-        }  
-      } catch (SQLException ex) {
-          Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-      }
- return null;
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT endDate FROM auction WHERE auction.idAuction = ?");
+            statement.setInt(1, idAuction);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Date deadline = resultSet.getDate("endDate");
+                return deadline;
+            } else {
+                System.out.println("error");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public List<Auction> getAllAuctions() {
-         List<Auction> data = new ArrayList<Auction>();
-    PreparedStatement statement;
-  try {
+        List<Auction> data = new ArrayList<Auction>();
+        PreparedStatement statement;
+        try {
             statement = cnx.prepareStatement("SELECT * FROM auction");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 data.add(new Auction(
-                    resultSet.getInt("idAuction"),
-		    resultSet.getDate("startDate"),
-                    resultSet.getDate("endDate"),
-                    resultSet.getFloat("startingPrice"),
-                    resultSet.getFloat("highestBid"),
-                    resultSet.getString("status"),
-                    resultSet.getInt("idCar")
-                
+                        resultSet.getInt("idAuction"),
+                        resultSet.getDate("startDate"),
+                        resultSet.getDate("endDate"),
+                        resultSet.getFloat("startingPrice"),
+                        resultSet.getFloat("highestBid"),
+                        resultSet.getString("status"),
+                        resultSet.getInt("idCar")
                 ));
             }
 
@@ -183,5 +187,90 @@ try {
 
     }
 
+    @Override
+    public String getEmailWinner(int idUser) {
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "SELECT email FROM user u join auction a on u.user_id=a.  WHERE id_user = ?");
+            statement.setInt(1, idUser);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String email = resultSet.getString("email");
+                return email;
+            } else {
+                System.out.println("error in getting the email");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    @Override
+    public void WinnerNotificationMail() {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+    
+                try {
+                    System.out.println("start ");
+                    PreparedStatement statement = cnx.prepareStatement(
+                            "SELECT idAuction,endDate,highestBid,status FROM auction");
+                    ResultSet resultSet = statement.executeQuery();
+                    while (resultSet.next()) {
+                        Date deadline = resultSet.getDate("endDate");
+                        int idAuc = resultSet.getInt("idAuction");
+                        float highestBid = resultSet.getFloat("highestBid");
+                        String status = resultSet.getString("status");
+                        LocalDateTime now = LocalDateTime.now();
+                        LocalDateTime deadl = resultSet.getTimestamp("endDate").toLocalDateTime();
+                        Duration timeLeft = Duration.between(now, deadl);
+                        long hours = timeLeft.toHours();
+                        long minutes = timeLeft.toMinutes() % 60;
+                        long seconds = timeLeft.getSeconds() % 60;
+                        String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                        //remainingTime="00:00:00";
+                      
+                        //timeLeft.toMinutes() < 1
+                        //remainingTime.equals("00:00:00")
+                        if (timeLeft.toMinutes()<1  && status.equals("open")) {
+                            System.out.println("entered");
+                            
+                            try {
+                                PreparedStatement statement1 = cnx.prepareStatement(
+                                        "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"
+                                );
+                                 PreparedStatement statement2 = cnx.prepareStatement(
+                                        "update auction set status='closed' where idAuction=?"
+                                );
+                                statement1.setInt(1, idAuc);
+                                System.out.println(idAuc);
+                                statement2.setInt(1, idAuc);
+                                // statement1.setFloat(2, highestBid);
+                                ResultSet resultSet2 = statement1.executeQuery();
+                                statement2.executeUpdate();
+                                if (resultSet2.next()) {
+                                    String winnerEmail = resultSet2.getString("email");
+                                    System.out.println(winnerEmail);
+                                    MailApi.sendMail(winnerEmail);
+                                  
+                                } 
+                            } catch (SQLException ex) {
+                                Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        }
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }, 0, 1, TimeUnit.MINUTES);
+
+    }
 
 }
