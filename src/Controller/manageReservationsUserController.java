@@ -29,10 +29,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.effect.BlurType;
 
-public class manageReservationsUserController extends manageReservationsController{
+public class manageReservationsUserController extends manageReservationsController {
 
     ReservationDao r = new ReservationDao();
-    int currentUserID = 3;//CurrentUser.getUser().getId();
+    int currentUserID = 3;// CurrentUser.getUser().getId();
     // CarsDao car = new CarsDao();
 
     @FXML
@@ -85,13 +85,13 @@ public class manageReservationsUserController extends manageReservationsControll
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(.5), refreshBtn);
             rotateTransition.setByAngle(-360);
             rotateTransition.play();
-        }else {
+        } else {
             if (event.getSource() == filterBtn) {
                 System.out.println("Filter!");
-            }else {
+            } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
                     System.out.println("Details!!");
-                }else {
+                } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
                         carColumn = (Label) hbox.getChildren().get(0);
@@ -133,15 +133,15 @@ public class manageReservationsUserController extends manageReservationsControll
         }
     }
 
-    public boolean isTableEmpty(ObservableList<Reservation> ol){
+    public boolean isTableEmpty(ObservableList<Reservation> ol) {
         if (ol.isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public ObservableList<Reservation> returnLatestTable(){
+    public ObservableList<Reservation> returnLatestTable() {
         return FXCollections.observableList(r.filterReservationsByUser(currentUserID));
     }
 
@@ -212,8 +212,8 @@ public class manageReservationsUserController extends manageReservationsControll
     }
 
     @FXML
-    public void generateDetailsView(){
-        
+    public void generateDetailsView() {
+
     }
 
     // This method promps the user if he's certain he wants to delete reservation

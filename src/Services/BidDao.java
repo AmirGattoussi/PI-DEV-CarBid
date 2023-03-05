@@ -21,10 +21,16 @@ public interface BidDao {
     public void addMaxBid(Bid bid);
 
     public void deleteBid(int id);
-    public void updateBid(int idBid ,Date date, String type, float liveBidAmount,float maxBidAmount);
-    public Bid getBid(int id); 
+
+    public void updateBid(int idBid, Date date, String type, float liveBidAmount, float maxBidAmount);
+
+    public Bid getBid(int id);
+
     public List<Bid> getAllBids();
+
     public List<Bid> getBidsById(int id);
-    public int getNumberBids(int idCar); 
+
+    public int getNumberBids(int idCar);
+
     public Bid getMaxBidById(int id);
 }

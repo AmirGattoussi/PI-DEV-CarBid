@@ -25,8 +25,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
-    AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-    aucDao.WinnerNotificationMail();
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+        aucDao.WinnerNotificationMail();
         launch(args);
     }
 }

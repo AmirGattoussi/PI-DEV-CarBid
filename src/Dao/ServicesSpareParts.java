@@ -4,6 +4,7 @@
  */
 package Dao;
 //import Entities.SpareParts;
+
 //import Entities.*;
 //import Entities.SpareParts;
 //import java.sql.*;
@@ -44,12 +45,12 @@ import tools.MyConnection;
  *
  * @author Yasmine
  *
- * public class ReservationDao implements IReservationDao{
+ *         public class ReservationDao implements IReservationDao{
  *
- * Connection cnx;
+ *         Connection cnx;
  *
- * public ReservationDao()throws SQLException { cnx =
- * DBconnexion.getInstance().getConnection(); }
+ *         public ReservationDao()throws SQLException { cnx =
+ *         DBconnexion.getInstance().getConnection(); }
  */
 public class ServicesSpareParts {
 
@@ -74,7 +75,7 @@ public class ServicesSpareParts {
                 String Description = res.getString(4);
                 double Price = res.getDouble(5);
                 String Typec = res.getString(6);
-                //   SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
+                // SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
                 SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
                 listpieces.add(s);
 
@@ -87,7 +88,8 @@ public class ServicesSpareParts {
     }
 
     public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`id_sparepart`, `Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?,?)");
+        PreparedStatement pre = cnx.prepareStatement(
+                "INSERT INTO `spareparts`(`id_sparepart`, `Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?,?)");
 
         pre.setInt(1, u.getId());
         pre.setString(2, u.getType());
@@ -99,12 +101,13 @@ public class ServicesSpareParts {
 
         pre.executeUpdate();
         /*
-           if ((text_live_id.getText().isEmpty()) && (!(txt_main_price.getText().isEmpty())) ) {
-          Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter only a live data.");
-                alert.showAndWait();}}
+         * if ((text_live_id.getText().isEmpty()) &&
+         * (!(txt_main_price.getText().isEmpty())) ) {
+         * Alert alert = new Alert(AlertType.WARNING);
+         * alert.setTitle("Invalid Input");
+         * alert.setHeaderText(null);
+         * alert.setContentText("Please enter only a live data.");
+         * alert.showAndWait();}}
          */
 
     }
@@ -124,7 +127,8 @@ public class ServicesSpareParts {
     public void modify(SpareParts u) {
 
         try {
-            PreparedStatement pre = cnx.prepareStatement("Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
+            PreparedStatement pre = cnx.prepareStatement(
+                    "Update spareparts set Type=?,Pou=?,Description=?,Price=?,Typec=? where id_sparepart = ?");
 
             pre.setInt(6, u.getId());
 
@@ -154,7 +158,8 @@ public class ServicesSpareParts {
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
-                SpareParts u = new SpareParts(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getDouble(5), result.getString(6));
+                SpareParts u = new SpareParts(result.getInt(1), result.getString(2), result.getInt(3),
+                        result.getString(4), result.getDouble(5), result.getString(6));
                 return u;
             }
         } catch (SQLException ex) {

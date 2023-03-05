@@ -12,13 +12,15 @@ public class Command {
     private int id_command;
     private int id_user;
     private int id_sparepart;
-    public Command(int id_command,int id_user,int id_sparepart)
-    {
-        this.id_command=id_command;
-        this.id_user=id_user;
-        this.id_sparepart=id_sparepart;
+
+    public Command(int id_command, int id_user, int id_sparepart) {
+        this.id_command = id_command;
+        this.id_user = id_user;
+        this.id_sparepart = id_sparepart;
     }
-    public Command(){};
+
+    public Command() {
+    };
 
     public int getId_command() {
         return id_command;
@@ -46,9 +48,8 @@ public class Command {
 
     @Override
     public String toString() {
-        return "Command{" + "id_command=" + id_command + ", id_user=" + id_user + ", id_sparepart=" + id_sparepart + '}';
-    }
-    
-    
+        return "Command{" + "id_command=" + id_command + ", id_user=" + id_user + ", id_sparepart=" + id_sparepart
+                + '}';
     }
 
+}

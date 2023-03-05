@@ -72,8 +72,7 @@ public class UserDao implements IUserDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("phone_number"),
-                        resultSet.getString("location")
-                );
+                        resultSet.getString("location"));
             }
 
         } catch (SQLException ex) {
@@ -98,8 +97,7 @@ public class UserDao implements IUserDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("phone_number"),
-                        resultSet.getString("location")
-                );
+                        resultSet.getString("location"));
             }
 
         } catch (SQLException ex) {
@@ -124,8 +122,7 @@ public class UserDao implements IUserDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("phone_number"),
-                        resultSet.getString("location")
-                );
+                        resultSet.getString("location"));
             }
 
         } catch (SQLException ex) {
@@ -176,7 +173,8 @@ public class UserDao implements IUserDao {
         ResultSet resultSet = null;
 
         try {
-            // prepare a statement to query the database for a user with the given username and password
+            // prepare a statement to query the database for a user with the given username
+            // and password
             statement = cnx.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
             statement.setString(1, email);
             statement.setString(2, password);

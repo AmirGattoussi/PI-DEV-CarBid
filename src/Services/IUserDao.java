@@ -7,13 +7,14 @@ package Services;
 
 import Entities.User;
 
-
 /**
  *
  * @author asus
  */
 public interface IUserDao {
-public void createUser(User user);
-public void updateUser(User user);
-public User getUserById(int id_user);}
+    public void createUser(User user);
 
+    public void updateUser(User user);
+
+    public User getUserById(int id_user);
+}

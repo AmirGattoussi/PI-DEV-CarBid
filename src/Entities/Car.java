@@ -34,7 +34,9 @@ public class Car {
 
     }
 
-    public Car(String model, String color, String type, String make, String description, int mileage, int year, int fiscalpower, String transmission, String loss, String primarydamage, String secondarydamage, String fueltype) {
+    public Car(String model, String color, String type, String make, String description, int mileage, int year,
+            int fiscalpower, String transmission, String loss, String primarydamage, String secondarydamage,
+            String fueltype) {
         this.model = model;
         this.color = color;
         this.type = type;
@@ -48,10 +50,11 @@ public class Car {
         this.primarydamage = primarydamage;
         this.secondarydamage = secondarydamage;
         this.fueltype = fueltype;
-        
+
     }
 
-    public Car(int id_car, String model, String color, String type, String make, String description, int mileage, int year, int fiscalpower, String transmission, String loss,
+    public Car(int id_car, String model, String color, String type, String make, String description, int mileage,
+            int year, int fiscalpower, String transmission, String loss,
             String primarydamage, String secondarydamage, String fueltype) {
         this.id_car = id_car;
         this.model = model;
@@ -66,7 +69,7 @@ public class Car {
         this.loss = loss;
         this.primarydamage = primarydamage;
         this.secondarydamage = secondarydamage;
-        this.fueltype= fueltype;
+        this.fueltype = fueltype;
     }
 
     public int getId() {
@@ -183,8 +186,11 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make + ",description=" + description + ",mileage=" + mileage + ",yeae=" + year + ",fiscalpower=" + fiscalpower
-                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
+        return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make
+                + ",description=" + description + ",mileage=" + mileage + ",yeae=" + year + ",fiscalpower="
+                + fiscalpower
+                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage
+                + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
     }
 
     @Override
@@ -211,17 +217,16 @@ public class Car {
         }
         return true;
     }
-    
-    public double getbasevalue(){
-        
-        double x = baseprice*this.fiscalpower;
+
+    public double getbasevalue() {
+
+        double x = baseprice * this.fiscalpower;
         System.out.println(x);
-        if(mileage>10000) x= x- x *0.05 *(mileage /10000 );
+        if (mileage > 10000)
+            x = x - x * 0.05 * (mileage / 10000);
         System.out.println(x);
         int y = LocalDate.now().getYear() - year;
-        System.out.println(x-x*y*0.05);
-     return x-x*y*0.05;
+        System.out.println(x - x * y * 0.05);
+        return x - x * y * 0.05;
     }
-    }
-
-
+}

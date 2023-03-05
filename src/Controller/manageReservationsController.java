@@ -92,18 +92,19 @@ public class manageReservationsController implements Initializable {
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(.5), refreshBtn);
             rotateTransition.setByAngle(-360);
             rotateTransition.play();
-        }else {
+        } else {
             if (event.getSource() == filterBtn) {
                 System.out.println("Filter!");
-            }else {
+            } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
-                    
-                }else {
+
+                } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
                         userColumn = (Label) hbox.getChildren().get(0);
                         carColumn = (Label) hbox.getChildren().get(1);
-                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()), Integer.parseInt(carColumn.getText()));
+                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()),
+                                Integer.parseInt(carColumn.getText()));
                     }
                 }
             }
@@ -141,15 +142,15 @@ public class manageReservationsController implements Initializable {
         }
     }
 
-    public boolean isTableEmpty(ObservableList<Reservation> ol){
+    public boolean isTableEmpty(ObservableList<Reservation> ol) {
         if (ol.isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public ObservableList<Reservation> returnLatestTable(){
+    public ObservableList<Reservation> returnLatestTable() {
         return FXCollections.observableList(r.getReservations());
     }
 
@@ -220,8 +221,8 @@ public class manageReservationsController implements Initializable {
     }
 
     @FXML
-    public void generateDetailsView(){
-        
+    public void generateDetailsView() {
+
     }
 
     // This method promps the user if he's certain he wants to delete reservation

@@ -38,10 +38,10 @@ public class ServicesCommand {
                 int id_command = res.getInt(1);
                 int id_user = res.getInt(2);
                 int id_sparepart = res.getInt(3);
-               
-                //   SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
-                //SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
-                //listpieces.add(s);
+
+                // SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
+                // SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
+                // listpieces.add(s);
 
             }
         } catch (SQLException ex) {
@@ -52,20 +52,22 @@ public class ServicesCommand {
     }
 
     public void add(Command u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
+        PreparedStatement pre = cnx
+                .prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
 
         pre.setInt(1, u.getId_command());
         pre.setInt(2, u.getId_user());
         pre.setInt(3, u.getId_sparepart());
-        
+
         pre.executeUpdate();
         /*
-           if ((text_live_id.getText().isEmpty()) && (!(txt_main_price.getText().isEmpty())) ) {
-          Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter only a live data.");
-                alert.showAndWait();}}
+         * if ((text_live_id.getText().isEmpty()) &&
+         * (!(txt_main_price.getText().isEmpty())) ) {
+         * Alert alert = new Alert(AlertType.WARNING);
+         * alert.setTitle("Invalid Input");
+         * alert.setHeaderText(null);
+         * alert.setContentText("Please enter only a live data.");
+         * alert.showAndWait();}}
          */
 
     }
@@ -85,15 +87,15 @@ public class ServicesCommand {
     public void modify(SpareParts u) {
 
         try {
-            PreparedStatement pre = cnx.prepareStatement("Update command set id_user=?,id_sparepart=? where id_command = ?");
+            PreparedStatement pre = cnx
+                    .prepareStatement("Update command set id_user=?,id_sparepart=? where id_command = ?");
 
-            //pre.setInt(3, u.getId_command());
+            // pre.setInt(3, u.getId_command());
 
-//            pre.setString(1, u.getId_user());
+            // pre.setString(1, u.getId_user());
 
-  //          pre.setInt(2, u.getId_sparepart());
+            // pre.setInt(2, u.getId_sparepart());
 
-           
             pre.executeUpdate();
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
@@ -110,7 +112,8 @@ public class ServicesCommand {
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
-                SpareParts u = new SpareParts(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getDouble(5), result.getString(6));
+                SpareParts u = new SpareParts(result.getInt(1), result.getString(2), result.getInt(3),
+                        result.getString(4), result.getDouble(5), result.getString(6));
                 return u;
             }
         } catch (SQLException ex) {

@@ -1,13 +1,15 @@
 package Entities;
-import java.util.ArrayList;
-public class Carwishlist {
-    
-    private ArrayList<String> cars;
 
+import java.util.ArrayList;
+
+public class Carwishlist {
+
+    private ArrayList<String> cars;
 
     public Carwishlist() {
         cars = new ArrayList<String>();
     }
+
     public void addCar(String car) {
         cars.add(car);
     }

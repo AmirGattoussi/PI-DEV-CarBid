@@ -68,30 +68,29 @@ public class ListCarsController implements Initializable {
         // TODO
         ObservableList<Car> cars = FXCollections.observableArrayList();
         try {
-         
-          CarDao carDao = new CarDao(); List<Car>
-          data = carDao.displayAll(); ObservableList<Car> observableList =
-          FXCollections.observableList(data);
-         
-          tcmake.setCellValueFactory(new PropertyValueFactory<>("make"));
-          tcmodel.setCellValueFactory(new PropertyValueFactory<>("model"));
-          tccolor.setCellValueFactory(new
-          PropertyValueFactory<>("color"));
-          tctransmission.setCellValueFactory(new PropertyValueFactory<>("transmission"));
-         tcfueltype.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
-          tcloss.setCellValueFactory(new
-          PropertyValueFactory<>("loss"));
-          tctype.setCellValueFactory(new
-          PropertyValueFactory<>("type"));
-         
-          tvID.setItems(observableList); } catch (SQLException ex)
-          { Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE,
-         null, ex); }
+
+            CarDao carDao = new CarDao();
+            List<Car> data = carDao.displayAll();
+            ObservableList<Car> observableList = FXCollections.observableList(data);
+
+            tcmake.setCellValueFactory(new PropertyValueFactory<>("make"));
+            tcmodel.setCellValueFactory(new PropertyValueFactory<>("model"));
+            tccolor.setCellValueFactory(new PropertyValueFactory<>("color"));
+            tctransmission.setCellValueFactory(new PropertyValueFactory<>("transmission"));
+            tcfueltype.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
+            tcloss.setCellValueFactory(new PropertyValueFactory<>("loss"));
+            tctype.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+            tvID.setItems(observableList);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
-    
+    }
+
     @FXML
-    private void update(ActionEvent event) { 
-         Car selectecar = tvID.getSelectionModel().getSelectedItem();
+    private void update(ActionEvent event) {
+        Car selectecar = tvID.getSelectionModel().getSelectedItem();
         if (selectecar == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
@@ -107,12 +106,11 @@ public class ListCarsController implements Initializable {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 UpdateCarController controller = loader.getController();
-                
+
                 stage.setScene(scene);
                 stage.show();
                 controller.setValue(selectecar);
                 CarDao carDao;
-
 
             } catch (IOException ex) {
                 Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,9 +118,10 @@ public class ListCarsController implements Initializable {
         }
 
     }
+
     @FXML
-    private void viewcar(ActionEvent event) { 
-         Car selectecar = tvID.getSelectionModel().getSelectedItem();
+    private void viewcar(ActionEvent event) {
+        Car selectecar = tvID.getSelectionModel().getSelectedItem();
         if (selectecar == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
@@ -138,12 +137,11 @@ public class ListCarsController implements Initializable {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 DisplayCarController controller = loader.getController();
-                
+
                 stage.setScene(scene);
                 stage.show();
                 controller.setValue(selectecar);
                 CarDao carDao;
-
 
             } catch (IOException ex) {
                 Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,9 +149,6 @@ public class ListCarsController implements Initializable {
         }
 
     }
-  
-    
-    
 
     @FXML
     private void delete(ActionEvent event) {
@@ -169,33 +164,28 @@ public class ListCarsController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    
-    
-      @FXML
+
+    @FXML
     private void caradd(ActionEvent event) {
-    
+
         try {
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCars.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                AddCarsController controller = loader.getController();
-                
-                stage.setScene(scene);
-                stage.show();
-                CarDao carDao;
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCars.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            AddCarsController controller = loader.getController();
 
+            stage.setScene(scene);
+            stage.show();
+            CarDao carDao;
 
-            } catch (IOException ex) {
-                Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    
+        } catch (IOException ex) {
+            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
- 
 
-        
 }

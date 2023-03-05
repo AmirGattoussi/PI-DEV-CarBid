@@ -52,7 +52,6 @@ public class AdminPageController implements Initializable {
         // TODO
         AdminDao admin = new AdminDao();
         List<User> userList = admin.view_users();
-
         ObservableList<User> observableUserList = FXCollections.observableList(userList);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -62,7 +61,6 @@ public class AdminPageController implements Initializable {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         userTableView.setItems(observableUserList);
         adminNameLabel.setText(CurrentUser.getUser().getName());
-
     }
 
 }

@@ -152,8 +152,7 @@ public class BidDaoImplementation implements BidDao {
                         resultSet.getDate("date"),
                         resultSet.getString("type"),
                         resultSet.getFloat("liveBidAmount"),
-                        resultSet.getFloat("maxBidAmount")
-                ));
+                        resultSet.getFloat("maxBidAmount")));
             }
 
         } catch (SQLException ex) {
@@ -215,25 +214,24 @@ public class BidDaoImplementation implements BidDao {
 
     @Override
     public Bid getMaxBidById(int id) {
-    try {
+        try {
             PreparedStatement statement = cnx.prepareStatement(
                     "SELECT b.userId,max(maxBidAmount) FROM bid b join auction a WHERE b.idAuction =a.idAuction and a.idAuction=? GROUP by b.idAuction;");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-              if (resultSet.next()) {
-                  return new Bid(
-                    resultSet.getInt("userId"), resultSet.getFloat("max(maxBidAmount)"));
-                
+            if (resultSet.next()) {
+                return new Bid(
+                        resultSet.getInt("userId"), resultSet.getFloat("max(maxBidAmount)"));
 
             }
 
             return null;
-      
+
         } catch (SQLException ex) {
             Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    
+
     }
 
 }
