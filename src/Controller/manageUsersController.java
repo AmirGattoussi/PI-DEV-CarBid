@@ -37,7 +37,6 @@ import javafx.scene.effect.BlurType;
  *
  * @author neil
  */
-
 public class manageUsersController implements Initializable {
 
     UserDao r = new UserDao();
@@ -52,6 +51,10 @@ public class manageUsersController implements Initializable {
     private Label dateColumn;
     @FXML
     private Label locationColumn;
+    @FXML
+    private Label phoneColumn;
+    @FXML
+    private Label roleColumn;
     @FXML
     private Button detailsBtn;
     @FXML
@@ -92,13 +95,13 @@ public class manageUsersController implements Initializable {
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(.5), refreshBtn);
             rotateTransition.setByAngle(-360);
             rotateTransition.play();
-        }else {
+        } else {
             if (event.getSource() == filterBtn) {
                 System.out.println("Filter!");
-            }else {
+            } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
-                    
-                }else {
+
+                } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
                         userColumn = (Label) hbox.getChildren().get(0);
@@ -114,16 +117,14 @@ public class manageUsersController implements Initializable {
     @FXML
     private void refreshView() {
         ObservableList<User> observableUserList = returnLatestTable();
+        System.out.println(isTableEmpty(observableUserList));
         if (isTableEmpty(observableUserList)) {
             usersPanel.getChildren().clear();
-            pnlManageUsers.lookup("#noUserYet").setVisible(true);
-            System.out.println("no user yet");
+            pnlManageUsers.lookup("#noUsersYet").setVisible(true);
         } else {
-            pnlManageUsers.lookup("#noUserYet").setVisible(false);
-            System.out.println("Users found");
+            pnlManageUsers.lookup("#noUsersYet").setVisible(false);
             for (User us : observableUserList) {
-                HBox user = generateUserRow(us.getId(), us.getPhone_number(), us.getName(),
-                        us.getLocation());
+                HBox user = generateUserRow(us.getId(), us.getName(), us.getEmail(), us.getLocation(), us.getPhone_number(), r.getRole(us.getId()));
                 usersPanel.getChildren().add(user);
             }
         }
@@ -142,26 +143,26 @@ public class manageUsersController implements Initializable {
         }
     }
 
-    public boolean isTableEmpty(ObservableList<User> ol){
+    public boolean isTableEmpty(ObservableList<User> ol) {
         if (ol.isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public ObservableList<User> returnLatestTable(){
+    public ObservableList<User> returnLatestTable() {
         return FXCollections.observableList(r.view_users());
     }
 
     // This method generates fxml code for user row
     @FXML
-    public HBox generateUserRow(int usr, int car, String date, String location) {
+    public HBox generateUserRow(int usr, String car, String date, String location, int phone_number, String role) {
         HBox user = new HBox();
         user.setStyle("-fx-background-color: #EBE8F9; -fx-background-radius: 5; -fx-background-insets: 0;");
 
         // Getting absolute path of the css file
-        String cssPath = "src/Styles/userStyle.css";
+        String cssPath = "src/Styles/reservationStyle.css";
         File cssFile = new File(cssPath);
         String cssUrl;
         try {
@@ -172,26 +173,32 @@ public class manageUsersController implements Initializable {
             e.printStackTrace();
         }
 
-        user.setPrefSize(750, 53);
+        user.setPrefSize(720, 53);
         user.setMinSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         user.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
-        user.setAlignment(Pos.CENTER);
+        user.setAlignment(Pos.CENTER_LEFT);
 
         Label userColumn = new Label();
-        userColumn.setPrefSize(99, 18);
+        userColumn.setPrefSize(70, 18);
         userColumn.setId("userColumn");
         Label carColumn = new Label();
-        carColumn.setPrefSize(84, 18);
+        carColumn.setPrefSize(70, 18);
         carColumn.setId("carColumn");
         Label dateColumn = new Label();
-        dateColumn.setPrefSize(125, 18);
+        dateColumn.setPrefSize(140, 18);
         Label locationColumn = new Label();
-        locationColumn.setPrefSize(308, 18);
+        locationColumn.setPrefSize(70, 18);
+        Label phoneColumn = new Label();
+        phoneColumn.setPrefSize(70, 18);
+        Label roleColumn = new Label();
+        roleColumn.setPrefSize(150, 18);
 
         userColumn.setText("" + usr);
         carColumn.setText("" + car);
         dateColumn.setText("" + date);
         locationColumn.setText("" + location);
+        phoneColumn.setText("" + phone_number);
+        roleColumn.setText("" + role);
 
         Button details_btn = new Button("Details");
         details_btn.setId("detailsBtn");
@@ -199,8 +206,9 @@ public class manageUsersController implements Initializable {
         details_btn.getStyleClass().add("details-btn");
         detailsBtn = details_btn;
         details_btn.setOnAction(this::handleClicks);
+        HBox.setMargin(details_btn, new Insets(0, 0, 0, 90));
 
-        Button cancel_btn = new Button("Cancel");
+        Button cancel_btn = new Button("Delete");
         cancel_btn.setId("cancelBtn");
         cancel_btn.setPrefSize(70, 22);
         cancel_btn.getStyleClass().add("cancel-btn");
@@ -216,13 +224,13 @@ public class manageUsersController implements Initializable {
         user.setEffect(dropShadow);
 
         user.setPadding(new Insets(20, 20, 20, 20));
-        user.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, details_btn, cancelBtn);
+        user.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, phoneColumn, details_btn, cancelBtn);
         return user;
     }
 
     @FXML
-    public void generateDetailsView(){
-        
+    public void generateDetailsView() {
+
     }
 
     // This method promps the user if he's certain he wants to delete user
@@ -230,11 +238,11 @@ public class manageUsersController implements Initializable {
     private void deleteUserAlert(HBox user, int id_user, int id_car) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to cancel user?");
+        alert.setContentText("Are you sure you want to delete this user? This will also delete all their records.");
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
         // Getting absolute path of the css file
-        String cssPath = "src/Styles/userStyle.css";
+        String cssPath = "src/Styles/reservationStyle.css";
         File cssFile = new File(cssPath);
         String cssUrl;
         try {
@@ -263,7 +271,7 @@ public class manageUsersController implements Initializable {
         // Show the alert dialog and wait for the user to respond
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeDelete) {
-                r.deleteUser(id_user);
+                r.deleteUserRecords(id_user);
 
                 Parent parent = user.getParent();
                 if (parent instanceof Pane) {

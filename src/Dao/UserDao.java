@@ -164,7 +164,25 @@ public class UserDao implements IUserDao {
             statement = cnx.prepareStatement(
                     "DELETE FROM user WHERE id_user = ?");
             statement.setInt(1, id_user);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+
+    public void deleteUserRecords(int id_user) {
+        int userId = 123;
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement("DELETE u, c, b, cmd, r "
+                    + "FROM user u "
+                    + "LEFT JOIN car c ON u.id_user = c.id_user "
+                    + "LEFT JOIN bid b ON u.id_user = b.userId "
+                    + "LEFT JOIN command cmd ON u.id_user = cmd.id_user "
+                    + "LEFT JOIN reservation r ON u.id_user = r.id_user "
+                    + "WHERE u.id_user = ?");
+            statement.setInt(1, id_user);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -273,13 +291,12 @@ public class UserDao implements IUserDao {
         }
     }
 
-    public int getNumberOfUsers() 
-    {
+    public int getNumberOfUsers() {
         int count = 0;
         PreparedStatement statement;
 
         try {
-            statement = cnx.prepareStatement("SELECT COUNT(*) FROM reservation");
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM user");
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -290,7 +307,8 @@ public class UserDao implements IUserDao {
         }
         return count;
     }
-     public List<User> view_users() {
+
+    public List<User> view_users() {
         List<User> users = new ArrayList<>();
 
         PreparedStatement statement;
@@ -315,4 +333,30 @@ public class UserDao implements IUserDao {
         return users;
 
     }
+
+    public String getRole(int id_user) {
+        PreparedStatement statement;
+        String role = null;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT id_agent, id_admin FROM user WHERE id_user = ?");
+            statement.setInt(1, id_user);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getInt("id_agent")!=0){
+                    role="Agent";
+                }
+                else if (resultSet.getInt("id_admin")!=0){
+                    role="Admin";
+                }
+                else role="Client";
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return role;
+    }
+
 }

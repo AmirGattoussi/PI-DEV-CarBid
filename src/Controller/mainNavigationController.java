@@ -44,6 +44,14 @@ public final class mainNavigationController implements Initializable {
     public void handleClicks(ActionEvent event) throws IOException {
         if (event.getSource() == btnHome) {
             mainView.getChildren().clear();
+            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Register.fxml"));
+                                Parent registerView = loader.load();
+                                mainView = (StackPane) mainView.lookup("#mainView");
+                                mainView.getChildren().add(registerView);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
         } else {
             if (event.getSource() == btnAuction) {
                 mainView.getChildren().clear();

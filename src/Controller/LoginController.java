@@ -34,6 +34,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import java.awt.*;
+import java.awt.TrayIcon.MessageType;
 
 /**
  * FXML Controller class
@@ -67,6 +69,23 @@ public class LoginController implements Initializable {
         // TODO
     }
 
+    public void showLoginNotification() {
+        String title="CARBID";  
+        String message="LOGGED IN";
+       if (SystemTray.isSupported()) {
+        SystemTray tray = SystemTray.getSystemTray();
+        Image image = Toolkit.getDefaultToolkit().createImage("../images/auction.png");
+        TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
+        trayIcon.setImageAutoSize(true);
+        trayIcon.setToolTip("Java AWT Tray Demo");
+        try {
+            tray.add(trayIcon);
+        } catch (AWTException ex) {
+            System.out.println("TrayIcon could not be added.");
+        }
+        trayIcon.displayMessage(title, message, MessageType.INFO);
+    }
+}
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         // perform login validation
@@ -76,11 +95,7 @@ public class LoginController implements Initializable {
         valid = user.login(emailIn, hashedPassword);
         if (valid) {
             // login successful, display success message on screen
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Login Successful");
-            alert.setHeaderText(null);
-            alert.setContentText("You have successfully logged in!");
-            alert.showAndWait();
+            showLoginNotification();
             int passThroughUserID = user.getUserIdAtLogin(emailIn);
             // Get the user object from the database
             User loggedUser = user.getUserByMail(emailIn);

@@ -48,7 +48,7 @@
                         </VBox>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="179.0" prefHeight="53.0" prefWidth="750.0" style="-fx-background-color: #ffffff;">
+                <HBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="179.0" prefHeight="53.0" prefWidth="729.0" style="-fx-background-color: #ffffff;">
                     <children>
                         <Label prefHeight="18.0" prefWidth="99.0" text="Id user">
                             <HBox.margin>
@@ -70,6 +70,8 @@
                                 <Insets />
                             </HBox.margin>
                         </Label>
+                        <Label text="Phone number" translateX="50.0" />
+                  <Label text="Role" translateX="80.0" />
                     </children>
                 </HBox>
                 <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="775.0" vbarPolicy="ALWAYS">

@@ -41,7 +41,7 @@ public final class AdminHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        adminNameLabel.setText("Welcome, " + CurrentUser.getUser().getName());
+        adminNameLabel.setText("Welcome, " /*+ CurrentUser.getUser().getName()*/);
     }
 
     public void handleClicks(ActionEvent event) throws IOException {
@@ -50,11 +50,10 @@ public final class AdminHomeController implements Initializable {
         } else if (event.getSource() == btnUsers) {
             mainView.getChildren().clear();
             try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("../View/manageUsers.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/manageUsers.fxml"));
                 Parent included = loader.load();
-                pnlManageReservations = (Pane) included.lookup("#pnlManageUsers");
-                mainView.getChildren().add(pnlManageReservations);
+                mainView = (StackPane) mainView.lookup("#mainView");
+                mainView.getChildren().add(included);
             } catch (IOException e) {
                 e.printStackTrace();
             }
