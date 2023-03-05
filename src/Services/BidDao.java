@@ -26,4 +26,5 @@ public interface BidDao {
     public List<Bid> getAllBids();
     public List<Bid> getBidsById(int id);
     public int getNumberBids(int idCar); 
+    public Bid getMaxBidById(int id);
 }

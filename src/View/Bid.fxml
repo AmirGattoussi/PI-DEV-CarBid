@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -68,12 +69,15 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox layoutX="390.0" layoutY="367.0" mnemonicParsing="false" text="I agree to the terms and conditions" />
-      <RadioButton layoutX="390.0" layoutY="298.0" mnemonicParsing="false" text="Live Bid" />
-      <RadioButton layoutX="558.0" layoutY="298.0" mnemonicParsing="false" text="Max Bid" />
+      <CheckBox fx:id="btn_terms" layoutX="390.0" layoutY="367.0" mnemonicParsing="false" text="I agree to the terms and conditions" />
+      <RadioButton fx:id="radio_btn_live" layoutX="390.0" layoutY="298.0" mnemonicParsing="false" text="Live Bid">
+         <toggleGroup>
+            <ToggleGroup fx:id="bid_group" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radio_btn_max" layoutX="558.0" layoutY="298.0" mnemonicParsing="false" text="Max Bid" toggleGroup="$bid_group" />
       <TextField fx:id="txt_live_bid" layoutX="390.0" layoutY="324.0" />
       <TextField fx:id="txt_max_bid" layoutX="558.0" layoutY="324.0" />
-      <Button fx:id="btn_confirm" layoutX="390.0" layoutY="408.0" mnemonicParsing="false" onAction="#addBidLive" prefHeight="25.0" prefWidth="141.0" text="Confirm"  />
+      <Button fx:id="btn_confirm" layoutX="390.0" layoutY="408.0" mnemonicParsing="false" onAction="#addBid" prefHeight="25.0" prefWidth="141.0" text="Confirm" />
       <Button layoutX="578.0" layoutY="408.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Cancel" />
       <TableView fx:id="table_view_history" layoutX="52.0" layoutY="308.0" prefHeight="200.0" prefWidth="227.0">
         <columns>

@@ -103,7 +103,7 @@ private DatePicker e_date_pick;
                 alert.showAndWait();
 
         } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);}
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex.getMessage());}
            
           }
        
