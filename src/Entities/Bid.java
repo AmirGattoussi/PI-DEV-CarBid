@@ -35,6 +35,11 @@ public class Bid {
         this.name = name;
     }
     
+    public Bid(int userId, float maxBidAmount) {
+        this.userId = userId;
+        this.maxBidAmount = maxBidAmount;
+    }
+    
     public Bid(int id_bid, int userId, int idAuction, Date date, String type, float liveBidAmount, float maxBidAmount) {
         this.idBid = id_bid;
         this.userId = userId;

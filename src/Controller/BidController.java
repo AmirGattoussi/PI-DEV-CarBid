@@ -120,7 +120,7 @@ public class BidController implements Initializable {
                 Instant deadlineInstant = deadli.atStartOfDay(ZoneId.systemDefault()).toInstant();
                 Duration duration = java.time.Duration.between(now, deadlineInstant);
                 if (duration.isNegative()) {
-                    txt_time.setText("Deadline");
+                    txt_time.setText("Deadline has passed");
                 } else {
                     long hours = duration.toHours();
                     long minutes = duration.toMinutes() % 60;
@@ -140,7 +140,7 @@ public class BidController implements Initializable {
         try {
 
             AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            Float highest = aucDao.getHighestBidById(carId);
+            Float highest = aucDao.getHighestBidById(auctionId);
             txt_highest_bid.setText(Float.toString(highest));
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
@@ -234,6 +234,18 @@ private void refreshScene(ActionEvent event) {
                     alert.showAndWait();
 
                 } else {
+                    BidDaoImplementation bidDao=new BidDaoImplementation();
+                    Bid max_bid=bidDao.getMaxBidById(auctionId);
+                        System.out.println("maxxx "+max_bid.getMaxBidAmount());
+                        System.out.println("txt_live_bid "+txt_live_bid.getText());
+                        System.out.println("carId " +carId+ " userId "+userId);
+                        if (max_bid.getMaxBidAmount()-Float.parseFloat(txt_live_bid.getText())>0){
+                            AuctionDaoImplementation aucDao=new AuctionDaoImplementation();
+                            aucDao.IncrementBid(auctionId,max_bid.getUserId(), Float.parseFloat(txt_live_bid.getText())+500);
+                        }
+                        else {
+                            System.out.println("You're outbid");
+                        }
                     BidDaoImplementation bid_dao = new BidDaoImplementation();
                     bid_dao.addLiveBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText())));
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -249,6 +261,8 @@ private void refreshScene(ActionEvent event) {
                 System.out.println(ex.getMessage());
             }
         } else {
+            BidDaoImplementation bidDao=new BidDaoImplementation();
+            Bid max_bid=bidDao.getMaxBidById(auctionId);
             
 
                 if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty())) || (txt_max_bid.getText().isEmpty()) && (!(txt_live_bid.getText().isEmpty()))) {
@@ -258,6 +272,13 @@ private void refreshScene(ActionEvent event) {
                     alert.setContentText("Please enter both a live bid amount and a max bid amout");
                     alert.showAndWait();
                 }
+                else if (Float.parseFloat(txt_max_bid.getText()) <max_bid.getMaxBidAmount()) {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a bigger max bid amount");
+                    alert.showAndWait();
+                }  
            
 
           else  if (!(txt_max_bid.getText().matches("[0-9]*")) && (!(txt_max_bid.getText().isEmpty()))) {
@@ -313,7 +334,7 @@ private void refreshScene(ActionEvent event) {
         try {
 
             AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            Float highest = aucDao.getHighestBidById(carId);
+            Float highest = aucDao.getHighestBidById(auctionId);
             txt_highest_bid.setText(Float.toString(highest));
 
             BidDaoImplementation bidDao = new BidDaoImplementation();

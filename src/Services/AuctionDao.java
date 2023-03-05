@@ -26,4 +26,5 @@ public interface AuctionDao {
     public List<Auction> getAllAuctions();
     public String getEmailWinner(int idUser);
     public void WinnerNotificationMail();
+    public void IncrementBid(int id,int userId,float amount);
 }

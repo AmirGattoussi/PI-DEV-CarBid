@@ -124,11 +124,11 @@ public class AuctionDaoImplementation implements AuctionDao {
     }
 
     @Override
-    public Float getHighestBidById(int idCar) {
+    public Float getHighestBidById(int idAuction) {
         try {
             PreparedStatement statement = cnx.prepareStatement(
-                    "SELECT highestBid FROM auction WHERE auction.idCar = ?");
-            statement.setInt(1, idCar);
+                    "SELECT highestBid FROM auction WHERE auction.idAuction = ?");
+            statement.setInt(1, idAuction);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 float floatValue = resultSet.getFloat("highestBid");
@@ -272,5 +272,33 @@ public class AuctionDaoImplementation implements AuctionDao {
         }, 0, 1, TimeUnit.MINUTES);
 
     }
-
+    @Override
+    public void IncrementBid(int id,int userId,float amount) {
+      PreparedStatement statement;
+      PreparedStatement statement1;
+        try {
+            statement = cnx.prepareStatement(
+                    "UPDATE auction SET  `highestBid` = ? WHERE `auction`.`idAuction` = ?;");
+            statement1 = cnx.prepareStatement(
+                    "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, now(),'Live', ?,0)");
+             PreparedStatement statement2 = cnx.prepareStatement(
+                    "update auction set highestBid= ? WHERE auction.idAuction = ?");
+            statement.setFloat(1, amount);
+            statement.setInt(2, id);
+            statement1.setInt(1, userId);
+            statement1.setInt(2, id);
+            statement1.setFloat(3, amount);
+            statement.executeUpdate();
+            statement1.executeUpdate();
+             statement2.setFloat(1, amount);
+            statement2.setInt(2, id);
+            statement2.executeUpdate();
+            System.out.println("updated successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    
+    
+    
+    }
 }
