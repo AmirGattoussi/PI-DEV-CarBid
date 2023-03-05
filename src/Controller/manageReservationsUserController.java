@@ -29,6 +29,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.effect.BlurType;
 
+/**
+ *
+ * @author neil
+ */
 public class manageReservationsUserController extends manageReservationsController{
 
     ReservationDao r = new ReservationDao();
@@ -163,7 +167,7 @@ public class manageReservationsUserController extends manageReservationsControll
             e.printStackTrace();
         }
 
-        reservation.setPrefSize(750, 53);
+        reservation.setPrefSize(835, 53);
         reservation.setMinSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setAlignment(Pos.CENTER);
@@ -177,7 +181,7 @@ public class manageReservationsUserController extends manageReservationsControll
         Label dateColumn = new Label();
         dateColumn.setPrefSize(125, 18);
         Label locationColumn = new Label();
-        locationColumn.setPrefSize(258, 18);
+        locationColumn.setPrefSize(369, 18);
 
         carColumn.setText("" + car);
         carModelColumn.setText("" + car_model);

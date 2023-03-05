@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +12,6 @@ import javafx.animation.RotateTransition;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,7 +27,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.effect.BlurType;
 
@@ -171,7 +168,7 @@ public class manageReservationsController implements Initializable {
             e.printStackTrace();
         }
 
-        reservation.setPrefSize(750, 53);
+        reservation.setPrefSize(835, 53);
         reservation.setMinSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setAlignment(Pos.CENTER);
