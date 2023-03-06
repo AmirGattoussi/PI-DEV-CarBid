@@ -1,18 +1,24 @@
 package Controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Dao.ReservationDao;
+import Dao.UserDao;
 import Entities.Reservation;
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.effect.DropShadow;
@@ -28,6 +35,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
 import javafx.scene.effect.BlurType;
 
 /**
@@ -38,6 +48,7 @@ import javafx.scene.effect.BlurType;
 public class manageReservationsController implements Initializable {
 
     ReservationDao r = new ReservationDao();
+    UserDao u = new UserDao();
 
     @FXML
     private VBox reservationsPanel;
@@ -89,18 +100,22 @@ public class manageReservationsController implements Initializable {
             RotateTransition rotateTransition = new RotateTransition(Duration.seconds(.5), refreshBtn);
             rotateTransition.setByAngle(-360);
             rotateTransition.play();
-        }else {
+        } else {
             if (event.getSource() == filterBtn) {
                 System.out.println("Filter!");
-            }else {
+            } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
-                    
-                }else {
+                    HBox hbox = (HBox) ((Node) event.getSource()).getParent();
+                    userColumn = (Label) hbox.getChildren().get(0);
+                    carColumn = (Label) hbox.getChildren().get(1);
+                    detailsPopup(hbox, Integer.parseInt(userColumn.getText()), Integer.parseInt(carColumn.getText()));
+                } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
                         userColumn = (Label) hbox.getChildren().get(0);
                         carColumn = (Label) hbox.getChildren().get(1);
-                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()), Integer.parseInt(carColumn.getText()));
+                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()),
+                                Integer.parseInt(carColumn.getText()));
                     }
                 }
             }
@@ -138,15 +153,15 @@ public class manageReservationsController implements Initializable {
         }
     }
 
-    public boolean isTableEmpty(ObservableList<Reservation> ol){
+    public boolean isTableEmpty(ObservableList<Reservation> ol) {
         if (ol.isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public ObservableList<Reservation> returnLatestTable(){
+    public ObservableList<Reservation> returnLatestTable() {
         return FXCollections.observableList(r.getReservations());
     }
 
@@ -217,8 +232,68 @@ public class manageReservationsController implements Initializable {
     }
 
     @FXML
-    public void generateDetailsView(){
-        
+    private void detailsPopup(HBox reservation, int Id_user, int id_car) {
+        Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
+        overlay.widthProperty().bind(pnlManageReservations.widthProperty());
+        overlay.heightProperty().bind(pnlManageReservations.heightProperty());
+
+        Popup popup = new Popup();
+        Pane popupContent = new Pane();
+
+        Parent included;
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../View/reservationDetails.fxml"));
+            included = loader.load();
+            pnlReservationDetails = (Pane) included.lookup("#pnlReservationDetails");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        popupContent.getChildren().addAll(pnlReservationDetails);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(popupContent);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMaxHeight(600);
+        scrollPane.setFocusTraversable(false);
+        scrollPane.getStyleClass().add("reservationDetails-ScrollPane");
+        scrollPane.getStylesheets().add("./Styles/reservationStyle.css");
+
+        Platform.runLater(() -> {
+            // Set the vertical scroll position to the top
+            scrollPane.setVvalue(0.0);
+        });
+    
+
+        popup.getContent().add(scrollPane);
+        popup.setAutoHide(true);
+        popup.setOnHidden(event -> pnlManageReservations.getChildren().remove(overlay));
+
+        Button closeBtn = (Button) popupContent.lookup("#closeBtn");
+        closeBtn.setOnAction(event -> {
+            popup.hide();
+        });
+        Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
+        cancelButton.setOnAction(event -> {
+            deleteReservationRow(reservation, Id_user, id_car);
+            popup.hide();
+        });
+
+        // Label agencyLabel = (Label) popupContent.lookup("#AgencyNameField");
+        // agencyLabel.setText("" + u.getUserById(Id_user).getName());
+        // Label userPhoneLabel = (Label) popupContent.lookup("#AgencyPhoneField");
+        // userPhoneLabel.setText("" + u.getUserById(Id_user).getPhone_number());
+        Label dateLabel = (Label) popupContent.lookup("#dateField");
+        dateLabel.setText("" + r.getReservation(Id_user, id_car).getDate());
+        Label locationLabel = (Label) popupContent.lookup("#locationField");
+        locationLabel.setText("" + r.getReservation(Id_user, id_car).getLocation());
+
+        pnlManageReservations.getChildren().add(overlay);
+
+        Bounds rootBounds = pnlManageReservations.getBoundsInLocal();
+        double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - scrollPane.getWidth()) / 1.4;
+        popup.show(detailsBtn.getScene().getWindow(), popupX , 125);
+        popup.setAutoFix(true);
     }
 
     // This method promps the user if he's certain he wants to delete reservation
@@ -259,19 +334,23 @@ public class manageReservationsController implements Initializable {
         // Show the alert dialog and wait for the user to respond
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeDelete) {
-                r.deleteReservation(id_user, id_car);
-
-                Parent parent = reservation.getParent();
-                if (parent instanceof Pane) {
-                    ((Pane) parent).getChildren().remove(reservation);
-                }
-
-                updateReservationCounter();
-                if (isTableEmpty(returnLatestTable())) {
-                    pnlManageReservations.lookup("#noReservationYet").setVisible(true);
-                }
+                deleteReservationRow(reservation, id_user, id_car);
             }
         });
+    }
+
+    public void deleteReservationRow(Node reservation, int id_user, int id_car){
+        r.deleteReservation(id_user, id_car);
+
+        Parent parent = reservation.getParent();
+        if (parent instanceof Pane) {
+            ((Pane) parent).getChildren().remove(reservation);
+        }
+
+        updateReservationCounter();
+        if (isTableEmpty(returnLatestTable())) {
+            pnlManageReservations.lookup("#noReservationYet").setVisible(true);
+        }
     }
 
     // This method updates the UI reservation counter

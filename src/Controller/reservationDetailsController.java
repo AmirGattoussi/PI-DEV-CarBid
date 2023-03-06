@@ -3,7 +3,6 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -48,8 +47,8 @@ public class reservationDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         String apiKey = "UrH7rF0Ljp3pAfsxkpI-uq_gWQ8kDb_Ddo2TxpCNTYo";
-        // center= (lon, lat)
-        String center = "10.1874636,36.899229";
+        // center = (lon, lat)
+        String center = "10.1865735,36.8163404";
         String baseUrl = "https://atlas.microsoft.com/map/static/png";
         int zoom = 16;
         String marker = "pin-s-l+000FF(" + center + ")";
@@ -68,35 +67,15 @@ public class reservationDetailsController implements Initializable {
         imageView.setFitHeight(435);
 
         DropShadow dropShadow = new DropShadow();
-        dropShadow.setRadius(5);
-        dropShadow.setWidth(5);
-        dropShadow.setHeight(5);
+        dropShadow.setRadius(10);
+        dropShadow.setWidth(10);
+        dropShadow.setHeight(10);
         dropShadow.setBlurType(BlurType.GAUSSIAN);
         mapContainer.setEffect(dropShadow);
 
         mapContainer.getChildren().add(imageView);
         } catch (Exception e) {
         e.printStackTrace();
-        }
-
-        // ReservationDao r = new ReservationDao();
-        // UserDao u = new UserDao();
-
-        // int user_id = r.getReservation(0, 0).getUser(); // specify user and car IDs
-
-        // Label userLabel = (Label) detailsPane.lookup("#userLabel");
-        // userLabel.setText("" + u.getUserById(user_id).getName());
-        // Label userPhoneLabel = (Label) detailsPane.lookup("#userPhoneLabel");
-        // userPhoneLabel.setText("" + u.getUserById(user_id).getPhone_number());
-
-    }
-
-    public void handleClicks(ActionEvent event) {
-        if (event.getSource() == closeBtn) {
-            System.out.println("Close!");
-        }
-        if (event.getSource() == cancelBtn) {
-            System.out.println("Cancel!");
         }
     }
 }

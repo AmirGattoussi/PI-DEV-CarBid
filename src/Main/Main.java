@@ -16,7 +16,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/reservationDetails.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/mainNavigation.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinWidth(1100);
