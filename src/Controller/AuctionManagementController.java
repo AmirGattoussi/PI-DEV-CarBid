@@ -126,5 +126,26 @@ public class AuctionManagementController implements Initializable {
         }
 
     }
+     @FXML
+    private void redirBid(ActionEvent event) {
+     
+            try {
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid_management.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                BidManagementController controller = loader.getController();
+                stage.setScene(scene);
+                stage.show();
+                
+                
+
+            } catch (IOException ex) {
+                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    
 
 }

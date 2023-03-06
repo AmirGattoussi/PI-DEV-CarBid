@@ -24,4 +24,7 @@ public interface AuctionDao {
     public Float getHighestBidById(int idCar); 
     public Date getDeadline(int idAuction);
     public List<Auction> getAllAuctions();
+    public String getEmailWinner(int idUser);
+    public void WinnerNotificationMail();
+    public void IncrementBid(int id,int userId,float amount);
 }

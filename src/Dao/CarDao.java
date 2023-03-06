@@ -123,7 +123,7 @@ public class CarDao implements IDao<Car> {
     }
     @Override
     public ObservableList<Car> displayAll() {
-        String req="select * from cars";
+        String req="select * from car";
         ObservableList<Car> list=FXCollections.observableArrayList();       
         
         try {
@@ -156,7 +156,7 @@ public class CarDao implements IDao<Car> {
     }
     @Override
     public List<Car> displayAllList() {
-        String req = "select * from cars";
+        String req = "select * from car";
         List<Car> list = new ArrayList<>();
 
         try {
