@@ -87,15 +87,15 @@ public class ServicesSpareParts {
     }
 
     public void add(SpareParts u) throws SQLException {
-        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`id_sparepart`, `Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?,?)");
+        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `spareparts`(`Type`, `Pou`, `Description`, `Price`, `Typec`) VALUES (?,?,?,?,?)");
 
-        pre.setInt(1, u.getId());
-        pre.setString(2, u.getType());
-        pre.setInt(3, u.getPou());
-        pre.setString(4, u.getDescription());
-        pre.setDouble(5, u.getPrice());
+     //   pre.setInt(1, u.getId());
+        pre.setString(1, u.getType());
+        pre.setInt(2, u.getPou());
+        pre.setString(3, u.getDescription());
+        pre.setDouble(4, u.getPrice());
 
-        pre.setString(6, u.getTypec());
+        pre.setString(5, u.getTypec());
 
         pre.executeUpdate();
         /*
@@ -149,8 +149,9 @@ public class ServicesSpareParts {
         try {
 
             PreparedStatement pre = cnx.prepareStatement("select * from spareparts where id_sparepart = ?");
-
+//PreparedStatement pre = cnx.prepareStatement("select * from spareparts where pou = ?");
             pre.setInt(1, id);
+             // pre.setInt(3,pou );
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
@@ -162,5 +163,27 @@ public class ServicesSpareParts {
         }
         return null;
     }
+      public int CountSPPerType(String Type) {
+
+        int i = 0;
+        String requete = "SELECT * FROM spareparts where type= ?  ";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1,Type);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+             i=i+1;
+            }
+          
+         return i; 
+         
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return i;
+    }
+
 
 }
