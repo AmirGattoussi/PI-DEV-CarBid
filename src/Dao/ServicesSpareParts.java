@@ -163,5 +163,27 @@ public class ServicesSpareParts {
         }
         return null;
     }
+      public int CountSPPerType(String Type) {
+
+        int i = 0;
+        String requete = "SELECT * FROM spareparts where type= ?  ";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1,Type);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+             i=i+1;
+            }
+          
+         return i; 
+         
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return i;
+    }
+
 
 }

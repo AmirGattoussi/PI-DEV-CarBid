@@ -27,6 +27,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -85,6 +87,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField tfNom;
     @FXML
     private Button btn_pdf;
+    @FXML
+    private Button btn_states;
 
     /**
      * Initializes the controller class.
@@ -308,4 +312,55 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    @FXML
+    private void statesSP(ActionEvent event) {
+         try {
+            //taawed thezzek lel inscription
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
+            Parent root = loader.load();
+            btn_states.getScene().setRoot(root);
+           
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+public void calculerNombreParType() throws SQLException {
+
+        int NbrMoteur = 0;
+        int NbrDec = 0;
+        /*
+         private int id_sparepart;
+    private String type;
+    private int pou;
+    private String description;
+    private double price;
+    private String typec;
+        */
+
+        ServicesSpareParts us = new ServicesSpareParts();
+       ObservableList<SpareParts> list = FXCollections.observableArrayList();
+            id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
+            type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
+            pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
+            description_tab.setCellValueFactory(new PropertyValueFactory<>("description"));
+            price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
+            typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
+              list.addAll(us.display());
+            tablespareparts.setItems(list);
+      
+        for (SpareParts sp : list) {
+            if ("moteur".equals(sp.getType())) {
+                NbrMoteur += 1;
+
+            }
+            if ("dÃ©cor volan".equals(sp.getType())) {
+                NbrDec += 1;
+            }
+        }
+        System.out.println(NbrMoteur);
+        System.out.println(NbrDec);
+
+    }
+
+  
 }
