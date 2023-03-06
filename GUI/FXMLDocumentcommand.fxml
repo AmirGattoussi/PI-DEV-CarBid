@@ -12,19 +12,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentcommandController">
+<AnchorPane id="AnchorPane" prefHeight="562.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentcommandController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickMouseec" prefHeight="1001.0" prefWidth="1934.0">
+      <AnchorPane id="AnchorPane" layoutX="67.0" layoutY="10.0" onMouseClicked="#clickMouseec" prefHeight="558.0" prefWidth="1065.0">
          <children>
-            <TextField fx:id="text_cmd_id_user" layoutX="466.0" layoutY="426.0" prefHeight="31.0" prefWidth="199.0" />
-            <TextField fx:id="text_cmd_id_sparepart" layoutX="466.0" layoutY="485.0" prefHeight="31.0" prefWidth="199.0" />
-            <Label layoutX="364.0" layoutY="431.0" prefHeight="21.0" prefWidth="132.0" text="id_user  : " />
-            <Label layoutX="359.0" layoutY="490.0" prefHeight="21.0" prefWidth="88.0" text="id_sparepart  : " />
-            <Button fx:id="btn_main_add_cmd" layoutX="1340.0" layoutY="214.0" mnemonicParsing="false" onAction="#addcommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #6EFF5E;" text="Add" />
-            <Button fx:id="btn_main_modify_cmd" layoutX="1340.0" layoutY="300.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
-            <Button fx:id="btn_main_display_cmd" layoutX="1340.0" layoutY="388.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #4AAFE8;" text="Display" />
-            <Button fx:id="btn_main_delete_cmd" layoutX="1344.0" layoutY="477.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
-            <TableView fx:id="tablecommand" layoutX="773.0" layoutY="203.0" onMouseClicked="#clickMousee" prefHeight="640.0" prefWidth="424.0">
+            <TextField fx:id="text_cmd_id_user" layoutX="377.0" layoutY="314.0" prefHeight="31.0" prefWidth="57.0" />
+            <TextField fx:id="text_cmd_id_sparepart" layoutX="377.0" layoutY="357.0" prefHeight="31.0" prefWidth="57.0" />
+            <Label layoutX="273.0" layoutY="308.0" prefHeight="21.0" prefWidth="132.0" text="id_user  : " />
+            <Label layoutX="267.0" layoutY="362.0" prefHeight="21.0" prefWidth="88.0" text="id_sparepart  : " />
+            <Button fx:id="btn_main_add_cmd" layoutX="631.0" layoutY="436.0" mnemonicParsing="false" onAction="#addcommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #6EFF5E;" text="Add" />
+            <Button fx:id="btn_main_modify_cmd" layoutX="631.0" layoutY="494.0" mnemonicParsing="false" onAction="#modifycommand" prefHeight="42.0" prefWidth="111.0" style="-fx-background-color: #E8BF4A;" text="Modify" />
+            <Button fx:id="btn_main_display_cmd" layoutX="485.0" layoutY="436.0" mnemonicParsing="false" onAction="#displaycommand" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #4AAFE8;" text="Display" />
+            <Button fx:id="btn_main_delete_cmd" layoutX="762.0" layoutY="494.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="42.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
+            <TableView fx:id="tablecommand" layoutX="449.0" layoutY="105.0" onMouseClicked="#clickMousee" prefHeight="323.0" prefWidth="424.0">
                <columns>
                   <TableColumn fx:id="id_tab_cmd" prefWidth="107.0" text="id_command" />
                   <TableColumn fx:id="id_user_tab_cmd" prefWidth="82.0" text="id_user" />
@@ -32,35 +32,33 @@
                   <TableColumn fx:id="date_cr_tab_cmd" prefWidth="103.0" text="date_creation" />
                </columns>
             </TableView>
-            <TextField fx:id="text_cmd_id_command" layoutX="466.0" layoutY="364.0" prefHeight="31.0" prefWidth="199.0" />
-            <TextField fx:id="text_cmd_date_cr" layoutX="466.0" layoutY="543.0" prefHeight="31.0" prefWidth="199.0" />
-            <Label layoutX="364.0" layoutY="367.0" prefHeight="21.0" prefWidth="132.0" text="id_command :   " />
-            <Label layoutX="359.0" layoutY="548.0" prefHeight="21.0" prefWidth="88.0" text="date_creation  : " />
-            <Pane layoutX="-10.0" prefHeight="147.0" prefWidth="1984.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin">
+            <TextField fx:id="text_cmd_id_command" layoutX="377.0" layoutY="262.0" prefHeight="31.0" prefWidth="57.0" />
+            <TextField fx:id="text_cmd_date_cr" layoutX="344.0" layoutY="405.0" prefHeight="31.0" prefWidth="88.0" />
+            <Label layoutX="273.0" layoutY="256.0" prefHeight="21.0" prefWidth="132.0" text="id_command :   " />
+            <Label layoutX="251.0" layoutY="405.0" prefHeight="21.0" prefWidth="88.0" text="date_creation  : " />
+            <Pane layoutX="10.0" layoutY="-7.0" prefHeight="99.0" prefWidth="1078.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin">
                <children>
                   <Hyperlink focusTraversable="false" layoutX="124.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Hyperlink>
-                  <Pane layoutX="969.0" layoutY="58.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin">
-                     <children>
-                        <Hyperlink focusTraversable="false" layoutX="-20.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" text="COMMAND" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Hyperlink>
-                     </children>
-                  </Pane>
+                  <Hyperlink focusTraversable="false" layoutX="424.0" layoutY="27.0" prefHeight="35.0" prefWidth="200.0" text="COMMAND" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Hyperlink>
+                  <Pane layoutX="596.0" layoutY="34.0" prefHeight="35.0" prefWidth="279.0" style="-fx-background-color: blue;" styleClass="backgroundAdmin" />
                </children>
             </Pane>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="303.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="239.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_main_refresh_cmd" layoutX="1344.0" layoutY="569.0" mnemonicParsing="false" onAction="#Refresh_cmd" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Refresh" />
-            <Button fx:id="btn_main_research_cmd" layoutX="1344.0" layoutY="655.0" mnemonicParsing="false" onAction="#GetcommandById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #fd3f92;" text="Research" />
+            <Button fx:id="btn_main_refresh_cmd" layoutX="762.0" layoutY="436.0" mnemonicParsing="false" onAction="#Refresh_cmd" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Refresh" />
+            <Button fx:id="btn_main_research_cmd" layoutX="494.0" layoutY="494.0" mnemonicParsing="false" onAction="#GetcommandById" prefHeight="42.0" prefWidth="111.0" style="-fx-background-color: #fd3f92;" text="Research" />
+            <Button fx:id="btn_cmd_lier" layoutX="880.0" layoutY="105.0" mnemonicParsing="false" onAction="#gotocmd" prefHeight="48.0" prefWidth="159.0" style="-fx-background-color: #fd3f92;" text="Go to liste of spare_parts" />
          </children>
       </AnchorPane>
    </children>
