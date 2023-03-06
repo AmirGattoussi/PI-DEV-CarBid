@@ -64,6 +64,9 @@ public class manageUsersController implements Initializable {
     @FXML
     private Label totalNumberOfUsers;
     @FXML
+    private Label totalSubs;
+
+    @FXML
     private Button refreshBtn;
     @FXML
     private HBox user;
@@ -79,6 +82,7 @@ public class manageUsersController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refreshView();
+        System.out.println(r.getNumberOfSubs());
     }
 
     // This method handles button clicks
@@ -126,9 +130,11 @@ public class manageUsersController implements Initializable {
             for (User us : observableUserList) {
                 HBox user = generateUserRow(us.getId(), us.getName(), us.getEmail(), us.getLocation(), us.getPhone_number(), r.getRole(us.getId()));
                 usersPanel.getChildren().add(user);
+                System.out.println(r.getRole(us.getId()));
             }
         }
         updateUserCounter();
+        updateSubsCounter();
     }
 
     // This method checks if there was a change in the db table or not
@@ -179,19 +185,19 @@ public class manageUsersController implements Initializable {
         user.setAlignment(Pos.CENTER_LEFT);
 
         Label userColumn = new Label();
-        userColumn.setPrefSize(70, 18);
+        userColumn.setPrefSize(115, 18);
         userColumn.setId("userColumn");
         Label carColumn = new Label();
-        carColumn.setPrefSize(70, 18);
+        carColumn.setPrefSize(90, 18);
         carColumn.setId("carColumn");
         Label dateColumn = new Label();
-        dateColumn.setPrefSize(140, 18);
+        dateColumn.setPrefSize(180, 18);
         Label locationColumn = new Label();
-        locationColumn.setPrefSize(70, 18);
+        locationColumn.setPrefSize(120, 18);
         Label phoneColumn = new Label();
-        phoneColumn.setPrefSize(70, 18);
+        phoneColumn.setPrefSize(135, 18);
         Label roleColumn = new Label();
-        roleColumn.setPrefSize(150, 18);
+        roleColumn.setPrefSize(80, 18);
 
         userColumn.setText("" + usr);
         carColumn.setText("" + car);
@@ -199,18 +205,17 @@ public class manageUsersController implements Initializable {
         locationColumn.setText("" + location);
         phoneColumn.setText("" + phone_number);
         roleColumn.setText("" + role);
-
         Button details_btn = new Button("Details");
         details_btn.setId("detailsBtn");
-        details_btn.setPrefSize(70, 22);
+        details_btn.setPrefSize(100, 22);
         details_btn.getStyleClass().add("details-btn");
         detailsBtn = details_btn;
         details_btn.setOnAction(this::handleClicks);
-        HBox.setMargin(details_btn, new Insets(0, 0, 0, 90));
+        HBox.setMargin(details_btn, new Insets(0, 0, 0, 25));
 
         Button cancel_btn = new Button("Delete");
         cancel_btn.setId("cancelBtn");
-        cancel_btn.setPrefSize(70, 22);
+        cancel_btn.setPrefSize(100, 22);
         cancel_btn.getStyleClass().add("cancel-btn");
         cancel_btn.setOnAction(this::handleClicks);
         cancelBtn = cancel_btn;
@@ -224,7 +229,7 @@ public class manageUsersController implements Initializable {
         user.setEffect(dropShadow);
 
         user.setPadding(new Insets(20, 20, 20, 20));
-        user.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, phoneColumn, details_btn, cancelBtn);
+        user.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, phoneColumn, roleColumn, details_btn, cancelBtn);
         return user;
     }
 
@@ -289,6 +294,10 @@ public class manageUsersController implements Initializable {
     // This method updates the UI user counter
     public void updateUserCounter() {
         totalNumberOfUsers.setText("" + r.getNumberOfUsers());
+    }
+
+    public void updateSubsCounter() {
+        totalSubs.setText("" + r.getNumberOfSubs());
     }
 
 }

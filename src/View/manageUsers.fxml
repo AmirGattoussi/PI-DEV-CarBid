@@ -33,22 +33,22 @@
                                         <Font name="System Bold" size="26.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="18.0" prefWidth="118.0" style="-fx-font-weight: 700;" text="Total Users" />
+                                <Label prefHeight="18.0" prefWidth="66.0" style="-fx-font-weight: 700;" text="Total Users" />
                             </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                             <children>
-                                <Label text="0" textFill="#26bfbc">
+                                <Label fx:id="totalSubs" text="0" textFill="#26bfbc">
                                     <font>
                                         <Font name="System Bold" size="26.0" />
                                     </font>
                                 </Label>
-                                <Label style="-fx-font-weight: 700;" text="Total cars" />
+                                <Label style="-fx-font-weight: 700;" text="Total subscribers" />
                             </children>
                         </VBox>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="179.0" prefHeight="53.0" prefWidth="729.0" style="-fx-background-color: #ffffff;">
+                <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="179.0" prefHeight="53.0" prefWidth="729.0" style="-fx-background-color: #ffffff;">
                     <children>
                         <Label prefHeight="18.0" prefWidth="99.0" text="Id user">
                             <HBox.margin>
@@ -65,7 +65,7 @@
                                 <Insets />
                             </HBox.margin>
                         </Label>
-                        <Label text="Location">
+                        <Label alignment="CENTER" text="Location">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>

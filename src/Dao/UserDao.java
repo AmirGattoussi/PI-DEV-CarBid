@@ -308,6 +308,23 @@ public class UserDao implements IUserDao {
         return count;
     }
 
+    public int getNumberOfSubs() {
+        int count = 0;
+        PreparedStatement statement;
+
+        try {
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM user WHERE id_agent IS NULL AND id_admin IS NULL");
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
     public List<User> view_users() {
         List<User> users = new ArrayList<>();
 
@@ -344,13 +361,13 @@ public class UserDao implements IUserDao {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                if (resultSet.getInt("id_agent")!=0){
-                    role="Agent";
+                if (resultSet.getInt("id_agent") != 0) {
+                    role = "Agent";
+                } else if (resultSet.getInt("id_admin") != 0) {
+                    role = "Admin";
+                } else {
+                    role = "Client";
                 }
-                else if (resultSet.getInt("id_admin")!=0){
-                    role="Admin";
-                }
-                else role="Client";
             }
 
         } catch (SQLException ex) {
