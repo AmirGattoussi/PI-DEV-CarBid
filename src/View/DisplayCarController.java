@@ -8,12 +8,14 @@ package View;
 import Dao.CarDao;
 import Entities.Car;
 import Utils.DBconnexion;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -142,6 +144,7 @@ public class DisplayCarController implements Initializable {
     @FXML
     private void photo(ActionEvent event) {
         Photos.toFront();
+        
     }
 
     @FXML
@@ -176,7 +179,7 @@ public class DisplayCarController implements Initializable {
     }
     
     @FXML
-    private void exportPDF(ActionEvent event) throws SQLException, DocumentException {
+    private void exportPDF(ActionEvent event) throws SQLException, DocumentException, BadElementException, IOException {
         try {
             DBconnexion cnx = DBconnexion.getInstance();
             
@@ -355,6 +358,8 @@ public class DisplayCarController implements Initializable {
             table.addCell(cell);
             
             doc.add(table);
+            
+            doc.add(Image.getInstance("C:\\Users\\rima\\OneDrive\\Desktop\\pidev\\PI-DEV-CarBid\\src\\Images\\damcar.jpg"));
 
             System.out.println("PDF exported");
             doc.close();

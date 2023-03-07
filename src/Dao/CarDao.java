@@ -99,10 +99,6 @@ public class CarDao implements IDao<Car> {
 
 
 
-
-
-
-
 }
     @Override
     public void delete(Car car) {
@@ -235,4 +231,6 @@ public class CarDao implements IDao<Car> {
         }
         return false; //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 }

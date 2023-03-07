@@ -83,32 +83,12 @@
                               <TextField fx:id="tfDesc" layoutX="445.0" layoutY="385.0" prefHeight="152.0" prefWidth="335.0" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
                               <DatePicker layoutX="137.0" layoutY="113.0" prefHeight="26.0" prefWidth="101.0" promptText="........" />
                               <Label layoutX="335.0" layoutY="29.0" prefHeight="18.0" prefWidth="153.0" text="choose file (JPG,JPEG)" />
-                              <Button layoutX="364.0" layoutY="54.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" text="import" textFill="#c4bfbf" />
-
-                                    <ImageView fitHeight="200.0" fitWidth="273.0" layoutX="521.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Images/damcar.jpg" />
-                                 </image>
-                              </ImageView>
+                              <Button fx:id="btnimport" layoutX="364.0" layoutY="54.0" mnemonicParsing="false" onAction="#Import" prefHeight="33.0" prefWidth="96.0" text="import" textFill="#c4bfbf" />
                               <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="565.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="662.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../Downloads/resizer%20(2).jpg" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="511.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../Downloads/resizer%20(3).jpg" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="360.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../Downloads/resizer%20(4).jpg" />
-                                 </image>
-                              </ImageView>
                               <RadioButton layoutX="145.0" layoutY="152.0" mnemonicParsing="false" text="auto" />
                               <RadioButton layoutX="145.0" layoutY="178.0" mnemonicParsing="false" text="manually" />
                               <Label layoutX="363.0" layoutY="389.0" prefHeight="17.0" prefWidth="73.0" text="Description" />
+                              <ImageView fx:id="imgid" fitHeight="150.0" fitWidth="200.0" layoutX="539.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>
