@@ -7,17 +7,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Dao.ReservationDao;
-import Dao.UserDao;
-import Entities.Reservation;
+import Entities.*;
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -44,18 +41,22 @@ import javafx.scene.effect.BlurType;
  *
  * @author neil
  */
+public class manageReservationsController extends manageReservationsAgencyController {
 
-public class manageReservationsController implements Initializable {
+    // *********************************************
+    // Attributes
+    // *********************************************
 
     ReservationDao r = new ReservationDao();
-    UserDao u = new UserDao();
+    int currentUserID = 3;// CurrentUser.getUser().getId();
+    // CarsDao car = new CarsDao();
 
     @FXML
     private VBox reservationsPanel;
     @FXML
-    private Label userColumn;
-    @FXML
     private Label carColumn;
+    @FXML
+    private Label carModelColumn;
     @FXML
     private Label dateColumn;
     @FXML
@@ -79,14 +80,30 @@ public class manageReservationsController implements Initializable {
     @FXML
     public Pane pnlReservationDetails;
 
-    int currentCount = r.getNumberOfReservations();
+    int currentCount = r.filterReservationsByUser(currentUserID).size();
 
+    // *********************************************
+    // Methods
+    // *********************************************
+
+    /**
+     * JavaFx initialize method
+     * 
+     * @param location  used to resolve relative paths for the root object, or null
+     *                  if the location is not known.
+     * @param resources used to localize the root object, or null if the root object
+     *                  was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refreshView();
     }
 
-    // This method handles button clicks
+    /**
+     * This Method handles button clicks.
+     * 
+     * @param event event handler.
+     */
     @FXML
     public void handleClicks(ActionEvent event) {
         if (event.getSource() == refreshBtn) {
@@ -106,23 +123,24 @@ public class manageReservationsController implements Initializable {
             } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
                     HBox hbox = (HBox) ((Node) event.getSource()).getParent();
-                    userColumn = (Label) hbox.getChildren().get(0);
-                    carColumn = (Label) hbox.getChildren().get(1);
-                    detailsPopup(hbox, Integer.parseInt(userColumn.getText()), Integer.parseInt(carColumn.getText()));
+                    carColumn = (Label) hbox.getChildren().get(0);
+                    detailsPopup(hbox, currentUserID, Integer.parseInt(carColumn.getText()));
                 } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();
-                        userColumn = (Label) hbox.getChildren().get(0);
-                        carColumn = (Label) hbox.getChildren().get(1);
-                        deleteReservationAlert(hbox, Integer.parseInt(userColumn.getText()),
-                                Integer.parseInt(carColumn.getText()));
+                        carColumn = (Label) hbox.getChildren().get(0);
+                        deleteReservationAlert(hbox, currentUserID, Integer.parseInt(carColumn.getText()));
                     }
                 }
             }
         }
     }
 
-    // This method refreshes the view when there's something that changed
+    /**
+     * This method refreshes the manage reservations view.
+     * 
+     * @param void
+     */
     @FXML
     private void refreshView() {
         ObservableList<Reservation> observableReservationList = returnLatestTable();
@@ -133,7 +151,7 @@ public class manageReservationsController implements Initializable {
         } else {
             pnlManageReservations.lookup("#noReservationYet").setVisible(false);
             for (Reservation reserv : observableReservationList) {
-                HBox reservation = generateReservationRow(reserv.getUser(), reserv.getCar(), reserv.getDate(),
+                HBox reservation = generateReservationRow(reserv.getCar(), "car", reserv.getDate(),
                         reserv.getLocation());
                 reservationsPanel.getChildren().add(reservation);
             }
@@ -141,7 +159,11 @@ public class manageReservationsController implements Initializable {
         updateReservationCounter();
     }
 
-    // This method checks if there was a change in the db table or not
+    /**
+     * This method checks if there was a change in the db table or not
+     * 
+     * @param oldCount previous List size.
+     */
     public boolean tableChanged(int oldCount) {
         int currentCount = r.getNumberOfReservations();
 
@@ -153,6 +175,11 @@ public class manageReservationsController implements Initializable {
         }
     }
 
+    /**
+     * This method checks if the Table is empty or not.
+     * 
+     * @param ol an ObservableList object that represents the table to be checked.
+     */
     public boolean isTableEmpty(ObservableList<Reservation> ol) {
         if (ol.isEmpty()) {
             return true;
@@ -161,13 +188,25 @@ public class manageReservationsController implements Initializable {
         }
     }
 
+    /**
+     * This method creturn the latest reservation table from the DataBase.
+     * 
+     * @param void
+     */
     public ObservableList<Reservation> returnLatestTable() {
-        return FXCollections.observableList(r.getReservations());
+        return FXCollections.observableList(r.filterReservationsByUser(currentUserID));
     }
 
-    // This method generates fxml code for reservation row
+    /**
+     * This method generates fxml code for reservation row
+     * 
+     * @param car       the car ID
+     * @param car_model the car model
+     * @param date      the date of the reservation
+     * @param location  the location where the car is located.
+     */
     @FXML
-    public HBox generateReservationRow(int usr, int car, String date, String location) {
+    public HBox generateReservationRow(int car, String car_model, String date, String location) {
         HBox reservation = new HBox();
         reservation.setStyle("-fx-background-color: #EBE8F9; -fx-background-radius: 5; -fx-background-insets: 0;");
 
@@ -188,19 +227,19 @@ public class manageReservationsController implements Initializable {
         reservation.setMaxSize(HBox.USE_PREF_SIZE, HBox.USE_PREF_SIZE);
         reservation.setAlignment(Pos.CENTER);
 
-        Label userColumn = new Label();
-        userColumn.setPrefSize(99, 18);
-        userColumn.setId("userColumn");
         Label carColumn = new Label();
-        carColumn.setPrefSize(84, 18);
+        carColumn.setPrefSize(99, 18);
         carColumn.setId("carColumn");
+        Label carModelColumn = new Label();
+        carModelColumn.setPrefSize(134, 18);
+        carModelColumn.setId("carModelColumn");
         Label dateColumn = new Label();
         dateColumn.setPrefSize(125, 18);
         Label locationColumn = new Label();
-        locationColumn.setPrefSize(308, 18);
+        locationColumn.setPrefSize(369, 18);
 
-        userColumn.setText("" + usr);
         carColumn.setText("" + car);
+        carModelColumn.setText("" + car_model);
         dateColumn.setText("" + date);
         locationColumn.setText("" + location);
 
@@ -227,15 +266,23 @@ public class manageReservationsController implements Initializable {
         reservation.setEffect(dropShadow);
 
         reservation.setPadding(new Insets(20, 20, 20, 20));
-        reservation.getChildren().addAll(userColumn, carColumn, dateColumn, locationColumn, details_btn, cancelBtn);
+        reservation.getChildren().addAll(carColumn, carModelColumn, dateColumn, locationColumn, details_btn, cancelBtn);
         return reservation;
     }
 
+    /**
+     * This method generates fxml code for reservation details popup and displays
+     * it.
+     * 
+     * @param reservation the HBox parent of the detailsBtn that is clicked.
+     * @param Id_user     the user ID
+     * @param Id_car      the car ID
+     */
     @FXML
-    private void detailsPopup(HBox reservation, int Id_user, int id_car) {
+    private void detailsPopup(HBox reservation, int Id_user, int Id_car) {
         Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
         overlay.widthProperty().bind(pnlManageReservations.widthProperty());
-        overlay.heightProperty().bind(pnlManageReservations.heightProperty());
+        overlay.heightProperty().bind(pnlManageReservations.heightProperty()); // Overlay to put the popup in focus
 
         Popup popup = new Popup();
         Pane popupContent = new Pane();
@@ -243,7 +290,7 @@ public class manageReservationsController implements Initializable {
         Parent included;
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../View/reservationDetails.fxml"));
+                    getClass().getResource("../View/reservationDetails.fxml")); // Loading FXML
             included = loader.load();
             pnlReservationDetails = (Pane) included.lookup("#pnlReservationDetails");
         } catch (IOException e) {
@@ -251,6 +298,9 @@ public class manageReservationsController implements Initializable {
         }
         popupContent.getChildren().addAll(pnlReservationDetails);
 
+        /**
+         * Creating Scroll Pane to house the popup content, it's scrollable.
+         */
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(popupContent);
         scrollPane.setFitToWidth(true);
@@ -258,45 +308,59 @@ public class manageReservationsController implements Initializable {
         scrollPane.setFocusTraversable(false);
         scrollPane.getStyleClass().add("reservationDetails-ScrollPane");
         scrollPane.getStylesheets().add("./Styles/reservationStyle.css");
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Hide vertical scroll bar
 
         Platform.runLater(() -> {
             // Set the vertical scroll position to the top
             scrollPane.setVvalue(0.0);
         });
-    
 
-        popup.getContent().add(scrollPane);
-        popup.setAutoHide(true);
-        popup.setOnHidden(event -> pnlManageReservations.getChildren().remove(overlay));
+        popup.getContent().add(scrollPane); // Adding content to the popup.
+        popup.setAutoHide(true); // when clicking away from popup it closes.
+        popup.setOnHidden(event -> pnlManageReservations.getChildren().remove(overlay)); // Removing overlay.
 
+        /**
+         * Popup button handling.
+         * Note: Reason why it's not in handleClicks() because this is easier to get the
+         * selected reservation row.
+         */
         Button closeBtn = (Button) popupContent.lookup("#closeBtn");
         closeBtn.setOnAction(event -> {
             popup.hide();
         });
         Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
         cancelButton.setOnAction(event -> {
-            deleteReservationRow(reservation, Id_user, id_car);
+            deleteReservationRow(reservation, Id_user, Id_car);
             popup.hide();
         });
 
+        /**
+         * Populating the details popup labels.
+         */
         // Label agencyLabel = (Label) popupContent.lookup("#AgencyNameField");
         // agencyLabel.setText("" + u.getUserById(Id_user).getName());
         // Label userPhoneLabel = (Label) popupContent.lookup("#AgencyPhoneField");
         // userPhoneLabel.setText("" + u.getUserById(Id_user).getPhone_number());
         Label dateLabel = (Label) popupContent.lookup("#dateField");
-        dateLabel.setText("" + r.getReservation(Id_user, id_car).getDate());
+        dateLabel.setText("" + r.getReservation(Id_user, Id_car).getDate());
         Label locationLabel = (Label) popupContent.lookup("#locationField");
-        locationLabel.setText("" + r.getReservation(Id_user, id_car).getLocation());
+        locationLabel.setText("" + r.getReservation(Id_user, Id_car).getLocation());
 
-        pnlManageReservations.getChildren().add(overlay);
+        pnlManageReservations.getChildren().add(overlay); // Adding overlay to View.
 
         Bounds rootBounds = pnlManageReservations.getBoundsInLocal();
         double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - scrollPane.getWidth()) / 1.4;
-        popup.show(detailsBtn.getScene().getWindow(), popupX , 125);
+        popup.show(detailsBtn.getScene().getWindow(), popupX, 125);
         popup.setAutoFix(true);
     }
 
-    // This method promps the user if he's certain he wants to delete reservation
+    /**
+     * This method promps the user if he's certain he wants to delete reservation.
+     * 
+     * @param reservation the HBox parent of the cancelBtn that is clicked.
+     * @param id_user     the user ID
+     * @param id_car      the car ID
+     */
     @FXML
     private void deleteReservationAlert(HBox reservation, int id_user, int id_car) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -339,7 +403,15 @@ public class manageReservationsController implements Initializable {
         });
     }
 
-    public void deleteReservationRow(Node reservation, int id_user, int id_car){
+    /**
+     * This method deletes a reservation from the table and removes a row from the
+     * UI table.
+     * 
+     * @param reservation the HBox row to be removed from FXML code
+     * @param id_user     the user ID
+     * @param id_car      the car ID
+     */
+    public void deleteReservationRow(Node reservation, int id_user, int id_car) {
         r.deleteReservation(id_user, id_car);
 
         Parent parent = reservation.getParent();
@@ -353,9 +425,12 @@ public class manageReservationsController implements Initializable {
         }
     }
 
-    // This method updates the UI reservation counter
+    /**
+     * This method updates the UI reservation counter
+     * 
+     * @param void
+     */
     public void updateReservationCounter() {
-        totalNumberOfReservations.setText("" + r.getNumberOfReservations());
+        totalNumberOfReservations.setText("" + returnLatestTable().size());
     }
-
 }

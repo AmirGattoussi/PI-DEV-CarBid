@@ -17,11 +17,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
     prefHeight="689.0" prefWidth="893.0" style="-fx-background-color: #ffffff;"
     stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsController">
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.manageReservationsAgencyController">
     <children>
-        <Pane fx:id="pnlManageReservations" layoutY="11.0" prefHeight="554.0" prefWidth="793.0"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-            AnchorPane.topAnchor="0.0">
+        <Pane fx:id="pnlManageReservations" layoutX="-1.0" layoutY="-3.0" prefHeight="689.0"
+            prefWidth="893.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="31.0" layoutY="29.0" style="-fx-font-weight: 700"
                     text="Manage Reservations">
@@ -29,7 +29,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Button fx:id="filterBtn" layoutX="788.0" layoutY="38.0" mnemonicParsing="false"
+                <Button fx:id="filterBtn" layoutX="789.0" layoutY="38.0" mnemonicParsing="false"
                     onAction="#handleClicks" prefHeight="30.0" prefWidth="71.0"
                     styleClass="filter-btn" text="Filter" />
                 <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="74.0" prefHeight="92.0"
@@ -46,6 +46,16 @@
                                     style="-fx-font-weight: 700;" text="Total Reservations" />
                             </children>
                         </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <Label text="0" textFill="#26bfbc">
+                                    <font>
+                                        <Font name="System Bold" size="26.0" />
+                                    </font>
+                                </Label>
+                                <Label style="-fx-font-weight: 700;" text="Total cars" />
+                            </children>
+                        </VBox>
                     </children>
                 </HBox>
                 <Pane layoutX="14.0" layoutY="179.0">
@@ -55,17 +65,17 @@
                                 <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="750.0"
                                     style="-fx-background-color: #ffffff;">
                                     <children>
-                                        <Label prefHeight="18.0" prefWidth="99.0" text="Id car">
+                                        <Label prefHeight="18.0" prefWidth="99.0" text="Id user">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Label prefHeight="18.0" prefWidth="101.0" text="Id car">
                                             <HBox.margin>
                                                 <Insets />
                                             </HBox.margin>
                                         </Label>
-                                        <Label prefHeight="18.0" prefWidth="134.0" text="Car model">
-                                            <HBox.margin>
-                                                <Insets />
-                                            </HBox.margin>
-                                        </Label>
-                                        <Label prefHeight="18.0" prefWidth="107.0" text="Date">
+                                        <Label prefHeight="18.0" prefWidth="119.0" text="Date">
                                             <HBox.margin>
                                                 <Insets />
                                             </HBox.margin>

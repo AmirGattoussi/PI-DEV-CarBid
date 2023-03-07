@@ -1,6 +1,7 @@
 package Services;
 
 import java.util.List;
+
 import Entities.*;
 
 /**
@@ -9,7 +10,7 @@ import Entities.*;
  */
 public interface IReservationDao {
 
-    // CRUD methods
+    /* CRUD methods */
     public void createReservation(Reservation reservation);
 
     public void deleteReservation(int id_user, int id_car);
@@ -24,10 +25,14 @@ public interface IReservationDao {
 
     public int getNumberOfReservations();
 
-    // JOB methods
     public List<Reservation> filterReservationsByUser(int id_user);
 
     public List<Reservation> filterReservationsByCar(int id_car);
 
     public List<Reservation> filterReservationsByDate(String date);
+
+    /* JOB methods */
+    public List<Object> reservationDetails();
+
+    public List<Object> reservationDetailsAgency();
 }

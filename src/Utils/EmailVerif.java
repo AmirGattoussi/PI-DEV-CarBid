@@ -13,7 +13,7 @@ import java.util.Properties;
  * @author gtsia
  */
 public class EmailVerif {
-     public static void sendVerificationEmail(String recipientEmail, String verificationCode) throws MessagingException {
+    public static void sendVerificationEmail(String recipientEmail, String verificationCode) throws MessagingException {
         String senderEmail = "carBidVerif@gmail.com";
         String senderPassword = "rocpddemnwdthnul";
         

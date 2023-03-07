@@ -19,9 +19,22 @@ import java.util.logging.Logger;
  */
 public class ReservationDao implements IReservationDao {
 
+    // *********************************************
+    // Attributes
+    // *********************************************
+
     Connection cnx;
     PreparedStatement statement;
 
+    // *********************************************
+    // Methods
+    // *********************************************
+
+    /**
+     * Constructor method. Handles the connection to database.
+     * 
+     * @param void
+     */
     public ReservationDao() {
         try {
             cnx = DBconnexion.getInstance().getConnection();
@@ -30,7 +43,11 @@ public class ReservationDao implements IReservationDao {
         }
     }
 
-    // CRUD method for creating a reservation
+    /**
+     * CRUD method for creating a reservation.
+     * 
+     * @param reservation Object
+     */
     @Override
     public void createReservation(Reservation reservation) {
         try {
@@ -57,7 +74,15 @@ public class ReservationDao implements IReservationDao {
         }
     }
 
-    // CRUD method for deleting a reservation
+    /**
+     * CRUD method for deleting a reservation.
+     * 
+     * @param id_user ID of user
+     * @param id_car  ID of car
+     *                Note: id_user,id_car together make the primary key of DB
+     *                table.
+     */
+    //
     @Override
     public void deleteReservation(int id_user, int id_car) {
         try {
@@ -72,7 +97,13 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // CRUD methods for updating/modifying a reservation
+    /**
+     * CRUD method that updates reservation's date.
+     * 
+     * @param id_user ID of user
+     * @param id_car  ID of car
+     * @param date    value that date will get updated to.
+     */
     @Override
     public void updateReservationDate(int id_user, int id_car, String date) {
         try {
@@ -97,6 +128,13 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * CRUD method that updates reservation's location.
+     * 
+     * @param id_user ID of user
+     * @param id_car  ID of car
+     * @param date    value that location will get updated to.
+     */
     @Override
     public void updateReservationLocation(int id_user, int id_car, String location) {
         try {
@@ -112,7 +150,12 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // CRUD method for getting information for specific a reservation
+    /**
+     * CRUD method for getting information for specific a reservation.
+     * 
+     * @param id_user ID of user
+     * @param id_car  ID of car
+     */
     @Override
     public Reservation getReservation(int id_user, int id_car) {
         try {
@@ -137,7 +180,11 @@ public class ReservationDao implements IReservationDao {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // CRUD method for getting list of all reservations
+    /**
+     * CRUD method for getting list of all reservations.
+     * 
+     * @param void
+     */
     @Override
     public List<Reservation> getReservations() {
         List<Reservation> data = new ArrayList<Reservation>();
@@ -161,8 +208,11 @@ public class ReservationDao implements IReservationDao {
         return data;
     }
 
-    // JOBS methods for filtering reservations
-    // Note: The following methods, all of them, return a List of reservations.
+    /**
+     * This method filters reservations by user and returns a list.
+     * 
+     * @param id_user ID of user.
+     */
     @Override
     public List<Reservation> filterReservationsByUser(int id_user) {
         List<Reservation> filteredData = new ArrayList<Reservation>();
@@ -188,6 +238,11 @@ public class ReservationDao implements IReservationDao {
         return filteredData;
     }
 
+    /**
+     * This method filters reservations by car and returns a list.
+     * 
+     * @param id_car ID of car.
+     */
     @Override
     public List<Reservation> filterReservationsByCar(int id_car) {
         List<Reservation> filteredData = new ArrayList<Reservation>();
@@ -213,6 +268,11 @@ public class ReservationDao implements IReservationDao {
         return filteredData;
     }
 
+    /**
+     * This method filters reservations by date and return a list.
+     * 
+     * @param date reservation date.
+     */
     @Override
     public List<Reservation> filterReservationsByDate(String date) {
         List<Reservation> filteredData = new ArrayList<Reservation>();
@@ -246,7 +306,11 @@ public class ReservationDao implements IReservationDao {
         return filteredData;
     }
 
-    // A JOB method that returns the total number of reservations
+    /**
+     * This method return the total number of reservations.
+     * 
+     * @param void
+     */
     @Override
     public int getNumberOfReservations() {
         int count = 0;
@@ -261,5 +325,30 @@ public class ReservationDao implements IReservationDao {
             Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    /**
+     * This Job method returns a list of the informations that will be diplayed in
+     * the
+     * details popup for a normal user
+     * 
+     * @param void
+     */
+    @Override
+    public List<Object> reservationDetails() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reservationDetails'");
+    }
+
+    /**
+     * This Job method returns a list of the informations that will be displayed in
+     * the details popup of an agency.
+     * 
+     * @param void
+     */
+    @Override
+    public List<Object> reservationDetailsAgency() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reservationDetailsAgency'");
     }
 }

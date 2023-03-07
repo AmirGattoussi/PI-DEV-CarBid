@@ -1,52 +1,53 @@
 package Api;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
+import javafx.concurrent.Worker.State;
+import javafx.fxml.FXML;
+import javafx.scene.web.WebView;
 
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
+/**
+ *
+ * @author neil
+ */
 public class MapsApi {
 
-    // private double latitude;
-    // private double longitude;
+    // *********************************************
+    // Methods
+    // *********************************************
 
-    public static void generateMap(Pane mapContainer) {
+    /**
+     * This method calls the Google Maps Api and generates a map.
+     * 
+     * @param mapContainer container that will contain the map returned by the API.
+     */
+    @FXML
+    public static void generateMap(WebView mapContainer) {
 
-        String apiKey = "UrH7rF0Ljp3pAfsxkpI-uq_gWQ8kDb_Ddo2TxpCNTYo";
-        // center = (lon, lat)
-        String center = "10.1865735,36.8163404";
-        String baseUrl = "https://atlas.microsoft.com/map/static/png";
-        int zoom = 16;
-        String marker = "pin-s-l+000FF(" + center + ")";
+        String apiKey = "AIzaSyCtAGE5bb0_x_LJAfK_yq-8quauxzIGGHM";
+        String address = "lot 13, V5XR+M37 إقامة السلام 2، Av. Fethi Zouhir, Cebalat Ben Ammar 2083";
 
-        // Build the URL for the Azure Maps static map API
-        String apiUrl = baseUrl + "?api-version=1.0&subscription-key=" + apiKey +
-                "&center=" + center + "&zoom=" + zoom + "&iconset=pin&iconcolor=000FF&style=main" + "&pushpin="
-                + marker;
+        /* The html to be displayed in the webview */
+        String googleMapsHTML = "<!DOCTYPE html>" +
+                "<html lang=\"en\">" +
+                "<head>" +
+                "<meta charset=\"UTF-8\">" +
+                "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "<title>Document</title>" +
+                "</head>" +
+                "<body>" +
+                "<iframe width=\"415\" height=\"415\" style=\"border:0\" loading=\"lazy\" allowfullscreen src=\"https://www.google.com/maps/embed/v1/place?q="
+                + address + "&key=" + apiKey + "\"></iframe>" +
+                "</body>" +
+                "</html>";
 
-        try {
-            URL url = new URL(apiUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            Image image = new Image(conn.getInputStream());
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(435);
-            imageView.setFitHeight(435);
+        mapContainer.getEngine().loadContent(googleMapsHTML);
+        mapContainer.setPrefSize(435, 435);
 
-            DropShadow dropShadow = new DropShadow();
-            dropShadow.setRadius(10);
-            dropShadow.setWidth(10);
-            dropShadow.setHeight(10);
-            dropShadow.setBlurType(BlurType.GAUSSIAN);
-            mapContainer.setEffect(dropShadow);
-
-            mapContainer.getChildren().add(imageView);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mapContainer.getEngine().getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
+            if (newState == State.SUCCEEDED) {
+                // The WebView is loaded completely
+                mapContainer.setVisible(true);
+            }
+        });
     }
 }
