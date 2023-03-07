@@ -1,0 +1,238 @@
+.side-navbar {
+    -fx-background-color: #EBE8F9;
+    background-color: #EBE8F9;
+    -fx-text-fill: black;
+}
+
+.side-navbar:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+    -fx-background-color: #dbdbdb;
+    background-color: #dbdbdb;
+}
+
+.side-navbar:active {
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.side-navbar:pressed {
+    -fx-background-color: #d4d4d4;
+    background-color: #d4d4d4;
+}
+
+.details-btn {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #2A73FF;
+}
+
+.details-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.details-btn:pressed {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: #2A73FF;
+    background-color: #2A73FF;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.alert-no-button {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #2A73FF;
+}
+
+.alert-no-button:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.alert-no-button:pressed {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: #2A73FF;
+    background-color: #2A73FF;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.cancel-btn {
+    -fx-border-color: #ff0000;
+    border-color: #ff0000;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #ff0000;
+}
+
+.cancel-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.cancel-btn:pressed {
+    -fx-border-color: #ff0000;
+    border-color: #ff0000;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: #ff0000;
+    background-color: #ff0000;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.alert-yes-button {
+    -fx-border-color: #ff0000;
+    border-color: #ff0000;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #ff0000;
+}
+
+.alert-yes-button:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.alert-yes-button:pressed {
+    -fx-border-color: #ff0000;
+    border-color: #ff0000;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: #ff0000;
+    background-color: #ff0000;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+
+.filter-btn {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 5;
+    border-radius: 5;
+    -fx-border-width: 2;
+    border-width: 2;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #2A73FF;
+    font-weight: bold;
+}
+
+.filter-btn:hover {
+    -fx-cursor: pointer;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.filter-btn:pressed {
+    -fx-border-color: #2A73FF;
+    border-color: #2A73FF;
+    -fx-border-radius: 5;
+    border-radius: 5;
+    -fx-border-width: 2;
+    border-width: 2;
+    -fx-background-color: #2A73FF;
+    background-color: #2A73FF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    font-weight: bold;
+}
+
+.refresh-btn {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.refresh-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.close-btn {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.close-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* .details-pane-bg {
+    -fx-opacity: 0.5;
+    opacity: 0.5;
+} */
+
+.details-pane {
+    -fx-border-radius: 2;
+    border-radius: 2;
+    /* -fx-opacity: 1;
+    opacity: 1; */
+}
+
+.increment-button,
+.decrement-button {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-border-color: transparent;
+    border-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: white;
+    background-color: white;
+
+}
+
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-border-color: transparent;
+    border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #c8c8c8;
+    background-color: #c8c8c8;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane>.corner {
+    -fx-background-color: white;
+    background-color: white;
+}
+

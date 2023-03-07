@@ -233,16 +233,18 @@ public class Car {
         }
         return true;
     }
-    
-    public double getbasevalue(){
-        
-        double x = baseprice*this.fiscalpower;
+
+    public double getbasevalue() {
+
+        double x = baseprice * this.fiscalpower;
         System.out.println(x);
-        if(mileage>10000) x= x- x *0.05 *(mileage /10000 );
+        if (mileage > 10000) {
+            x = x - x * 0.05 * (mileage / 10000);
+        }
         System.out.println(x);
         int y = LocalDate.now().getYear() - year;
-        System.out.println(x-x*y*0.05);
-     return x-x*y*0.05;
+        System.out.println(x - x * y * 0.05);
+        return x - x * y * 0.05;
     }
     
     }

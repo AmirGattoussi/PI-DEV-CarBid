@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="664.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BidManagementController">
+   <children>
+      <TableView fx:id="tableViewBids" layoutX="60.0" layoutY="127.0" prefHeight="273.0" prefWidth="522.0">
+        <columns>
+          <TableColumn fx:id="bidColumn" prefWidth="75.0" text="Id bid" />
+          <TableColumn fx:id="userColumn" prefWidth="75.0" text="Id user" />
+            <TableColumn fx:id="auctionColumn" prefWidth="75.0" text="Id auction" />
+            <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="liveColumn" prefWidth="75.0" text="Live amount" />
+            <TableColumn fx:id="maxColumn" prefWidth="75.0" text="Max bid" />
+        </columns>
+      </TableView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#25c5b9" height="59.0" stroke="#25c5b9" strokeType="INSIDE" width="707.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3f3d56" height="381.0" layoutY="59.0" stroke="#3f3d56" strokeType="INSIDE" width="53.0" />
+      <Text layoutX="75.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 23; -fx-font-weight: 700;" text="Manage Bids">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Text>
+      <ImageView fitHeight="49.0" fitWidth="81.0" layoutX="588.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
+      <StackPane layoutX="567.0" layoutY="223.0" prefHeight="59.0" prefWidth="77.0">
+         <children>
+            <Circle fill="#ff1f1f" radius="16.0" stroke="#ff1f1f" strokeType="INSIDE" />
+            <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#deleteBidAction" prefHeight="36.0" prefWidth="45.0" style="-fx-shape: circle;">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="18.0" />
+               </graphic>
+            </Button>
+         </children>
+      </StackPane>
+      <StackPane layoutX="550.0" layoutY="149.0" prefHeight="101.0" prefWidth="111.0">
+         <children>
+            <Circle fill="#53ee06" radius="16.0" stroke="#53ee06" strokeType="INSIDE" />
+            <Button mnemonicParsing="false" onAction="#updateBidAction" prefHeight="38.0" prefWidth="47.0" style="-fx-shape: circle;" textFill="#53ee06">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20.0" />
+               </graphic>
+            </Button>
+         </children>
+      </StackPane>
+      <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="13.0" layoutY="114.0" size="25.0" />
+      <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="17.0" layoutY="158.0" size="25.0" />
+      <FontAwesomeIconView fill="WHITE" glyphName="CAR" layoutX="13.0" layoutY="207.0" size="23.0" />
+      <StackPane layoutX="-2.0" layoutY="226.0" prefHeight="59.0" prefWidth="53.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/auction.png" />
+               </image>
+            </ImageView>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#redirAuction" prefHeight="39.0" prefWidth="41.0" style="-fx-shape: RECTANGLE;" />
+               </children>
+            </StackPane>
+         </children>
+      </StackPane>
+      <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" layoutX="16.0" layoutY="377.0" size="25.0" />
+      <StackPane layoutX="-2.0" layoutY="288.0" prefHeight="59.0" prefWidth="53.0">
+         <children>
+            <ImageView fitHeight="54.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/bid.png" />
+               </image>
+            </ImageView>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="67.0" style="-fx-shape: rectangle;" />
+               </children>
+            </StackPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
