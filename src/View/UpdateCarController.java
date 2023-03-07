@@ -25,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 /**
  * FXML Controller class
  *
@@ -61,152 +60,142 @@ public class UpdateCarController implements Initializable {
     private TextField tfmileage;
     @FXML
     private TextField tfcolor;
-     @FXML
+    @FXML
     private Button btnview;
-    
-   private Car selectedCar;
+
+    private Car selectedCar;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
-    }    
+    }
 
     @FXML
     private void confirmUpdate(ActionEvent event) {
         if (tftransmission.getText().isEmpty()) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter valid transmission");
-                    alert.showAndWait();
-                } 
-         else if ((tfloss.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter valid transmission");
+            alert.showAndWait();
+        } else if ((tfloss.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter loss");
-                    alert.showAndWait();
-                } 
-            else if ((tfft.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter loss");
+            alert.showAndWait();
+        } else if ((tfft.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter fueltype");
-                    alert.showAndWait();
-                } 
-        else if ((tfmake.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter fueltype");
+            alert.showAndWait();
+        } else if ((tfmake.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter make");
-                    alert.showAndWait();
-                } 
-            else if ((tfmodel.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter make");
+            alert.showAndWait();
+        } else if ((tfmodel.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter model");
-                    alert.showAndWait();
-                } 
-        else if ((tftype.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter model");
+            alert.showAndWait();
+        } else if ((tftype.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter type");
-                    alert.showAndWait();
-                } 
-            else if ((tfsd.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter type");
+            alert.showAndWait();
+        } else if ((tfsd.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter secondarydamage");
-                    alert.showAndWait();
-                } 
-        else if ((tfpd.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter secondarydamage");
+            alert.showAndWait();
+        } else if ((tfpd.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter primarydamage");
-                    alert.showAndWait();
-                } 
-            else if ((tfyear.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter primarydamage");
+            alert.showAndWait();
+        } else if ((tfyear.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter year");
-                    alert.showAndWait();
-                } 
-        else if ((tffp.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter year");
+            alert.showAndWait();
+        } else if ((tffp.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter fiscalpower");
-                    alert.showAndWait();
-                } 
-            else if ((tfDesc.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter fiscalpower");
+            alert.showAndWait();
+        } else if ((tfDesc.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter description");
-                    alert.showAndWait();
-                } 
-        else if ((tfmileage.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter description");
+            alert.showAndWait();
+        } else if ((tfmileage.getText().isEmpty())) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Invalid Input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please enter a mileage");
-                    alert.showAndWait();
-                } 
-        else{ 
-           try {
-            CarDao carDao = new CarDao();
-            
-          
-         
-            carDao.update(new Car( selectedCar.getId(), tfmodel.getText(),tfcolor.getText(),
-           tftype.getText(),
-            tfmake.getText(),
-            tfDesc.getText(),
-            Integer.parseInt(tfmileage.getText()),
-            Integer.parseInt(tfyear.getText()),
-            Integer.parseInt(tffp.getText()), 
-            tftransmission.getText(),
-            tfloss.getText(),
-            tfpd.getText(),
-            tfsd.getText(),
-            tfft.getText()));
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a mileage");
+            alert.showAndWait();
+        } else {
+            try {
+                CarDao carDao = new CarDao();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                carDao.update(new Car(selectedCar.getId(), tfmodel.getText(), tfcolor.getText(),
+                        tftype.getText(),
+                        tfmake.getText(),
+                        tfDesc.getText(),
+                        Integer.parseInt(tfmileage.getText()),
+                        Integer.parseInt(tfyear.getText()),
+                        Integer.parseInt(tffp.getText()),
+                        tftransmission.getText(),
+                        tfloss.getText(),
+                        tfpd.getText(),
+                        tfsd.getText(),
+                        tfft.getText()));
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Update Car");
                 alert.setHeaderText(null);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/UpdateCareController.fxml"));
                 alert.setContentText("The car is updated successfully.");
                 alert.showAndWait();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(UpdateCarController.class.getName()).log(Level.SEVERE, null, ex);}
-            
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateCarController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
     }
-    
-    } public void setValue(Car car) {
+
+    public void setValue(Car car) {
 
         this.selectedCar = car;
-            initcar();
+        initcar();
     }
 
     private void initcar() {
@@ -221,34 +210,28 @@ public class UpdateCarController implements Initializable {
         tfsd.setText(selectedCar.getSecondarydamage());
         tfpd.setText(selectedCar.getPrimarydamage());
         tfyear.setText(String.valueOf(selectedCar.getYear()));
-                tfmileage.setText(String.valueOf(selectedCar.getMileage()));
+        tfmileage.setText(String.valueOf(selectedCar.getMileage()));
         tffp.setText(String.valueOf(selectedCar.getFiscalpower()));
-                tfDesc.setText(selectedCar.getDescription());
-
-
-        
-       
-        
+        tfDesc.setText(selectedCar.getDescription());
 
     }
-    
- @FXML
+
+    @FXML
     private void backlist(ActionEvent event) {
-         try {
+        try {
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                ListCarsController controller = loader.getController();
-                
-                stage.setScene(scene);
-                stage.show();
-                CarDao carDao;
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ListCarsController controller = loader.getController();
 
+            stage.setScene(scene);
+            stage.show();
+            CarDao carDao;
 
-            } catch (IOException ex) {
-                Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException ex) {
+            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

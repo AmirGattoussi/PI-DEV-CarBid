@@ -324,7 +324,38 @@ public class UserDao implements IUserDao {
         }
         return count;
     }
+public int getNumberOfAdmins() {
+        int count = 0;
+        PreparedStatement statement;
 
+        try {
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM user WHERE id_admin IS NOT NULL");
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+public int getNumberOfAgents() {
+        int count = 0;
+        PreparedStatement statement;
+
+        try {
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM user WHERE id_agent IS NOT NULL");
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
     public List<User> view_users() {
         List<User> users = new ArrayList<>();
 

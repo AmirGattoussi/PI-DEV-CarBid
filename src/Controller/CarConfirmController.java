@@ -46,7 +46,7 @@ public class CarConfirmController implements Initializable {
     private Button btn;
     public int userId = 2;
     public int carId = 1;
-    public int auctionId=2;
+    public int auctionId = 2;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,9 +58,8 @@ public class CarConfirmController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
 
-            BidController bidcontroller = new BidController(userId,carId,auctionId);
-           
-            
+            BidController bidcontroller = new BidController(userId, carId, auctionId);
+
             loader.setController(bidcontroller);
 // bidcontroller.setValueCar(carId);
             //bidcontroller.setValueUser(userId);

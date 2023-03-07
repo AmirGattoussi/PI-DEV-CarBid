@@ -6,6 +6,7 @@
 package Dao;
 
 import Entities.Car;
+import Entities.CurrentUser;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -67,7 +68,7 @@ public class CarDao implements IDao<Car> {
         } */
 
         //To change body of generated methods, choose Tools | Templates.
-        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_user) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req);
@@ -84,7 +85,7 @@ public class CarDao implements IDao<Car> {
             pst.setString(11, car.getPrimarydamage());
             pst.setString(12, car.getSecondarydamage());
             pst.setString(13, car.getFueltype());
-
+            pst.setInt(14, CurrentUser.getUser().getId());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
@@ -96,7 +97,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public void delete(Car car) {
-        String req = "delete from Cars where id=" + car.getId();
+        String req = "delete from Cars where id_car=" + car.getId();
         Car p = displayById(car.getId());
 
         if (p != null) {
@@ -114,7 +115,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public ObservableList<Car> displayAll() {
-        String req = "select * from car";
+        String req = "select * from cars";
         ObservableList<Car> list = FXCollections.observableArrayList();
 
         try {
@@ -182,7 +183,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public Car displayById(int id_car) {
-        String req = "select * from Cars where id =" + id_car;
+        String req = "select * from Cars where id_car =" + id_car;
         Car p = new Car();
         try {
             rs = st.executeQuery(req);

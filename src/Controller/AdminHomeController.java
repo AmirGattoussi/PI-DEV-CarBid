@@ -63,6 +63,14 @@ public final class AdminHomeController implements Initializable {
             }
         } else if (event.getSource() == btnDashboard) {
             mainView.getChildren().clear();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/dashboard.fxml"));
+                Parent included = loader.load();
+                mainView = (StackPane) mainView.lookup("#mainView");
+                mainView.getChildren().add(included);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if (event.getSource() == btnSignout) {
             mainView.getChildren().clear();
             CurrentUser.setUser(null);

@@ -18,11 +18,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/reservationDetails.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/AdminHome.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMinWidth(1100);
-        primaryStage.setMinHeight(725);
+        primaryStage.setMinWidth(1089);
+        primaryStage.setMinHeight(689.0);
         primaryStage.show();
     }
 

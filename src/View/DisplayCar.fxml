@@ -54,6 +54,7 @@
                         <Image url="@../../../../../../Downloads/ICON-MM-01-0001.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="bidButton" layoutX="435.0" layoutY="114.0" mnemonicParsing="false" text="Place Bid" />
                   <Button layoutX="233.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Make appointment" />
                </children>
             </Pane>
