@@ -1,5 +1,10 @@
 package Api;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
@@ -22,7 +27,17 @@ public class MapsApi {
     @FXML
     public static void generateMap(WebView mapContainer) {
 
-        String apiKey = "AIzaSyCtAGE5bb0_x_LJAfK_yq-8quauxzIGGHM";
+        /* Loading API key from config.properties for security reasons */
+        Properties prop = new Properties();
+        String apiKey = "";
+        try {
+            prop.load(new FileInputStream("config.properties"));
+            apiKey = prop.getProperty("google.maps.key");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String address = "lot 13, V5XR+M37 إقامة السلام 2، Av. Fethi Zouhir, Cebalat Ben Ammar 2083";
 
         /* The html to be displayed in the webview */
