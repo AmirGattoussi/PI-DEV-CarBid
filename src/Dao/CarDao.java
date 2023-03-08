@@ -6,6 +6,7 @@
 package Dao;
 
 import Entities.Car;
+import Entities.CurrentUser;
 import java.sql.*;
 import Services.*;
 import Utils.DBconnexion;
@@ -56,28 +57,18 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public void insert(Car car) {
-        /*
-         * try {
-         * String req =
-         * "insert into 'cars' ('model','color','type','make','description','mileage','year','fiscalpower','transmission','loss','primarydamage','secondarydamage','fueltype') values ('"
-         * + car.getModel() + "','" + car.getColor() + "','"
-         * + "'" + car.getMake() + "','" + car.getDescription() + "','" + car.getLoss()
-         * + "','" + car.getType() + "','" + car.getTransmission() + "',"
-         * + "'" + car.getFiscalpower() + "','" + car.getMileage() + "','" +
-         * car.getYear() + "','" + car.getPrimarydamage() + "','" +
-         * car.getSecondarydamage() + "','" + car.getFueltype() + "')";
-         * 
-         * st.executeUpdate(req);
-         * } catch (SQLException ex) {
-         * System.out.
-         * println("Insert statement false****************************************************************************"
-         * );
-         * }
-         */
+        /*   try {
+        String req = "insert into 'cars' ('model','color','type','make','description','mileage','year','fiscalpower','transmission','loss','primarydamage','secondarydamage','fueltype') values ('" + car.getModel() + "','" + car.getColor() + "','"
+                + "'" + car.getMake() + "','" + car.getDescription() + "','" + car.getLoss() + "','" + car.getType() + "','" + car.getTransmission() + "',"
+                + "'" + car.getFiscalpower() + "','" + car.getMileage() + "','" + car.getYear() + "','" + car.getPrimarydamage() + "','" + car.getSecondarydamage() + "','" + car.getFueltype() + "')";
+        
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            System.out.println("Insert statement false****************************************************************************");
+        } */
 
-        // To change body of generated methods, choose Tools | Templates.
-
-        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        //To change body of generated methods, choose Tools | Templates.
+        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_user) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req);
@@ -94,7 +85,7 @@ public class CarDao implements IDao<Car> {
             pst.setString(11, car.getPrimarydamage());
             pst.setString(12, car.getSecondarydamage());
             pst.setString(13, car.getFueltype());
-
+            pst.setInt(14, CurrentUser.getUser().getId());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
@@ -106,7 +97,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public void delete(Car car) {
-        String req = "delete from Cars where id=" + car.getId();
+        String req = "delete from Cars where id_car=" + car.getId();
         Car p = displayById(car.getId());
 
         if (p != null) {
@@ -193,7 +184,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public Car displayById(int id_car) {
-        String req = "select * from car where id =" + id_car;
+        String req = "select * from Cars where id_car =" + id_car;
         Car p = new Car();
         try {
             rs = st.executeQuery(req);
@@ -224,12 +215,8 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public boolean update(Car car) {
-        String qry = "UPDATE Cars SET model = '" + car.getModel() + "', color = '" + car.getColor() + "',  make = '"
-                + car.getMake() + "', type = '" + car.getType() + "', fueltype = '" + car.getFueltype()
-                + "', description = '" + car.getDescription() + "', primarydamage = '" + car.getPrimarydamage() + "',"
-                + "   transmission = '" + car.getTransmission() + "',  fiscalpower = '" + car.getFiscalpower()
-                + "',  loss = '" + car.getLoss() + "', mileage = '" + car.getMileage() + "',  year = '" + car.getYear()
-                + "',  secondarydamage = '" + car.getSecondarydamage() + "'WHERE id_car= '" + car.getId() + "'";
+        String qry = "UPDATE Cars SET model = '" + car.getModel() + "', color = '" + car.getColor() + "',  make = '" + car.getMake() + "', type = '" + car.getType() + "', fueltype = '" + car.getFueltype() + "', description = '" + car.getDescription() + "', primarydamage = '" + car.getPrimarydamage() + "',"
+                + "   transmission = '" + car.getTransmission() + "',  fiscalpower = '" + car.getFiscalpower() + "',  loss = '" + car.getLoss() + "', mileage = '" + car.getMileage() + "',  year = '" + car.getYear() + "',  secondarydamage = '" + car.getSecondarydamage() + "'WHERE id_car= '" + car.getId() + "'";
         System.out.println(qry);
         try {
 
@@ -241,5 +228,38 @@ public class CarDao implements IDao<Car> {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false; // To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getCarId(Car car) {
+        int id_car=0;
+        PreparedStatement statement2;
+        try {
+            //Get Id_car from car description
+            statement2 = conn.prepareStatement(
+                    "SELECT id_car FROM cars WHERE model = ? AND color = ? AND type = ? AND make = ? AND description = ? AND mileage = ? AND year = ? AND fiscalpower = ? AND transmission = ? AND loss = ? AND primarydamage = ? AND secondarydamage = ? AND fueltype= ?");
+            statement2.setString(1, car.getModel());
+            statement2.setString(2, car.getColor());
+            statement2.setString(3, car.getType());
+            statement2.setString(4, car.getMake());
+            statement2.setString(5, car.getDescription());
+            statement2.setInt(6, car.getMileage());
+            statement2.setInt(7, car.getYear());
+            statement2.setInt(8, car.getFiscalpower());
+            statement2.setString(9, car.getTransmission());
+            statement2.setString(10, car.getLoss());
+            statement2.setString(11, car.getPrimarydamage());
+            statement2.setString(12, car.getSecondarydamage());
+            statement2.setString(13, car.getFueltype());
+            ResultSet resultSet = statement2.executeQuery();
+            //Set ID User to ID Admin
+            if (resultSet.next()) {
+                id_car = resultSet.getInt("id_car");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id_car;
+
     }
 }

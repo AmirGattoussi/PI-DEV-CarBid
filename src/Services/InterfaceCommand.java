@@ -19,6 +19,18 @@ import java.util.ArrayList;
  * @author Yasmine
  */
 public interface InterfaceCommand<T> {
+   
+    public void addcommand(T  u) throws SQLException;
+    
+    public void deletecommand(int id) throws SQLException;
+    
+       public void modifycommand(T  u) throws SQLException;
+       
+       
+           public Command GetcommandById(int id) throws SQLException;
+    public ArrayList<T> displaycommand();
+    
+}
 
     public void addcommand(T u) throws SQLException;
 

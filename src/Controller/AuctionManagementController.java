@@ -73,7 +73,7 @@ public class AuctionManagementController implements Initializable {
 
             tableViewAuctions.setItems(observableAuctionList);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AuctionManagementController.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
@@ -91,7 +91,7 @@ public class AuctionManagementController implements Initializable {
                 tableViewAuctions.getItems().remove(selectedAuction);
                 bidDao.deleteAuction(selectedAuction.getIdAuction());
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

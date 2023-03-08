@@ -36,8 +36,12 @@ public class AuctionDaoImplementation implements AuctionDao {
     int i=0;
     Connection cnx;
 
-    public AuctionDaoImplementation() throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public AuctionDaoImplementation() {
+        try {
+            cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -321,5 +325,26 @@ public class AuctionDaoImplementation implements AuctionDao {
         }  
     
     
+    }
+
+    public int getIdAuctionByCar(int idCar) {
+        PreparedStatement statement;
+        int idAuction = 0;
+        try {
+            statement = cnx.prepareStatement("SELECT idAuction FROM auction WHERE idCar= ?");
+            statement.setInt(1, idCar);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+
+                idAuction = resultSet.getInt("idAuction");
+            }
+            else{
+                System.err.println("Auction does not exist");}
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idAuction;
+
     }
 }

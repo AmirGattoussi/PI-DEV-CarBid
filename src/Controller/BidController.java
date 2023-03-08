@@ -151,15 +151,9 @@ public class BidController implements Initializable {
 //            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
-        try {
-
-            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            Float highest = aucDao.getHighestBidById(auctionId);
-            txt_highest_bid.setText(Float.toString(highest));
-        } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
-                    null, ex);
-        }
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+        Float highest = aucDao.getHighestBidById(auctionId);
+        txt_highest_bid.setText(Float.toString(highest));
         try {
 
             BidDaoImplementation bidDao = new BidDaoImplementation();

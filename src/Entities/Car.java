@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import java.io.File;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -29,14 +31,14 @@ public class Car {
     private String secondarydamage;
     private String fueltype;
     private double baseprice = 10000;
+    private String carImg;
+    
 
     public Car() {
 
     }
 
-    public Car(String model, String color, String type, String make, String description, int mileage, int year,
-            int fiscalpower, String transmission, String loss, String primarydamage, String secondarydamage,
-            String fueltype) {
+    public Car(String model, String color, String type, String make, String description, int mileage, int year, int fiscalpower, String transmission, String loss, String primarydamage, String secondarydamage, String fueltype,String carImg) {
         this.model = model;
         this.color = color;
         this.type = type;
@@ -50,7 +52,18 @@ public class Car {
         this.primarydamage = primarydamage;
         this.secondarydamage = secondarydamage;
         this.fueltype = fueltype;
+        this.carImg=carImg;
+        
+        
+        
+    }
 
+    public String getCarImg() {
+        return carImg;
+    }
+
+    public void setCarImg(String carImg) {
+        this.carImg = carImg;
     }
 
     public Car(int id_car, String model, String color, String type, String make, String description, int mileage,
@@ -69,8 +82,14 @@ public class Car {
         this.loss = loss;
         this.primarydamage = primarydamage;
         this.secondarydamage = secondarydamage;
-        this.fueltype = fueltype;
+        this.fueltype= fueltype;
+        
+        
     }
+
+  
+
+   
 
     public int getId() {
         return id_car;
@@ -87,6 +106,7 @@ public class Car {
     public String getType() {
         return type;
     }
+
 
     public String getMake() {
         return make;
@@ -186,11 +206,8 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make
-                + ",description=" + description + ",mileage=" + mileage + ",yeae=" + year + ",fiscalpower="
-                + fiscalpower
-                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage
-                + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
+        return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make + ",description=" + description + ",mileage=" + mileage + ",year=" + year + ",fiscalpower=" + fiscalpower
+                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
     }
 
     @Override
@@ -222,11 +239,15 @@ public class Car {
 
         double x = baseprice * this.fiscalpower;
         System.out.println(x);
-        if (mileage > 10000)
+        if (mileage > 10000) {
             x = x - x * 0.05 * (mileage / 10000);
+        }
         System.out.println(x);
         int y = LocalDate.now().getYear() - year;
         System.out.println(x - x * y * 0.05);
         return x - x * y * 0.05;
     }
-}
+    
+    }
+
+

@@ -28,7 +28,7 @@ public class ServicesCommand {
         cnx = (Connection) DBconnexion.getInstance().getConnection();
     }
 
-    public List<Command> display() {
+    public List<Command> displaycommand() {
         List<Command> listpieces = new ArrayList<>();
         try {
             ste = cnx.createStatement();
@@ -37,11 +37,14 @@ public class ServicesCommand {
             while (res.next()) {
                 int id_command = res.getInt(1);
                 int id_user = res.getInt(2);
+                  
                 int id_sparepart = res.getInt(3);
-
-                // SpareParts s = new SpareParts(Id,Type,Pou,Description,Price,Typec);
-                // SpareParts s = new SpareParts(Id, Type, Pou, Description, Price, Typec);
-                // listpieces.add(s);
+                String date_cr=res.getString(4);
+                 // int id_sparepart = res.getInt(2);
+                   Command s = new Command(id_command,id_user,id_sparepart,date_cr);
+                //Command s = new Command(id_user,id_sparepart);
+              
+                listpieces.add(s);
 
             }
         } catch (SQLException ex) {
@@ -51,14 +54,16 @@ public class ServicesCommand {
         return listpieces;
     }
 
-    public void add(Command u) throws SQLException {
-        PreparedStatement pre = cnx
-                .prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
-
-        pre.setInt(1, u.getId_command());
-        pre.setInt(2, u.getId_user());
-        pre.setInt(3, u.getId_sparepart());
-
+    public void addcommand(Command u) throws SQLException {
+        //PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`(`id_command`, `id_user`, `id_sparepart`) VALUES (?,?,?)");
+PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`( `id_user`, `id_sparepart`,`date_cr`) VALUES (?,?,?)");
+      // pre.setInt(1, u.getId_command());
+       // pre.setInt(2, u.getId_user());
+        //pre.setInt(3, u.getId_sparepart());
+          pre.setInt(1, u.getId_user());
+        pre.setInt(2, u.getId_sparepart());
+         pre.setString(3, u.getDate_cr());
+        
         pre.executeUpdate();
         /*
          * if ((text_live_id.getText().isEmpty()) &&
@@ -72,7 +77,7 @@ public class ServicesCommand {
 
     }
 
-    public void delete(int id) {
+    public void deletecommand(int id) {
 
         try {
             PreparedStatement pre = cnx.prepareStatement("delete from command where id_command = ?");
@@ -84,17 +89,17 @@ public class ServicesCommand {
 
     }
 
-    public void modify(SpareParts u) {
+    public void modifycommand(Command u) {
 
         try {
-            PreparedStatement pre = cnx
-                    .prepareStatement("Update command set id_user=?,id_sparepart=? where id_command = ?");
+            PreparedStatement pre = cnx.prepareStatement("Update command set id_user=?,id_sparepart=?,date_cr=? where id_command = ?");
 
-            // pre.setInt(3, u.getId_command());
+            pre.setInt(4, u.getId_command());
 
-            // pre.setString(1, u.getId_user());
+         pre.setInt(1, u.getId_user());
 
-            // pre.setInt(2, u.getId_sparepart());
+          pre.setInt(2, u.getId_sparepart());
+          pre.setString(3, u.getDate_cr());
 
             pre.executeUpdate();
         } catch (SQLException ex) {
@@ -102,7 +107,7 @@ public class ServicesCommand {
         }
     }
 
-    public SpareParts GetSparePartsById(int id) {
+    public Command GetcommandById(int id) {
 
         try {
 
@@ -112,8 +117,7 @@ public class ServicesCommand {
             ResultSet result = pre.executeQuery();
             while (result.next()) {
 
-                SpareParts u = new SpareParts(result.getInt(1), result.getString(2), result.getInt(3),
-                        result.getString(4), result.getDouble(5), result.getString(6));
+                Command u = new Command(result.getInt(1), result.getInt(2), result.getInt(3),result.getString(4));
                 return u;
             }
         } catch (SQLException ex) {
@@ -121,5 +125,9 @@ public class ServicesCommand {
         }
         return null;
     }
+    
+    
+    
+    
 
 }

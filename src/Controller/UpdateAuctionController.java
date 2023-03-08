@@ -101,7 +101,7 @@ public class UpdateAuctionController implements Initializable {
                 alert.setContentText("The auction is updated successfully.");
                 alert.showAndWait();
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             }
 
