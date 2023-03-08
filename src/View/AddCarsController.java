@@ -9,9 +9,17 @@ import Controller.AddAuctionDetailsController;
 import Controller.RegisterController;
 import Dao.CarDao;
 import Entities.Car;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import static java.lang.Integer.parseInt;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,7 +35,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import static jdk.nashorn.internal.objects.NativeJava.type;
+import javafx.stage.FileChooser.ExtensionFilter;;
 
 /**
  * FXML Controller class
@@ -72,6 +88,14 @@ public class AddCarsController implements Initializable {
     private TextField tfDesc;
     @FXML
     private Button btnhome;
+    @FXML
+    private Button btnimport;
+    @FXML
+    private ImageView imgid;
+    private Object imgView;
+    private String imagePath;
+    private String[] type;
+    private FileChooser fileChooser = new FileChooser();
 
     /**
      * Initializes the controller class.
@@ -185,6 +209,7 @@ public class AddCarsController implements Initializable {
                 CarDao cardao = new CarDao();
                 Car c;
                 c = new Car(
+
                         tfModel.getText(),
                         tfColor.getText(),
                         tfType.getText(),
@@ -197,12 +222,13 @@ public class AddCarsController implements Initializable {
                         tfLoss.getText(),
                         tfPd.getText(),
                         tfSd.getText(),
-                        tfFt.getText()
+                        tfFt.getText(),
+                        this.imagePath
+
                 );
 
                 cardao.insert(c);
                 int carId = cardao.getCarId(c);
-                System.out.println(carId);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Insert Car");
                 alert.setHeaderText(null);
@@ -234,6 +260,7 @@ public class AddCarsController implements Initializable {
         CarDao cardao = new CarDao();
         Car c;
         c = new Car(
+
                 tfModel.getText(),
                 tfColor.getText(),
                 tfType.getText(),
@@ -246,7 +273,9 @@ public class AddCarsController implements Initializable {
                 tfLoss.getText(),
                 tfPd.getText(),
                 tfSd.getText(),
-                tfFt.getText()
+                tfFt.getText(),
+                this.imagePath
+
         );
 
         cardao.update(c);
@@ -270,6 +299,54 @@ public class AddCarsController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+
+    private void Import(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        this.fileChooser.setTitle("Select an image");
+        this.fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+        File file = this.fileChooser.showOpenDialog(primaryStage);
+        this.imagePath = file.getPath();
+        String phpUrl = "C:/xamppp/htdocs/piImg/piImg.php";
+        // String imageFilePath = "C:\\xamppp\\htdocs\\piImg";
+
+        // Read the image file data
+        byte[] imageData = Files.readAllBytes(file.toPath());
+
+        // Create the boundary string for the multipart request
+        String boundary = "---------------------------12345";
+
+        // Open the connection to the PHP script
+        URL url = new URL(phpUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+        // Write the image file data to the output stream of the connection
+        OutputStream outputStream = connection.getOutputStream();
+        outputStream.write(("--" + boundary + "\r\n").getBytes());
+        outputStream.write(
+                ("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"\r\n").getBytes());
+        outputStream.write(("Content-Type: image/jpeg\r\n\r\n").getBytes());
+        outputStream.write(imageData);
+        outputStream.write(("\r\n--" + boundary + "--\r\n").getBytes());
+        outputStream.flush();
+        outputStream.close();
+
+        // Read the response from the PHP script
+        InputStream inputStream = connection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+
     }
 
 }

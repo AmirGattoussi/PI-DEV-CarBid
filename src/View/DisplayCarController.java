@@ -10,8 +10,27 @@ import Dao.AuctionDaoImplementation;
 import Dao.CarDao;
 import Entities.Car;
 import Entities.CurrentUser;
+import Utils.DBconnexion;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +41,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -44,6 +64,8 @@ public class DisplayCarController implements Initializable {
     private Button btnphoto;
     @FXML
     private Button btnBid;
+    @FXML
+    private Button btnExport;
     @FXML
     private TextField tfDesc;
     @FXML
@@ -123,6 +145,7 @@ public class DisplayCarController implements Initializable {
     @FXML
     private void photo(ActionEvent event) {
         Photos.toFront();
+        
     }
     @FXML
     private void makeRes(ActionEvent event) {
@@ -172,7 +195,217 @@ public class DisplayCarController implements Initializable {
         textsd.setText(selectedCar.getSecondarydamage());
         textpd.setText(selectedCar.getPrimarydamage());
 
-        //    textcolor.setText(selectedCar.getColor());
+
+    //    textcolor.setText(selectedCar.getColor());
+
     }
     
+    @FXML
+    private void exportPDF(ActionEvent event) throws SQLException, DocumentException, BadElementException, IOException {
+        try {
+            DBconnexion cnx = DBconnexion.getInstance();
+            
+            //PreparedStatement pst=null;
+            //ResultSet rs=null;
+            
+            //Car car = new Car();
+            
+            //String guery = " select * from cars WHERE id_car= '" + car.getId()+"'";
+            //try {
+            
+            //pst= cnx.getConnection().prepareStatement(guery);
+            //rs= pst.executeQuery();
+            
+            String file_name = "Cars2.pdf";
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream(file_name));
+            
+            doc.open();
+            
+            /*com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance("C:\\xampp\\htdocs\\FirstProject-main\\public\\uploads\\logo.png");
+            img.scaleAbsoluteWidth(600);
+            img.scaleAbsoluteHeight(92);
+            img.setAlignment(com.itextpdf.text.Image.ALIGN_CENTER);
+            doc.add(img); */
+            
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("Car details",FontFactory.getFont(FontFactory.TIMES_BOLD,20,BaseColor.BLUE)));
+            doc.add(new Paragraph(" "));
+            
+            PdfPTable table = new PdfPTable(13);
+            table.setWidthPercentage(100);
+            PdfPCell cell;
+            cell = new PdfPCell (new Phrase("Model", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Color", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Type", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            cell = new PdfPCell (new Phrase("Make", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            cell = new PdfPCell (new Phrase("Description", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            
+            cell = new PdfPCell (new Phrase("Mileage", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            
+            cell = new PdfPCell (new Phrase("Year", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Fiscalpower", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            cell = new PdfPCell (new Phrase("Transmission", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Loss", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Primarydamage", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Secondarydamage", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase("Fueltype", FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            table.addCell(cell);
+            
+            
+            /////////////////////////////////////////////////////////////////////////////////
+            /*while(rs.next()) {
+            
+            car.setModel(rs.getString("model"));
+            car.setColor(rs.getString("color"));
+            car.setType(rs.getString("type"));
+            car.setMake(rs.getString("make"));
+            car.setDescription(rs.getString("description"));
+            car.setMileage(rs.getInt("mileage"));
+            car.setYear(rs.getInt("year"));
+            car.setFiscalpower(rs.getInt("fiscalpower"));
+            car.setTransmission(rs.getString("transmission"));
+            car.setLoss(rs.getString("loss"));
+            car.setPrimarydamage(rs.getString("primarydamage"));
+            car.setSecondarydamage(rs.getString("secondarydamage"));
+            car.setFueltype(rs.getString("fueltype"));
+            System.out.println(rs.next());
+            */
+            cell = new PdfPCell (new Phrase(selectedCar.getModel(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            System.out.println(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getColor(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getType(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getMake(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getDescription(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getMileage())), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getYear())), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getFiscalpower())), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getTransmission(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getLoss(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getPrimarydamage(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getSecondarydamage(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            cell = new PdfPCell (new Phrase(selectedCar.getFueltype(), FontFactory.getFont("Arial",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            doc.add(table);
+            
+            doc.add(Image.getInstance("C:\\Users\\rima\\OneDrive\\Desktop\\pidev\\PI-DEV-CarBid\\src\\Images\\damcar.jpg"));
+
+            System.out.println("PDF exported");
+            doc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DisplayCarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        
+        //} catch (DocumentException | SQLException | IOException ex) {
+           // Logger.getLogger(DisplayCarController.class.getName()).log(Level.SEVERE, null, ex);
+        //}
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Car details exported to PDF Sheet");
+            alert.show();
+
+            
 }
+           
+    }
+        
+   // }
+
+
