@@ -26,7 +26,7 @@
             <Button fx:id="btn_main_delete_cmd" layoutX="1344.0" layoutY="477.0" mnemonicParsing="false" onAction="#deletecommand" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
             <TableView fx:id="tablecommand" layoutX="773.0" layoutY="203.0" onMouseClicked="#clickMousee" prefHeight="640.0" prefWidth="424.0">
                <columns>
-                  <TableColumn fx:id="id_tab_cmd" prefWidth="107.0" text="id_command" />
+                  <TableColumn fx:id="id_tab_cmd" prefWidth="107.0" text="id_command" visible="false" />
                   <TableColumn fx:id="id_user_tab_cmd" prefWidth="82.0" text="id_user" />
                   <TableColumn fx:id="id_sparepart_tab_cmd" prefWidth="131.0" text="id_sparepart" />
                   <TableColumn fx:id="date_cr_tab_cmd" prefWidth="103.0" text="date_creation" />
