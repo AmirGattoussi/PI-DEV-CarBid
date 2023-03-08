@@ -20,7 +20,6 @@ import javafx.scene.layout.StackPane;
 public final class mainNavigationController implements Initializable {
 
     // int currentUser = CurrentUser.getUser().getId();
-
     @FXML
     private Button btnHome;
     @FXML
@@ -49,13 +48,13 @@ public final class mainNavigationController implements Initializable {
         if (event.getSource() == btnHome) {
             mainView.getChildren().clear();
             try {
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Register.fxml"));
-                                Parent registerView = loader.load();
-                                mainView = (StackPane) mainView.lookup("#mainView");
-                                mainView.getChildren().add(registerView);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
+                Parent registerView = loader.load();
+                mainView = (StackPane) mainView.lookup("#mainView");
+                mainView.getChildren().add(registerView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             if (event.getSource() == btnAuction) {
                 mainView.getChildren().clear();

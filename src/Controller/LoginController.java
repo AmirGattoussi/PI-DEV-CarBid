@@ -70,22 +70,23 @@ public class LoginController implements Initializable {
     }
 
     public void showLoginNotification() {
-        String title="CARBID";  
-        String message="LOGGED IN";
-       if (SystemTray.isSupported()) {
-        SystemTray tray = SystemTray.getSystemTray();
-        Image image = Toolkit.getDefaultToolkit().createImage("../images/auction.png");
-        TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
-        trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip("Java AWT Tray Demo");
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException ex) {
-            System.out.println("TrayIcon could not be added.");
+        String title = "CARBID";
+        String message = "LOGGED IN";
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            Image image = Toolkit.getDefaultToolkit().createImage("../images/auction.png");
+            TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
+            trayIcon.setImageAutoSize(true);
+            trayIcon.setToolTip("Java AWT Tray Demo");
+            try {
+                tray.add(trayIcon);
+            } catch (AWTException ex) {
+                System.out.println("TrayIcon could not be added.");
+            }
+            trayIcon.displayMessage(title, message, MessageType.INFO);
         }
-        trayIcon.displayMessage(title, message, MessageType.INFO);
     }
-}
+
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         // perform login validation
@@ -111,6 +112,12 @@ public class LoginController implements Initializable {
             } // Login to Agent Interface
             else if (agent.isAgent(passThroughUserID)) {
                 Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) loginBtn.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                Parent root = FXMLLoader.load(getClass().getResource("../View/mainNavigation.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
                 stage.setScene(scene);

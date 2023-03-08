@@ -5,8 +5,11 @@
  */
 package View;
 
+import Controller.BidController;
+import Dao.AuctionDaoImplementation;
 import Dao.CarDao;
 import Entities.Car;
+import Entities.CurrentUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +35,7 @@ import javafx.stage.Stage;
  * @author rima
  */
 public class DisplayCarController implements Initializable {
-
+    
     @FXML
     private Button btnBack;
     @FXML
@@ -54,7 +57,7 @@ public class DisplayCarController implements Initializable {
     private Car selectedCar;
     @FXML
     private Text texttype;
-        @FXML
+    @FXML
     private Text entryPrice;
     @FXML
     private Text Textmodel;
@@ -76,8 +79,6 @@ public class DisplayCarController implements Initializable {
     private Text textft;
     @FXML
     private Text textDesc;
-    
-    
 
     /**
      * Initializes the controller class.
@@ -85,63 +86,84 @@ public class DisplayCarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
- @FXML
-    private void Back(ActionEvent event) {
-         try {
-
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                ListCarsController controller = loader.getController();
-                
-                stage.setScene(scene);
-                stage.show();
-                CarDao carDao;
-
-
-            } catch (IOException ex) {
-                Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }
-
+    
+    @FXML
+    private void Back(ActionEvent event) {
+        try {
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ListCarsController controller = loader.getController();
+            
+            stage.setScene(scene);
+            stage.show();
+            CarDao carDao;
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @FXML
     private void fncarspecification(KeyEvent event) {
     }
-
+    
     @FXML
     private void carspecification(ActionEvent event) {
     }
-
+    
     @FXML
     private void fnphoto(KeyEvent event) {
         Carspecification.toFront();
     }
-
+    
     @FXML
     private void photo(ActionEvent event) {
         Photos.toFront();
     }
-
+    @FXML
+    private void makeRes(ActionEvent event) {
+    }
+    
     @FXML
     private void setbid(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
+            AuctionDaoImplementation auc = new AuctionDaoImplementation();
+            BidController bidcontroller = new BidController(CurrentUser.getUser().getId(), selectedCar.getId(), auc.getIdAuctionByCar(selectedCar.getId()));
+            
+            loader.setController(bidcontroller);
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("New View");
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
+    
+    
     public void setValue(Car car) {
-
+        
         this.selectedCar = car;
-            initcar();
+        initcar();
     }
-
+    
     private void initcar() {
         System.out.println(selectedCar);
         textcolor.setText(selectedCar.getColor());
         texttype.setText(selectedCar.getType());
         Textmodel.setText(selectedCar.getModel());
-        Textyear.setText(selectedCar.getYear()+" ");
-        entryPrice.setText(selectedCar.getbasevalue()+" ");
-        textfp.setText(selectedCar.getFiscalpower()+" ");
-        textmileage.setText(selectedCar.getMileage()+" ");
+        Textyear.setText(selectedCar.getYear() + " ");
+        entryPrice.setText(selectedCar.getbasevalue() + " ");
+        textfp.setText(selectedCar.getFiscalpower() + " ");
+        textmileage.setText(selectedCar.getMileage() + " ");
         texttype.setText(selectedCar.getType());
         textmake.setText(selectedCar.getMake());
         textloss.setText(selectedCar.getLoss());
@@ -150,14 +172,7 @@ public class DisplayCarController implements Initializable {
         textsd.setText(selectedCar.getSecondarydamage());
         textpd.setText(selectedCar.getPrimarydamage());
 
-
-
-
-
-
-
-    //    textcolor.setText(selectedCar.getColor());
-
+        //    textcolor.setText(selectedCar.getColor());
     }
-
+    
 }

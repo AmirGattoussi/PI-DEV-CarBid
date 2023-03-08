@@ -137,15 +137,9 @@ public class BidController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
-
-            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            Float highest = aucDao.getHighestBidById(auctionId);
-            txt_highest_bid.setText(Float.toString(highest));
-        } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
-                    null, ex);
-        }
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+        Float highest = aucDao.getHighestBidById(auctionId);
+        txt_highest_bid.setText(Float.toString(highest));
         try {
 
             BidDaoImplementation bidDao = new BidDaoImplementation();
@@ -236,6 +230,7 @@ private void refreshScene(ActionEvent event) {
                 } else {
                     BidDaoImplementation bidDao=new BidDaoImplementation();
                     Bid max_bid=bidDao.getMaxBidById(auctionId);
+                    System.out.println(max_bid.getLiveBidAmount());
                         System.out.println("maxxx "+max_bid.getMaxBidAmount());
                         System.out.println("txt_live_bid "+txt_live_bid.getText());
                         System.out.println("carId " +carId+ " userId "+userId);
