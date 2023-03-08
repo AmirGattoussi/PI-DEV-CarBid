@@ -32,7 +32,7 @@ public interface IReservationDao {
     public List<Reservation> filterReservationsByDate(String date);
 
     /* JOB methods */
-    public List<Object> reservationDetails();
+    public List<ReservationDetail> reservationDetails(int id_user, int id_car);
 
-    public List<Object> reservationDetailsAgency();
+    public List<ReservationDetail> reservationDetailsAgency(int id_user, int id_car);
 }

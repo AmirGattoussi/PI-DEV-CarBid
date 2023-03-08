@@ -8,11 +8,20 @@ package Entities;
  * @author neil
  */
 public class Reservation {
+
+    // *********************************************
+    // Attributes
+    // *********************************************
+
     private String date;
     private String location;
     private int id_user;
     private int id_car;
     private int id_agent;
+
+    // *********************************************
+    // Methods
+    // *********************************************
 
     public Reservation(int id_user, int id_car, String date, String location, int id_agent) {
         this.date = date;
