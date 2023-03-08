@@ -3,24 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Dao/CarsDao.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Services/AuctionDao.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/AuctionManagementController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/UpdateAuctionController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Entities/Bid.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/manageReservationsController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/BidManagementController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Dao/AuctionDaoImplementation.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/View/Bid.fxml</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Entities/User.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Dao/BidDaoImplementation.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/View/Bid_management.fxml</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/BidController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/reservationsController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Main/Main.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/UpdateBidController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Controller/CarConfirmController.java</file>
-            <file>file:/C:/Users/asus/Desktop/04-02/PI-DEV-CarBid/src/Api/MailApi.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Main/Main.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Services/NotificationDao.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Api/MailApi.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Dao/NotificationDaoImplementation.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Services/BidDao.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Services/AuctionDao.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Dao/AuctionDaoImplementation.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/View/NotificationPage.fxml</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Controller/AuctionManagementController.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Controller/CarConfirmController.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Controller/BidController.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Entities/Bid.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Dao/BidDaoImplementation.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Entities/User.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Entities/Winner.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Entities/Notification.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Api/QRCodeExample.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Controller/NotificationController.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Controller/BestBiddersController.java</file>
+            <file>file:/C:/Users/asus/Desktop/04-02%20-%20Copie/PI-DEV-CarBid/src/Dao/CarsDao.java</file>
         </group>
     </open-files>
 </project-private>

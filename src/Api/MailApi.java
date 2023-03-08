@@ -42,9 +42,18 @@ public class MailApi {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("Congratulations ");
-            message.setText(
-                    "Dear Bidder,</br> We are delighted to inform you that you have won the auction for the car ..");
+            message.setSubject("Congratulations, You Won the Auction!");
+         String body = "Dear Bidder,\n"
+                    + "It is with great pleasure that we announce that you have won the auction.\n"
+                    + "Attached to this email, you will find all the details. Please feel free to download, print, and share the PDF.\n"
+                    + "Best regards,\n"
+                    + "CarBid team";
+        
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setText(body);
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBodyPart);
+        message.setContent(multipart);
             Transport.send(message);
             System.out.println("message sent successfully....");
         } catch (Exception ex) {

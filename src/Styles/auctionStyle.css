@@ -1,0 +1,68 @@
+.read-btn {
+    -fx-border-color:  #25c5b9;
+    border-color:  #25c5b9;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill:  #25c5b9;
+}
+
+.read-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.read-btn:pressed {
+    -fx-border-color:  #25c5b9;
+    border-color:  #25c5b9;
+    -fx-border-radius: 20;
+    border-radius: 20;
+    -fx-background-color:  #25c5b9;
+    background-color:  #25c5b9;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.refresh-btn {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.refresh-btn:hover {
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+.scroll-pane {
+    -fx-background-color: white;
+    background-color: white;
+
+}
+
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-border-color: transparent;
+    border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #c8c8c8;
+    background-color: #c8c8c8;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane>.corner {
+    -fx-background-color: white;
+    background-color: white;
+}

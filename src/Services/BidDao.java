@@ -8,6 +8,7 @@ package Services;
 import Entities.Auction;
 import Entities.Bid;
 import Entities.User;
+import Entities.Winner;
 import java.sql.Date;
 import java.util.List;
 
@@ -33,4 +34,6 @@ public interface BidDao {
     public int getNumberBids(int idCar);
 
     public Bid getMaxBidById(int id);
+    
+    public List<Winner> getBestBidders();
 }

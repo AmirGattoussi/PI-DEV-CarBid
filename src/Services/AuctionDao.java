@@ -35,4 +35,6 @@ public interface AuctionDao {
     public void WinnerNotificationMail();
 
     public void IncrementBid(int id, int userId, float amount);
+    public void IncrementBidMax(int id, int userId, float liveAmount, float maxAmount);
+    public void closeAuction(int id);
 }

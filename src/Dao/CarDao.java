@@ -193,7 +193,7 @@ public class CarDao implements IDao<Car> {
 
     @Override
     public Car displayById(int id_car) {
-        String req = "select * from Cars where id =" + id_car;
+        String req = "select * from car where id =" + id_car;
         Car p = new Car();
         try {
             rs = st.executeQuery(req);

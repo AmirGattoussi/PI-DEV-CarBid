@@ -216,12 +216,19 @@ public class BidDaoImplementation implements BidDao {
     public Bid getMaxBidById(int id) {
         try {
             PreparedStatement statement = cnx.prepareStatement(
-                    "SELECT b.userId,max(maxBidAmount) FROM bid b join auction a WHERE b.idAuction =a.idAuction and a.idAuction=? GROUP by b.idAuction;");
+                    "SELECT max(maxBidAmount) FROM bid b join auction a WHERE b.idAuction =a.idAuction and a.idAuction=? GROUP by b.idAuction;");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            PreparedStatement statement1 = cnx.prepareStatement(
+                    "SELECT userId FROM bid where maxBidAmount=?;");
             if (resultSet.next()) {
+                 statement1.setFloat(1, resultSet.getFloat("max(maxBidAmount)"));
+            }
+           
+            ResultSet resultSet2 = statement1.executeQuery();
+            if (resultSet2.next()) {
                 return new Bid(
-                        resultSet.getInt("userId"), resultSet.getFloat("max(maxBidAmount)"));
+                        resultSet2.getInt("userId"), resultSet.getFloat("max(maxBidAmount)"));
 
             }
 
@@ -232,6 +239,27 @@ public class BidDaoImplementation implements BidDao {
         }
         return null;
 
+    }
+
+    @Override
+    public List<Winner> getBestBidders() {
+     List<Winner> data = new ArrayList<Winner>();
+        PreparedStatement statement;
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT b.userId,u.name,COUNT(liveBidAmount),u.phone_number FROM bid b join user u JOIN auction a ON u.id_user=b.userId and a.idAuction = b.idAuction WHERE status = 'closed' AND b.liveBidAmount=a.highestBid GROUP BY 1 ORDER BY 3 DESC LIMIT 3;");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new Winner(
+                        resultSet.getString("name"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getInt("COUNT(liveBidAmount)")
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
     }
 
 }
