@@ -34,7 +34,7 @@ public class DashboardController implements Initializable {
     @FXML
     private NumberAxis userNumberAxis;
     UserDao user = new UserDao();
-
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize user data and add it to the user chart

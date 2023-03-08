@@ -236,7 +236,9 @@ public class AuctionDaoImplementation implements AuctionDao {
                         //remainingTime.equals("00:00:00")
                         if (timeLeft.toMinutes()<1  && status.equals("open")) {
                             System.out.println("entered");
-                            
+                            //i will past updateWinnerCar methode here
+                              //  new CarDao().updateWinnerCar(idAuc);
+                                
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(
                                         "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"

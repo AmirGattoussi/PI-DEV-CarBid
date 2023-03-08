@@ -32,6 +32,15 @@ public class Car {
     private String fueltype;
     private double baseprice = 10000;
     private String carImg;
+    private User owner;
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
     
 
     public Car() {
@@ -206,7 +215,7 @@ public class Car {
     @Override
     public String toString() {
         return "Cars{" + "id=" + id_car + ", model=" + model + ", color=" + color + ",type=" + type + ",make=" + make + ",description=" + description + ",mileage=" + mileage + ",year=" + year + ",fiscalpower=" + fiscalpower
-                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype + '}';
+                + ",transmission=" + transmission + ",loss=" + loss + ", primarydamage=" + primarydamage + ",secondarydamage=" + secondarydamage + ",fueltype=" + fueltype +"path:"+carImg +'}';
     }
 
     @Override
