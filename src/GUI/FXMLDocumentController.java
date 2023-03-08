@@ -365,4 +365,55 @@ public void calculerNombreParType() throws SQLException {
     }
 
 
+    @FXML
+    private void statesSP(ActionEvent event) {
+         try {
+            //taawed thezzek lel inscription
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
+            Parent root = loader.load();
+            btn_states.getScene().setRoot(root);
+           
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+public void calculerNombreParType() throws SQLException {
+
+        int NbrMoteur = 0;
+        int NbrDec = 0;
+        /*
+         private int id_sparepart;
+    private String type;
+    private int pou;
+    private String description;
+    private double price;
+    private String typec;
+        */
+
+        ServicesSpareParts us = new ServicesSpareParts();
+       ObservableList<SpareParts> list = FXCollections.observableArrayList();
+            id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
+            type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
+            pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
+            description_tab.setCellValueFactory(new PropertyValueFactory<>("description"));
+            price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
+            typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
+              list.addAll(us.display());
+            tablespareparts.setItems(list);
+      
+        for (SpareParts sp : list) {
+            if ("moteur".equals(sp.getType())) {
+                NbrMoteur += 1;
+
+            }
+            if ("dÃ©cor volan".equals(sp.getType())) {
+                NbrDec += 1;
+            }
+        }
+        System.out.println(NbrMoteur);
+        System.out.println(NbrDec);
+
+    }
+
+  
 }
