@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import Dao.ServicesSpareParts;
 import Entities.SpareParts;
 import Utils.PdfAPI;
-import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -309,7 +308,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void GeneratePdf(ActionEvent event) throws SQLException, FileNotFoundException, DocumentException, IOException {
+    private void GeneratePdf(ActionEvent event) throws SQLException, FileNotFoundException,, IOException {
         PdfAPI pdf = new PdfAPI();
 
         try {

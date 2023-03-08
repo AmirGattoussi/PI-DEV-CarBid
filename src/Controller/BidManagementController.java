@@ -39,19 +39,16 @@ import javafx.stage.Stage;
  * @author asus
  */
 public class BidManagementController implements Initializable {
-       @FXML
+    @FXML
     private Button btn_confirm;
     @FXML
     private CheckBox btn_terms;
-   
-    
- 
-   
+
     @FXML
     private Button btn_delete;
-     @FXML
+    @FXML
     private TableColumn<Bid, Integer> bidColumn;
-   @FXML
+    @FXML
     private TableView<Bid> tableViewBids;
     @FXML
     private TableColumn<Bid, Integer> userColumn;
@@ -74,28 +71,28 @@ public class BidManagementController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-         
-          BidDaoImplementation bidDao = new BidDaoImplementation(); List<Bid>
-          data = bidDao.getAllBids(); ObservableList<Bid> observableBidList =
-          FXCollections.observableList(data);
-         
-          bidColumn.setCellValueFactory(new PropertyValueFactory<>("idBid"));
-          userColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
-          auctionColumn.setCellValueFactory(new
-          PropertyValueFactory<>("idAuction"));
-          dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-          liveColumn.setCellValueFactory(new
-          PropertyValueFactory<>("liveBidAmount"));
-          maxColumn.setCellValueFactory(new
-          PropertyValueFactory<>("maxBidAmount"));
-         
-          tableViewBids.setItems(observableBidList); } catch (SQLException ex)
-          { Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
-         null, ex); }
+
+            BidDaoImplementation bidDao = new BidDaoImplementation();
+            List<Bid> data = bidDao.getAllBids();
+            ObservableList<Bid> observableBidList = FXCollections.observableList(data);
+
+            bidColumn.setCellValueFactory(new PropertyValueFactory<>("idBid"));
+            userColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+            auctionColumn.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            liveColumn.setCellValueFactory(new PropertyValueFactory<>("liveBidAmount"));
+            maxColumn.setCellValueFactory(new PropertyValueFactory<>("maxBidAmount"));
+
+            tableViewBids.setItems(observableBidList);
+        } catch (SQLException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
     }
-  @FXML
-  private void deleteBidAction(ActionEvent event) {
+
+    @FXML
+    private void deleteBidAction(ActionEvent event) {
         try {
             BidDaoImplementation bidDao = new BidDaoImplementation();
             Bid selectedBid = tableViewBids.getSelectionModel().getSelectedItem();
@@ -103,21 +100,21 @@ public class BidManagementController implements Initializable {
             if (selectedBid != null) {
                 tableViewBids.getItems().remove(selectedBid);
                 bidDao.deleteBid(selectedBid.getIdBid());
-            }
-            else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Invalid Input");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an item");
-            alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText(null);
+                alert.setContentText("Please select an item");
+                alert.showAndWait();
 
-        }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-  @FXML
+
+    @FXML
     private void updateBidAction(ActionEvent event) {
         Bid selectedBid = tableViewBids.getSelectionModel().getSelectedItem();
         if (selectedBid == null) {
@@ -140,32 +137,29 @@ public class BidManagementController implements Initializable {
                 controller.setValue(selectedBid.getIdBid());
                 BidDaoImplementation bidDao;
 
-
             } catch (IOException ex) {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
     }
-     @FXML
+
+    @FXML
     private void redirAuction(ActionEvent event) {
-     
-            try {
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AuctionManagement.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                AuctionManagementController controller = loader.getController();
-                stage.setScene(scene);
-                stage.show();
-                
-                
+        try {
 
-            } catch (IOException ex) {
-                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AuctionManagement.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            AuctionManagementController controller = loader.getController();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-  
+    }
+
 }
-  

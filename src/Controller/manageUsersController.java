@@ -104,7 +104,6 @@ public class manageUsersController implements Initializable {
                 System.out.println("Filter!");
             } else {
                 if (((Node) event.getSource()).getId() == detailsBtn.getId()) {
-
                 } else {
                     if (((Node) event.getSource()).getId() == cancelBtn.getId()) {
                         HBox hbox = (HBox) ((Node) event.getSource()).getParent();

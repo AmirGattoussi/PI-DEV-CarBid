@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package Services;
-import Entities.*;
 
+import Entities.*;
 
 import Entities.Auction;
 import java.sql.Date;
 import java.util.List;
-
 
 /**
  *
@@ -18,13 +17,24 @@ import java.util.List;
  */
 public interface AuctionDao {
     public void addAuction(Auction auction);
+
     public void deleteAuction(int id);
-    public void updateAuction(int id, float highestBid,String status,Date endDate);
-    public Auction getAuction(int id); 
-    public Float getHighestBidById(int idCar); 
+
+    public void updateAuction(int id, float highestBid, String status, Date endDate);
+
+    public Auction getAuction(int id);
+
+    public Float getHighestBidById(int idCar);
+
     public Date getDeadline(int idAuction);
+
     public List<Auction> getAllAuctions();
+
     public String getEmailWinner(int idUser);
+
     public void WinnerNotificationMail();
-    public void IncrementBid(int id,int userId,float amount);
+
+    public void IncrementBid(int id, int userId, float amount);
+    public void IncrementBidMax(int id, int userId, float liveAmount, float maxAmount);
+    public void closeAuction(int id);
 }

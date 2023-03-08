@@ -66,12 +66,13 @@ PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`( `id_user`, 
         
         pre.executeUpdate();
         /*
-           if ((text_live_id.getText().isEmpty()) && (!(txt_main_price.getText().isEmpty())) ) {
-          Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter only a live data.");
-                alert.showAndWait();}}
+         * if ((text_live_id.getText().isEmpty()) &&
+         * (!(txt_main_price.getText().isEmpty())) ) {
+         * Alert alert = new Alert(AlertType.WARNING);
+         * alert.setTitle("Invalid Input");
+         * alert.setHeaderText(null);
+         * alert.setContentText("Please enter only a live data.");
+         * alert.showAndWait();}}
          */
 
     }
@@ -100,7 +101,6 @@ PreparedStatement pre = cnx.prepareStatement("INSERT INTO `command`( `id_user`, 
           pre.setInt(2, u.getId_sparepart());
           pre.setString(3, u.getDate_cr());
 
-           
             pre.executeUpdate();
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());

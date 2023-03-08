@@ -32,3 +32,14 @@ public interface InterfaceCommand<T> {
     
 }
 
+    public void addcommand(T u) throws SQLException;
+
+    public void deletecommand(int id) throws SQLException;
+
+    public void modifycommand(T u) throws SQLException;
+
+    public SpareParts GetcommandById(int id) throws SQLException;
+
+    public ArrayList<T> display();
+
+}

@@ -25,7 +25,6 @@ import javafx.scene.control.TextField;
  * @author asus
  */
 public class UpdateAuctionController implements Initializable {
-
     private int aucId;
     @FXML
     private TextField highest_txt;
@@ -61,7 +60,9 @@ public class UpdateAuctionController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please enter a status");
             alert.showAndWait();
-        } else if (!(highest_txt.getText().matches("[0-9]*"))) {
+        }
+
+        else if (!(highest_txt.getText().matches("[0-9]*"))) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
@@ -69,7 +70,9 @@ public class UpdateAuctionController implements Initializable {
             alert.setContentText("Please enter only a number");
             alert.showAndWait();
 
-        } else if ((e_date_pick.getValue() == null)) {
+        }
+
+        else if ((e_date_pick.getValue() == null)) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
@@ -85,16 +88,22 @@ public class UpdateAuctionController implements Initializable {
             alert.showAndWait();
 
         } else {
-            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            LocalDate localDate = e_date_pick.getValue();
-            java.util.Date utilDate = java.sql.Date.valueOf(localDate);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            aucDao.updateAuction(aucId, Float.parseFloat(highest_txt.getText()), status_txt.getText(), sqlDate);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Update Auction");
-            alert.setHeaderText(null);
-            alert.setContentText("The auction is updated successfully.");
-            alert.showAndWait();
+            try {
+                AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+                LocalDate localDate = e_date_pick.getValue();
+                java.util.Date utilDate = java.sql.Date.valueOf(localDate);
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                aucDao.updateAuction(aucId, Float.parseFloat(highest_txt.getText()), status_txt.getText(), sqlDate);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Update Auction");
+                alert.setHeaderText(null);
+                alert.setContentText("The auction is updated successfully.");
+                alert.showAndWait();
+
+            } catch (Exception ex) {
+                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            }
 
         }
 

@@ -57,28 +57,42 @@ public class AuctionManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-        List<Auction> data = aucDao.getAllAuctions();
-        ObservableList<Auction> observableAuctionList = FXCollections.observableList(data);
-        auction_column.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
-        car_column.setCellValueFactory(new PropertyValueFactory<>("idCar"));
-        s_date_column.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        e_date_column.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        s_price_column.setCellValueFactory(new PropertyValueFactory<>("startingPrice"));
-        highest_column.setCellValueFactory(new PropertyValueFactory<>("highestBid"));
-        status_column.setCellValueFactory(new PropertyValueFactory<>("status"));
-        tableViewAuctions.setItems(observableAuctionList);
+        try {
+
+            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+            List<Auction> data = aucDao.getAllAuctions();
+            ObservableList<Auction> observableAuctionList = FXCollections.observableList(data);
+
+            auction_column.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
+            car_column.setCellValueFactory(new PropertyValueFactory<>("idCar"));
+            s_date_column.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+            e_date_column.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+            s_price_column.setCellValueFactory(new PropertyValueFactory<>("startingPrice"));
+            highest_column.setCellValueFactory(new PropertyValueFactory<>("highestBid"));
+            status_column.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+            tableViewAuctions.setItems(observableAuctionList);
+
+        } catch (Exception ex) {
+            Logger.getLogger(AuctionManagementController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
 
     }
 
     @FXML
     private void deleteAuctionAction(ActionEvent event) {
-        AuctionDaoImplementation bidDao = new AuctionDaoImplementation();
-        Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
-        if (selectedAuction != null) {
+        try {
+            AuctionDaoImplementation bidDao = new AuctionDaoImplementation();
+            Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
 
-            tableViewAuctions.getItems().remove(selectedAuction);
-            bidDao.deleteAuction(selectedAuction.getIdAuction());
+            if (selectedAuction != null) {
+
+                tableViewAuctions.getItems().remove(selectedAuction);
+                bidDao.deleteAuction(selectedAuction.getIdAuction());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -92,7 +106,6 @@ public class AuctionManagementController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please select an item");
             alert.showAndWait();
-
         } else {
             try {
 
@@ -109,12 +122,10 @@ public class AuctionManagementController implements Initializable {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     @FXML
     private void redirBid(ActionEvent event) {
-
         try {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

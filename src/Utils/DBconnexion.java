@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package Utils;
-import java.sql.*;
 
+import java.sql.*;
 
 /**
  *
  * @author neil
  */
 public class DBconnexion {
-  
+
   private static DBconnexion instance;
   private Connection connection;
   private String url = "jdbc:mysql://localhost:3306/carbid";
@@ -22,13 +22,12 @@ public class DBconnexion {
   private DBconnexion() throws SQLException {
     try {
       this.connection = DriverManager.getConnection(url, username, password);
-                System.out.println("Established connection !");
+      System.out.println("Established connection !");
 
+    } catch (SQLException ex) {
+      System.out.println("Connection error");
+      System.out.println(ex.getMessage());
     }
-    catch (SQLException ex) {
-            System.out.println("Connection error");
-            System.out.println(ex.getMessage());
-        }
   }
 
   public Connection getConnection() {

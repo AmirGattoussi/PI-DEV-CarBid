@@ -110,7 +110,8 @@ public class CarDao implements IDao<Car> {
             }
         } else {
             System.out.println("n'existe pas");
-        }; //To change body of generated methods, choose Tools | Templates.
+        }
+        ; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -178,7 +179,7 @@ public class CarDao implements IDao<Car> {
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list; //To change body of generated methods, choose Tools | Templates.
+        return list; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -205,11 +206,11 @@ public class CarDao implements IDao<Car> {
             p.setTransmission(rs.getString("transmission"));
             p.setYear(rs.getInt("year"));
 
-            //}  
+            // }
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return p; //To change body of generated methods, choose Tools | Templates.
+        return p; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -226,7 +227,7 @@ public class CarDao implements IDao<Car> {
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false; //To change body of generated methods, choose Tools | Templates.
+        return false; // To change body of generated methods, choose Tools | Templates.
     }
 
     public int getCarId(Car car) {

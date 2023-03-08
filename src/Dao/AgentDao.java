@@ -37,7 +37,7 @@ public class AgentDao {
     public void createAgent(Agent agent) {
         PreparedStatement statement;
         try {
-            //Create withoud agent ID
+            // Create withoud agent ID
             statement = cnx.prepareStatement(
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, agent.getName());
@@ -56,7 +56,7 @@ public class AgentDao {
         PreparedStatement statement3;
 
         try {
-            //Get Id_agent from Id_User
+            // Get Id_agent from Id_User
             statement2 = cnx.prepareStatement(
                     "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, agent.getName());
@@ -64,7 +64,7 @@ public class AgentDao {
             statement2.setInt(3, agent.getPhone_number());
             statement2.setString(4, agent.getLocation());
             ResultSet resultSet = statement2.executeQuery();
-            //Set ID User to ID Agent
+            // Set ID User to ID Agent
             if (resultSet.next()) {
                 id_agent = resultSet.getInt("id_user");
                 System.out.println(id_agent);
@@ -90,7 +90,8 @@ public class AgentDao {
             // execute the query and retrieve the results
             ResultSet resultSet = statement.executeQuery();
 
-            // if the result set contains a non-null value for admin_id, the user is an admin
+            // if the result set contains a non-null value for admin_id, the user is an
+            // admin
             if (resultSet.next()) {
                 int adminId = resultSet.getInt("id_agent");
                 return (adminId != 0);

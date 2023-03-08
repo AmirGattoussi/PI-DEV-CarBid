@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  * @author asus
  */
 public class AuctionDaoImplementation implements AuctionDao {
-
+    int i=0;
     Connection cnx;
 
     public AuctionDaoImplementation() {
@@ -82,8 +82,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         resultSet.getFloat("startingPrice"),
                         resultSet.getFloat("highestBid"),
                         resultSet.getString("status"),
-                        resultSet.getInt("idCar")
-                );
+                        resultSet.getInt("idCar"));
 
             }
 
@@ -180,8 +179,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         resultSet.getFloat("startingPrice"),
                         resultSet.getFloat("highestBid"),
                         resultSet.getString("status"),
-                        resultSet.getInt("idCar")
-                ));
+                        resultSet.getInt("idCar")));
             }
 
         } catch (SQLException ex) {
@@ -234,20 +232,14 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long minutes = timeLeft.toMinutes() % 60;
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                        //remainingTime="00:00:00";
-
-                        //timeLeft.toMinutes() < 1
-                        //remainingTime.equals("00:00:00")
-                        if (timeLeft.toMinutes() < 1 && status.equals("open")) {
+                        if (remainingTime.compareTo("00:00:00")<0 && status.equals("open")) {
                             System.out.println("entered");
 
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(
-                                        "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"
-                                );
+                                        "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount");
                                 PreparedStatement statement2 = cnx.prepareStatement(
-                                        "update auction set status='closed' where idAuction=?"
-                                );
+                                        "update auction set status='closed' where idAuction=?");
                                 statement1.setInt(1, idAuc);
                                 System.out.println(idAuc);
                                 statement2.setInt(1, idAuc);
@@ -263,7 +255,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                             } catch (SQLException ex) {
                                 Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
+                            i++;
                         }
                     }
 
@@ -303,6 +295,36 @@ public class AuctionDaoImplementation implements AuctionDao {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @Override
+    public void IncrementBidMax(int id, int userId, float liveAmount, float maxAmount) {
+        try {
+            PreparedStatement statement2 = cnx.prepareStatement(
+                    "update auction set highestBid= ? WHERE auction.idAuction = ?");
+            statement2.setFloat(1, liveAmount);
+            statement2.setInt(2, id);
+            statement2.executeUpdate();
+            System.out.println("updated successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+
+    @Override
+    public void closeAuction(int id) {
+        try {
+            PreparedStatement statement = cnx.prepareStatement(
+                    "update auction set status='closed' WHERE auction.idAuction = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            System.out.println("updated successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    
+    
     }
 
     public int getIdAuctionByCar(int idCar) {

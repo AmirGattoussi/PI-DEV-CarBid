@@ -101,7 +101,8 @@ public class SpareParts {
 
     @Override
     public String toString() {
-        return "SpareParts{" + "id_sparepart=" + id_sparepart + ", Type=" + type + ", Pou=" + pou + ", description=" + description + ", Price=" + price + ", typec=" + typec + '}';
+        return "SpareParts{" + "id_sparepart=" + id_sparepart + ", Type=" + type + ", Pou=" + pou + ", description="
+                + description + ", Price=" + price + ", typec=" + typec + '}';
     }
 
 }
