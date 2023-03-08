@@ -60,6 +60,5 @@ public class reservationDetailsController implements Initializable {
 
         /* Generate interactive map */
         MapsApi.generateMap(mapContainer);
-
     }
 }

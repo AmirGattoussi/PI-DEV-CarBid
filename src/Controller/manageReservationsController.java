@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import Dao.CarDao;
 import Dao.ReservationDao;
 import Entities.*;
 import javafx.util.Duration;
@@ -48,8 +50,8 @@ public class manageReservationsController extends manageReservationsAgencyContro
     // *********************************************
 
     ReservationDao r = new ReservationDao();
-    int currentUserID = 34;// CurrentUser.getUser().getId();
-    // CarsDao car = new CarsDao();
+    ReservationDetail rd = new ReservationDetail();
+    int currentUserID = 40;// CurrentUser.getUser().getId();
 
     @FXML
     private VBox reservationsPanel;
@@ -145,18 +147,26 @@ public class manageReservationsController extends manageReservationsAgencyContro
     private void refreshView() {
         ObservableList<Reservation> observableReservationList = returnLatestTable();
 
-        if (isTableEmpty(observableReservationList)) {
-            reservationsPanel.getChildren().clear();
-            pnlManageReservations.lookup("#noReservationYet").setVisible(true);
-        } else {
-            pnlManageReservations.lookup("#noReservationYet").setVisible(false);
-            for (Reservation reserv : observableReservationList) {
-                HBox reservation = generateReservationRow(reserv.getCar(), "car", reserv.getDate(),
-                        reserv.getLocation());
-                reservationsPanel.getChildren().add(reservation);
+        try {
+            CarDao c = new CarDao();
+
+            if (isTableEmpty(observableReservationList)) {
+                reservationsPanel.getChildren().clear();
+                pnlManageReservations.lookup("#noReservationYet").setVisible(true);
+            } else {
+                pnlManageReservations.lookup("#noReservationYet").setVisible(false);
+                for (Reservation reserv : observableReservationList) {
+                    HBox reservation = generateReservationRow(reserv.getCar(),
+                            c.displayById(reserv.getCar()).getModel(), reserv.getDate(),
+                            reserv.getLocation());
+                    reservationsPanel.getChildren().add(reservation);
+                }
             }
+            updateReservationCounter();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        updateReservationCounter();
     }
 
     /**
@@ -334,17 +344,32 @@ public class manageReservationsController extends manageReservationsAgencyContro
             popup.hide();
         });
 
+        /* Getting reservation details for specific car */
+        rd = r.reservationDetails(Id_user, Id_car).get(0);
+
         /**
          * Populating the details popup labels.
          */
-        // Label agencyLabel = (Label) popupContent.lookup("#AgencyNameField");
-        // agencyLabel.setText("" + u.getUserById(Id_user).getName());
-        // Label userPhoneLabel = (Label) popupContent.lookup("#AgencyPhoneField");
-        // userPhoneLabel.setText("" + u.getUserById(Id_user).getPhone_number());
+        Label agencyLabel = (Label) popupContent.lookup("#agencyNameField");
+        agencyLabel.setText("" + rd.getName());
+
+        Label agencyPhoneLabel = (Label) popupContent.lookup("#agencyPhoneField");
+        agencyPhoneLabel.setText("" + rd.getPhoneNumber());
+
+        Label agencyEmailLabel = (Label) popupContent.lookup("#agencyEmailField");
+        agencyEmailLabel.setText("" + rd.getEmail());
+
+        Label carMakeLabel = (Label) popupContent.lookup("#carBrandField");
+        carMakeLabel.setText("" + rd.getMake());
+
+        Label carModelLabel = (Label) popupContent.lookup("#carModelField");
+        carModelLabel.setText("" + rd.getModel());
+
         Label dateLabel = (Label) popupContent.lookup("#dateField");
-        dateLabel.setText("" + r.getReservation(Id_user, Id_car).getDate());
+        dateLabel.setText("" + rd.getDate());
+
         Label locationLabel = (Label) popupContent.lookup("#locationField");
-        locationLabel.setText("" + r.getReservation(Id_user, Id_car).getLocation());
+        locationLabel.setText("" + rd.getLocation());
 
         pnlManageReservations.getChildren().add(overlay); // Adding overlay to View.
 

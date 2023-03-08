@@ -1,6 +1,6 @@
 package Dao;
 
-import Entities.Reservation;
+import Entities.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -335,9 +335,31 @@ public class ReservationDao implements IReservationDao {
      * @param void
      */
     @Override
-    public List<Object> reservationDetails() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reservationDetails'");
+    public List<ReservationDetail> reservationDetails(int id_user, int id_car) {
+        List<ReservationDetail> data = new ArrayList<ReservationDetail>();
+
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT u.name, u.phone_number,u.email,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_agent=r.id_agent AND r.id_car=c.id_car WHERE u.id_agent IS NOT NULL AND r.id_user=? AND r.id_car=?;");
+
+            statement.setInt(1, id_user);
+            statement.setInt(2, id_car);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new ReservationDetail(
+                        resultSet.getString("name"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("email"),
+                        resultSet.getString("make"),
+                        resultSet.getString("model"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     /**
@@ -347,8 +369,31 @@ public class ReservationDao implements IReservationDao {
      * @param void
      */
     @Override
-    public List<Object> reservationDetailsAgency() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reservationDetailsAgency'");
+    public List<ReservationDetail> reservationDetailsAgency(int id_user, int id_car) {
+        List<ReservationDetail> data = new ArrayList<ReservationDetail>();
+
+        try {
+            statement = cnx.prepareStatement(
+                    "SELECT u.name, u.phone_number,u.email,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_user=r.id_user AND r.id_car=c.id_car WHERE r.id_user=? AND r.id_car=?;");
+
+            statement.setInt(1, id_user);
+            statement.setInt(2, id_car);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                data.add(new ReservationDetail(
+                        resultSet.getString("name"),
+                        resultSet.getInt("phone_number"),
+                        resultSet.getString("email"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("make"),
+                        resultSet.getString("model"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }
