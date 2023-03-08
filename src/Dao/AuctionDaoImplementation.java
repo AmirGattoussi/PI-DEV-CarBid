@@ -36,8 +36,12 @@ public class AuctionDaoImplementation implements AuctionDao {
 
     Connection cnx;
 
-    public AuctionDaoImplementation() throws SQLException {
-        cnx = DBconnexion.getInstance().getConnection();
+    public AuctionDaoImplementation() {
+        try {
+            cnx = DBconnexion.getInstance().getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -45,7 +49,7 @@ public class AuctionDaoImplementation implements AuctionDao {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement(
-                    "INSERT INTO auction (startDate, endDate, startingPrice,highestBid,status,carId) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO auction (startDate, endDate, startingPrice,highestBid,status,idCar) VALUES (?, ?, ?, ?, ?, ?)");
             statement.setDate(1, auction.getStartDate());
             statement.setDate(2, auction.getEndDate());
             statement.setFloat(3, auction.getStartingPrice());
@@ -78,7 +82,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         resultSet.getFloat("startingPrice"),
                         resultSet.getFloat("highestBid"),
                         resultSet.getString("status"),
-                        resultSet.getInt("carId")
+                        resultSet.getInt("idCar")
                 );
 
             }
@@ -212,7 +216,7 @@ public class AuctionDaoImplementation implements AuctionDao {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new Runnable() {
             public void run() {
-    
+
                 try {
                     System.out.println("start ");
                     PreparedStatement statement = cnx.prepareStatement(
@@ -231,17 +235,17 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                         //remainingTime="00:00:00";
-                      
+
                         //timeLeft.toMinutes() < 1
                         //remainingTime.equals("00:00:00")
-                        if (timeLeft.toMinutes()<1  && status.equals("open")) {
+                        if (timeLeft.toMinutes() < 1 && status.equals("open")) {
                             System.out.println("entered");
-                            
+
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(
                                         "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"
                                 );
-                                 PreparedStatement statement2 = cnx.prepareStatement(
+                                PreparedStatement statement2 = cnx.prepareStatement(
                                         "update auction set status='closed' where idAuction=?"
                                 );
                                 statement1.setInt(1, idAuc);
@@ -254,8 +258,8 @@ public class AuctionDaoImplementation implements AuctionDao {
                                     String winnerEmail = resultSet2.getString("email");
                                     System.out.println(winnerEmail);
                                     MailApi.sendMail(winnerEmail);
-                                  
-                                } 
+
+                                }
                             } catch (SQLException ex) {
                                 Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -272,16 +276,17 @@ public class AuctionDaoImplementation implements AuctionDao {
         }, 0, 1, TimeUnit.MINUTES);
 
     }
+
     @Override
-    public void IncrementBid(int id,int userId,float amount) {
-      PreparedStatement statement;
-      PreparedStatement statement1;
+    public void IncrementBid(int id, int userId, float amount) {
+        PreparedStatement statement;
+        PreparedStatement statement1;
         try {
             statement = cnx.prepareStatement(
                     "UPDATE auction SET  `highestBid` = ? WHERE `auction`.`idAuction` = ?;");
             statement1 = cnx.prepareStatement(
                     "INSERT INTO bid (userId,idAuction, date,type,liveBidAmount,maxBidAmount) VALUES (?, ?, now(),'Live', ?,0)");
-             PreparedStatement statement2 = cnx.prepareStatement(
+            PreparedStatement statement2 = cnx.prepareStatement(
                     "update auction set highestBid= ? WHERE auction.idAuction = ?");
             statement.setFloat(1, amount);
             statement.setInt(2, id);
@@ -290,15 +295,34 @@ public class AuctionDaoImplementation implements AuctionDao {
             statement1.setFloat(3, amount);
             statement.executeUpdate();
             statement1.executeUpdate();
-             statement2.setFloat(1, amount);
+            statement2.setFloat(1, amount);
             statement2.setInt(2, id);
             statement2.executeUpdate();
             System.out.println("updated successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    
-    
-    
+        }
+
+    }
+
+    public int getIdAuctionByCar(int idCar) {
+        PreparedStatement statement;
+        int idAuction = 0;
+        try {
+            statement = cnx.prepareStatement("SELECT idAuction FROM auction WHERE idCar= ?");
+            statement.setInt(1, idCar);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+
+                idAuction = resultSet.getInt("idAuction");
+            }
+            else{
+                System.err.println("Auction does not exist");}
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idAuction;
+
     }
 }

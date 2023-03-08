@@ -57,47 +57,33 @@ public class AuctionManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-
-            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-            List<Auction> data = aucDao.getAllAuctions();
-            ObservableList<Auction> observableAuctionList= FXCollections.observableList(data);
-
-            auction_column.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
-            car_column.setCellValueFactory(new PropertyValueFactory<>("idCar"));
-            s_date_column.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-            e_date_column.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-            s_price_column.setCellValueFactory(new PropertyValueFactory<>("startingPrice"));
-            highest_column.setCellValueFactory(new PropertyValueFactory<>("highestBid"));
-            status_column.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-    tableViewAuctions.setItems(observableAuctionList);
-
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AuctionManagementController.class.getName()).log(Level.SEVERE,
-                    null, ex);
-        }
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+        List<Auction> data = aucDao.getAllAuctions();
+        ObservableList<Auction> observableAuctionList = FXCollections.observableList(data);
+        auction_column.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
+        car_column.setCellValueFactory(new PropertyValueFactory<>("idCar"));
+        s_date_column.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        e_date_column.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        s_price_column.setCellValueFactory(new PropertyValueFactory<>("startingPrice"));
+        highest_column.setCellValueFactory(new PropertyValueFactory<>("highestBid"));
+        status_column.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tableViewAuctions.setItems(observableAuctionList);
 
     }
+
     @FXML
-  private void deleteAuctionAction(ActionEvent event) {
-        try {
-            AuctionDaoImplementation bidDao = new AuctionDaoImplementation();
-            Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
+    private void deleteAuctionAction(ActionEvent event) {
+        AuctionDaoImplementation bidDao = new AuctionDaoImplementation();
+        Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
+        if (selectedAuction != null) {
 
-            if (selectedAuction != null) {
-
-                tableViewAuctions.getItems().remove(selectedAuction);
-                bidDao.deleteAuction(selectedAuction.getIdAuction());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+            tableViewAuctions.getItems().remove(selectedAuction);
+            bidDao.deleteAuction(selectedAuction.getIdAuction());
         }
 
     }
-   @FXML
+
+    @FXML
     private void updateAuctionAction(ActionEvent event) {
         Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
         if (selectedAuction == null) {
@@ -118,7 +104,6 @@ public class AuctionManagementController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
                 controller.setValue(selectedAuction.getIdAuction());
-                
 
             } catch (IOException ex) {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,26 +111,23 @@ public class AuctionManagementController implements Initializable {
         }
 
     }
-     @FXML
+
+    @FXML
     private void redirBid(ActionEvent event) {
-     
-            try {
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid_management.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                BidManagementController controller = loader.getController();
-                stage.setScene(scene);
-                stage.show();
-                
-                
+        try {
 
-            } catch (IOException ex) {
-                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid_management.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            BidManagementController controller = loader.getController();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    
+    }
 
 }

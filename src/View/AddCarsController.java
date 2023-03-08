@@ -5,6 +5,8 @@
  */
 package View;
 
+import Controller.AddAuctionDetailsController;
+import Controller.RegisterController;
 import Dao.CarDao;
 import Entities.Car;
 import java.io.IOException;
@@ -199,12 +201,26 @@ public class AddCarsController implements Initializable {
                 );
 
                 cardao.insert(c);
+                int carId = cardao.getCarId(c);
+                System.out.println(carId);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Insert Car");
                 alert.setHeaderText(null);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCarsController.fxml"));
                 alert.setContentText("The car is inserted successfully.");
                 alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/addAuctionDetails.fxml"));
+                Parent loginParent;
+                try {
+                    loginParent = loader.load();
+                    AddAuctionDetailsController controller = loader.getController();
+                    controller.setCarId(carId);
+                    Scene loginScene = new Scene(loginParent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(loginScene);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(AddCarsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,6 +252,7 @@ public class AddCarsController implements Initializable {
         cardao.update(c);
 
     }
+
     @FXML
     private void backhome(ActionEvent event) {
         try {

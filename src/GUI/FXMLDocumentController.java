@@ -120,7 +120,6 @@ public class FXMLDocumentController implements Initializable {
                         return true;
                     }
 
-                    
                     String lowerCaseFilter = newValue.toLowerCase();
 
                     if (spareparts.getType().toLowerCase().contains(lowerCaseFilter)) {
@@ -298,7 +297,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void GeneratePdf(ActionEvent event) throws SQLException,FileNotFoundException, DocumentException, IOException {
+    private void GeneratePdf(ActionEvent event) throws SQLException, FileNotFoundException, DocumentException, IOException {
         PdfAPI pdf = new PdfAPI();
 
         try {
@@ -314,17 +313,18 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void statesSP(ActionEvent event) {
-         try {
+        try {
             //taawed thezzek lel inscription
             FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
             Parent root = loader.load();
             btn_states.getScene().setRoot(root);
-           
+
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public void calculerNombreParType() throws SQLException {
+
+    public void calculerNombreParType() throws SQLException {
 
         int NbrMoteur = 0;
         int NbrDec = 0;
@@ -335,19 +335,19 @@ public void calculerNombreParType() throws SQLException {
     private String description;
     private double price;
     private String typec;
-        */
+         */
 
         ServicesSpareParts us = new ServicesSpareParts();
-       ObservableList<SpareParts> list = FXCollections.observableArrayList();
-            id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
-            type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
-            pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
-            description_tab.setCellValueFactory(new PropertyValueFactory<>("description"));
-            price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
-            typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
-              list.addAll(us.display());
-            tablespareparts.setItems(list);
-      
+        ObservableList<SpareParts> list = FXCollections.observableArrayList();
+        id_tab.setCellValueFactory(new PropertyValueFactory<>("id"));
+        type_tab.setCellValueFactory(new PropertyValueFactory<>("type"));
+        pou_tab.setCellValueFactory(new PropertyValueFactory<>("pou"));
+        description_tab.setCellValueFactory(new PropertyValueFactory<>("description"));
+        price_tab.setCellValueFactory(new PropertyValueFactory<>("price"));
+        typec_tab.setCellValueFactory(new PropertyValueFactory<>("typec"));
+        list.addAll(us.display());
+        tablespareparts.setItems(list);
+
         for (SpareParts sp : list) {
             if ("moteur".equals(sp.getType())) {
                 NbrMoteur += 1;
@@ -362,5 +362,4 @@ public void calculerNombreParType() throws SQLException {
 
     }
 
-  
 }
