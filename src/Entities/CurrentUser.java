@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Entities;
 
 /**
  *
  * @author gtsia
  */
+import Dao.UserDao;
 public class CurrentUser {
 
     private static User user;

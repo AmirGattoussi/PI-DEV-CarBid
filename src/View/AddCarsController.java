@@ -95,7 +95,8 @@ public class AddCarsController implements Initializable {
     private Object imgView;
     private String imagePath;
     private String[] type;
-    private FileChooser fileChooser = new FileChooser();
+    private FileChooser fileChooser= new FileChooser();
+    String path;
 
     /**
      * Initializes the controller class.
@@ -300,7 +301,6 @@ public class AddCarsController implements Initializable {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @FXML
 
     private void Import(ActionEvent event) throws IOException {
@@ -311,8 +311,17 @@ public class AddCarsController implements Initializable {
 
         File file = this.fileChooser.showOpenDialog(primaryStage);
         this.imagePath = file.getPath();
-        String phpUrl = "C:/xamppp/htdocs/piImg/piImg.php";
-        // String imageFilePath = "C:\\xamppp\\htdocs\\piImg";
+        
+        
+        path = file.getName();
+        System.out.println(path);
+        for (char c : file.getPath().toCharArray()) {
+            
+        }
+  
+        System.out.println(file.toPath());
+     String phpUrl = "http://localhost/piImg/piImg.php";
+//        String imageFilePath = "C:\\xamppp\\htdocs\\piImg";
 
         // Read the image file data
         byte[] imageData = Files.readAllBytes(file.toPath());
@@ -346,7 +355,8 @@ public class AddCarsController implements Initializable {
             System.out.println(line);
         }
         reader.close();
-
+        String x = "http://localhost/piImg/" + this.path;
+    imgid.setImage(new Image(new URL(x).openStream(),245,237,false,true));
     }
 
 }

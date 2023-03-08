@@ -33,6 +33,7 @@ public class CarDao implements IDao<Car> {
     private ResultSet rs;
     private Statement st;
     private Connection conn;
+        UserDao  userDao = new UserDao();
 
     public static CarDao getInstance() {
         if (instance == null) {
@@ -68,7 +69,7 @@ public class CarDao implements IDao<Car> {
         } */
 
         //To change body of generated methods, choose Tools | Templates.
-        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_user) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_user,carImg) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req);
@@ -86,6 +87,7 @@ public class CarDao implements IDao<Car> {
             pst.setString(12, car.getSecondarydamage());
             pst.setString(13, car.getFueltype());
             pst.setInt(14, CurrentUser.getUser().getId());
+            pst.setString(15, car.getCarImg());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
@@ -94,6 +96,10 @@ public class CarDao implements IDao<Car> {
         }
 
     }
+
+
+
+
 
     @Override
     public void delete(Car car) {
@@ -138,6 +144,8 @@ public class CarDao implements IDao<Car> {
                 p.setSecondarydamage(rs.getString("secondarydamage"));
                 p.setTransmission(rs.getString("transmission"));
                 p.setYear(rs.getInt("year"));
+                            p.setOwner(userDao.getUserById(rs.getInt("id_user")));
+                            p.setCarImg(rs.getString("carImg"));
 
                 list.add(p);
             }
@@ -205,6 +213,7 @@ public class CarDao implements IDao<Car> {
             p.setSecondarydamage(rs.getString("secondarydamage"));
             p.setTransmission(rs.getString("transmission"));
             p.setYear(rs.getInt("year"));
+            p.setOwner(userDao.getUserById(rs.getInt("id_user")));
 
             // }
         } catch (SQLException ex) {
@@ -262,4 +271,35 @@ public class CarDao implements IDao<Car> {
         return id_car;
 
     }
+    
+    public void updateWinnerCar(int idAuc) throws SQLException{
+                                    int idCar = 0;
+                                    int iduser = 0;
+                                        PreparedStatement statement1 = conn.prepareStatement(
+                                        "SELECT u.id_user,a.idCar FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"
+                                );
+                                        statement1.setInt(1, idAuc);
+                                         PreparedStatement statement = conn.prepareStatement(
+                                        "update cars set id_user=?,solde = ? where id_car=?"
+                                );
+                                         try{
+                                         ResultSet resultSet = statement1.executeQuery();
+                                         if (resultSet.next()) {
+                                    iduser = resultSet.getInt(1);
+                                    idCar = resultSet.getInt(2);
+                                    System.out.println(iduser + " --- "+ idCar);
+                                    
+                                  
+                                } 
+                            } catch (SQLException ex) {
+                                Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                         
+                                            statement.setInt(3, idCar);
+                                            statement.setInt(1, iduser);
+                                            statement.setBoolean(2, true);
+                                            statement.executeUpdate();
+                
+                
+}
 }

@@ -33,12 +33,8 @@
             <Pane layoutX="160.0" layoutY="9.0" prefHeight="226.0" prefWidth="654.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Button fx:id="btnBack" layoutX="11.0" layoutY="22.0" mnemonicParsing="false" onAction="#Back" text="&lt; Back To Menu" />
-                  <ImageView fitHeight="92.0" fitWidth="126.0" layoutX="20.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/damcar.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="195.0" layoutY="90.0" prefHeight="22.0" prefWidth="230.0" text=" BMW 3 SERIES 330I">
+                  <ImageView fx:id="imageC" fitHeight="92.0" fitWidth="126.0" layoutX="20.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="201.0" layoutY="66.0" prefHeight="22.0" prefWidth="230.0" text=" BMW 3 SERIES 330I">
                      <font>
                         <Font name="Cambria" size="18.0" />
                      </font>
@@ -54,7 +50,7 @@
                         <Image url="@../../../../../../Downloads/ICON-MM-01-0001.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="bidButton" layoutX="435.0" layoutY="114.0" mnemonicParsing="false" onAction="#setbid" text="Place Bid" />
+                  <Button fx:id="bidButton" layoutX="478.0" layoutY="114.0" mnemonicParsing="false" text="Place Bid" />
                   <Button layoutX="233.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Make appointment" />
                   <Button fx:id="btnPdf" layoutX="383.0" layoutY="114.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="26.0" prefWidth="63.0" text="Export" />
                </children>
@@ -111,6 +107,8 @@
                         <Text fx:id="textmileage" layoutX="88.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="entryPrice" layoutX="251.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="entryPrice" />
                         <Label layoutX="166.0" layoutY="131.0" text="Bid entry price" />
+                        <Label layoutX="166.0" layoutY="195.0" prefHeight="17.0" prefWidth="119.0" text="owner name:" />
+                        <Text fx:id="textOwner" layoutX="240.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>
                </children>

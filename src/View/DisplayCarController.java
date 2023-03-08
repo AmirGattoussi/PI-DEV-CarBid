@@ -19,21 +19,28 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.net.MalformedURLException;
+//import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,10 +51,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+
+
+
+
 
 /**
  * FXML Controller class
@@ -101,6 +114,13 @@ public class DisplayCarController implements Initializable {
     private Text textft;
     @FXML
     private Text textDesc;
+      @FXML
+    private Text textOwner;
+      @FXML
+    private ImageView imageC;
+      private javafx.scene.image.Image imageData;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -170,15 +190,13 @@ public class DisplayCarController implements Initializable {
         }
         
     }
-    
-    
-    public void setValue(Car car) {
-        
+    public void setValue(Car car) throws IOException {
+
         this.selectedCar = car;
         initcar();
     }
-    
-    private void initcar() {
+
+    private void initcar() throws MalformedURLException, IOException {
         System.out.println(selectedCar);
         textcolor.setText(selectedCar.getColor());
         texttype.setText(selectedCar.getType());
@@ -194,8 +212,29 @@ public class DisplayCarController implements Initializable {
         textDesc.setText(selectedCar.getDescription());
         textsd.setText(selectedCar.getSecondarydamage());
         textpd.setText(selectedCar.getPrimarydamage());
+        textOwner.setText(selectedCar.getOwner().getName());
+        System.out.println(selectedCar.getOwner().getName());
+        System.out.println(selectedCar.getCarImg());
+        String path = "http://localhost/piImg/"+selectedCar.getCarImg();
+        //URL url = new URL(path);
+        //HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+       // connection.setDoOutput(true);
+      //  connection.setRequestMethod("GET");
+      try {
+       imageData =new javafx.scene.image.Image( new java.net.URL(path).openStream());
+      //new javafx.scene.image.Image(in)
+       imageC.setImage(imageData);
 
-
+        // Decode the Base64 string to a byte array
+        //byte[] decodedData = Base64.getDecoder().decode(imageData);
+        //imageC.setImage(new javafx.scene.image.Image(imageData,245,237,false,true));
+        //URL url = new URL(selectedCar.getCarImg()+"http://localhost/piImg/"+selectedCar.getCarImg());
+        //System.out.println(url.getPath());
+        //imageC.setImage(new javafx.scene.image.Image(url.openStream(),245,237,false,true));
+        } catch (Exception e) {
+            e.printStackTrace();
+           // System.err.println(e.fillInStackTrace());
+      }
     //    textcolor.setText(selectedCar.getColor());
 
     }
@@ -216,7 +255,7 @@ public class DisplayCarController implements Initializable {
             //pst= cnx.getConnection().prepareStatement(guery);
             //rs= pst.executeQuery();
             
-            String file_name = "Cars2.pdf";
+            String file_name = selectedCar.getId()+"_" +selectedCar.getMake()+".pdf";
             Document doc = new Document();
             PdfWriter.getInstance(doc, new FileOutputStream(file_name));
             
@@ -380,8 +419,12 @@ public class DisplayCarController implements Initializable {
             table.addCell(cell);
             
             doc.add(table);
+            com.itextpdf.text.Image imagePdf = com.itextpdf.text.Image.getInstance(SwingFXUtils.fromFXImage(imageData, null),null);
+            //imagePdf.setDpi(150, 100);
+            imagePdf.scaleAbsolute(300, 250);
+            imagePdf.setAbsolutePosition(150, 400);
             
-            doc.add(Image.getInstance("C:\\Users\\rima\\OneDrive\\Desktop\\pidev\\PI-DEV-CarBid\\src\\Images\\damcar.jpg"));
+            doc.add( imagePdf);
 
             System.out.println("PDF exported");
             doc.close();
