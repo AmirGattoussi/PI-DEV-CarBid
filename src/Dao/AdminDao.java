@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +46,7 @@ public class AdminDao implements IAdminDao {
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
             statement.setString(2, admin.getEmail());
-            statement.setString(3, admin.getPassword());
+            statement.setString(3, PasswordHasher.hash(admin.getPassword()));
             statement.setInt(4, admin.getPhone_number());
             statement.setString(5, admin.getLocation());
 
@@ -60,12 +62,11 @@ public class AdminDao implements IAdminDao {
         try {
             //Get Id_admin from Id_User
             statement2 = cnx.prepareStatement(
-                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND password = ? AND phone_number = ? AND location = ?");
+                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, admin.getName());
             statement2.setString(2, admin.getEmail());
-            statement2.setString(3, admin.getPassword());
-            statement2.setInt(4, admin.getPhone_number());
-            statement2.setString(5, admin.getLocation());
+            statement2.setInt(3, admin.getPhone_number());
+            statement2.setString(4, admin.getLocation());
             ResultSet resultSet = statement2.executeQuery();
             //Set ID User to ID Admin
             if (resultSet.next()) {
@@ -113,7 +114,9 @@ public class AdminDao implements IAdminDao {
 
     @Override
     public List<User> sortUsers_byUsername() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<User> userList = view_users();
+        Collections.sort(userList, (User u1, User u2) -> u1.getName().compareTo(u2.getName()));
+        return userList;
     }
 
     @Override
@@ -123,7 +126,7 @@ public class AdminDao implements IAdminDao {
 
     @Override
     public void suspend_user() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -134,6 +137,31 @@ public class AdminDao implements IAdminDao {
     @Override
     public void updateAdmin(Admin admin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean isAdmin(int userId) {
+
+        try {
+            // create a PreparedStatement to execute a query
+            PreparedStatement statement = cnx.prepareStatement("SELECT id_admin FROM user WHERE id_user = ?");
+            statement.setInt(1, userId);
+
+            // execute the query and retrieve the results
+            ResultSet resultSet = statement.executeQuery();
+
+            // if the result set contains a non-null value for admin_id, the user is an admin
+            if (resultSet.next()) {
+                int adminId = resultSet.getInt("id_admin");
+                return (adminId != 0);
+            }
+
+            // if the result set is empty, the user is not found in the database
+            // throw an exception to indicate this
+            throw new SQLException("User not found in database");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

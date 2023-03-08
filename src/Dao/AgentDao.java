@@ -42,7 +42,7 @@ public class AgentDao {
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, agent.getName());
             statement.setString(2, agent.getEmail());
-            statement.setString(3, agent.getPassword());
+            statement.setString(3, PasswordHasher.hash(agent.getPassword()));
             statement.setInt(4, agent.getPhone_number());
             statement.setString(5, agent.getLocation());
 
@@ -58,12 +58,11 @@ public class AgentDao {
         try {
             //Get Id_agent from Id_User
             statement2 = cnx.prepareStatement(
-                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND password = ? AND phone_number = ? AND location = ?");
+                    "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, agent.getName());
             statement2.setString(2, agent.getEmail());
-            statement2.setString(3, agent.getPassword());
-            statement2.setInt(4, agent.getPhone_number());
-            statement2.setString(5, agent.getLocation());
+            statement2.setInt(3, agent.getPhone_number());
+            statement2.setString(4, agent.getLocation());
             ResultSet resultSet = statement2.executeQuery();
             //Set ID User to ID Agent
             if (resultSet.next()) {
@@ -79,6 +78,31 @@ public class AgentDao {
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean isAgent(int userId) {
+
+        try {
+            // create a PreparedStatement to execute a query
+            PreparedStatement statement = cnx.prepareStatement("SELECT id_agent FROM user WHERE id_user = ?");
+            statement.setInt(1, userId);
+
+            // execute the query and retrieve the results
+            ResultSet resultSet = statement.executeQuery();
+
+            // if the result set contains a non-null value for admin_id, the user is an admin
+            if (resultSet.next()) {
+                int adminId = resultSet.getInt("id_agent");
+                return (adminId != 0);
+            }
+
+            // if the result set is empty, the user is not found in the database
+            // throw an exception to indicate this
+            throw new SQLException("User not found in database");
+        } catch (SQLException ex) {
+            Logger.getLogger(AgentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

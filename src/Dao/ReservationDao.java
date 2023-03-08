@@ -245,4 +245,21 @@ public class ReservationDao implements IReservationDao {
 
         return filteredData;
     }
+
+    // A JOB method that returns the total number of reservations
+    @Override
+    public int getNumberOfReservations() {
+        int count = 0;
+        try {
+            statement = cnx.prepareStatement("SELECT COUNT(*) FROM reservation");
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 }

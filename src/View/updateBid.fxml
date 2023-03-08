@@ -13,7 +13,7 @@
       <Button layoutX="426.0" layoutY="317.0" mnemonicParsing="false" onAction="#updateBidAct" prefHeight="25.0" prefWidth="89.0" text="Confirm" />
       <TextField fx:id="txt_live" layoutX="151.0" layoutY="224.0" prefHeight="25.0" prefWidth="174.0" />
       <Label layoutX="46.0" layoutY="154.0" text="Date" />
-      <Label layoutX="46.0" layoutY="191.0" text="Status" />
+      <Label layoutX="46.0" layoutY="191.0" text="Type" />
       <Label layoutX="46.0" layoutY="228.0" style="-fx-font-size: 12;" text="Live Bid Amount" />
       <Label layoutX="46.0" layoutY="265.0" text="Max Bid Amount" />
       <TextField fx:id="txt_max" layoutX="151.0" layoutY="264.0" prefHeight="25.0" prefWidth="174.0" />

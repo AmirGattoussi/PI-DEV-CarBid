@@ -14,7 +14,6 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,38 +44,35 @@ public class CarConfirmController implements Initializable {
      */
     @FXML
     private Button btn;
-    
+    public int userId = 2;
+    public int carId = 1;
+    public int auctionId = 2;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-//        btn.setOnAction(event->{
-//            txt.setText("The first workshop :)))");
-//        });
-    
+
     }
-    
-@FXML
- void redir(ActionEvent event)  {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
-                Parent root = loader.load();
-                 BidController controller = loader.getController();
 
-    Stage stage = new Stage();
-    stage.setScene(new Scene(root));
-    stage.setTitle("New View");
-    stage.show();
-    
-            } catch (IOException ex) {
-                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-   
+    @FXML
+    void redir(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
+
+            BidController bidcontroller = new BidController(userId, carId, auctionId);
+
+            loader.setController(bidcontroller);
+// bidcontroller.setValueCar(carId);
+            //bidcontroller.setValueUser(userId);
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("New View");
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }
-    
-    
-    
-    
-    
-}
-
-

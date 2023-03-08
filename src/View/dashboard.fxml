@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="896.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+    <children>
+      <Pane layoutX="21.0" layoutY="314.0" prefHeight="268.0" prefWidth="506.0">
+         <children>
+              <VBox prefHeight="313.0" prefWidth="490.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="489.0" text="User Data" />
+                  <BarChart fx:id="userChart" prefHeight="250.0" prefWidth="339.0">
+                      <xAxis>
+                          <CategoryAxis fx:id="userCategoryAxis" />
+                      </xAxis>
+                      <yAxis>
+                          <NumberAxis fx:id="userNumberAxis" />
+                      </yAxis>
+                  </BarChart>
+              </VBox>
+         </children>
+      </Pane>
+      <Pane layoutX="571.0" layoutY="314.0" prefHeight="250.0" prefWidth="444.0">
+         <children>
+            <PieChart fx:id="conversionChart" prefHeight="250.0" prefWidth="444.0" title="Conversion Rate Chart" />
+         </children>
+      </Pane>
+      <HBox layoutX="363.0" layoutY="95.0" prefHeight="100.0" prefWidth="317.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of clicks" />
+                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of Auctions" />
+                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of Users" />
+                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>  
+    </children>
+</AnchorPane>

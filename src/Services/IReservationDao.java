@@ -22,6 +22,8 @@ public interface IReservationDao {
 
     public List<Reservation> getReservations();
 
+    public int getNumberOfReservations();
+
     // JOB methods
     public List<Reservation> filterReservationsByUser(int id_user);
 

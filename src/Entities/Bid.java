@@ -19,7 +19,27 @@ public class Bid {
     private String type;
     private float liveBidAmount;
     private float maxBidAmount;
+    private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Bid(String name,Date date, float liveBidAmount ) {
+        this.date = date;
+        this.liveBidAmount = liveBidAmount;
+        this.name = name;
+    }
+    
+    public Bid(int userId, float maxBidAmount) {
+        this.userId = userId;
+        this.maxBidAmount = maxBidAmount;
+    }
+    
     public Bid(int id_bid, int userId, int idAuction, Date date, String type, float liveBidAmount, float maxBidAmount) {
         this.idBid = id_bid;
         this.userId = userId;
@@ -115,6 +135,12 @@ public class Bid {
         this.idAuction = idAuction;
         this.liveBidAmount = liveBidAmount;
         this.maxBidAmount = maxBidAmount;
+    }
+
+    public Bid(int userId, Date date, float liveBidAmount) {
+        this.userId = userId;
+        this.date = date;
+        this.liveBidAmount = liveBidAmount;
     }
     
 
