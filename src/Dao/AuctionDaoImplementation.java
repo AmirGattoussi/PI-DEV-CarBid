@@ -235,7 +235,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         if (remainingTime.compareTo("00:00:00")<0 && status.equals("open")) {
                             System.out.println("entered");
                             //i will past updateWinnerCar methode here
-                               // new CarDao().updateWinnerCar(idAuc);
+                                new CarDao().updateWinnerCar(idAuc);
                                 
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(

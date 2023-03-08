@@ -70,7 +70,7 @@ public final class mainNavigationController implements Initializable {
         if (event.getSource() == btnHome) {
             mainView.getChildren().clear();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Register.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
                 Parent registerView = loader.load();
                 mainView = (StackPane) mainView.lookup("#mainView");
                 mainView.getChildren().add(registerView);
