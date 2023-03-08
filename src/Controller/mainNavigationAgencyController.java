@@ -13,27 +13,20 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-/**
- *
- * @author neil
- */
-public final class mainNavigationController implements Initializable {
+public class mainNavigationAgencyController implements Initializable {
 
     // *********************************************
     // Attributes
     // *********************************************
 
     // int currentUser = CurrentUser.getUser().getId();
+
     @FXML
     private Button btnHome;
     @FXML
-    private Button btnAuction;
-    @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnSpareParts;
-    @FXML
     private Button btnReservations;
+    @FXML
+    private Button btnNotifications;
     @FXML
     private Button btnSettings;
     @FXML
@@ -78,39 +71,31 @@ public final class mainNavigationController implements Initializable {
                 e.printStackTrace();
             }
         } else {
-            if (event.getSource() == btnAuction) {
+            if (event.getSource() == btnReservations) {
                 mainView.getChildren().clear();
+                try {
+                    FXMLLoader loader = new FXMLLoader(
+                            getClass().getResource("../View/manageReservationsAgency.fxml"));
+                    Parent included = loader.load();
+                    pnlManageReservations = (Pane) included.lookup("#pnlManageReservations");
+                    mainView.getChildren().add(pnlManageReservations);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
-                if (event.getSource() == btnOrders) {
+                if (event.getSource() == btnNotifications) {
                     mainView.getChildren().clear();
                 } else {
-                    if (event.getSource() == btnSpareParts) {
+                    if (event.getSource() == btnSettings) {
                         mainView.getChildren().clear();
                     } else {
-                        if (event.getSource() == btnReservations) {
+                        if (event.getSource() == btnSignout) {
                             mainView.getChildren().clear();
-                            try {
-                                FXMLLoader loader = new FXMLLoader(
-                                        getClass().getResource("../View/manageReservations.fxml"));
-                                Parent included = loader.load();
-                                pnlManageReservations = (Pane) included.lookup("#pnlManageReservations");
-                                mainView.getChildren().add(pnlManageReservations);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            if (event.getSource() == btnSettings) {
-                                mainView.getChildren().clear();
-                            } else {
-                                if (event.getSource() == btnSignout) {
-                                    mainView.getChildren().clear();
-                                }
-                            }
+
                         }
                     }
                 }
             }
         }
     }
-
 }

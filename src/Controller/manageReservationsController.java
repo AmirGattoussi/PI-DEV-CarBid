@@ -48,7 +48,7 @@ public class manageReservationsController extends manageReservationsAgencyContro
     // *********************************************
 
     ReservationDao r = new ReservationDao();
-    int currentUserID = 3;// CurrentUser.getUser().getId();
+    int currentUserID = 34;// CurrentUser.getUser().getId();
     // CarsDao car = new CarsDao();
 
     @FXML
