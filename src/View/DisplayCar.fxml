@@ -34,7 +34,7 @@
                <children>
                   <Button fx:id="btnBack" layoutX="11.0" layoutY="22.0" mnemonicParsing="false" onAction="#Back" text="&lt; Back To Menu" />
                   <ImageView fx:id="imageC" fitHeight="92.0" fitWidth="126.0" layoutX="20.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="195.0" layoutY="90.0" prefHeight="22.0" prefWidth="230.0" text=" BMW 3 SERIES 330I">
+                  <Label layoutX="201.0" layoutY="66.0" prefHeight="22.0" prefWidth="230.0" text=" BMW 3 SERIES 330I">
                      <font>
                         <Font name="Cambria" size="18.0" />
                      </font>

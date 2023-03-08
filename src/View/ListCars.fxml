@@ -56,24 +56,6 @@
          </children>
       </AnchorPane>
       <Button fx:id="btnview" layoutX="460.0" layoutY="334.0" mnemonicParsing="false" onAction="#viewcar" prefHeight="25.0" prefWidth="79.0" text="View Car" />
-      <ImageView fitHeight="130.0" fitWidth="165.0" layoutX="176.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/damcar.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="347.0" layoutY="386.0" prefHeight="18.0" prefWidth="183.0" text="2005 CHRYSLER 300 300C">
-         <font>
-            <Font name="Calibri Bold" size="16.0" />
-         </font>
-      </Label>
-      <Button layoutX="359.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="View Car" />
-      <Label layoutX="529.0" layoutY="448.0" prefHeight="17.0" prefWidth="51.0" text="sedan" />
-      <Label layoutX="533.0" layoutY="414.0" prefHeight="17.0" prefWidth="51.0" text="auto" />
-      <Label layoutX="439.0" layoutY="448.0" prefHeight="17.0" prefWidth="61.0" text="right Front" />
-      <Label layoutX="439.0" layoutY="414.0" prefHeight="17.0" prefWidth="61.0" text="Front End" />
-      <Label layoutX="360.0" layoutY="448.0" prefHeight="17.0" prefWidth="51.0" text="Gasoline" />
-      <Label layoutX="360.0" layoutY="414.0" prefHeight="17.0" prefWidth="51.0" text="Other" />
-      <Label layoutX="598.0" layoutY="423.0" prefHeight="17.0" prefWidth="73.0" text="Mon Feb 16" />
       <TextField alignment="CENTER_RIGHT" layoutX="174.0" layoutY="36.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
       <ImageView fitHeight="18.0" fitWidth="34.0" layoutX="180.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -81,7 +63,6 @@
          </image>
       </ImageView>
       <Button fx:id="btnupdate" layoutX="574.0" layoutY="334.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="73.0" text="update" />
-      <Button layoutX="469.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="update" />
       <TableView fx:id="tvID" layoutX="164.0" layoutY="91.0" prefHeight="229.0" prefWidth="514.0">
         <columns>
           <TableColumn fx:id="tcmake" prefWidth="75.0" text="make" />
