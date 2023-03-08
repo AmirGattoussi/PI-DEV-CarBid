@@ -75,7 +75,8 @@ public class Car {
         this.carImg = carImg;
     }
 
-    public Car(int id_car, String model, String color, String type, String make, String description, int mileage, int year, int fiscalpower, String transmission, String loss,
+    public Car(int id_car, String model, String color, String type, String make, String description, int mileage,
+            int year, int fiscalpower, String transmission, String loss,
             String primarydamage, String secondarydamage, String fueltype) {
         this.id_car = id_car;
         this.model = model;

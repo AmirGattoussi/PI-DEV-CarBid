@@ -5,6 +5,8 @@
  */
 package View;
 
+import Controller.AddAuctionDetailsController;
+import Controller.RegisterController;
 import Dao.CarDao;
 import Entities.Car;
 import java.io.BufferedReader;
@@ -41,8 +43,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import static jdk.nashorn.internal.objects.NativeJava.type;
-import javafx.stage.FileChooser.ExtensionFilter;
-;
+import javafx.stage.FileChooser.ExtensionFilter;;
 
 /**
  * FXML Controller class
@@ -87,9 +88,9 @@ public class AddCarsController implements Initializable {
     private TextField tfDesc;
     @FXML
     private Button btnhome;
-       @FXML
+    @FXML
     private Button btnimport;
-       @FXML
+    @FXML
     private ImageView imgid;
     private Object imgView;
     private String imagePath;
@@ -209,32 +210,44 @@ public class AddCarsController implements Initializable {
                 CarDao cardao = new CarDao();
                 Car c;
                 c = new Car(
-                        
 
-            tfModel.getText(),
-            tfColor.getText(),
-            tfType.getText(),
-            tfMake.getText(),
-            tfDesc.getText(),
-            Integer.parseInt(tfMileage.getText()),
-            Integer.parseInt(tfYear.getText()),
-            Integer.parseInt(tfFP.getText()), 
-            tfTrans.getText(),
-            tfLoss.getText(),
-            tfPd.getText(),
-            tfSd.getText(),
-            tfFt.getText(),
-            this.path
-            
-            );
+                        tfModel.getText(),
+                        tfColor.getText(),
+                        tfType.getText(),
+                        tfMake.getText(),
+                        tfDesc.getText(),
+                        Integer.parseInt(tfMileage.getText()),
+                        Integer.parseInt(tfYear.getText()),
+                        Integer.parseInt(tfFP.getText()),
+                        tfTrans.getText(),
+                        tfLoss.getText(),
+                        tfPd.getText(),
+                        tfSd.getText(),
+                        tfFt.getText(),
+                        this.imagePath
 
-        cardao.insert(c);
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                );
+
+                cardao.insert(c);
+                int carId = cardao.getCarId(c);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Insert Car");
                 alert.setHeaderText(null);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCarsController.fxml"));
                 alert.setContentText("The car is inserted successfully.");
                 alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/addAuctionDetails.fxml"));
+                Parent loginParent;
+                try {
+                    loginParent = loader.load();
+                    AddAuctionDetailsController controller = loader.getController();
+                    controller.setCarId(carId);
+                    Scene loginScene = new Scene(loginParent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(loginScene);
+                    window.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(AddCarsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -249,28 +262,27 @@ public class AddCarsController implements Initializable {
         Car c;
         c = new Car(
 
-            tfModel.getText(),
-            tfColor.getText(),
-            tfType.getText(),
-            tfMake.getText(),
-            tfDesc.getText(),
-            Integer.parseInt(tfMileage.getText()),
-            Integer.parseInt(tfYear.getText()),
-            Integer.parseInt(tfFP.getText()), 
-            tfTrans.getText(),
-            tfLoss.getText(),
-            tfPd.getText(),
-            tfSd.getText(),
-            tfFt.getText(),
+                tfModel.getText(),
+                tfColor.getText(),
+                tfType.getText(),
+                tfMake.getText(),
+                tfDesc.getText(),
+                Integer.parseInt(tfMileage.getText()),
+                Integer.parseInt(tfYear.getText()),
+                Integer.parseInt(tfFP.getText()),
+                tfTrans.getText(),
+                tfLoss.getText(),
+                tfPd.getText(),
+                tfSd.getText(),
+                tfFt.getText(),
                 this.imagePath
-            
-                
-                
-            );
+
+        );
 
         cardao.update(c);
 
     }
+
     @FXML
     private void backhome(ActionEvent event) {
         try {
@@ -289,19 +301,13 @@ public class AddCarsController implements Initializable {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
     @FXML
-    
-    
-    
-    private void Import(ActionEvent event) throws IOException{
+
+    private void Import(ActionEvent event) throws IOException {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         this.fileChooser.setTitle("Select an image");
         this.fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-        );
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
         File file = this.fileChooser.showOpenDialog(primaryStage);
         this.imagePath = file.getPath();
@@ -333,7 +339,8 @@ public class AddCarsController implements Initializable {
         // Write the image file data to the output stream of the connection
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(("--" + boundary + "\r\n").getBytes());
-        outputStream.write(("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"\r\n").getBytes());
+        outputStream.write(
+                ("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"\r\n").getBytes());
         outputStream.write(("Content-Type: image/jpeg\r\n\r\n").getBytes());
         outputStream.write(imageData);
         outputStream.write(("\r\n--" + boundary + "--\r\n").getBytes());

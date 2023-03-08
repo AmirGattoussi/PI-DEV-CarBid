@@ -50,21 +50,21 @@ public class StatesSparePartsController implements Initializable {
         try {
             ServicesSpareParts sps = new ServicesSpareParts();
             
-            int nbrmot=sps.CountSPPerType("moteur");
+            int nbrmot=sps.CountSPPerType("car_engine");
             System.out.println(nbrmot);
-            int nbrdecv=   sps.CountSPPerType("décor volan");
+            int nbrdecv=   sps.CountSPPerType("volant_design");
             System.out.println(nbrdecv);
             
-            int nbrpara=sps.CountSPPerType("parachoque");
+            int nbrpara=sps.CountSPPerType("bumper");
             System.out.println(nbrpara);
             
             
             
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("moteur", nbrmot),
-                    new PieChart.Data("décor volan", nbrdecv),
-            new PieChart.Data("parachoque", nbrpara));
-            statesSP.setTitle("Graphe des spare parts par type");
+                    new PieChart.Data("car_engine", nbrmot),
+                    new PieChart.Data("volant_design", nbrdecv),
+            new PieChart.Data("bumper", nbrpara));
+            statesSP.setTitle("Graph of spare parts per type");
              statesSP.setData(pieData); 
             
             // TODO

@@ -59,7 +59,7 @@
             <Image url="@../Images/damcar.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="258.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BMW-Serie 5 520I LUXURY LINE">
+      <Text fx:id="txt_car" layoutX="258.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BMW-Serie 5 520I LUXURY LINE">
          <font>
             <Font size="18.0" />
          </font>

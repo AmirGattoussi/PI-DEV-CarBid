@@ -19,6 +19,10 @@ import javafx.scene.layout.StackPane;
  */
 public final class mainNavigationController implements Initializable {
 
+    // *********************************************
+    // Attributes
+    // *********************************************
+
     // int currentUser = CurrentUser.getUser().getId();
     @FXML
     private Button btnHome;
@@ -39,16 +43,34 @@ public final class mainNavigationController implements Initializable {
     @FXML
     private Pane pnlManageReservations;
 
+    // *********************************************
+    // Methods
+    // *********************************************
+
+    /**
+     * JavaFx initialize method
+     * 
+     * @param location  used to resolve relative paths for the root object, or null
+     *                  if the location is not known.
+     * @param resources used to localize the root object, or null if the root object
+     *                  was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
+    /**
+     * This Method handles button clicks
+     * 
+     * @param event
+     * @throws IOException
+     */
     public void handleClicks(ActionEvent event) throws IOException {
         if (event.getSource() == btnHome) {
             mainView.getChildren().clear();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Register.fxml"));
                 Parent registerView = loader.load();
                 mainView = (StackPane) mainView.lookup("#mainView");
                 mainView.getChildren().add(registerView);

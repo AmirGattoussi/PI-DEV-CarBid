@@ -116,7 +116,8 @@ public class CarDao implements IDao<Car> {
             }
         } else {
             System.out.println("n'existe pas");
-        }; //To change body of generated methods, choose Tools | Templates.
+        }
+        ; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -186,7 +187,7 @@ public class CarDao implements IDao<Car> {
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list; //To change body of generated methods, choose Tools | Templates.
+        return list; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -214,11 +215,11 @@ public class CarDao implements IDao<Car> {
             p.setYear(rs.getInt("year"));
             p.setOwner(userDao.getUserById(rs.getInt("id_user")));
 
-            //}  
+            // }
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return p; //To change body of generated methods, choose Tools | Templates.
+        return p; // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -235,7 +236,40 @@ public class CarDao implements IDao<Car> {
         } catch (SQLException ex) {
             Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false; //To change body of generated methods, choose Tools | Templates.
+        return false; // To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getCarId(Car car) {
+        int id_car=0;
+        PreparedStatement statement2;
+        try {
+            //Get Id_car from car description
+            statement2 = conn.prepareStatement(
+                    "SELECT id_car FROM cars WHERE model = ? AND color = ? AND type = ? AND make = ? AND description = ? AND mileage = ? AND year = ? AND fiscalpower = ? AND transmission = ? AND loss = ? AND primarydamage = ? AND secondarydamage = ? AND fueltype= ?");
+            statement2.setString(1, car.getModel());
+            statement2.setString(2, car.getColor());
+            statement2.setString(3, car.getType());
+            statement2.setString(4, car.getMake());
+            statement2.setString(5, car.getDescription());
+            statement2.setInt(6, car.getMileage());
+            statement2.setInt(7, car.getYear());
+            statement2.setInt(8, car.getFiscalpower());
+            statement2.setString(9, car.getTransmission());
+            statement2.setString(10, car.getLoss());
+            statement2.setString(11, car.getPrimarydamage());
+            statement2.setString(12, car.getSecondarydamage());
+            statement2.setString(13, car.getFueltype());
+            ResultSet resultSet = statement2.executeQuery();
+            //Set ID User to ID Admin
+            if (resultSet.next()) {
+                id_car = resultSet.getInt("id_car");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id_car;
+
     }
     
     public void updateWinnerCar(int idAuc) throws SQLException{

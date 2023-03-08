@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package GUI;
+package gui;
 
 import Dao.ServicesCommand;
 import java.net.URL;
@@ -231,10 +231,12 @@ public class FXMLDocumentcommandController implements Initializable {
         int id_cmd = tablecommand.getSelectionModel().getSelectedItems().get(0).getId_command();
         int id_user = tablecommand.getSelectionModel().getSelectedItems().get(0).getId_user();
         int id_sp = tablecommand.getSelectionModel().getSelectedItems().get(0).getId_sparepart();
-
+        String date_sp = tablecommand.getSelectionModel().getSelectedItems().get(0).getDate_cr();
         this.text_cmd_id_command.setText(String.valueOf(id_cmd));
         this.text_cmd_id_user.setText(String.valueOf(id_user));
         this.text_cmd_id_sparepart.setText(String.valueOf(id_sp));
+        this.text_cmd_date_cr.setText(String.valueOf(date_sp));
+        
 
     }
 

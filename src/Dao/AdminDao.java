@@ -41,7 +41,7 @@ public class AdminDao implements IAdminDao {
     public void createAdmin(Admin admin) {
         PreparedStatement statement;
         try {
-            //Create withoud admin ID
+            // Create withoud admin ID
             statement = cnx.prepareStatement(
                     "INSERT INTO user (name, email, password, phone_number,location) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
@@ -60,7 +60,7 @@ public class AdminDao implements IAdminDao {
         PreparedStatement statement3;
 
         try {
-            //Get Id_admin from Id_User
+            // Get Id_admin from Id_User
             statement2 = cnx.prepareStatement(
                     "SELECT id_user FROM user WHERE name = ? AND email = ? AND phone_number = ? AND location = ?");
             statement2.setString(1, admin.getName());
@@ -68,7 +68,7 @@ public class AdminDao implements IAdminDao {
             statement2.setInt(3, admin.getPhone_number());
             statement2.setString(4, admin.getLocation());
             ResultSet resultSet = statement2.executeQuery();
-            //Set ID User to ID Admin
+            // Set ID User to ID Admin
             if (resultSet.next()) {
                 id_admin = resultSet.getInt("id_user");
                 System.out.println(id_admin);
@@ -83,7 +83,7 @@ public class AdminDao implements IAdminDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //To change body of generated methods, choose Tools | Templates.
+    // To change body of generated methods, choose Tools | Templates.
 
     @Override
     public List<User> view_users() {
@@ -101,8 +101,7 @@ public class AdminDao implements IAdminDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("phone_number"),
-                        resultSet.getString("location")
-                ));
+                        resultSet.getString("location")));
             }
 
         } catch (SQLException ex) {
@@ -121,7 +120,8 @@ public class AdminDao implements IAdminDao {
 
     @Override
     public List<User> searchUser_byUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
@@ -131,12 +131,14 @@ public class AdminDao implements IAdminDao {
 
     @Override
     public void deleteAdmin(Admin admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public void updateAdmin(Admin admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     public boolean isAdmin(int userId) {
@@ -149,7 +151,8 @@ public class AdminDao implements IAdminDao {
             // execute the query and retrieve the results
             ResultSet resultSet = statement.executeQuery();
 
-            // if the result set contains a non-null value for admin_id, the user is an admin
+            // if the result set contains a non-null value for admin_id, the user is an
+            // admin
             if (resultSet.next()) {
                 int adminId = resultSet.getInt("id_admin");
                 return (adminId != 0);

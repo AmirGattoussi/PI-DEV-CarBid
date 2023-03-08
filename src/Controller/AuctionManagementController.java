@@ -61,7 +61,7 @@ public class AuctionManagementController implements Initializable {
 
             AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
             List<Auction> data = aucDao.getAllAuctions();
-            ObservableList<Auction> observableAuctionList= FXCollections.observableList(data);
+            ObservableList<Auction> observableAuctionList = FXCollections.observableList(data);
 
             auction_column.setCellValueFactory(new PropertyValueFactory<>("idAuction"));
             car_column.setCellValueFactory(new PropertyValueFactory<>("idCar"));
@@ -71,18 +71,17 @@ public class AuctionManagementController implements Initializable {
             highest_column.setCellValueFactory(new PropertyValueFactory<>("highestBid"));
             status_column.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-    tableViewAuctions.setItems(observableAuctionList);
+            tableViewAuctions.setItems(observableAuctionList);
 
-
-
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AuctionManagementController.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
 
     }
+
     @FXML
-  private void deleteAuctionAction(ActionEvent event) {
+    private void deleteAuctionAction(ActionEvent event) {
         try {
             AuctionDaoImplementation bidDao = new AuctionDaoImplementation();
             Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
@@ -92,12 +91,13 @@ public class AuctionManagementController implements Initializable {
                 tableViewAuctions.getItems().remove(selectedAuction);
                 bidDao.deleteAuction(selectedAuction.getIdAuction());
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-   @FXML
+
+    @FXML
     private void updateAuctionAction(ActionEvent event) {
         Auction selectedAuction = tableViewAuctions.getSelectionModel().getSelectedItem();
         if (selectedAuction == null) {
@@ -106,7 +106,6 @@ public class AuctionManagementController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please select an item");
             alert.showAndWait();
-
         } else {
             try {
 
@@ -118,34 +117,28 @@ public class AuctionManagementController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
                 controller.setValue(selectedAuction.getIdAuction());
-                
 
             } catch (IOException ex) {
                 Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
-     @FXML
+
+    @FXML
     private void redirBid(ActionEvent event) {
-     
-            try {
+        try {
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid_management.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                BidManagementController controller = loader.getController();
-                stage.setScene(scene);
-                stage.show();
-                
-                
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid_management.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            BidManagementController controller = loader.getController();
+            stage.setScene(scene);
+            stage.show();
 
-            } catch (IOException ex) {
-                Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException ex) {
+            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    
+    }
 
 }

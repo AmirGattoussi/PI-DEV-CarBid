@@ -27,7 +27,9 @@ public class Command {
         this.id_sparepart=id_sparepart;
         this.date_cr=date_cr;
     }
-    public Command(){};
+
+    public Command() {
+    };
 
     public int getId_command() {
         return id_command;
@@ -68,5 +70,6 @@ public class Command {
 
    
     
-    }
+    
 
+}

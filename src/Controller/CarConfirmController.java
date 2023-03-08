@@ -61,8 +61,8 @@ public class CarConfirmController implements Initializable {
             BidController bidcontroller = new BidController(userId, carId, auctionId);
 
             loader.setController(bidcontroller);
-// bidcontroller.setValueCar(carId);
-            //bidcontroller.setValueUser(userId);
+            // bidcontroller.setValueCar(carId);
+            // bidcontroller.setValueUser(userId);
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

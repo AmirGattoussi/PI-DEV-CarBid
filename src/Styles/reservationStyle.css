@@ -183,16 +183,11 @@
     cursor: hand;
 }
 
-/* .details-pane-bg {
-    -fx-opacity: 0.5;
-    opacity: 0.5;
-} */
-
-.details-pane {
+.reservationDetails-ScrollPane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
     -fx-border-radius: 2;
     border-radius: 2;
-    /* -fx-opacity: 1;
-    opacity: 1; */
 }
 
 .increment-button,
