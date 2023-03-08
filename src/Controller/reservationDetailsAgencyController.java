@@ -3,20 +3,17 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Api.MapsApi;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 
 /**
  *
  * @author neil
  */
-public class reservationDetailsController implements Initializable {
+public class reservationDetailsAgencyController implements Initializable {
 
     // *********************************************
     // Attributes
@@ -39,9 +36,7 @@ public class reservationDetailsController implements Initializable {
     @FXML
     private Label locationLabel;
     @FXML
-    private WebView mapContainer;
-    @FXML
-    private Text loadingText;
+    private Pane mapContainer;
 
     // *********************************************
     // Methods
@@ -57,9 +52,6 @@ public class reservationDetailsController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        /* Generate interactive map */
-        MapsApi.generateMap(mapContainer);
 
     }
 }
