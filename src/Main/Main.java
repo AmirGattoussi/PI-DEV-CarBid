@@ -13,12 +13,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
     private Stage stage;
     private Parent parent;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLDocumentcommand.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinWidth(1089);
@@ -27,8 +28,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
-    AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-    aucDao.WinnerNotificationMail();
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+        aucDao.WinnerNotificationMail();
         launch(args);
     }
 }

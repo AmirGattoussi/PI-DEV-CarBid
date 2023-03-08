@@ -171,6 +171,12 @@ public class FXMLDocumentController implements Initializable {
                 // SpareParts u = new SpareParts(id, type, pou, description, price, typec);
                 SpareParts u = new SpareParts(type, pou, description, price, typec);
                 us.add(u);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Ajout sussès");
+                alert.setHeaderText("Votre SparePart a été bien ajouté");
+                alert.setContentText("veuillez se desincrire et reconnecter   !");
+                alert.showAndWait();
             }
             //refresh(event);
         } catch (SQLException ex) {
@@ -195,6 +201,12 @@ public class FXMLDocumentController implements Initializable {
         String typec = text_main_typec.getText();
         SpareParts u = new SpareParts(id, type, pou, description, price, typec);
         us.modify(u);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("Modify successful");
+        alert.setHeaderText("Votre SparePart a été bien modifié");
+        alert.setContentText("veuillez se desincrire et reconnecter   !");
+        alert.showAndWait();
     }
 
     @FXML
@@ -318,6 +330,7 @@ public class FXMLDocumentController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("statesSpareParts.fxml"));
             Parent root = loader.load();
             btn_states.getScene().setRoot(root);
+
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
