@@ -7,6 +7,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import Api.MapsApi;
 import Dao.CarDao;
 import Dao.ReservationDao;
 import Entities.*;
@@ -17,6 +18,7 @@ import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,14 +38,16 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 import javafx.scene.effect.BlurType;
 
 /**
- *
+ * This Java controller class controls the manage reservations UI for the user.
+ * 
  * @author neil
  */
-public class manageReservationsController extends manageReservationsAgencyController {
+public class manageReservationsController implements Initializable {
 
     // *********************************************
     // Attributes
@@ -51,7 +55,7 @@ public class manageReservationsController extends manageReservationsAgencyContro
 
     ReservationDao r = new ReservationDao();
     ReservationDetail rd = new ReservationDetail();
-    int currentUserID = 40;// CurrentUser.getUser().getId();
+    int currentUserID = CurrentUser.getUser().getId();
 
     @FXML
     private VBox reservationsPanel;
@@ -75,12 +79,12 @@ public class manageReservationsController extends manageReservationsAgencyContro
     private Button refreshBtn;
     @FXML
     private HBox reservation;
-
-    // public FXML variables
     @FXML
-    public Pane pnlManageReservations;
+    private WebView mapContainer;
     @FXML
-    public Pane pnlReservationDetails;
+    private Pane pnlManageReservations;
+    @FXML
+    private Pane pnlReservationDetails;
 
     int currentCount = r.filterReservationsByUser(currentUserID).size();
 
@@ -165,7 +169,9 @@ public class manageReservationsController extends manageReservationsAgencyContro
             updateReservationCounter();
 
         } catch (SQLException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
     }
 
@@ -229,7 +235,9 @@ public class manageReservationsController extends manageReservationsAgencyContro
             // Add the stylesheet to the reservation row
             reservation.getStylesheets().add(cssUrl);
         } catch (MalformedURLException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
 
         reservation.setPrefSize(835, 53);
@@ -240,11 +248,14 @@ public class manageReservationsController extends manageReservationsAgencyContro
         Label carColumn = new Label();
         carColumn.setPrefSize(99, 18);
         carColumn.setId("carColumn");
+
         Label carModelColumn = new Label();
         carModelColumn.setPrefSize(134, 18);
         carModelColumn.setId("carModelColumn");
+
         Label dateColumn = new Label();
         dateColumn.setPrefSize(125, 18);
+
         Label locationColumn = new Label();
         locationColumn.setPrefSize(369, 18);
 
@@ -303,8 +314,11 @@ public class manageReservationsController extends manageReservationsAgencyContro
                     getClass().getResource("../View/reservationDetails.fxml")); // Loading FXML
             included = loader.load();
             pnlReservationDetails = (Pane) included.lookup("#pnlReservationDetails");
+            mapContainer = (WebView) included.lookup("#mapContainer");
         } catch (IOException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
         popupContent.getChildren().addAll(pnlReservationDetails);
 
@@ -347,6 +361,9 @@ public class manageReservationsController extends manageReservationsAgencyContro
         /* Getting reservation details for specific car */
         rd = r.reservationDetails(Id_user, Id_car).get(0);
 
+        /* Generate interactive map */
+        MapsApi.generateMap(mapContainer, rd.getLocation());
+
         /**
          * Populating the details popup labels.
          */
@@ -376,7 +393,6 @@ public class manageReservationsController extends manageReservationsAgencyContro
         Bounds rootBounds = pnlManageReservations.getBoundsInLocal();
         double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - scrollPane.getWidth()) / 1.4;
         popup.show(detailsBtn.getScene().getWindow(), popupX, 125);
-        popup.setAutoFix(true);
     }
 
     /**
@@ -402,7 +418,9 @@ public class manageReservationsController extends manageReservationsAgencyContro
             // Add the stylesheet to the alert dialog
             alert.getDialogPane().getScene().getStylesheets().add(cssUrl);
         } catch (MalformedURLException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
 
         // Set the style class for the alert dialog
