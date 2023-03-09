@@ -20,11 +20,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../CarConfirm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
         primaryStage.setTitle("Carbid");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMinWidth(1089);
-        primaryStage.setMinHeight(689.0);
+        //primaryStage.setMinWidth(1089);
+        //primaryStage.setMinHeight(689.0);
         primaryStage.show();
     }
 

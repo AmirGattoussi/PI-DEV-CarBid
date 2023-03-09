@@ -50,7 +50,7 @@ public class NotificationController implements Initializable {
     private Button readBtn;
     @FXML
     private Button refreshBtn;
-    private int userId = 4;
+    private int userId = 2;
     NotificationDaoImplementation notifDao = new NotificationDaoImplementation();
     int currentCount = notifDao.getAllNotifications(2).size();
 

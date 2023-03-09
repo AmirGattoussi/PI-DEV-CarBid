@@ -193,7 +193,7 @@ public class AuctionDaoImplementation implements AuctionDao {
     public String getEmailWinner(int idUser) {
         try {
             PreparedStatement statement = cnx.prepareStatement(
-                    "SELECT email FROM user u join auction a on u.user_id=a.  WHERE id_user = ?");
+                    "SELECT email FROM user u join bid b on u.id_user=b.userId WHERE id_user = ?");
             statement.setInt(1, idUser);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -232,14 +232,17 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long minutes = timeLeft.toMinutes() % 60;
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                        if (remainingTime.compareTo("00:00:00")<0 && status.equals("open")) {
-                            System.out.println("entered");
-
+                         if ((remainingTime.compareTo("00:00:00")<0) && status.equals("open")) {
+                            System.out.println(remainingTime);
+                            System.out.println(remainingTime.compareTo("00:00:00")<0);
+                            
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(
-                                        "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount");
-                                PreparedStatement statement2 = cnx.prepareStatement(
-                                        "update auction set status='closed' where idAuction=?");
+                                        "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount"
+                                );
+                                 PreparedStatement statement2 = cnx.prepareStatement(
+                                        "update auction set status='closed' where idAuction=?"
+                                );
                                 statement1.setInt(1, idAuc);
                                 System.out.println(idAuc);
                                 statement2.setInt(1, idAuc);
@@ -250,12 +253,12 @@ public class AuctionDaoImplementation implements AuctionDao {
                                     String winnerEmail = resultSet2.getString("email");
                                     System.out.println(winnerEmail);
                                     MailApi.sendMail(winnerEmail);
-
-                                }
+                                  
+                                } 
                             } catch (SQLException ex) {
                                 Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            i++;
+
                         }
                     }
 
@@ -329,22 +332,31 @@ public class AuctionDaoImplementation implements AuctionDao {
 
     public int getIdAuctionByCar(int idCar) {
         PreparedStatement statement;
-        int idAuction = 0;
         try {
             statement = cnx.prepareStatement("SELECT idAuction FROM auction WHERE idCar= ?");
-            statement.setInt(1, idCar);
-
+                statement.setInt(1, idCar);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-
-                idAuction = resultSet.getInt("idAuction");
+                int idAuction=resultSet.getInt("idAuction");
+                return idAuction;
+            } else {
+                System.out.println("error");
             }
-            else{
-                System.err.println("Auction does not exist");}
         } catch (SQLException ex) {
-            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BidDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return idAuction;
+//            statement.setInt(1, idCar);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                idAuction=resultSet.getInt("idAuction");
+//                 return idAuction;
+//            }
+//            else{
+//                System.err.println("Auction does not exist");}
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        return 0;
 
     }
 }

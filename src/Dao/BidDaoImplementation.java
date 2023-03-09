@@ -221,6 +221,7 @@ public class BidDaoImplementation implements BidDao {
             ResultSet resultSet = statement.executeQuery();
             PreparedStatement statement1 = cnx.prepareStatement(
                     "SELECT userId FROM bid where maxBidAmount=?;");
+            statement1.setInt(1, id);
             if (resultSet.next()) {
                  statement1.setFloat(1, resultSet.getFloat("max(maxBidAmount)"));
             }

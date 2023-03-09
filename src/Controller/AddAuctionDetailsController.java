@@ -67,7 +67,7 @@ public class AddAuctionDetailsController implements Initializable {
         java.sql.Date startDatesql = java.sql.Date.valueOf(startDate);
         java.sql.Date endDatesql = java.sql.Date.valueOf(endDate);
         
-        Auction auction = new Auction(startDatesql, endDatesql, startingPrice, 0, "Open", carId);
+        Auction auction = new Auction(startDatesql, endDatesql, startingPrice, 0, "open", carId);
         auc.addAuction(auction);
     }
     

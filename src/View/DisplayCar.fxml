@@ -54,7 +54,7 @@
                         <Image url="@../../../../../../Downloads/ICON-MM-01-0001.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="bidButton" layoutX="435.0" layoutY="114.0" mnemonicParsing="false" onAction="#setbid" text="Place Bid" />
+                  <Button fx:id="bidButton" layoutX="498.0" layoutY="115.0" mnemonicParsing="false" onAction="#setbid" text="Place Bid" />
                   <Button layoutX="233.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Make appointment" />
                   <Button fx:id="btnPdf" layoutX="383.0" layoutY="114.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="26.0" prefWidth="63.0" text="Export" />
                </children>
