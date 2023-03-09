@@ -61,7 +61,7 @@ public class ReservationInformMailApi {
      * This method opens the email template file, reads it and replaces words with
      * information provided as parameters.
      * 
-     * @param name the name of the user that did the reservation.
+     * @param name      the name of the user that did the reservation.
      * @param car_brand brand of the car that is reserved.
      * @param car_model model of the car that is reserved.
      * @return Email body msg as a string.

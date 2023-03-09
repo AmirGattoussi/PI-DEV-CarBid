@@ -34,6 +34,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import Entities.Bid;
 import Entities.Car;
+import Entities.CurrentUser;
 import Entities.Notification;
 import Entities.User;
 import java.sql.Date;
@@ -204,24 +205,90 @@ public class BidController implements Initializable {
      **/
     @FXML
     void addBid(ActionEvent event) throws SQLException, IOException {
-        AuctionDaoImplementation aucDao=new AuctionDaoImplementation();
+        AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
         System.out.println(aucDao.getAuction(auctionId).getStatus());
-        if ("open".equals(aucDao.getAuction(auctionId).getStatus())){
-        if (radio_btn_live.isSelected()) {
-            try {
-                // Bid bid = new Bid();
-                // bid.setLiveBidAmount(Float.parseFloat(txt_live_bid.getText()));
+        System.out.println("Open".equals(aucDao.getAuction(auctionId).getStatus()));
+        if ("Open".equals(aucDao.getAuction(auctionId).getStatus())) {
+            if (radio_btn_live.isSelected()) {
+                try {
+                    // Bid bid = new Bid();
+                    // bid.setLiveBidAmount(Float.parseFloat(txt_live_bid.getText()));
+
+                    if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty()))
+                            || (txt_live_bid.getText().isEmpty())
+                            || (txt_live_bid.getText().isEmpty()) && (txt_max_bid.getText().isEmpty())) {
+
+                        Alert alert = new Alert(AlertType.WARNING);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please enter only a live bid amount");
+                        alert.showAndWait();
+                    } else if (!(txt_live_bid.getText().matches("[0-9]*")) && (!(txt_live_bid.getText().isEmpty()))) {
+
+                        Alert alert = new Alert(AlertType.WARNING);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please enter only a number");
+                        alert.showAndWait();
+
+                    } else if (!(btn_terms.isSelected()) == true) {
+
+                        Alert alert = new Alert(AlertType.WARNING);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please agree to the terms and conditions");
+                        alert.showAndWait();
+
+                    } else if (Float.parseFloat(txt_live_bid.getText()) <= Float.parseFloat(txt_highest_bid.getText())) {
+
+                        Alert alert = new Alert(AlertType.WARNING);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please enter a live bid amount bigger than the current bid");
+                        alert.showAndWait();
+//END OF CHECKS**********************************************
+                    } else {
+                        BidDaoImplementation bidDao = new BidDaoImplementation();
+                        Bid max_bid = bidDao.getMaxBidById(auctionId);
+                        if (max_bid.getMaxBidAmount() - Float.parseFloat(txt_live_bid.getText()) > 0 && max_bid != null) {
+                            aucDao.IncrementBid(auctionId, max_bid.getUserId(),
+                                    Float.parseFloat(txt_live_bid.getText()) + 500);
+
+                        } else {
+                            NotificationDaoImplementation notificationDao = new NotificationDaoImplementation();
+                            int id = notificationDao.sendNotification(new Notification(max_bid.getUserId(), "Sorry, you have been outbid on the auction " + auctionId + " Another bidder has a maximum limit higher than yours"));
+                        }
+                        BidDaoImplementation bid_dao = new BidDaoImplementation();
+                        bid_dao.addLiveBid(new Bid(CurrentUser.getUser().getId(), auctionId, Float.parseFloat(txt_live_bid.getText())));
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Add Bid");
+                        alert.setHeaderText(null);
+                        alert.setContentText("The bid is added successfully.");
+                        alert.showAndWait();
+                        // refreshScene(event);
+                        refreshTextFields();
+                    }
+                } catch (NumberFormatException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                BidDaoImplementation bidDao = new BidDaoImplementation();
+                Bid max_bid = bidDao.getMaxBidById(auctionId);
 
                 if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty()))
-                        || (txt_live_bid.getText().isEmpty())
-                        || (txt_live_bid.getText().isEmpty()) && (txt_max_bid.getText().isEmpty())) {
-
+                        || (txt_max_bid.getText().isEmpty()) && (!(txt_live_bid.getText().isEmpty()))) {
                     Alert alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Invalid Input");
                     alert.setHeaderText(null);
-                    alert.setContentText("Please enter only a live bid amount");
+                    alert.setContentText("Please enter both a live bid amount and a max bid amout");
                     alert.showAndWait();
-                } else if (!(txt_live_bid.getText().matches("[0-9]*")) && (!(txt_live_bid.getText().isEmpty()))) {
+                } else if (Float.parseFloat(txt_max_bid.getText()) < max_bid.getMaxBidAmount()) {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter a bigger max bid amount");
+                    alert.showAndWait();
+                } else if (!(txt_max_bid.getText().matches("[0-9]*")) && (!(txt_max_bid.getText().isEmpty()))) {
 
                     Alert alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Invalid Input");
@@ -229,12 +296,12 @@ public class BidController implements Initializable {
                     alert.setContentText("Please enter only a number");
                     alert.showAndWait();
 
-                } else if (!(btn_terms.isSelected()) == true) {
+                } else if (Float.parseFloat(txt_live_bid.getText()) >= Float.parseFloat(txt_max_bid.getText())) {
 
                     Alert alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Invalid Input");
                     alert.setHeaderText(null);
-                    alert.setContentText("Please agree to the terms and conditions");
+                    alert.setContentText("Please enter a higher max bid amount");
                     alert.showAndWait();
 
                 } else if (Float.parseFloat(txt_live_bid.getText()) <= Float.parseFloat(txt_highest_bid.getText())) {
@@ -245,113 +312,47 @@ public class BidController implements Initializable {
                     alert.setContentText("Please enter a live bid amount bigger than the current bid");
                     alert.showAndWait();
 
-                } else {
-                    BidDaoImplementation bidDao = new BidDaoImplementation();
-                    Bid max_bid = bidDao.getMaxBidById(auctionId);
-                    if (max_bid.getMaxBidAmount() - Float.parseFloat(txt_live_bid.getText()) > 0 && max_bid!=null) {
-                        aucDao.IncrementBid(auctionId, max_bid.getUserId(),
-                                Float.parseFloat(txt_live_bid.getText()) + 500);
+                } else if (!(btn_terms.isSelected())) {
 
-                    } else {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please agree to the terms and conditions");
+                    alert.showAndWait();
+
+                } else {
+                    if (max_bid.getUserId() == userId) {
+                        Alert alert = new Alert(AlertType.WARNING);
+                        alert.setHeaderText(null);
+                        alert.setContentText("You already have a max bid");
+                        alert.showAndWait();
+                    } else if (Float.parseFloat(txt_max_bid.getText()) > max_bid.getMaxBidAmount()) {
                         NotificationDaoImplementation notificationDao = new NotificationDaoImplementation();
                         int id = notificationDao.sendNotification(new Notification(max_bid.getUserId(), "Sorry, you have been outbid on the auction " + auctionId + " Another bidder has a maximum limit higher than yours"));
+                        aucDao.IncrementBidMax(auctionId, max_bid.getUserId(),
+                                Float.parseFloat(txt_live_bid.getText()), Float.parseFloat(txt_max_bid.getText()));
+                        BidDaoImplementation bid_dao = new BidDaoImplementation();
+                        bid_dao.addMaxBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText()),
+                                Float.parseFloat(txt_max_bid.getText())));
+                        // refreshScene(event);
+                        refreshTextFields();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Add Bid");
+                        alert.setHeaderText(null);
+                        alert.setContentText("The bid is added successfully.");
+                        alert.showAndWait();
+
                     }
-                    BidDaoImplementation bid_dao = new BidDaoImplementation();
-                    bid_dao.addLiveBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText())));
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Add Bid");
-                    alert.setHeaderText(null);
-                    alert.setContentText("The bid is added successfully.");
-                    alert.showAndWait();
-                    // refreshScene(event);
-                    refreshTextFields();
+
                 }
-            } catch (NumberFormatException ex) {
-                System.out.println(ex.getMessage());
             }
         } else {
-            BidDaoImplementation bidDao = new BidDaoImplementation();
-            Bid max_bid = bidDao.getMaxBidById(auctionId);
-
-            if ((txt_live_bid.getText().isEmpty()) && (!(txt_max_bid.getText().isEmpty()))
-                    || (txt_max_bid.getText().isEmpty()) && (!(txt_live_bid.getText().isEmpty()))) {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter both a live bid amount and a max bid amout");
-                alert.showAndWait();
-            } else if (Float.parseFloat(txt_max_bid.getText()) < max_bid.getMaxBidAmount()) {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a bigger max bid amount");
-                alert.showAndWait();
-            } else if (!(txt_max_bid.getText().matches("[0-9]*")) && (!(txt_max_bid.getText().isEmpty()))) {
-
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter only a number");
-                alert.showAndWait();
-
-            } else if (Float.parseFloat(txt_live_bid.getText()) >= Float.parseFloat(txt_max_bid.getText())) {
-
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a higher max bid amount");
-                alert.showAndWait();
-
-            } else if (Float.parseFloat(txt_live_bid.getText()) <= Float.parseFloat(txt_highest_bid.getText())) {
-
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a live bid amount bigger than the current bid");
-                alert.showAndWait();
-
-            } else if (!(btn_terms.isSelected())) {
-
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText(null);
-                alert.setContentText("Please agree to the terms and conditions");
-                alert.showAndWait();
-
-            } else {
-                if (max_bid.getUserId() == userId) {
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setHeaderText(null);
-                    alert.setContentText("You already have a max bid");
-                    alert.showAndWait();
-                } else if (Float.parseFloat(txt_max_bid.getText()) > max_bid.getMaxBidAmount()) {
-                    NotificationDaoImplementation notificationDao = new NotificationDaoImplementation();
-                    int id = notificationDao.sendNotification(new Notification(max_bid.getUserId(), "Sorry, you have been outbid on the auction " + auctionId + " Another bidder has a maximum limit higher than yours"));
-                    aucDao.IncrementBidMax(auctionId, max_bid.getUserId(),
-                            Float.parseFloat(txt_live_bid.getText()), Float.parseFloat(txt_max_bid.getText()));
-                    BidDaoImplementation bid_dao = new BidDaoImplementation();
-                    bid_dao.addMaxBid(new Bid(2, 2, Float.parseFloat(txt_live_bid.getText()),
-                            Float.parseFloat(txt_max_bid.getText())));
-                    // refreshScene(event);
-                    refreshTextFields();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Add Bid");
-                    alert.setHeaderText(null);
-                    alert.setContentText("The bid is added successfully.");
-                    alert.showAndWait();
-
-                }
-
-            }
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Auction status");
+            alert.setHeaderText(null);
+            alert.setContentText("Sorry the deadline ended,you can not bid anymore");
+            alert.showAndWait();
         }
-    }
-        else {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Auction status");
-                alert.setHeaderText(null);
-                alert.setContentText("Sorry the deadline ended,you can not bid anymore");
-                alert.showAndWait();
-                }
 
     }
 

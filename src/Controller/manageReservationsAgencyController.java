@@ -450,15 +450,15 @@ public class manageReservationsAgencyController implements Initializable {
 
         /* Sending Email to user to inform about canceling the reservation */
         try {
-        CarDao c = new CarDao();
+            CarDao c = new CarDao();
 
-        ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
-        u.getUserById(id_user).getName(), c.displayById(id_car).getMake(),
-        c.displayById(id_car).getMake());
+            ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
+                    u.getUserById(id_user).getName(), c.displayById(id_car).getMake(),
+                    c.displayById(id_car).getMake());
         } catch (SQLException e) {
-        System.out.println("****************");
-        e.printStackTrace();
-        System.out.println("****************");
+            System.out.println("****************");
+            e.printStackTrace();
+            System.out.println("****************");
         }
     }
 

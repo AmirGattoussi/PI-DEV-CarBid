@@ -224,7 +224,7 @@ public class AddCarsController implements Initializable {
                         tfPd.getText(),
                         tfSd.getText(),
                         tfFt.getText(),
-                        this.imagePath
+                        this.path
 
                 );
 
@@ -275,7 +275,7 @@ public class AddCarsController implements Initializable {
                 tfPd.getText(),
                 tfSd.getText(),
                 tfFt.getText(),
-                this.imagePath
+                this.path
 
         );
 

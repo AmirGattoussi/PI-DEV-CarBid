@@ -33,7 +33,8 @@ import java.util.logging.Logger;
  * @author asus
  */
 public class AuctionDaoImplementation implements AuctionDao {
-    int i=0;
+
+    int i = 0;
     Connection cnx;
 
     public AuctionDaoImplementation() {
@@ -232,11 +233,11 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long minutes = timeLeft.toMinutes() % 60;
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                        if (remainingTime.compareTo("00:00:00")<0 && status.equals("open")) {
+                        if (remainingTime.compareTo("00:00:00") < 0 && status.equals("Open")) {
                             System.out.println("entered");
                             //i will past updateWinnerCar methode here
-                               // new CarDao().updateWinnerCar(idAuc);
-                                
+                            new CarDao().updateWinnerCar(idAuc);
+
                             try {
                                 PreparedStatement statement1 = cnx.prepareStatement(
                                         "SELECT DISTINCT(email) FROM user u join bid b join auction a on u.id_user=b.userId and b.idAuction=a.idAuction where a.idAuction=? and a.highestBid=b.liveBidAmount");
@@ -311,7 +312,7 @@ public class AuctionDaoImplementation implements AuctionDao {
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
 
     @Override
@@ -324,9 +325,8 @@ public class AuctionDaoImplementation implements AuctionDao {
             System.out.println("updated successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    
-    
+        }
+
     }
 
     public int getIdAuctionByCar(int idCar) {
@@ -340,9 +340,9 @@ public class AuctionDaoImplementation implements AuctionDao {
             if (resultSet.next()) {
 
                 idAuction = resultSet.getInt("idAuction");
+            } else {
+                System.err.println("Auction does not exist");
             }
-            else{
-                System.err.println("Auction does not exist");}
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
