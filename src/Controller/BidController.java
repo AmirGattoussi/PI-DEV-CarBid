@@ -34,6 +34,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import Entities.Bid;
 import Entities.Car;
+import Entities.CurrentUser;
 import Entities.Notification;
 import Entities.User;
 import java.sql.Date;

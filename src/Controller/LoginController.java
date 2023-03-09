@@ -111,7 +111,7 @@ public class LoginController implements Initializable {
                 stage.show();
             } // Login to Agent Interface
             else if (agent.isAgent(passThroughUserID)) {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/manageReservations.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/mainNavigationAgency.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
                 stage.setScene(scene);

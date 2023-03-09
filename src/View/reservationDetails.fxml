@@ -73,19 +73,19 @@
             </VBox>
             <VBox prefHeight="195.0" prefWidth="380.0" spacing="15.0">
                <children>
-                  <Label fx:id="AgencyNameField" text="Label">
+                  <Label fx:id="agencyNameField" text="Label">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Label fx:id="AgencyPhoneField" text="Label">
+                  <Label fx:id="agencyPhoneField" text="Label">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Label fx:id="EmailField" text="Label">
+                  <Label fx:id="agencyEmailField" text="Label">
                      <font>
                         <Font size="14.0" />
                      </font>

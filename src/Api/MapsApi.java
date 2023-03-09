@@ -14,17 +14,14 @@ import javafx.scene.web.WebView;
  */
 public class MapsApi {
 
-    // *********************************************
-    // Methods
-    // *********************************************
-
     /**
      * This method calls the Google Maps Api and generates a map.
      * 
      * @param mapContainer container that will contain the map returned by the API.
+     * @param address the address of the location to be highlighted when map loads.
      */
     @FXML
-    public static void generateMap(WebView mapContainer) {
+    public static void generateMap(WebView mapContainer, String address) {
 
         /* Loading API key from config.properties for security reasons */
         Properties prop = new Properties();
@@ -36,8 +33,6 @@ public class MapsApi {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String address = "lot 13, V5XR+M37 إقامة السلام 2، Av. Fethi Zouhir, Cebalat Ben Ammar 2083";
 
         /* The html to be displayed in the webview */
         String googleMapsHTML = "<!DOCTYPE html>" +

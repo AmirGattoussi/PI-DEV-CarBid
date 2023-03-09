@@ -33,7 +33,8 @@ import java.util.logging.Logger;
  * @author asus
  */
 public class AuctionDaoImplementation implements AuctionDao {
-    int i=0;
+
+    int i = 0;
     Connection cnx;
 
     public AuctionDaoImplementation() {
@@ -312,7 +313,7 @@ public class AuctionDaoImplementation implements AuctionDao {
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
 
     @Override
@@ -325,9 +326,8 @@ public class AuctionDaoImplementation implements AuctionDao {
             System.out.println("updated successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDaoImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    
-    
+        }
+
     }
 
     public int getIdAuctionByCar(int idCar) {

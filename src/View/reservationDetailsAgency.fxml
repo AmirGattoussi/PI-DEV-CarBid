@@ -10,9 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pnlReservationDetails" prefHeight="613.0" prefWidth="554.0" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.reservationDetailsAgencyController">
+<Pane fx:id="pnlReservationDetails" prefHeight="613.0" prefWidth="554.0"
+    stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19"
+    xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label layoutX="14.0" layoutY="40.0" style="-fx-font-weight: 700; -fx-font-size:24;" text="Reservations Details:">
+        <Label layoutX="14.0" layoutY="40.0" style="-fx-font-weight: 700; -fx-font-size:24;"
+            text="Reservations Details:">
             <font>
                 <Font size="24.0" />
             </font>
@@ -26,43 +29,43 @@
                                 <Font name="System Italic" size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label text="User phone number:">
                             <font>
                                 <Font name="System Italic" size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
-                  <Label text="User e-mail:">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" />
-                  <Label text="Car ID:">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
+                        <Label text="User e-mail:">
+                            <font>
+                                <Font name="System Italic" size="14.0" />
+                            </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <Label text="Car ID:">
+                            <font>
+                                <Font name="System Italic" size="14.0" />
+                            </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
                         <Label text="Car brand:">
                             <font>
                                 <Font name="System Italic" size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label text="Car model:">
                             <font>
                                 <Font name="System Italic" size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label text="Reservation date:">
                             <font>
                                 <Font name="System Italic" size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label text="Location:">
                             <font>
                                 <Font name="System Italic" size="14.0" />
@@ -77,43 +80,43 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label fx:id="userPhoneField" text="Label">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
-                  <Label fx:id="userEmailField" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" />
-                  <Label fx:id="carIdField" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="userEmailField" text="Label">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="carIdField" text="Label">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
                         <Label fx:id="carBrandField" text="Label">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label fx:id="carModelField" text="Label">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label fx:id="dateField" text="Label">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" />
                         <Label fx:id="locationField" text="Label">
                             <font>
                                 <Font size="14.0" />
@@ -123,8 +126,10 @@
                 </VBox>
             </children>
         </HBox>
-        <Button fx:id="cancelBtn" layoutX="212.0" layoutY="554.0" prefHeight="28.0" prefWidth="130.0" styleClass="cancel-btn" text="Cancel Reservation" />
-        <Button fx:id="closeBtn" layoutX="507.0" layoutY="14.0" prefHeight="20.0" prefWidth="15.0" styleClass="close-btn">
+        <Button fx:id="cancelBtn" layoutX="212.0" layoutY="554.0" prefHeight="28.0"
+            prefWidth="130.0" styleClass="cancel-btn" text="Cancel Reservation" />
+        <Button fx:id="closeBtn" layoutX="507.0" layoutY="14.0" prefHeight="20.0" prefWidth="15.0"
+            styleClass="close-btn">
             <graphic>
                 <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                     <image>

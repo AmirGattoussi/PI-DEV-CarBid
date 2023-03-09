@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import Api.ReservationInformMailApi;
+import Dao.CarDao;
 import Dao.ReservationDao;
 import Dao.UserDao;
 import Entities.Reservation;
+import Entities.ReservationDetail;
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
 import javafx.collections.*;
@@ -38,7 +42,9 @@ import javafx.stage.Popup;
 import javafx.scene.effect.BlurType;
 
 /**
- *
+ * This Java controller class controls the manage reservations UI for the
+ * agency.
+ * 
  * @author neil
  */
 
@@ -49,7 +55,13 @@ public class manageReservationsAgencyController implements Initializable {
     // *********************************************
 
     ReservationDao r = new ReservationDao();
+    ReservationDetail rd = new ReservationDetail();
     UserDao u = new UserDao();
+    int currentAgencyID = 42; // CurrentUser.getUser().getId();
+    /*
+     * maybe use id_agent and id_car to identify reservations of the connected
+     * agency
+     */
 
     @FXML
     private VBox reservationsPanel;
@@ -78,7 +90,7 @@ public class manageReservationsAgencyController implements Initializable {
     @FXML
     public Pane pnlReservationDetails;
 
-    int currentCount = r.getNumberOfReservations();
+    int currentCount = r.filterReservationsByAgent(currentAgencyID).size();
 
     // *********************************************
     // Methods
@@ -195,7 +207,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param void
      */
     public ObservableList<Reservation> returnLatestTable() {
-        return FXCollections.observableList(r.getReservations());
+        return FXCollections.observableList(r.filterReservationsByAgent(currentAgencyID));
     }
 
     /**
@@ -220,7 +232,9 @@ public class manageReservationsAgencyController implements Initializable {
             // Add the stylesheet to the reservation row
             reservation.getStylesheets().add(cssUrl);
         } catch (MalformedURLException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
 
         reservation.setPrefSize(835, 53);
@@ -231,11 +245,14 @@ public class manageReservationsAgencyController implements Initializable {
         Label userColumn = new Label();
         userColumn.setPrefSize(99, 18);
         userColumn.setId("userColumn");
+
         Label carColumn = new Label();
         carColumn.setPrefSize(84, 18);
         carColumn.setId("carColumn");
+
         Label dateColumn = new Label();
         dateColumn.setPrefSize(125, 18);
+
         Label locationColumn = new Label();
         locationColumn.setPrefSize(308, 18);
 
@@ -280,7 +297,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param Id_car      the car ID
      */
     @FXML
-    private void detailsPopup(HBox reservation, int Id_user, int Id_car) {
+    private void detailsPopup(HBox reservation, int id_user, int id_car) {
         Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
         overlay.widthProperty().bind(pnlManageReservations.widthProperty());
         overlay.heightProperty().bind(pnlManageReservations.heightProperty()); // Overlay to put the popup in focus
@@ -295,7 +312,9 @@ public class manageReservationsAgencyController implements Initializable {
             included = loader.load();
             pnlReservationDetails = (Pane) included.lookup("#pnlReservationDetails");
         } catch (IOException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
         Rectangle popupBackground = new Rectangle(550, 600, Color.WHITE);
         popupContent.getChildren().addAll(popupBackground, pnlReservationDetails);
@@ -315,17 +334,39 @@ public class manageReservationsAgencyController implements Initializable {
         });
         Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
         cancelButton.setOnAction(event -> {
-            deleteReservationRow(reservation, Id_user, Id_car);
+            deleteReservationRow(reservation, id_user, id_car);
             popup.hide();
         });
+
+        /* Getting reservation details for specific car */
+        rd = r.reservationDetailsAgency(currentAgencyID, id_car);
 
         /**
          * Populating the details popup labels.
          */
+        Label nameLabel = (Label) popupContent.lookup("#userNameField");
+        nameLabel.setText("" + rd.getName());
+
+        Label userPhoneLabel = (Label) popupContent.lookup("#userPhoneField");
+        userPhoneLabel.setText("" + rd.getPhoneNumber());
+
+        Label userEmailLabel = (Label) popupContent.lookup("#userEmailField");
+        userEmailLabel.setText("" + rd.getEmail());
+
+        Label carIdLabel = (Label) popupContent.lookup("#carIdField");
+        carIdLabel.setText("" + rd.getCarID());
+
+        Label carMakeLabel = (Label) popupContent.lookup("#carBrandField");
+        carMakeLabel.setText("" + rd.getMake());
+
+        Label carModelLabel = (Label) popupContent.lookup("#carModelField");
+        carModelLabel.setText("" + rd.getModel());
+
         Label dateLabel = (Label) popupContent.lookup("#dateField");
-        dateLabel.setText("" + r.getReservation(Id_user, Id_car).getDate());
+        dateLabel.setText("" + rd.getDate());
+
         Label locationLabel = (Label) popupContent.lookup("#locationField");
-        locationLabel.setText("" + r.getReservation(Id_user, Id_car).getLocation());
+        locationLabel.setText("" + rd.getLocation());
 
         pnlManageReservations.getChildren().add(overlay); // Adding overlay to View.
 
@@ -358,7 +399,9 @@ public class manageReservationsAgencyController implements Initializable {
             // Add the stylesheet to the alert dialog
             alert.getDialogPane().getScene().getStylesheets().add(cssUrl);
         } catch (MalformedURLException e) {
+            System.out.println("****************");
             e.printStackTrace();
+            System.out.println("****************");
         }
 
         // Set the style class for the alert dialog
@@ -404,6 +447,19 @@ public class manageReservationsAgencyController implements Initializable {
         if (isTableEmpty(returnLatestTable())) {
             pnlManageReservations.lookup("#noReservationYet").setVisible(true);
         }
+
+        /* Sending Email to user to inform about canceling the reservation */
+        try {
+            CarDao c = new CarDao();
+
+            ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
+                    u.getUserById(id_user).getName(), c.displayById(id_car).getMake(),
+                    c.displayById(id_car).getMake());
+        } catch (SQLException e) {
+            System.out.println("****************");
+            e.printStackTrace();
+            System.out.println("****************");
+        }
     }
 
     /**
@@ -412,7 +468,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param void
      */
     public void updateReservationCounter() {
-        totalNumberOfReservations.setText("" + r.getNumberOfReservations());
+        totalNumberOfReservations.setText("" + returnLatestTable().size());
     }
 
 }

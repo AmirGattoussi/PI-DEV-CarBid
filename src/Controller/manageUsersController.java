@@ -65,7 +65,6 @@ public class manageUsersController implements Initializable {
     private Label totalNumberOfUsers;
     @FXML
     private Label totalSubs;
-
     @FXML
     private Button refreshBtn;
     @FXML
@@ -82,7 +81,6 @@ public class manageUsersController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refreshView();
-        System.out.println(r.getNumberOfSubs());
     }
 
     // This method handles button clicks
