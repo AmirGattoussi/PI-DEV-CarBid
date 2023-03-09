@@ -239,6 +239,36 @@ public class ReservationDao implements IReservationDao {
     }
 
     /**
+     * This method filters reservations by user and returns a list.
+     * 
+     * @param id_user ID of user.
+     */
+    @Override
+    public List<Reservation> filterReservationsByAgent(int id_agent) {
+        List<Reservation> filteredData = new ArrayList<Reservation>();
+
+        try {
+            statement = cnx.prepareStatement("SELECT * FROM reservation WHERE id_agent=?");
+            statement.setInt(1, id_agent);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                filteredData.add(new Reservation(
+                        resultSet.getInt("id_user"),
+                        resultSet.getInt("id_car"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("id_agent")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredData;
+    }
+
+    /**
      * This method filters reservations by car and returns a list.
      * 
      * @param id_car ID of car.
@@ -335,7 +365,7 @@ public class ReservationDao implements IReservationDao {
      * @param void
      */
     @Override
-    public List<ReservationDetail> reservationDetails(int id_user, int id_car) {
+    public ReservationDetail reservationDetails(int id_user, int id_car) {
         List<ReservationDetail> data = new ArrayList<ReservationDetail>();
 
         try {
@@ -359,7 +389,7 @@ public class ReservationDao implements IReservationDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return data;
+        return data.get(0);
     }
 
     /**
@@ -369,14 +399,14 @@ public class ReservationDao implements IReservationDao {
      * @param void
      */
     @Override
-    public List<ReservationDetail> reservationDetailsAgency(int id_user, int id_car) {
+    public ReservationDetail reservationDetailsAgency(int id_agent, int id_car) {
         List<ReservationDetail> data = new ArrayList<ReservationDetail>();
 
         try {
             statement = cnx.prepareStatement(
-                    "SELECT u.name, u.phone_number,u.email,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_user=r.id_user AND r.id_car=c.id_car WHERE r.id_user=? AND r.id_car=?;");
+                    "SELECT u.name, u.phone_number,u.email,c.id_car,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_user=r.id_user AND r.id_car=c.id_car WHERE r.id_agent=? AND r.id_car=?;");
 
-            statement.setInt(1, id_user);
+            statement.setInt(1, id_agent);
             statement.setInt(2, id_car);
 
             ResultSet resultSet = statement.executeQuery();
@@ -394,6 +424,6 @@ public class ReservationDao implements IReservationDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return data;
+        return data.get(0);
     }
 }
