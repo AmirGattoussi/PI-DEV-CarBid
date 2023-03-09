@@ -138,11 +138,9 @@ public class DisplayCarController implements Initializable {
         try {
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainNavigation.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            ListCarsController controller = loader.getController();
-            
+            Scene scene = new Scene(root);            
             stage.setScene(scene);
             stage.show();
             CarDao carDao;

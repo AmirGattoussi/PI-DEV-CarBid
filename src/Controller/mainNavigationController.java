@@ -54,14 +54,21 @@ public final class mainNavigationController implements Initializable {
     /**
      * JavaFx initialize method
      *
-     * @param location  used to resolve relative paths for the root object, or
-     *                  null if the location is not known.
+     * @param location used to resolve relative paths for the root object, or
+     * null if the location is not known.
      * @param resources used to localize the root object, or null if the root
-     *                  object was not localized.
+     * object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
+            Parent registerView = loader.load();
+            mainView = (StackPane) mainView.lookup("#mainView");
+            mainView.getChildren().add(registerView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -87,6 +94,14 @@ public final class mainNavigationController implements Initializable {
             } else {
                 if (event.getSource() == btnOrders) {
                     mainView.getChildren().clear();
+                     try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLDocumentcommand.fxml"));
+                            Parent registerView = loader.load();
+                            mainView = (StackPane) mainView.lookup("#mainView");
+                            mainView.getChildren().add(registerView);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                 } else {
                     if (event.getSource() == btnSpareParts) {
                         mainView.getChildren().clear();

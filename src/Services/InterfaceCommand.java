@@ -12,6 +12,7 @@
 //import java.util.List;
 //import Entities.SpareParts;
 //import Entities.SpareParts;
+import Entities.Command;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

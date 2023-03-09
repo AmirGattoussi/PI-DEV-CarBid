@@ -256,7 +256,7 @@ public class BidController implements Initializable {
                                 BidDaoImplementation bid_dao = new BidDaoImplementation();
                                 bid_dao.addLiveBid(new Bid(userId, auctionId, Float.parseFloat(txt_live_bid.getText())));
                                 aucDao.IncrementBid(auctionId, max_bid.getUserId(),
-                                Float.parseFloat(txt_live_bid.getText()) + 500);
+                                        Float.parseFloat(txt_live_bid.getText()) + 500);
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Add Bid");
                                 alert.setHeaderText(null);
@@ -264,6 +264,15 @@ public class BidController implements Initializable {
                                 alert.showAndWait();
                                 refreshTextFields();
                             } else {
+                                BidDaoImplementation bid_dao = new BidDaoImplementation();
+                                bid_dao.addLiveBid(new Bid(userId, auctionId, Float.parseFloat(txt_live_bid.getText())));
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Add Bid");
+                                alert.setHeaderText(null);
+                                alert.setContentText("The bid is added successfully.");
+                                alert.showAndWait();
+                                // refreshScene(event);
+                                refreshTextFields();
                                 NotificationDaoImplementation notificationDao = new NotificationDaoImplementation();
                                 int id = notificationDao.sendNotification(new Notification(max_bid.getUserId(), "Sorry, you have been outbid on the auction " + auctionId + " Another bidder has a maximum limit higher than yours"));
                             }
