@@ -27,12 +27,14 @@ public interface IReservationDao {
 
     public List<Reservation> filterReservationsByUser(int id_user);
 
+    public List<Reservation> filterReservationsByAgent(int id_agent);
+
     public List<Reservation> filterReservationsByCar(int id_car);
 
     public List<Reservation> filterReservationsByDate(String date);
 
     /* JOB methods */
-    public List<ReservationDetail> reservationDetails(int id_user, int id_car);
+    public ReservationDetail reservationDetails(int id_user, int id_car);
 
-    public List<ReservationDetail> reservationDetailsAgency(int id_user, int id_car);
+    public ReservationDetail reservationDetailsAgency(int id_agent, int id_car);
 }

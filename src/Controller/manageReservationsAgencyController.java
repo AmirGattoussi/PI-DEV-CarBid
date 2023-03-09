@@ -57,7 +57,7 @@ public class manageReservationsAgencyController implements Initializable {
     ReservationDao r = new ReservationDao();
     ReservationDetail rd = new ReservationDetail();
     UserDao u = new UserDao();
-    // int currentAgencyID = CurrentUser.getUser().getId();
+    int currentAgencyID = 42; // CurrentUser.getUser().getId();
     /*
      * maybe use id_agent and id_car to identify reservations of the connected
      * agency
@@ -90,7 +90,7 @@ public class manageReservationsAgencyController implements Initializable {
     @FXML
     public Pane pnlReservationDetails;
 
-    int currentCount = r.getNumberOfReservations();
+    int currentCount = r.filterReservationsByAgent(currentAgencyID).size();
 
     // *********************************************
     // Methods
@@ -207,7 +207,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param void
      */
     public ObservableList<Reservation> returnLatestTable() {
-        return FXCollections.observableList(r.getReservations());
+        return FXCollections.observableList(r.filterReservationsByAgent(currentAgencyID));
     }
 
     /**
@@ -297,7 +297,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param Id_car      the car ID
      */
     @FXML
-    private void detailsPopup(HBox reservation, int Id_user, int Id_car) {
+    private void detailsPopup(HBox reservation, int id_user, int id_car) {
         Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
         overlay.widthProperty().bind(pnlManageReservations.widthProperty());
         overlay.heightProperty().bind(pnlManageReservations.heightProperty()); // Overlay to put the popup in focus
@@ -334,12 +334,12 @@ public class manageReservationsAgencyController implements Initializable {
         });
         Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
         cancelButton.setOnAction(event -> {
-            deleteReservationRow(reservation, Id_user, Id_car);
+            deleteReservationRow(reservation, id_user, id_car);
             popup.hide();
         });
 
         /* Getting reservation details for specific car */
-        rd = r.reservationDetails(Id_user, Id_car).get(0);
+        rd = r.reservationDetailsAgency(currentAgencyID, id_car);
 
         /**
          * Populating the details popup labels.
@@ -450,14 +450,15 @@ public class manageReservationsAgencyController implements Initializable {
 
         /* Sending Email to user to inform about canceling the reservation */
         try {
-            CarDao c = new CarDao();
+        CarDao c = new CarDao();
 
-            ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
-                    u.getUserById(id_user).getName(), c.displayById(id_car).getMake(), c.displayById(id_car).getMake());
+        ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
+        u.getUserById(id_user).getName(), c.displayById(id_car).getMake(),
+        c.displayById(id_car).getMake());
         } catch (SQLException e) {
-            System.out.println("****************");
-            e.printStackTrace();
-            System.out.println("****************");
+        System.out.println("****************");
+        e.printStackTrace();
+        System.out.println("****************");
         }
     }
 
@@ -467,7 +468,7 @@ public class manageReservationsAgencyController implements Initializable {
      * @param void
      */
     public void updateReservationCounter() {
-        totalNumberOfReservations.setText("" + r.getNumberOfReservations());
+        totalNumberOfReservations.setText("" + returnLatestTable().size());
     }
 
 }

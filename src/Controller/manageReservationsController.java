@@ -359,7 +359,7 @@ public class manageReservationsController implements Initializable {
         });
 
         /* Getting reservation details for specific car */
-        rd = r.reservationDetails(Id_user, Id_car).get(0);
+        rd = r.reservationDetails(Id_user, Id_car);
 
         /* Generate interactive map */
         MapsApi.generateMap(mapContainer, rd.getLocation());
