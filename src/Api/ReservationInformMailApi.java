@@ -2,6 +2,7 @@ package Api;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -23,33 +24,44 @@ public class ReservationInformMailApi {
      */
     public static void sendEmailToUser(String recipientEmail, String name, String car_brand, String car_model) {
         try {
-            String senderEmail = "";
-            String senderPassword = "";
+            String senderEmail = "neil.monastiri@esprit.tn";
 
-            Properties props = new Properties();
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+            /* Loading API key from config.properties for security reasons */
+            Properties prop = new Properties();
+            try {
+                prop.load(new FileInputStream("config.properties"));
+                String senderPassword = prop.getProperty("gmail.mail.passwd");
 
-            Session session = Session.getInstance(props, new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(senderEmail, senderPassword);
-                }
-            });
+                Properties props = new Properties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.port", "587");
+                props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+                Session session = Session.getInstance(props, new Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(senderEmail, senderPassword);
+                    }
+                });
 
-            /* Setting the Email subject */
-            message.setSubject("Reservation Canceled");
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(senderEmail));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 
-            /* Setting the Email body */
-            message.setText(replaceWordsInTmplt(name, car_brand, car_model));
+                /* Setting the Email subject */
+                message.setSubject("Reservation Canceled");
 
-            Transport.send(message);
+                /* Setting the Email body */
+                message.setText(replaceWordsInTmplt(name, car_brand, car_model));
+
+                Transport.send(message);
+            } catch (IOException e) {
+                System.out.println("****************");
+                e.printStackTrace();
+                System.out.println("****************");
+            }
+
         } catch (MessagingException e) {
             System.out.println("****************");
             e.printStackTrace();
