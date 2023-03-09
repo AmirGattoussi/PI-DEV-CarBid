@@ -23,8 +23,8 @@ public class ReservationInformMailApi {
      */
     public static void sendEmailToUser(String recipientEmail, String name, String car_brand, String car_model) {
         try {
-            String senderEmail = "neil.monastiri@esprit.tn";
-            String senderPassword = "223JMT0532";
+            String senderEmail = "";
+            String senderPassword = "";
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
