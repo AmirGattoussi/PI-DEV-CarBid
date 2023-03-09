@@ -24,7 +24,7 @@
                 </Pane>
             </children>
         </HBox>
-        <Button fx:id="confirmBtn" layoutX="199.0" layoutY="265.0" prefHeight="28.0" prefWidth="79.0" styleClass="confirm-btn" text="Confirm" />
+        <Button fx:id="confirmBtn" layoutX="199.0" layoutY="265.0" onAction="#handleClicks" prefHeight="28.0" prefWidth="79.0" styleClass="confirm-btn" text="Confirm" />
         <Button fx:id="closeBtn" layoutX="321.0" layoutY="14.0" prefHeight="20.0" prefWidth="15.0" styleClass="close-btn">
             <graphic>
                 <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">

@@ -178,7 +178,6 @@ public class DisplayCarController implements Initializable {
             Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
             overlay.widthProperty().bind(pnlDisplayCar.widthProperty());
             overlay.heightProperty().bind(pnlDisplayCar.heightProperty()); // Overlay to put the popup in focus
-
             Popup popup = new Popup();
             Pane popupContent = new Pane();
             Pane createReservationPane = new Pane();
@@ -189,13 +188,10 @@ public class DisplayCarController implements Initializable {
                         getClass().getResource("../View/createReservation.fxml")); // Loading FXML
                 included = loader.load();
                 createReservationController controller = loader.getController();
-
                 controller.setCarID(selectedCar.getId());
                 createReservationPane = (Pane) included.lookup("#createReservationPopUp");
-
                 Rectangle popupBackground = new Rectangle(368, 315, Color.WHITE);
                 popupContent.getChildren().addAll(popupBackground, createReservationPane);
-
                 popup.getContent().add(popupContent); // Adding content to the popup.
                 popup.setAutoHide(true); // when clicking away from popup it closes.
                 popup.setOnHidden(eventCreateR -> pnlDisplayCar.getChildren().remove(overlay)); // Removing overlay.
@@ -205,16 +201,16 @@ public class DisplayCarController implements Initializable {
                  * Note: Reason why it's not in handleClicks() because this is easier to get the
                  * selected reservation row.
                  */
-                Button closeBtn = (Button) popupContent.lookup("#confirmBtn");
-                closeBtn.setOnAction(eventCreateR -> {
-                    controller.handleClicks(event);
-
-                    popup.hide();
-                });
-                Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
-                cancelButton.setOnAction(eventCreateR -> {
-                    popup.hide();
-                });
+//                Button confirmBtn = (Button) popupContent.lookup("#confirmBtn");
+//                confirmBtn.setOnAction(eventCreateR -> {
+//                    controller.handleClicks(eventCreateR);
+//                    System.out.println("HANDLE CLICKS");
+//                    popup.hide();
+//                });
+//                Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
+//                cancelButton.setOnAction(eventCreateR -> {
+//                    popup.hide();
+//                });
 
                 pnlDisplayCar.getChildren().add(overlay); // Adding overlay to View.
 

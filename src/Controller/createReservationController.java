@@ -61,6 +61,7 @@ public class createReservationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         invalidDateTXT.setVisible(false);
+        System.out.println("RESERVATION");
     }
 
     /**
@@ -68,6 +69,7 @@ public class createReservationController implements Initializable {
      * 
      * @param event event handler.
      */
+    @FXML
     public void handleClicks(ActionEvent event) {
         if (event.getSource() == confirmBtn) {
             LocalDate reservationDate = datePicker.getValue();
