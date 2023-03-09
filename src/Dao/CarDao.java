@@ -120,6 +120,9 @@ public class CarDao implements IDao<Car> {
         ; // To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    
+    
     @Override
     public ObservableList<Car> displayAll() {
         String req = "select * from cars";
@@ -156,6 +159,45 @@ public class CarDao implements IDao<Car> {
         return list;
     }
 
+     
+    public ObservableList<Car> displayAllbyuserId(int id ) {
+        String req = "select * from cars where id_user = "+ id;
+        ObservableList<Car> list = FXCollections.observableArrayList();
+
+        try {
+             
+             
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                Car p = new Car();
+                p.setId(rs.getInt(1));
+                p.setColor(rs.getString("color"));
+                p.setDescription(rs.getString("description"));
+                p.setType(rs.getString("type"));
+                p.setMake(rs.getString("make"));
+                p.setFiscalpower(rs.getInt("fiscalpower"));
+                p.setFueltype(rs.getString("fueltype"));
+                p.setLoss(rs.getString("loss"));
+                p.setMileage(rs.getInt("mileage"));
+                p.setModel(rs.getString("model"));
+                p.setMake(rs.getString("make"));
+                p.setPrimarydamage(rs.getString("primarydamage"));
+                p.setSecondarydamage(rs.getString("secondarydamage"));
+                p.setTransmission(rs.getString("transmission"));
+                p.setYear(rs.getInt("year"));
+                            p.setOwner(userDao.getUserById(rs.getInt("id_user")));
+                            p.setCarImg(rs.getString("carImg"));
+
+                list.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    
     @Override
     public List<Car> displayAllList() {
         String req = "select * from cars";

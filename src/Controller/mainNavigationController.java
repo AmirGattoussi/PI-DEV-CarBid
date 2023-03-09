@@ -27,6 +27,8 @@ public final class mainNavigationController implements Initializable {
     @FXML
     private Button btnHome;
     @FXML
+    private Button btnHome1;
+    @FXML
     private Button btnAuction;
     @FXML
     private Button btnOrders;
@@ -70,9 +72,20 @@ public final class mainNavigationController implements Initializable {
         if (event.getSource() == btnHome) {
             mainView.getChildren().clear();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars1.fxml"));
                 Parent registerView = loader.load();
                 mainView = (StackPane) mainView.lookup("#mainView");
+                mainView.getChildren().add(registerView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else 
+            if (event.getSource() == btnHome1) {
+            mainView.getChildren().clear();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ListCars.fxml"));
+                Parent registerView = loader.load();
+               
                 mainView.getChildren().add(registerView);
             } catch (IOException e) {
                 e.printStackTrace();
