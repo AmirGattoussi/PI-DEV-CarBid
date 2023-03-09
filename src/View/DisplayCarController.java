@@ -121,7 +121,7 @@ public class DisplayCarController implements Initializable {
     private Text textDesc;
     public int userId = CurrentUser.getUser().getId();
     public int carId;
-    
+
     @FXML
     private Text textOwner;
     @FXML
@@ -143,7 +143,7 @@ public class DisplayCarController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainNavigation.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);            
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
             CarDao carDao;
@@ -188,8 +188,10 @@ public class DisplayCarController implements Initializable {
                         getClass().getResource("../View/createReservation.fxml")); // Loading FXML
                 included = loader.load();
                 createReservationController controller = loader.getController();
-                controller.setCarID(selectedCar.getId());
+
+                controller.setCarID(selectedCar.getId()); // Getting car id and sending it to create
                 createReservationPane = (Pane) included.lookup("#createReservationPopUp");
+
                 Rectangle popupBackground = new Rectangle(368, 315, Color.WHITE);
                 popupContent.getChildren().addAll(popupBackground, createReservationPane);
                 popup.getContent().add(popupContent); // Adding content to the popup.
@@ -201,16 +203,16 @@ public class DisplayCarController implements Initializable {
                  * Note: Reason why it's not in handleClicks() because this is easier to get the
                  * selected reservation row.
                  */
-//                Button confirmBtn = (Button) popupContent.lookup("#confirmBtn");
-//                confirmBtn.setOnAction(eventCreateR -> {
-//                    controller.handleClicks(eventCreateR);
-//                    System.out.println("HANDLE CLICKS");
-//                    popup.hide();
-//                });
-//                Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
-//                cancelButton.setOnAction(eventCreateR -> {
-//                    popup.hide();
-//                });
+                // Button confirmBtn = (Button) popupContent.lookup("#confirmBtn");
+                // confirmBtn.setOnAction(eventCreateR -> {
+                // controller.handleClicks(eventCreateR);
+                // System.out.println("HANDLE CLICKS");
+                // popup.hide();
+                // });
+                // Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
+                // cancelButton.setOnAction(eventCreateR -> {
+                // popup.hide();
+                // });
 
                 pnlDisplayCar.getChildren().add(overlay); // Adding overlay to View.
 
@@ -230,11 +232,11 @@ public class DisplayCarController implements Initializable {
     @FXML
     private void setbid(ActionEvent event) {
         try {
-            System.out.println("aaaaaaaaaaaaa"+selectedCar.getId());
+            System.out.println("aaaaaaaaaaaaa" + selectedCar.getId());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
-            AuctionDaoImplementation aucDao=new AuctionDaoImplementation();
-            int auctionId =aucDao.getIdAuctionByCar(selectedCar.getId()) ;
-            System.out.println("bbbbbbbb"+auctionId);
+            AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
+            int auctionId = aucDao.getIdAuctionByCar(selectedCar.getId());
+            System.out.println("bbbbbbbb" + auctionId);
             BidController bidcontroller = new BidController(userId, selectedCar.getId(), auctionId);
 
             loader.setController(bidcontroller);
