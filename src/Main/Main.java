@@ -1,6 +1,7 @@
 package Main;
 
 import Api.MailApi;
+import Api.QRCodeExample;
 import Dao.AuctionDaoImplementation;
 import java.io.IOException;
 import java.sql.*;
@@ -30,7 +31,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException, IOException {
         AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-        aucDao.WinnerNotificationMail();
+        //aucDao.WinnerNotificationMail();
         launch(args);
     }
 }
