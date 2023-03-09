@@ -188,7 +188,6 @@ public class UserDao implements IUserDao {
     }
 
     public boolean login(String email, String password) {
-        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 

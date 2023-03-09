@@ -45,7 +45,7 @@ public final class AdminHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        adminNameLabel.setText("Welcome, " /*+ CurrentUser.getUser().getName()*/);
+        adminNameLabel.setText("Welcome, " + CurrentUser.getUser().getName());
     }
 
     public void handleClicks(ActionEvent event) throws IOException {

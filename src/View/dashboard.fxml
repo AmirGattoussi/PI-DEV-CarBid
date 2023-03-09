@@ -11,48 +11,49 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="896.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="689.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <children>
-      <Pane layoutX="21.0" layoutY="314.0" prefHeight="268.0" prefWidth="506.0">
+      <Pane layoutX="65.0" layoutY="305.0" prefHeight="268.0" prefWidth="506.0">
          <children>
-              <VBox prefHeight="313.0" prefWidth="490.0">
+              <VBox prefHeight="278.0" prefWidth="513.0">
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="489.0" text="User Data" />
-                  <BarChart fx:id="userChart" prefHeight="250.0" prefWidth="339.0">
-                      <xAxis>
-                          <CategoryAxis fx:id="userCategoryAxis" />
-                      </xAxis>
-                      <yAxis>
-                          <NumberAxis fx:id="userNumberAxis" />
-                      </yAxis>
-                  </BarChart>
               </VBox>
+               <BarChart fx:id="userChart" layoutX="121.0" layoutY="18.0" prefHeight="250.0" prefWidth="339.0">
+                   <xAxis>
+                       <CategoryAxis fx:id="userCategoryAxis" />
+                   </xAxis>
+                   <yAxis>
+                       <NumberAxis fx:id="userNumberAxis" />
+                   </yAxis>
+               </BarChart>
          </children>
       </Pane>
       <Pane layoutX="571.0" layoutY="314.0" prefHeight="250.0" prefWidth="444.0">
          <children>
-            <PieChart fx:id="conversionChart" prefHeight="250.0" prefWidth="444.0" title="Conversion Rate Chart" />
+            <Separator orientation="VERTICAL" prefHeight="290.0" prefWidth="0.0" />
+            <PieChart fx:id="conversionChart" layoutX="29.0" prefHeight="250.0" prefWidth="415.0" title="Conversion Rate Chart" />
          </children>
       </Pane>
-      <HBox layoutX="363.0" layoutY="95.0" prefHeight="100.0" prefWidth="317.0">
+      <HBox layoutX="363.0" layoutY="95.0" prefHeight="100.0" prefWidth="352.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of clicks" />
-                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of Visits" />
+                  <Label fx:id="visitCounter" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="100.0" prefWidth="152.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of Auctions" />
-                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="152.0" text="Number of  live Auctions" />
+                  <Label fx:id="liveAuctionsLabel" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="156.0" text="0" />
                </children>
             </VBox>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="0.0" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="105.0" text="Number of Users" />
-                  <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="106.0" text="0" />
+                  <Label fx:id="userNumberLabel" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="BOTTOM" prefHeight="84.0" prefWidth="137.0" text="0" />
                </children>
             </VBox>
          </children>

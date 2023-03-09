@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Dao.AuctionDaoImplementation;
 import Dao.UserDao;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -26,15 +28,20 @@ public class DashboardController implements Initializable {
 
     @FXML
     private BarChart<String, Integer> userChart;
- @FXML
+    @FXML
     private PieChart conversionRateChart;
     @FXML
     private CategoryAxis userCategoryAxis;
-
+    @FXML
+    private Label liveAuctionsLabel;
+    @FXML
+    private Label visitCounter;
+    @FXML
+    private Label userNumberLabel;
     @FXML
     private NumberAxis userNumberAxis;
     UserDao user = new UserDao();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize user data and add it to the user chart
@@ -45,6 +52,14 @@ public class DashboardController implements Initializable {
         series.getData().add(new XYChart.Data<>("Agent", user.getNumberOfAgents()));
         series.getData().add(new XYChart.Data<>("Subscribers", user.getNumberOfSubs()));
         userChart.getData().add(series);
+//Setting Up Labels
+        userNumberLabel.setText("" + user.getNumberOfUsers());
 
     }
+    //Method to count live auctions
+    public int getLiveAuctions(){
+        int lAuctions=0;
+        AuctionDaoImplementation auc = new AuctionDaoImplementation();
+        //TO DO
+    return lAuctions;}
 }
