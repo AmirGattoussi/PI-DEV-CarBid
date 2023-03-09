@@ -22,15 +22,20 @@
             <Separator layoutX="-6.0" layoutY="73.0" prefWidth="94.0" />
             <Pane layoutY="9.0" prefHeight="584.0" prefWidth="157.0" style="-fx-background-color: #363948;">
                <children>
-                  <Label layoutX="6.0" layoutY="32.0" prefHeight="28.0" prefWidth="140.0" text="Cars Review" textFill="#e8e5e5">
+                  <Label layoutX="14.0" layoutY="101.0" prefHeight="28.0" prefWidth="140.0" text="Display Car" textAlignment="CENTER" textFill="#e8e5e5">
                      <font>
                         <Font name="Century Gothic" size="22.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="58.0" fitWidth="94.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../New%20Folder/Screenshot%202023-02-22%20002512.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Separator layoutX="168.0" layoutY="51.0" prefHeight="3.0" prefWidth="557.0" />
-            <Pane layoutX="160.0" layoutY="9.0" prefHeight="226.0" prefWidth="654.0" style="-fx-background-color: #ffffff;">
+            <Pane layoutX="157.0" layoutY="9.0" prefHeight="217.0" prefWidth="654.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Button fx:id="btnBack" layoutX="11.0" layoutY="22.0" mnemonicParsing="false" onAction="#Back" text="&lt; Back To Menu" />
                   <ImageView fx:id="imageC" fitHeight="92.0" fitWidth="126.0" layoutX="20.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
@@ -39,10 +44,8 @@
                         <Font name="Cambria" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btncarspecification" layoutX="54.0" layoutY="189.0" mnemonicParsing="false" onAction="#carspecification" onKeyPressed="#fncarspecification" prefHeight="25.0" prefWidth="126.0" text="Car Specification" />
+                  <Button fx:id="btncarspecification" layoutX="36.0" layoutY="179.0" mnemonicParsing="false" onAction="#carspecification" onKeyPressed="#fncarspecification" prefHeight="25.0" prefWidth="126.0" text="Car Specification" />
                   <Line endX="28.0" layoutX="148.0" layoutY="224.0" startX="-90.0" />
-                  <Button fx:id="btnphoto" layoutX="247.0" layoutY="189.0" mnemonicParsing="false" onAction="#photo" onKeyPressed="#fnphoto" prefHeight="25.0" prefWidth="126.0" text="Photos" />
-                  <Button fx:id="btnBid" layoutX="435.0" layoutY="189.0" mnemonicParsing="false" onAction="#setbid" prefHeight="25.0" prefWidth="126.0" text="Bid Information" />
                   <Line endX="28.0" layoutX="341.0" layoutY="223.0" startX="-90.0" />
                   <Line endX="28.0" layoutX="529.0" layoutY="222.0" startX="-90.0" />
                   <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="201.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
@@ -58,27 +61,9 @@
             <TextField fx:id="tfDesc" layoutX="410.0" layoutY="368.0" prefHeight="152.0" prefWidth="364.0" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
             <StackPane layoutX="157.0" layoutY="232.0" prefHeight="363.0" prefWidth="654.0">
                <children>
-                  <Pane fx:id="Photos" prefHeight="377.0" prefWidth="676.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="363.0" stroke="BLACK" strokeType="INSIDE" width="654.0" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="28.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Downloads/resizer%20(4).jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane fx:id="Bidinformation" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="363.0" layoutX="7.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="654.0" />
-                        <Button layoutX="31.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="First Price" />
-                        <Button layoutX="31.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="End Date" />
-                        <Button layoutX="31.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Start Date" />
-                     </children>
-                  </Pane>
                   <Pane fx:id="Carspecification" prefHeight="352.0" prefWidth="643.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="363.0" stroke="BLACK" strokeType="INSIDE" width="654.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="375.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="654.0" />
                         <Label layoutX="19.0" layoutY="16.0" prefHeight="17.0" prefWidth="103.0" text="Model:  " />
                         <Label layoutX="19.0" layoutY="41.0" prefHeight="17.0" prefWidth="103.0" text="Year: " />
                         <Label layoutX="11.0" layoutY="213.0" prefHeight="17.0" prefWidth="119.0" text="mileage:  " />
@@ -87,28 +72,28 @@
                         <Label layoutX="20.0" layoutY="272.0" prefHeight="17.0" prefWidth="103.0" text="type: " />
                         <Label layoutX="6.0" layoutY="245.0" prefHeight="17.0" prefWidth="103.0" text="Fiscalpower: " />
                         <Label layoutX="12.0" layoutY="123.0" prefHeight="17.0" prefWidth="119.0" text="transmission: " />
-                        <Label layoutX="172.0" layoutY="61.0" prefHeight="17.0" prefWidth="157.0" text="Primarydamage :   " />
+                        <Label layoutX="147.0" layoutY="16.0" prefHeight="17.0" prefWidth="157.0" text="Primarydamage :   " />
                         <Label layoutX="22.0" layoutY="88.0" prefHeight="17.0" prefWidth="103.0" text="Loss:   " />
-                        <Label layoutX="172.0" layoutY="165.0" prefHeight="17.0" prefWidth="157.0" text="Scondarydamage : " />
+                        <Label layoutX="131.0" layoutY="123.0" prefHeight="17.0" prefWidth="157.0" text="Scondarydamage : " />
                         <Label layoutX="8.0" layoutY="180.0" prefHeight="28.0" prefWidth="85.0" text="fueltype:      " />
                         <Label fx:id="texttrans" layoutX="90.0" layoutY="123.0" text="auto" />
-                        <Label layoutX="166.0" layoutY="87.0" prefHeight="35.0" prefWidth="85.0" text="Description: " />
+                        <Label layoutX="147.0" layoutY="41.0" prefHeight="35.0" prefWidth="85.0" text="Description: " />
                         <Text fx:id="textcolor" layoutX="96.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="c" />
-                        <Text fx:id="textDesc" layoutX="262.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="textDesc" layoutX="284.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="textfp" layoutX="88.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="textft" layoutX="88.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="textloss" layoutX="87.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="textsd" layoutX="284.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="textsd" layoutX="284.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="Textyear" layoutX="88.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="Textmodel" layoutX="88.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="texttype" layoutX="87.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="textpd" layoutX="273.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="textpd" layoutX="284.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="textmake" layoutX="90.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="textmileage" layoutX="88.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="entryPrice" layoutX="251.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="entryPrice" />
-                        <Label layoutX="166.0" layoutY="131.0" text="Bid entry price" />
-                        <Label layoutX="166.0" layoutY="195.0" prefHeight="17.0" prefWidth="119.0" text="owner name:" />
-                        <Text fx:id="textOwner" layoutX="240.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="entryPrice" layoutX="249.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="entryPrice" wrappingWidth="189.3951416015625" />
+                        <Label layoutX="147.0" layoutY="87.0" text="Bid entry price" />
+                        <Label layoutX="130.0" layoutY="157.0" prefHeight="17.0" prefWidth="119.0" text="owner name:" />
+                        <Text fx:id="textOwner" layoutX="284.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>
                </children>

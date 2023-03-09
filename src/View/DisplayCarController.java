@@ -81,6 +81,8 @@ public class DisplayCarController implements Initializable {
     @FXML
     private Button btnBid;
     @FXML
+    private Button bidButton;
+    @FXML
     private Button btnExport;
     @FXML
     private Button createReservationBtn;
@@ -257,16 +259,14 @@ public class DisplayCarController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
             AuctionDaoImplementation auc = new AuctionDaoImplementation();
-            BidController bidcontroller = new BidController(CurrentUser.getUser().getId(), selectedCar.getId(),
-                    auc.getIdAuctionByCar(selectedCar.getId()));
-            System.out.println(auc.getIdAuctionByCar(selectedCar.getId()));
+            BidController bidcontroller = new BidController(CurrentUser.getUser().getId(), selectedCar.getId(), auc.getIdAuctionByCar(selectedCar.getId()));
+            
             loader.setController(bidcontroller);
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("New View");
             stage.show();
-
         } catch (IOException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
