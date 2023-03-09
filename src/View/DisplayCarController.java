@@ -62,6 +62,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -216,9 +217,11 @@ public class DisplayCarController implements Initializable {
 
                 pnlDisplayCar.getChildren().add(overlay); // Adding overlay to View.
 
-                Bounds rootBounds = pnlDisplayCar.getBoundsInLocal();
-                double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - popupContent.getWidth()) / 1.4;
-                popup.show(createReservationBtn.getScene().getWindow(), popupX, 125);
+                Window primarystage = pnlDisplayCar.getScene().getWindow();
+                double popupX = (2 * primarystage.getWidth() - pnlDisplayCar.getWidth()) / 2;
+                double popupY = primarystage.getHeight() / 6;
+
+                popup.show(createReservationBtn.getScene().getWindow(), popupX, popupY);
                 popup.setAutoFix(true);
 
             } catch (IOException e) {
