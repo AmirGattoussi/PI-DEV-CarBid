@@ -14,23 +14,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ListCarsController">
+<AnchorPane id="AnchorPane" prefHeight="689.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ListCarsController">
    <children>
-      <Pane prefHeight="584.0" prefWidth="157.0" style="-fx-background-color: #363948;">
+      <Pane prefHeight="689.0" prefWidth="157.0" style="-fx-background-color: #363948;">
          <children>
-            <Label layoutX="9.0" layoutY="75.0" prefHeight="28.0" prefWidth="140.0" text="Cars Review" textFill="#e8e5e5">
+            <Label layoutX="9.0" layoutY="75.0" prefHeight="28.0" prefWidth="140.0" text="Your Cars" textFill="#e8e5e5">
                <font>
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Label>
-            <ImageView fitHeight="47.0" fitWidth="85.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../New%20Folder/Screenshot%202023-02-22%20002512.png" />
-               </image>
-            </ImageView>
     
             <Line endX="-61.0" layoutX="101.0" layoutY="115.0" startX="-100.0" stroke="#efeeee" />
-            <Text fill="#f8f3f3" layoutX="18.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome to Carbid Here,you will find cars information" wrappingWidth="121.068359375">
+            <Text fill="#f8f3f3" layoutX="18.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are currently viewing your listed cars" wrappingWidth="121.068359375">
                <font>
                   <Font size="10.0" />
                </font>
@@ -46,9 +41,9 @@
       <Separator layoutX="157.0" layoutY="33.0" prefHeight="1.0" prefWidth="527.0" />
       <Label layoutX="634.0" layoutY="14.0" />
       <AnchorPane layoutX="432.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane layoutX="150.0" layoutY="-6.0" prefHeight="40.0" prefWidth="565.0" style="-fx-background-color: #363948;">
+      <AnchorPane layoutX="150.0" layoutY="-6.0" prefHeight="40.0" prefWidth="745.0" style="-fx-background-color: #363948;">
          <children>
-            <Label layoutX="283.0" layoutY="-1.0" text="welcome" textFill="#eee5e5">
+            <Label layoutX="167.0" layoutY="5.0" text="Welcome, have a look at your listings" textFill="#eee5e5">
                <font>
                   <Font size="20.0" />
                </font>
@@ -56,24 +51,29 @@
          </children>
       </AnchorPane>
       <Button fx:id="btnview" layoutX="460.0" layoutY="334.0" mnemonicParsing="false" onAction="#viewcar" prefHeight="25.0" prefWidth="79.0" text="View Car" />
-      <TextField alignment="CENTER_RIGHT" layoutX="174.0" layoutY="36.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
+      <TextField alignment="CENTER_RIGHT" layoutX="496.0" layoutY="51.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
       <ImageView fitHeight="18.0" fitWidth="34.0" layoutX="180.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/search-icon-png-5.png" />
+            <Image url="@../Images/search-icon-png-5.png" />
          </image>
       </ImageView>
       <Button fx:id="btnupdate" layoutX="574.0" layoutY="334.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="73.0" text="update" />
-      <TableView fx:id="tvID" layoutX="164.0" layoutY="91.0" prefHeight="229.0" prefWidth="514.0">
+      <TableView fx:id="tvID" layoutX="164.0" layoutY="91.0" prefHeight="229.0" prefWidth="663.0">
         <columns>
-          <TableColumn fx:id="tcmake" prefWidth="75.0" text="make" />
-          <TableColumn fx:id="tcmodel" prefWidth="75.0" text="model" />
-            <TableColumn fx:id="tccolor" prefWidth="87.33331298828125" text="color" />
-            <TableColumn fx:id="tctransmission" prefWidth="85.99993896484375" text="transmission" />
-            <TableColumn fx:id="tcfueltype" prefWidth="52.666717529296875" text="fueltype" />
-            <TableColumn fx:id="tcloss" prefWidth="75.0" text="loss" />
-            <TableColumn fx:id="tctype" prefWidth="75.0" text="type" />
+          <TableColumn fx:id="tcmake" prefWidth="75.0" text="Make" />
+          <TableColumn fx:id="tcmodel" prefWidth="75.0" text="Model" />
+            <TableColumn fx:id="tccolor" prefWidth="87.33331298828125" text="Color" />
+            <TableColumn fx:id="tctransmission" prefWidth="98.0" text="Transmission" />
+            <TableColumn fx:id="tcfueltype" prefWidth="104.0" text="FuelType" />
+            <TableColumn fx:id="tcloss" prefWidth="96.0" text="Loss" />
+            <TableColumn fx:id="tctype" prefWidth="126.0" text="Type" />
         </columns>
       </TableView>
       <Button fx:id="btndelete" layoutX="359.0" layoutY="334.0" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="79.0" text="Delete" />
+      <ImageView fitHeight="47.0" fitWidth="85.0" layoutX="178.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/garage.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

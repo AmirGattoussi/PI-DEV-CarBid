@@ -30,7 +30,7 @@ public class Car {
     private String primarydamage;
     private String secondarydamage;
     private String fueltype;
-    private double baseprice = 10000;
+    private float baseprice = 10000;
     private String carImg;
     private User owner;
 
@@ -244,17 +244,17 @@ public class Car {
         return true;
     }
 
-    public double getbasevalue() {
+    public float getbasevalue() {
 
-        double x = baseprice * this.fiscalpower;
+        float x = baseprice * this.fiscalpower;
         System.out.println(x);
         if (mileage > 10000) {
-            x = x - x * 0.05 * (mileage / 10000);
+            x = (float) (x - x * 0.05 * (mileage / 10000));
         }
         System.out.println(x);
         int y = LocalDate.now().getYear() - year;
         System.out.println(x - x * y * 0.05);
-        return x - x * y * 0.05;
+        return (float)(x - x * y * 0.05);
     }
     
     }

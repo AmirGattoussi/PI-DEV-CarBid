@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="689.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ListCars1Controller">
+   <children>
+      <Pane prefHeight="689.0" prefWidth="157.0" style="-fx-background-color: #363948;">
+         <children>
+            <Label layoutX="9.0" layoutY="75.0" prefHeight="28.0" prefWidth="140.0" text="Cars for Sale" textFill="#e8e5e5">
+               <font>
+                  <Font name="Century Gothic" size="22.0" />
+               </font>
+            </Label>
+    
+            <Line endX="-61.0" layoutX="101.0" layoutY="115.0" startX="-100.0" stroke="#efeeee" />
+            <Text fill="#f8f3f3" layoutX="4.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have a look at Ongoing Auctions" wrappingWidth="151.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Label layoutX="41.0" layoutY="265.0" text="Dashboard" textFill="#f2e7e7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="btna" layoutX="35.0" layoutY="300.0" mnemonicParsing="false" onAction="#caradd" prefHeight="25.0" prefWidth="73.0" text="Add Cars" />
+         </children>
+      </Pane>
+      <Separator layoutX="157.0" layoutY="33.0" prefHeight="1.0" prefWidth="527.0" />
+      <Label layoutX="634.0" layoutY="14.0" />
+      <AnchorPane layoutX="432.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutX="150.0" layoutY="-6.0" prefHeight="40.0" prefWidth="688.0" style="-fx-background-color: #363948;">
+         <children>
+            <Label layoutX="183.0" layoutY="5.0" text="Participate To Auctions !" textFill="#eee5e5">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnview" layoutX="457.0" layoutY="332.0" mnemonicParsing="false" onAction="#viewcar" prefHeight="25.0" prefWidth="79.0" text="View Car" />
+      <TextField alignment="CENTER_RIGHT" layoutX="593.0" layoutY="45.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
+      <ImageView fitHeight="18.0" fitWidth="34.0" layoutX="180.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/search-icon-png-5.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tvID" layoutX="164.0" layoutY="91.0" prefHeight="229.0" prefWidth="664.0">
+        <columns>
+          <TableColumn fx:id="tcmake" prefWidth="90.0" text="Make" />
+          <TableColumn fx:id="tcmodel" prefWidth="60.0" text="Model" />
+            <TableColumn fx:id="tccolor" prefWidth="87.33331298828125" text="Color" />
+            <TableColumn fx:id="tctransmission" prefWidth="85.99993896484375" text="Transmission" />
+            <TableColumn fx:id="tcfueltype" prefWidth="107.0" text="Fuel Type" />
+            <TableColumn fx:id="tcloss" prefWidth="85.0" text="Loss" />
+            <TableColumn fx:id="tctype" prefWidth="147.0" text="Type" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="47.0" fitWidth="85.0" layoutX="174.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/sale.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

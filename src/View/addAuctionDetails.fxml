@@ -13,8 +13,8 @@
       <Label layoutX="89.0" layoutY="201.0" text="Starting Price" />
       <DatePicker fx:id="startDatePicker" layoutX="206.0" layoutY="93.0" prefHeight="25.0" prefWidth="174.0" />
       <DatePicker fx:id="endDatePicker" layoutX="206.0" layoutY="148.0" />
-      <TextField fx:id="priceField" layoutX="206.0" layoutY="197.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="btnCancel" layoutX="147.0" layoutY="265.0" mnemonicParsing="false" text="Cancel" />
+      <TextField fx:id="priceField" editable="false" layoutX="206.0" layoutY="197.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="btnCancel" layoutX="147.0" layoutY="265.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
       <Button fx:id="btnConfirm" layoutX="364.0" layoutY="265.0" mnemonicParsing="false" onAction="#onConfirm" text="Confirm" />
       <Label layoutX="267.0" layoutY="30.0" text="Auction Details" />
    </children>

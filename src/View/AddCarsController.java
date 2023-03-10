@@ -241,6 +241,7 @@ public class AddCarsController implements Initializable {
                     loginParent = loader.load();
                     AddAuctionDetailsController controller = loader.getController();
                     controller.setCarId(carId);
+                  
                     Scene loginScene = new Scene(loginParent);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(loginScene);

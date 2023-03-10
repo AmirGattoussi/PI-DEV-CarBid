@@ -60,6 +60,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 //import javafx.util.Duration;
@@ -98,6 +99,8 @@ public class BidController implements Initializable {
     @FXML
     private TableColumn<Bid, Float> live_column;
     @FXML
+    private ImageView ImageC;
+    @FXML
     private Text txt_time;
     @FXML
     private Text bids_number;
@@ -105,6 +108,7 @@ public class BidController implements Initializable {
     private int userId;
     private int carId;
     private int auctionId;
+    private javafx.scene.image.Image imageData;
 
     public BidController(int userId, int carId, int auctionId) {
         this.userId = userId;
@@ -147,9 +151,21 @@ public class BidController implements Initializable {
         try {
             CarDao carDao = new CarDao();
             Car car = carDao.displayById(carId);
+            //Setting Model NAME LABEL
+            System.out.println(car);
             txt_car.setText(carDao.displayById(carId).getModel());
-        } catch (SQLException ex) {
-            Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
+            //BRINGING IN IMAGE
+            System.out.println(car.getCarImg());
+            String path = "http://localhost/piImg/" + car.getCarImg();
+            imageData = new javafx.scene.image.Image(new java.net.URL(path).openStream());
+            // new javafx.scene.image.Image(in)
+           
+            ImageC.setImage(imageData);
+
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+            // System.err.println(e.fillInStackTrace());
         }
 
         AuctionDaoImplementation aucDao = new AuctionDaoImplementation();

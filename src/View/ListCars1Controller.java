@@ -7,7 +7,6 @@ package View;
 
 import Dao.CarDao;
 import Entities.Car;
-import Entities.CurrentUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ import javafx.stage.Stage;
  *
  * @author rima
  */
-public class ListCarsController implements Initializable {
+public class ListCars1Controller implements Initializable {
 
     @FXML
     private Button btnupdate;
@@ -71,7 +70,7 @@ public class ListCarsController implements Initializable {
         try {
 
             CarDao carDao = new CarDao();
-            List<Car> data = carDao.displayAllbyuserId(CurrentUser.getUser().getId());
+            List<Car> data = carDao.displayAll();
             ObservableList<Car> observableList = FXCollections.observableList(data);
 
             tcmake.setCellValueFactory(new PropertyValueFactory<>("make"));
@@ -84,7 +83,7 @@ public class ListCarsController implements Initializable {
 
             tvID.setItems(observableList);
         } catch (SQLException ex) {
-            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(ListCars1Controller.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
     }
@@ -114,7 +113,7 @@ public class ListCarsController implements Initializable {
                 CarDao carDao;
 
             } catch (IOException ex) {
-                Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListCars1Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -145,7 +144,7 @@ public class ListCarsController implements Initializable {
                 CarDao carDao;
 
             } catch (IOException ex) {
-                Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListCars1Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -163,7 +162,7 @@ public class ListCarsController implements Initializable {
                 carDao.delete(selectedCar);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListCars1Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -184,7 +183,7 @@ public class ListCarsController implements Initializable {
             CarDao carDao;
 
         } catch (IOException ex) {
-            Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListCars1Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
