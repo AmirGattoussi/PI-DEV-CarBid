@@ -9,7 +9,6 @@ package Api;
  *
  * @author asus
  */
-
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +17,7 @@ import javax.mail.internet.*;
 import javax.activation.*;
 
 public class MailApi {
+
     public static void sendMail(String recepient) {
 
         Properties properties = new Properties();
@@ -26,7 +26,7 @@ public class MailApi {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         properties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-        String myAccountEmail = "yosr.moalla@esprit.tn";
+        String myAccountEmail = "";
         String password = "";
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
@@ -43,17 +43,25 @@ public class MailApi {
             message.setFrom(new InternetAddress(myAccountEmail));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Congratulations, You Won the Auction!");
-         String body = "Dear Bidder,\n"
+            String body = "Dear Bidder,\n"
                     + "It is with great pleasure that we announce that you have won the auction.\n"
                     + "Attached to this email, you will find all the details. Please feel free to download, print, and share the PDF.\n"
                     + "Best regards,\n"
                     + "CarBid team";
-        
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText(body);
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        message.setContent(multipart);
+
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            //QRCodeExample qr = new QRCodeExample();
+            messageBodyPart.setText(body);
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            //DataSource source = new FileDataSource("/PI-DEV/nbproject/qr_code.pdf");
+            FileDataSource source = new FileDataSource("C:\\Users\\asus\\Desktop\\04-02 - Copie\\PI-DEV-CarBid/qr_code.pdf");
+            MimeBodyPart pdfAttachment = new MimeBodyPart();
+            attachmentPart.setDataHandler(new DataHandler(source));
+            attachmentPart.setFileName("Details.pdf");
+            multipart.addBodyPart(attachmentPart);
+            message.setContent(multipart);
             Transport.send(message);
             System.out.println("message sent successfully....");
         } catch (Exception ex) {
