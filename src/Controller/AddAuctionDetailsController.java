@@ -38,77 +38,71 @@ import javafx.stage.Stage;
  * @author gtsia
  */
 public class AddAuctionDetailsController implements Initializable {
-    
+
     private int carId;
-    
-   public void setCarId(int carId) {
+
+    public void setCarId(int carId) {
         this.carId = carId;
         System.out.println(carId);
-        float x =carDao.displayById(carId).getbasevalue();
+        float x = carDao.displayById(carId).getbasevalue();
         System.out.println(x);
-        priceField.setText(carDao.displayById(carId).getbasevalue()+""); 
+        priceField.setText(carDao.displayById(carId).getbasevalue() + "");
     }
-
 
     /**
      * Initializes the controller class.
      */
     @FXML
     private DatePicker startDatePicker;
-    
+
     @FXML
     private DatePicker endDatePicker;
-    
+
     @FXML
     private TextField priceField;
-    
+
     @FXML
     private Button btnCancel;
-    
+
     @FXML
     private Button btnConfirm;
     CarDao carDao = CarDao.getInstance();
+
     @FXML
     void onCancel(ActionEvent event) {
         // TODO: Implement onCancel method
     }
-    AuctionDaoImplementation auc=new AuctionDaoImplementation();
+    AuctionDaoImplementation auc = new AuctionDaoImplementation();
+
     @FXML
     void onConfirm(ActionEvent event) {
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
-        if (startDatePicker.getValue()== null ||(endDatePicker.getValue()== null)) {
+        if (startDatePicker.getValue() == null || (endDatePicker.getValue() == null)) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
             alert.setHeaderText(null);
             alert.setContentText("Please enter valid transmission");
             alert.showAndWait();
-         }
-
-       else {
+        } else {
             try {
-        Float startingPrice = Float.parseFloat(priceField.getText());
-        java.sql.Date startDatesql = java.sql.Date.valueOf(startDate);
-        java.sql.Date endDatesql = java.sql.Date.valueOf(endDate);
-        
-        Auction auction = new Auction(startDatesql, endDatesql, startingPrice, 0, "open", carId);
-        auc.addAuction(auction);
-        
-         
+                Float startingPrice = Float.parseFloat(priceField.getText());
+                java.sql.Date startDatesql = java.sql.Date.valueOf(startDate);
+                java.sql.Date endDatesql = java.sql.Date.valueOf(endDate);
+
+                Auction auction = new Auction(startDatesql, endDatesql, startingPrice, 0, "open", carId);
+
                 AuctionDaoImplementation auctionDaoImplementation = new AuctionDaoImplementation();
 
                 auctionDaoImplementation.addAuction(
                         new Auction(
-                         startDatesql,
-                         endDatesql,
-                         Float.parseFloat(priceField.getText()),0,"open", carId)
-                         );
-                        
-                        
-                        
-                      
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                startDatesql,
+                                endDatesql,
+                                Float.parseFloat(priceField.getText()), 0, "open", carId)
+                );
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("AuctionConfirm");
                 alert.setHeaderText(null);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddDetailsController.fxml"));
@@ -119,18 +113,19 @@ public class AddAuctionDetailsController implements Initializable {
                 Logger.getLogger(AddAuctionDetailsController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }}
-    
-    
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO: Implement initialize method
         System.out.println(carId);
-        
+
     }
+
     @FXML
     void Cancel(ActionEvent event) {
-          try {
+        try {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
@@ -146,5 +141,4 @@ public class AddAuctionDetailsController implements Initializable {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    }
-
+}
