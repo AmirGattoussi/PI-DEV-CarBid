@@ -454,7 +454,7 @@ public class manageReservationsAgencyController implements Initializable {
 
             ReservationInformMailApi.sendEmailToUser(u.getUserById(id_user).getEmail(),
                     u.getUserById(id_user).getName(), c.displayById(id_car).getMake(),
-                    c.displayById(id_car).getMake());
+                    c.displayById(id_car).getModel());
         } catch (SQLException e) {
             System.out.println("****************");
             e.printStackTrace();

@@ -69,6 +69,7 @@ public class AddAuctionDetailsController implements Initializable {
         
         Auction auction = new Auction(startDatesql, endDatesql, startingPrice, 0, "open", carId);
         auc.addAuction(auction);
+        
     }
     
     @Override

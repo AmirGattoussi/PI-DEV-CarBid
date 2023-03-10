@@ -7,6 +7,7 @@ package Controller;
 
 import Dao.AuctionDaoImplementation;
 import Dao.NotificationDaoImplementation;
+import Entities.CurrentUser;
 import Entities.Notification;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -50,13 +51,14 @@ public class NotificationController implements Initializable {
     private Button readBtn;
     @FXML
     private Button refreshBtn;
-    private int userId = 2;
+    private int userId = CurrentUser.getUser().getId();
     NotificationDaoImplementation notifDao = new NotificationDaoImplementation();
-    int currentCount = notifDao.getAllNotifications(2).size();
+    int currentCount = notifDao.getAllNotifications(CurrentUser.getUser().getId()).size();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refreshView();
+        System.out.println(userId);
     }
 
     @FXML

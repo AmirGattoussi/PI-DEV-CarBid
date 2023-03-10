@@ -126,7 +126,7 @@ public class RegisterController implements Initializable {
         } // Begin User Adding
         else {
             if // Account Type Choice
-            (accountChoice.equals("Standard User")) {
+                    (accountChoice.equals("Standard User")) {
                 int phoneInt;
                 phoneInt = Integer.parseInt(phone);
                 User user = new User(name, email, password, phoneInt, location);
@@ -199,6 +199,20 @@ public class RegisterController implements Initializable {
             } catch (MessagingException ex) {
                 Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    @FXML
+    void cancel(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/login.fxml"));
+        Parent loginParent;
+        try {
+            loginParent = loader.load();
+            Scene loginScene = new Scene(loginParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(loginScene);
+            window.show();
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

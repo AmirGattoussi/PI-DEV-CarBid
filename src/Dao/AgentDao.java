@@ -7,14 +7,10 @@ package Dao;
 
 import Entities.Agent;
 import Utils.*;
-import Entities.Agent;
-import Entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,4 +102,39 @@ public class AgentDao {
         return false;
     }
 
+    public String getAgentLocation(int id_agent) {
+        PreparedStatement statement;
+        String location = "";
+        try {
+            statement = cnx.prepareStatement("SELECT location FROM user WHERE id_agent=?");
+            statement.setInt(1, id_agent);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            location = resultSet.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return location;
+    }
+
+    public int getAgentByCar(int id_car) {
+        PreparedStatement statement;
+        int id_agent = 0;
+        try {
+            statement = cnx.prepareStatement("SELECT id_agent FROM cars WHERE id_car=?");
+            statement.setInt(1, id_car);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            id_agent = resultSet.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return id_agent;
+    }
 }

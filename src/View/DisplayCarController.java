@@ -6,6 +6,7 @@
 package View;
 
 import Controller.BidController;
+import Controller.createReservationController;
 import Dao.AuctionDaoImplementation;
 import Dao.CarDao;
 import Entities.Car;
@@ -45,6 +46,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -53,14 +55,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
-
-
-
-
-
 
 /**
  * FXML Controller class
@@ -68,7 +69,9 @@ import javafx.stage.Stage;
  * @author rima
  */
 public class DisplayCarController implements Initializable {
-    
+
+    @FXML
+    private AnchorPane pnlDisplayCar;
     @FXML
     private Button btnBack;
     @FXML
@@ -79,6 +82,8 @@ public class DisplayCarController implements Initializable {
     private Button btnBid;
     @FXML
     private Button btnExport;
+    @FXML
+    private Button createReservationBtn;
     @FXML
     private TextField tfDesc;
     @FXML
@@ -117,13 +122,11 @@ public class DisplayCarController implements Initializable {
     public int userId = CurrentUser.getUser().getId();
     public int carId;
     
-      @FXML
+    @FXML
     private Text textOwner;
-      @FXML
+    @FXML
     private ImageView imageC;
-      private javafx.scene.image.Image imageData;
-    
-    
+    private javafx.scene.image.Image imageData;
 
     /**
      * Initializes the controller class.
@@ -132,48 +135,98 @@ public class DisplayCarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     @FXML
     private void Back(ActionEvent event) {
         try {
-            
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ListCars.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainNavigation.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            ListCarsController controller = loader.getController();
-            
+            Scene scene = new Scene(root);            
             stage.setScene(scene);
             stage.show();
             CarDao carDao;
-            
+
         } catch (IOException ex) {
             Logger.getLogger(ListCarsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void fncarspecification(KeyEvent event) {
     }
-    
+
     @FXML
     private void carspecification(ActionEvent event) {
     }
-    
+
     @FXML
     private void fnphoto(KeyEvent event) {
         Carspecification.toFront();
     }
-    
+
     @FXML
     private void photo(ActionEvent event) {
         Photos.toFront();
-        
+
     }
+
     @FXML
     private void makeRes(ActionEvent event) {
+        if (event.getSource() == createReservationBtn) {
+            Rectangle overlay = new Rectangle(0, 0, Color.rgb(0, 0, 0, 0.15));
+            overlay.widthProperty().bind(pnlDisplayCar.widthProperty());
+            overlay.heightProperty().bind(pnlDisplayCar.heightProperty()); // Overlay to put the popup in focus
+            Popup popup = new Popup();
+            Pane popupContent = new Pane();
+            Pane createReservationPane = new Pane();
+
+            Parent included;
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("../View/createReservation.fxml")); // Loading FXML
+                included = loader.load();
+                createReservationController controller = loader.getController();
+                controller.setCarID(selectedCar.getId());
+                createReservationPane = (Pane) included.lookup("#createReservationPopUp");
+                Rectangle popupBackground = new Rectangle(368, 315, Color.WHITE);
+                popupContent.getChildren().addAll(popupBackground, createReservationPane);
+                popup.getContent().add(popupContent); // Adding content to the popup.
+                popup.setAutoHide(true); // when clicking away from popup it closes.
+                popup.setOnHidden(eventCreateR -> pnlDisplayCar.getChildren().remove(overlay)); // Removing overlay.
+
+                /**
+                 * Popup button handling.
+                 * Note: Reason why it's not in handleClicks() because this is easier to get the
+                 * selected reservation row.
+                 */
+//                Button confirmBtn = (Button) popupContent.lookup("#confirmBtn");
+//                confirmBtn.setOnAction(eventCreateR -> {
+//                    controller.handleClicks(eventCreateR);
+//                    System.out.println("HANDLE CLICKS");
+//                    popup.hide();
+//                });
+//                Button cancelButton = (Button) popupContent.lookup("#cancelBtn");
+//                cancelButton.setOnAction(eventCreateR -> {
+//                    popup.hide();
+//                });
+
+                pnlDisplayCar.getChildren().add(overlay); // Adding overlay to View.
+
+                Bounds rootBounds = pnlDisplayCar.getBoundsInLocal();
+                double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - popupContent.getWidth()) / 1.4;
+                popup.show(createReservationBtn.getScene().getWindow(), popupX, 125);
+                popup.setAutoFix(true);
+
+            } catch (IOException e) {
+                System.out.println("****************");
+                e.printStackTrace();
+                System.out.println("****************");
+            }
+        }
     }
-    
+
     @FXML
     private void setbid(ActionEvent event) {
         try {
@@ -196,15 +249,16 @@ public class DisplayCarController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     @FXML
     private void setbid() {
-       try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
             AuctionDaoImplementation auc = new AuctionDaoImplementation();
-            BidController bidcontroller = new BidController(CurrentUser.getUser().getId(), selectedCar.getId(), auc.getIdAuctionByCar(selectedCar.getId()));
+            BidController bidcontroller = new BidController(CurrentUser.getUser().getId(), selectedCar.getId(),
+                    auc.getIdAuctionByCar(selectedCar.getId()));
             System.out.println(auc.getIdAuctionByCar(selectedCar.getId()));
             loader.setController(bidcontroller);
             Parent root = loader.load();
@@ -212,12 +266,13 @@ public class DisplayCarController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("New View");
             stage.show();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(BidController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//
+
     public void setValue(Car car) throws IOException {
 
         this.selectedCar = car;
@@ -243,216 +298,218 @@ public class DisplayCarController implements Initializable {
         textOwner.setText(selectedCar.getOwner().getName());
         System.out.println(selectedCar.getOwner().getName());
         System.out.println(selectedCar.getCarImg());
-        String path = "http://localhost/piImg/"+selectedCar.getCarImg();
-        //URL url = new URL(path);
-        //HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-       // connection.setDoOutput(true);
-      //  connection.setRequestMethod("GET");
-      try {
-       imageData =new javafx.scene.image.Image( new java.net.URL(path).openStream());
-      //new javafx.scene.image.Image(in)
-       imageC.setImage(imageData);
+        String path = "http://localhost/piImg/" + selectedCar.getCarImg();
+        // URL url = new URL(path);
+        // HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // connection.setDoOutput(true);
+        // connection.setRequestMethod("GET");
+        try {
+            imageData = new javafx.scene.image.Image(new java.net.URL(path).openStream());
+            // new javafx.scene.image.Image(in)
+            imageC.setImage(imageData);
 
-        // Decode the Base64 string to a byte array
-        //byte[] decodedData = Base64.getDecoder().decode(imageData);
-        //imageC.setImage(new javafx.scene.image.Image(imageData,245,237,false,true));
-        //URL url = new URL(selectedCar.getCarImg()+"http://localhost/piImg/"+selectedCar.getCarImg());
-        //System.out.println(url.getPath());
-        //imageC.setImage(new javafx.scene.image.Image(url.openStream(),245,237,false,true));
+            // Decode the Base64 string to a byte array
+            // byte[] decodedData = Base64.getDecoder().decode(imageData);
+            // imageC.setImage(new javafx.scene.image.Image(imageData,245,237,false,true));
+            // URL url = new
+            // URL(selectedCar.getCarImg()+"http://localhost/piImg/"+selectedCar.getCarImg());
+            // System.out.println(url.getPath());
+            // imageC.setImage(new
+            // javafx.scene.image.Image(url.openStream(),245,237,false,true));
         } catch (Exception e) {
             e.printStackTrace();
-           // System.err.println(e.fillInStackTrace());
-      }
-    //    textcolor.setText(selectedCar.getColor());
+            // System.err.println(e.fillInStackTrace());
+        }
+        // textcolor.setText(selectedCar.getColor());
 
     }
-    
+
     @FXML
     private void exportPDF(ActionEvent event) throws SQLException, DocumentException, BadElementException, IOException {
         try {
             DBconnexion cnx = DBconnexion.getInstance();
-            
-            //PreparedStatement pst=null;
-            //ResultSet rs=null;
-            
-            //Car car = new Car();
-            
-            //String guery = " select * from cars WHERE id_car= '" + car.getId()+"'";
-            //try {
-            
-            //pst= cnx.getConnection().prepareStatement(guery);
-            //rs= pst.executeQuery();
-            
-            String file_name = selectedCar.getId()+"_" +selectedCar.getMake()+".pdf";
+
+            // PreparedStatement pst=null;
+            // ResultSet rs=null;
+
+            // Car car = new Car();
+
+            // String guery = " select * from cars WHERE id_car= '" + car.getId()+"'";
+            // try {
+
+            // pst= cnx.getConnection().prepareStatement(guery);
+            // rs= pst.executeQuery();
+
+            String file_name = selectedCar.getId() + "_" + selectedCar.getMake() + ".pdf";
             Document doc = new Document();
             PdfWriter.getInstance(doc, new FileOutputStream(file_name));
-            
+
             doc.open();
-            
-            /*com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance("C:\\xampp\\htdocs\\FirstProject-main\\public\\uploads\\logo.png");
-            img.scaleAbsoluteWidth(600);
-            img.scaleAbsoluteHeight(92);
-            img.setAlignment(com.itextpdf.text.Image.ALIGN_CENTER);
-            doc.add(img); */
-            
+
+            /*
+             * com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance(
+             * "C:\\xampp\\htdocs\\FirstProject-main\\public\\uploads\\logo.png");
+             * img.scaleAbsoluteWidth(600);
+             * img.scaleAbsoluteHeight(92);
+             * img.setAlignment(com.itextpdf.text.Image.ALIGN_CENTER);
+             * doc.add(img);
+             */
+
             doc.add(new Paragraph(" "));
-            doc.add(new Paragraph("Car details",FontFactory.getFont(FontFactory.TIMES_BOLD,20,BaseColor.BLUE)));
+            doc.add(new Paragraph("Car details", FontFactory.getFont(FontFactory.TIMES_BOLD, 20, BaseColor.BLUE)));
             doc.add(new Paragraph(" "));
-            
+
             PdfPTable table = new PdfPTable(13);
             table.setWidthPercentage(100);
             PdfPCell cell;
-            cell = new PdfPCell (new Phrase("Model", FontFactory.getFont("Comic Sans MS",12)));
+            cell = new PdfPCell(new Phrase("Model", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Color", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Color", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Type", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Type", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
-            cell = new PdfPCell (new Phrase("Make", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Make", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
-            cell = new PdfPCell (new Phrase("Description", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Description", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
-            
-            cell = new PdfPCell (new Phrase("Mileage", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Mileage", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
-            
-            cell = new PdfPCell (new Phrase("Year", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Year", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Fiscalpower", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Fiscalpower", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
-            cell = new PdfPCell (new Phrase("Transmission", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Transmission", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Loss", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Loss", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Primarydamage", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Primarydamage", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Secondarydamage", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Secondarydamage", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase("Fueltype", FontFactory.getFont("Comic Sans MS",12)));
+
+            cell = new PdfPCell(new Phrase("Fueltype", FontFactory.getFont("Comic Sans MS", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.GRAY);
             table.addCell(cell);
-            
-            
+
             /////////////////////////////////////////////////////////////////////////////////
-            /*while(rs.next()) {
-            
-            car.setModel(rs.getString("model"));
-            car.setColor(rs.getString("color"));
-            car.setType(rs.getString("type"));
-            car.setMake(rs.getString("make"));
-            car.setDescription(rs.getString("description"));
-            car.setMileage(rs.getInt("mileage"));
-            car.setYear(rs.getInt("year"));
-            car.setFiscalpower(rs.getInt("fiscalpower"));
-            car.setTransmission(rs.getString("transmission"));
-            car.setLoss(rs.getString("loss"));
-            car.setPrimarydamage(rs.getString("primarydamage"));
-            car.setSecondarydamage(rs.getString("secondarydamage"));
-            car.setFueltype(rs.getString("fueltype"));
-            System.out.println(rs.next());
-            */
-            cell = new PdfPCell (new Phrase(selectedCar.getModel(), FontFactory.getFont("Arial",12)));
+            /*
+             * while(rs.next()) {
+             * 
+             * car.setModel(rs.getString("model"));
+             * car.setColor(rs.getString("color"));
+             * car.setType(rs.getString("type"));
+             * car.setMake(rs.getString("make"));
+             * car.setDescription(rs.getString("description"));
+             * car.setMileage(rs.getInt("mileage"));
+             * car.setYear(rs.getInt("year"));
+             * car.setFiscalpower(rs.getInt("fiscalpower"));
+             * car.setTransmission(rs.getString("transmission"));
+             * car.setLoss(rs.getString("loss"));
+             * car.setPrimarydamage(rs.getString("primarydamage"));
+             * car.setSecondarydamage(rs.getString("secondarydamage"));
+             * car.setFueltype(rs.getString("fueltype"));
+             * System.out.println(rs.next());
+             */
+            cell = new PdfPCell(new Phrase(selectedCar.getModel(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
             System.out.println(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getColor(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getColor(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getType(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getType(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getMake(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getMake(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getDescription(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getDescription(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getMileage())), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(
+                    new Phrase((Integer.toString(selectedCar.getMileage())), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getYear())), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(
+                    new Phrase((Integer.toString(selectedCar.getYear())), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase((Integer.toString(selectedCar.getFiscalpower())), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(
+                    new Phrase((Integer.toString(selectedCar.getFiscalpower())), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getTransmission(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getTransmission(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getLoss(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getLoss(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getPrimarydamage(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getPrimarydamage(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getSecondarydamage(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getSecondarydamage(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
-            cell = new PdfPCell (new Phrase(selectedCar.getFueltype(), FontFactory.getFont("Arial",12)));
+
+            cell = new PdfPCell(new Phrase(selectedCar.getFueltype(), FontFactory.getFont("Arial", 12)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-            
+
             doc.add(table);
-            com.itextpdf.text.Image imagePdf = com.itextpdf.text.Image.getInstance(SwingFXUtils.fromFXImage(imageData, null),null);
-            //imagePdf.setDpi(150, 100);
+            com.itextpdf.text.Image imagePdf = com.itextpdf.text.Image
+                    .getInstance(SwingFXUtils.fromFXImage(imageData, null), null);
+            // imagePdf.setDpi(150, 100);
             imagePdf.scaleAbsolute(300, 250);
             imagePdf.setAbsolutePosition(150, 400);
-            
-            doc.add( imagePdf);
+
+            doc.add(imagePdf);
 
             System.out.println("PDF exported");
             doc.close();
@@ -460,23 +517,18 @@ public class DisplayCarController implements Initializable {
             Logger.getLogger(DisplayCarController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-        
-        
-        //} catch (DocumentException | SQLException | IOException ex) {
-           // Logger.getLogger(DisplayCarController.class.getName()).log(Level.SEVERE, null, ex);
-        //}
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Car details exported to PDF Sheet");
-            alert.show();
+        // } catch (DocumentException | SQLException | IOException ex) {
+        // Logger.getLogger(DisplayCarController.class.getName()).log(Level.SEVERE,
+        // null, ex);
+        // }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Car details exported to PDF Sheet");
+        alert.show();
 
-            
-}
-           
     }
-        
-   // }
 
+}
 
+// }

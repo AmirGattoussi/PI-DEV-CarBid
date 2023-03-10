@@ -12,59 +12,57 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="769.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="769.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="70.0" layoutY="107.0" style="-fx-font-weight: BOLD;" text="Current Bid">
+      <Label layoutX="56.0" layoutY="69.0" style="-fx-font-weight: BOLD;" text="Current Bid">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Text fx:id="txt_highest_bid" layoutX="95.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="txt_highest_bid" layoutX="103.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#25c5b9" height="63.0" stroke="#25c5b9" strokeType="INSIDE" width="769.0" />
-      <ImageView fitHeight="57.0" fitWidth="95.0" layoutX="679.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="57.0" fitWidth="95.0" layoutX="679.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="314.0" layoutY="107.0" style="-fx-font-weight: BOLD;" text="Time Remaining ">
+      <Label layoutX="315.0" layoutY="69.0" style="-fx-font-weight: BOLD;" text="Time Remaining ">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Text fx:id="txt_time" layoutX="357.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+      <Text fx:id="txt_time" layoutX="357.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="bids_number" layoutX="649.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
+      <Text fx:id="bids_number" layoutX="652.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label layoutX="643.0" layoutY="107.0" style="-fx-font-weight: bold;" text="Bids">
+      <Label layoutX="643.0" layoutY="95.0" style="-fx-font-weight: bold;" text="Bids">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <ImageView fitHeight="129.0" fitWidth="180.0" layoutX="65.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="129.0" fitWidth="180.0" layoutX="56.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/damcar.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="txt_car" layoutX="258.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BMW-Serie 5 520I LUXURY LINE">
+      <Text fx:id="txt_car" layoutX="263.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BMW-Serie 5 520I LUXURY LINE">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label layoutX="52.0" layoutY="283.0" style="-fx-font-weight: bold;" text="BID HISTORY">
+      <Label layoutX="52.0" layoutY="270.0" style="-fx-font-weight: bold;" text="BID HISTORY">
          <font>
             <Font size="18.0" />
          </font>
