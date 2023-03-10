@@ -232,16 +232,12 @@ public class DisplayCarController implements Initializable {
     @FXML
     private void setbid(ActionEvent event) {
         try {
-            System.out.println("aaaaaaaaaaaaa"+selectedCar.getId());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Bid.fxml"));
             AuctionDaoImplementation aucDao=new AuctionDaoImplementation();
             int auctionId =aucDao.getIdAuctionByCar(selectedCar.getId()) ;
-            System.out.println("bbbbbbbb"+auctionId);
             BidController bidcontroller = new BidController(userId, selectedCar.getId(), auctionId);
 
             loader.setController(bidcontroller);
-            // bidcontroller.setValueCar(carId);
-            // bidcontroller.setValueUser(userId);
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

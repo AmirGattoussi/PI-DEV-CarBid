@@ -74,8 +74,8 @@
                         <Label layoutX="12.0" layoutY="123.0" prefHeight="17.0" prefWidth="119.0" text="transmission: " />
                         <Label layoutX="147.0" layoutY="16.0" prefHeight="17.0" prefWidth="157.0" text="Primarydamage :   " />
                         <Label layoutX="22.0" layoutY="88.0" prefHeight="17.0" prefWidth="103.0" text="Loss:   " />
-                        <Label layoutX="131.0" layoutY="123.0" prefHeight="17.0" prefWidth="157.0" text="Scondarydamage : " />
-                        <Label layoutX="8.0" layoutY="180.0" prefHeight="28.0" prefWidth="85.0" text="fueltype:      " />
+                        <Label layoutX="145.0" layoutY="123.0" prefHeight="17.0" prefWidth="157.0" text="Secondary Price:" />
+                        <Label layoutX="8.0" layoutY="180.0" prefHeight="28.0" prefWidth="85.0" text="Fuel Type:      " />
                         <Label fx:id="texttrans" layoutX="90.0" layoutY="123.0" text="auto" />
                         <Label layoutX="147.0" layoutY="41.0" prefHeight="35.0" prefWidth="85.0" text="Description: " />
                         <Text fx:id="textcolor" layoutX="96.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="c" />
@@ -92,7 +92,7 @@
                         <Text fx:id="textmileage" layoutX="88.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Text fx:id="entryPrice" layoutX="249.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="entryPrice" wrappingWidth="189.3951416015625" />
                         <Label layoutX="147.0" layoutY="87.0" text="Bid entry price" />
-                        <Label layoutX="130.0" layoutY="157.0" prefHeight="17.0" prefWidth="119.0" text="owner name:" />
+                        <Label layoutX="147.0" layoutY="157.0" prefHeight="17.0" prefWidth="119.0" text="owner name:" />
                         <Text fx:id="textOwner" layoutX="284.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>

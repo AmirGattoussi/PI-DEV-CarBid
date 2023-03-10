@@ -255,6 +255,7 @@ public class CarDao implements IDao<Car> {
             p.setSecondarydamage(rs.getString("secondarydamage"));
             p.setTransmission(rs.getString("transmission"));
             p.setYear(rs.getInt("year"));
+            p.setCarImg(rs.getString("carImg"));
             p.setOwner(userDao.getUserById(rs.getInt("id_user")));
 
             // }
