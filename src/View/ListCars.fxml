@@ -48,7 +48,7 @@
       <AnchorPane layoutX="432.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
       <AnchorPane layoutX="150.0" layoutY="-6.0" prefHeight="40.0" prefWidth="745.0" style="-fx-background-color: #363948;">
          <children>
-            <Label layoutX="290.0" layoutY="5.0" text="Welcome" textFill="#eee5e5">
+            <Label layoutX="167.0" layoutY="5.0" text="Welcome, have a look at your listings" textFill="#eee5e5">
                <font>
                   <Font size="20.0" />
                </font>
@@ -56,7 +56,7 @@
          </children>
       </AnchorPane>
       <Button fx:id="btnview" layoutX="460.0" layoutY="334.0" mnemonicParsing="false" onAction="#viewcar" prefHeight="25.0" prefWidth="79.0" text="View Car" />
-      <TextField alignment="CENTER_RIGHT" layoutX="495.0" layoutY="45.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
+      <TextField alignment="CENTER_RIGHT" layoutX="496.0" layoutY="51.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
       <ImageView fitHeight="18.0" fitWidth="34.0" layoutX="180.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Downloads/search-icon-png-5.png" />

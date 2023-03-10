@@ -39,31 +39,26 @@
                         <Insets left="25.0" />
                     </padding>
                 </Button>
-            <Button fx:id="btnHome1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="side-navbar" text="           My Cars">
+            <Button fx:id="btnHome1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="side-navbar" text="My Cars">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
                   <Insets left="25.0" />
                </padding>
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/icons8_Box_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
                 <Button fx:id="btnAuction" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="side-navbar" text="Auction">
                     <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Images/auction_icon.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="25.0" />
-                    </padding>
-                </Button>
-                <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" styleClass="side-navbar" text="Orders">
-                    <graphic>
-                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Images/icons8_Box_32px.png" />
                             </image>
                         </ImageView>
                     </graphic>

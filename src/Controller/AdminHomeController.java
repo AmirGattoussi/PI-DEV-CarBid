@@ -33,7 +33,7 @@ public final class AdminHomeController implements Initializable {
     @FXML
     private Button btnReservations;
     @FXML
-    private Button btnSettings;
+    private Button btnSp;
     @FXML
     private Button btnSignout;
     @FXML
@@ -65,6 +65,16 @@ public final class AdminHomeController implements Initializable {
             mainView.getChildren().clear();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/dashboard.fxml"));
+                Parent included = loader.load();
+                mainView = (StackPane) mainView.lookup("#mainView");
+                mainView.getChildren().add(included);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (event.getSource() == btnSp) {
+            mainView.getChildren().clear();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLDocumentcommand.fxml"));
                 Parent included = loader.load();
                 mainView = (StackPane) mainView.lookup("#mainView");
                 mainView.getChildren().add(included);

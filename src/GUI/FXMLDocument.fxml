@@ -12,24 +12,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#clickMousee" prefHeight="587.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<AnchorPane id="AnchorPane" minWidth="-Infinity" onMouseClicked="#clickMousee" prefHeight="587.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
     <children>
-        <TextField fx:id="text_main_id" layoutX="312.0" layoutY="455.0" prefHeight="31.0" prefWidth="88.0" />
-        <TextField fx:id="text_main_type" layoutX="316.0" layoutY="220.0" prefHeight="31.0" prefWidth="139.0" />
-        <TextField fx:id="text_main_pou" layoutX="193.0" layoutY="220.0" prefHeight="31.0" prefWidth="58.0" />
-        <TextField fx:id="text_main_description" layoutX="311.0" layoutY="305.0" prefHeight="31.0" prefWidth="169.0" />
-        <TextField fx:id="text_main_price" layoutX="199.0" layoutY="305.0" prefHeight="31.0" prefWidth="75.0" />
-        <Label layoutX="334.0" layoutY="422.0" prefHeight="0.0" prefWidth="38.0" text="Id " />
-        <Label layoutX="356.0" layoutY="172.0" prefHeight="21.0" prefWidth="58.0" text="Type" />
-        <Label layoutX="199.0" layoutY="172.0" prefHeight="21.0" prefWidth="58.0" text="Pou" />
-        <Label layoutX="342.0" layoutY="274.0" prefHeight="21.0" prefWidth="88.0" text="Description" />
-        <Label layoutX="206.0" layoutY="274.0" prefHeight="21.0" prefWidth="103.0" text="Price" />
-        <Label layoutX="282.0" layoutY="353.0" prefHeight="21.0" prefWidth="58.0" text="Typec" />
-        <Button fx:id="btn_main_add" layoutX="516.0" layoutY="446.0" mnemonicParsing="false" onAction="#add" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #f5ae07;" text="Add" />
-        <Button fx:id="btn_main_modify" layoutX="885.0" layoutY="446.0" mnemonicParsing="false" onAction="#modify" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #05e6d3;" text="Modify" />
-        <Button fx:id="btn_main_display" layoutX="516.0" layoutY="510.0" mnemonicParsing="false" onAction="#display" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #4AAFE8;" text="Display" />
-        <Button fx:id="btn_main_delete" layoutX="768.0" layoutY="447.0" mnemonicParsing="false" onAction="#delete" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
-        <TableView fx:id="tablespareparts" layoutX="487.0" layoutY="97.0" onMouseClicked="#clickMousee" prefHeight="333.0" prefWidth="484.0">
+        <TextField fx:id="text_main_id" layoutX="165.0" layoutY="456.0" prefHeight="31.0" prefWidth="88.0" />
+        <TextField fx:id="text_main_type" layoutX="121.0" layoutY="212.0" prefHeight="31.0" prefWidth="139.0" />
+        <TextField fx:id="text_main_pou" layoutX="30.0" layoutY="212.0" prefHeight="31.0" prefWidth="58.0" />
+        <TextField fx:id="text_main_description" layoutX="125.0" layoutY="305.0" prefHeight="31.0" prefWidth="169.0" />
+        <TextField fx:id="text_main_price" layoutX="33.0" layoutY="305.0" prefHeight="31.0" prefWidth="75.0" />
+        <Label layoutX="190.0" layoutY="422.0" prefHeight="0.0" prefWidth="38.0" text="Id " />
+        <Label layoutX="161.0" layoutY="173.0" prefHeight="21.0" prefWidth="58.0" text="Type" />
+        <Label layoutX="42.0" layoutY="173.0" prefHeight="21.0" prefWidth="58.0" text="Pou" />
+        <Label layoutX="162.0" layoutY="275.0" prefHeight="21.0" prefWidth="88.0" text="Description" />
+        <Label layoutX="37.0" layoutY="264.0" prefHeight="21.0" prefWidth="103.0" text="Price" />
+        <Label layoutX="70.0" layoutY="349.0" prefHeight="21.0" prefWidth="58.0" text="Typec" />
+        <Button fx:id="btn_main_add" layoutX="305.0" layoutY="438.0" mnemonicParsing="false" onAction="#add" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #f5ae07;" text="Add" />
+        <Button fx:id="btn_main_modify" layoutX="679.0" layoutY="441.0" mnemonicParsing="false" onAction="#modify" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #05e6d3;" text="Modify" />
+        <Button fx:id="btn_main_display" layoutX="305.0" layoutY="497.0" mnemonicParsing="false" onAction="#display" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #4AAFE8;" text="Display" />
+        <Button fx:id="btn_main_delete" layoutX="556.0" layoutY="441.0" mnemonicParsing="false" onAction="#delete" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF281C;" text="Delete" />
+        <TableView fx:id="tablespareparts" layoutX="305.0" layoutY="98.0" onMouseClicked="#clickMousee" prefHeight="333.0" prefWidth="485.0">
             <columns>
                 <TableColumn fx:id="id_tab" prefWidth="70.0" text="Id" visible="false" />
                 <TableColumn fx:id="type_tab" prefWidth="99.0" text="Type" />
@@ -39,8 +39,8 @@
                 <TableColumn fx:id="typec_tab" prefWidth="69.0" text="Type_car" />
             </columns>
         </TableView>
-        <Button fx:id="btn_main_refresh" layoutX="649.0" layoutY="510.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF7A30;" text="Refresh" />
-        <Pane layoutX="579.0" layoutY="14.0" prefHeight="66.0" prefWidth="377.0" style="-fx-background-color: #fd3f92;" styleClass="backgroundAdmin">
+        <Button fx:id="btn_main_refresh" layoutX="429.0" layoutY="500.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: #FF7A30;" text="Refresh" />
+        <Pane layoutX="395.0" layoutY="14.0" prefHeight="66.0" prefWidth="377.0" style="-fx-background-color: #fd3f92;" styleClass="backgroundAdmin">
             <children>
                 <Hyperlink focusTraversable="false" layoutX="124.0" layoutY="27.0" prefHeight="35.0" prefWidth="110.0" scaleX="1.2" scaleY="1.2" text="SpareParts" textAlignment="CENTER" textFill="WHITE">
                     <font>
@@ -49,8 +49,8 @@
                 </Hyperlink>
             </children>
         </Pane>
-        <TextField fx:id="text_main_typec" layoutX="254.0" layoutY="374.0" prefHeight="31.0" prefWidth="150.0" />
-        <ImageView fitHeight="155.0" fitWidth="161.0" layoutX="202.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+        <TextField fx:id="text_main_typec" layoutX="24.0" layoutY="370.0" prefHeight="31.0" prefWidth="150.0" />
+        <ImageView fitHeight="155.0" fitWidth="161.0" layoutX="45.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Images/image.png" />
             </image>
@@ -70,16 +70,16 @@
                 <Image url="@../Images/sp5.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="95.0" fitWidth="88.0" layoutX="176.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="95.0" fitWidth="88.0" layoutX="55.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Images/im_sp8.png" />
             </image>
         </ImageView>
-        <Button fx:id="btn_main_rech" layoutX="768.0" layoutY="510.0" mnemonicParsing="false" onAction="#GetSparePartsById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Research" />
-        <TextField fx:id="tfNom" layoutX="268.0" layoutY="534.0" prefHeight="31.0" prefWidth="199.0" />
-        <Button fx:id="btn_pdf" layoutX="649.0" layoutY="446.0" mnemonicParsing="false" onAction="#GeneratePdf" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="telecharger pdf" />
-        <Label layoutX="268.0" layoutY="500.0" prefHeight="21.0" prefWidth="169.0" text="Type/Typec  filtered/ordered : " />
-        <Button fx:id="btn_states" layoutX="885.0" layoutY="510.0" mnemonicParsing="false" onAction="#statesSP" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="statistique" />
+        <Button fx:id="btn_main_rech" layoutX="556.0" layoutY="500.0" mnemonicParsing="false" onAction="#GetSparePartsById" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: CCFF00;" text="Research" />
+        <TextField fx:id="tfNom" layoutX="88.0" layoutY="534.0" prefHeight="31.0" prefWidth="199.0" />
+        <Button fx:id="btn_pdf" layoutX="429.0" layoutY="441.0" mnemonicParsing="false" onAction="#GeneratePdf" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="telecharger pdf" />
+        <Label layoutX="115.0" layoutY="510.0" prefHeight="21.0" prefWidth="169.0" text="Type/Typec  filtered/ordered : " />
+        <Button fx:id="btn_states" layoutX="673.0" layoutY="500.0" mnemonicParsing="false" onAction="#statesSP" prefHeight="48.0" prefWidth="111.0" style="-fx-background-color: violet;" text="statistique" />
       
     </children>
 </AnchorPane>
