@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<Pane fx:id="pnlReservationDetails" prefHeight="1031.0" prefWidth="554.0" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+<Pane fx:id="pnlReservationDetails" prefHeight="1031.0" prefWidth="554.0" stylesheets="@../Styles/reservationStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="loadingText" layoutX="195.0" layoutY="742.0" opacity="0.3" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading Map...">
          <font>

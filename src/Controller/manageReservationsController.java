@@ -19,7 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -40,6 +39,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.stage.Popup;
+import javafx.stage.Window;
 import javafx.scene.effect.BlurType;
 
 /**
@@ -390,9 +390,11 @@ public class manageReservationsController implements Initializable {
 
         pnlManageReservations.getChildren().add(overlay); // Adding overlay to View.
 
-        Bounds rootBounds = pnlManageReservations.getBoundsInLocal();
-        double popupX = rootBounds.getMinX() + (rootBounds.getWidth() - scrollPane.getWidth()) / 1.4;
-        popup.show(detailsBtn.getScene().getWindow(), popupX, 125);
+        Window primarystage = pnlManageReservations.getScene().getWindow();
+        double popupX = (2 * primarystage.getWidth() - pnlManageReservations.getWidth()) / 2;
+        double popupY = primarystage.getHeight() / 6;
+
+        popup.show(primarystage, popupX, popupY);
     }
 
     /**
