@@ -31,7 +31,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException, IOException {
         AuctionDaoImplementation aucDao = new AuctionDaoImplementation();
-        //aucDao.WinnerNotificationMail();
+        aucDao.WinnerNotificationMail();
         launch(args);
     }
 }

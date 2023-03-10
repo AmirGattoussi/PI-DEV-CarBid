@@ -36,6 +36,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
+import java.io.FileWriter;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -102,6 +104,14 @@ public class LoginController implements Initializable {
             User loggedUser = user.getUserByMail(emailIn);
             // Set the currently logged-in user in the CurrentUser class
             CurrentUser.setUser(loggedUser);
+            // Log the login information
+            try {
+                try (FileWriter writer = new FileWriter("login_log.txt", true)) {
+                    writer.write(emailIn + "," + new Date().toString() + "\n");
+                }
+            } catch (IOException e) {
+                System.out.println("Failed to write to login log file");
+            }
             // Login to Admin Interface
             if (admin.isAdmin(passThroughUserID)) {
                 Parent root = FXMLLoader.load(getClass().getResource("../View/AdminHome.fxml"));

@@ -56,7 +56,7 @@ public class MailApi {
             multipart.addBodyPart(messageBodyPart);
             MimeBodyPart attachmentPart = new MimeBodyPart();
             //DataSource source = new FileDataSource("/PI-DEV/nbproject/qr_code.pdf");
-            FileDataSource source = new FileDataSource("C:\\Users\\asus\\Desktop\\04-02 - Copie\\PI-DEV-CarBid/qr_code.pdf");
+            FileDataSource source = new FileDataSource("C:\\Users\\gtsia\\Documents\\NetBeansProjects\\PI-DEV/qr_code.pdf");
             MimeBodyPart pdfAttachment = new MimeBodyPart();
             attachmentPart.setDataHandler(new DataHandler(source));
             attachmentPart.setFileName("Details.pdf");
