@@ -23,11 +23,6 @@
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Label>
-            <ImageView fitHeight="47.0" fitWidth="85.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../New%20Folder/Screenshot%202023-02-22%20002512.png" />
-               </image>
-            </ImageView>
     
             <Line endX="-61.0" layoutX="101.0" layoutY="115.0" startX="-100.0" stroke="#efeeee" />
             <Text fill="#f8f3f3" layoutX="18.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are currently viewing your listed cars" wrappingWidth="121.068359375">
@@ -59,7 +54,7 @@
       <TextField alignment="CENTER_RIGHT" layoutX="496.0" layoutY="51.0" prefHeight="30.0" prefWidth="183.0" promptText="Search" />
       <ImageView fitHeight="18.0" fitWidth="34.0" layoutX="180.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/search-icon-png-5.png" />
+            <Image url="@../Images/search-icon-png-5.png" />
          </image>
       </ImageView>
       <Button fx:id="btnupdate" layoutX="574.0" layoutY="334.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="73.0" text="update" />
@@ -75,5 +70,10 @@
         </columns>
       </TableView>
       <Button fx:id="btndelete" layoutX="359.0" layoutY="334.0" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="79.0" text="Delete" />
+      <ImageView fitHeight="47.0" fitWidth="85.0" layoutX="178.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/garage.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
