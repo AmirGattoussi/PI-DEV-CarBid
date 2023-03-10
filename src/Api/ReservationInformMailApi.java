@@ -24,7 +24,7 @@ public class ReservationInformMailApi {
      */
     public static void sendEmailToUser(String recipientEmail, String name, String car_brand, String car_model) {
         try {
-            String senderEmail = "neil.monastiri@esprit.tn";
+            String senderEmail = "carbid.corp@gmail.com";
 
             /* Loading API key from config.properties for security reasons */
             Properties prop = new Properties();

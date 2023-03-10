@@ -3,7 +3,7 @@ Dear [Customer Name],
 We are sorry to inform you that your reservation to examine the car: [Car Brand] [Car Model] has been canceled due to unforeseen circumstances. 
 We understand that this may cause inconvenience and we apologize for any inconvenience caused.
 
-If you have any questions or concerns regarding this cancellation, please contact us at carBidVerif@gmail.com.
+If you have any questions or concerns regarding this cancellation, please contact us at carbid.corp@gmail.com.
 Thank you for your understanding.
 
 Best regards,
