@@ -95,7 +95,7 @@ public class LoginController implements Initializable {
         String emailIn = email.getText();
         String passwordIn = password.getText();
         String hashedPassword = PasswordHasher.hash(passwordIn);
-        valid = user.login(emailIn, hashedPassword);
+        valid = user.login(emailIn, passwordIn);
         if (valid) {
             // login successful, display success message on screen
             showLoginNotification();

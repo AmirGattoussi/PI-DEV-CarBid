@@ -233,7 +233,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long minutes = timeLeft.toMinutes() % 60;
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                         if ((remainingTime.compareTo("22:05:00")<0) && status.equals("open")) {
+                         if ((remainingTime.compareTo("00:00:00")==0) && status.equals("open")) {
                             System.out.println(remainingTime);
                             //System.out.println(remainingTime.compareTo("00:00:00")<0);
                             
@@ -249,7 +249,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                                 statement2.setInt(1, idAuc);
                                 // statement1.setFloat(2, highestBid);
                                 ResultSet resultSet2 = statement1.executeQuery();
-                                statement2.executeUpdate();
+                                //statement2.executeUpdate();
                                 if (resultSet2.next()) {
                                     String winnerEmail = resultSet2.getString("email");
                                     System.out.println(winnerEmail);

@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//import org.mindrot.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.*;
+
 
 public class UserDao implements IUserDao {
 
@@ -188,30 +191,34 @@ public class UserDao implements IUserDao {
     }
 
     public boolean login(String email, String password) {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
 
-        try {
-            // prepare a statement to query the database for a user with the given username
-            // and password
-            statement = cnx.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
-            statement.setString(1, email);
-            statement.setString(2, password);
+    try {
+        // prepare a statement to query the database for a user with the given email
+        statement = cnx.prepareStatement("SELECT * FROM user WHERE email = ?");
+        statement.setString(1, email);
 
-            // execute the query and check if the result set contains any rows
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            // handle any exceptions that occur while querying the database
-            e.printStackTrace();
-            return false;
+        // execute the query and check if the result set contains any rows
+        resultSet = statement.executeQuery();
 
+        String hashedPassword = null;
+        if (resultSet.next()) {
+            hashedPassword = resultSet.getString("password");
         }
+//        System.out.println("Hashed: " + hashedPassword);
+//        System.out.println("Non Hashed: " + password);
+//        System.out.println( BCrypt.checkpw(password, hashedPassword));
+BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+        System.out.println(result);
+
+        return result.verified;
+    } catch (SQLException e) {
+        // handle any exceptions that occur while querying the database
+        e.printStackTrace();
+        return false;
     }
+}
 
     public boolean resetPassword(String email, String newPassword) {
         PreparedStatement stmt = null;
