@@ -69,7 +69,7 @@ public class CarDao implements IDao<Car> {
         } */
 
         //To change body of generated methods, choose Tools | Templates.
-        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_user,carImg) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into cars (model,color,type,make,description,mileage,year,fiscalpower,transmission,loss,primarydamage,secondarydamage,fueltype,id_owner_id,carImg) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req);
@@ -161,7 +161,7 @@ public class CarDao implements IDao<Car> {
 
      
     public ObservableList<Car> displayAllbyuserId(int id ) {
-        String req = "select * from cars where id_user = "+ id;
+        String req = "select * from cars where id_owner_id = "+ id;
         ObservableList<Car> list = FXCollections.observableArrayList();
 
         try {
@@ -185,7 +185,7 @@ public class CarDao implements IDao<Car> {
                 p.setSecondarydamage(rs.getString("secondarydamage"));
                 p.setTransmission(rs.getString("transmission"));
                 p.setYear(rs.getInt("year"));
-                            p.setOwner(userDao.getUserById(rs.getInt("id_user")));
+                            p.setOwner(userDao.getUserById(rs.getInt("id_owner_id")));
                             p.setCarImg(rs.getString("carImg"));
 
                 list.add(p);
@@ -256,7 +256,7 @@ public class CarDao implements IDao<Car> {
             p.setTransmission(rs.getString("transmission"));
             p.setYear(rs.getInt("year"));
             p.setCarImg(rs.getString("carImg"));
-            p.setOwner(userDao.getUserById(rs.getInt("id_user")));
+            p.setOwner(userDao.getUserById(rs.getInt("id_owner_id")));
 
             // }
         } catch (SQLException ex) {
@@ -323,7 +323,7 @@ public class CarDao implements IDao<Car> {
                                 );
                                         statement1.setInt(1, idAuc);
                                          PreparedStatement statement = conn.prepareStatement(
-                                        "update cars set id_user=?,solde = ? where id_car=?"
+                                        "update cars set id_owner_id=?,solde = ? where id_car=?"
                                 );
                                          try{
                                          ResultSet resultSet = statement1.executeQuery();
