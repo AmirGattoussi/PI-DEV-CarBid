@@ -20,7 +20,7 @@
          <children>
             <Separator layoutX="154.0" layoutY="9.0" orientation="VERTICAL" prefHeight="450.0" prefWidth="2.0" />
             <Separator layoutX="-6.0" layoutY="73.0" prefWidth="94.0" />
-            <Pane layoutY="9.0" prefHeight="584.0" prefWidth="157.0" style="-fx-background-color: #363948;">
+            <Pane layoutY="9.0" prefHeight="584.0" prefWidth="157.0" style="-fx-background-color: db2d2e;">
                <children>
                   <Label layoutX="14.0" layoutY="101.0" prefHeight="28.0" prefWidth="140.0" text="Display Car" textAlignment="CENTER" textFill="#e8e5e5">
                      <font>
