@@ -39,11 +39,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import static jdk.nashorn.internal.objects.NativeJava.type;
-import javafx.stage.FileChooser.ExtensionFilter;;
+// import javax.swing.JFileChooser;
+// import javax.swing.JFrame;
+// import javax.swing.filechooser.FileNameExtensionFilter;
+// import static jdk.nashorn.internal.objects.NativeJava.type;
+// import javafx.stage.FileChooser.ExtensionFilter;;
 
 /**
  * FXML Controller class

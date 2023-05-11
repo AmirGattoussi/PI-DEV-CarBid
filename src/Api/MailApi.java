@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
+//import javax.activation.*;
 
 public class MailApi {
 
@@ -56,9 +56,9 @@ public class MailApi {
             multipart.addBodyPart(messageBodyPart);
             MimeBodyPart attachmentPart = new MimeBodyPart();
             //DataSource source = new FileDataSource("/PI-DEV/nbproject/qr_code.pdf");
-            FileDataSource source = new FileDataSource("C:\\Users\\gtsia\\Documents\\NetBeansProjects\\PI-DEV/qr_code.pdf");
+            //FileDataSource source = new FileDataSource("C:\\Users\\gtsia\\Documents\\NetBeansProjects\\PI-DEV/qr_code.pdf");
             MimeBodyPart pdfAttachment = new MimeBodyPart();
-            attachmentPart.setDataHandler(new DataHandler(source));
+            //attachmentPart.setDataHandler(new DataHandler(source));
             attachmentPart.setFileName("Details.pdf");
             multipart.addBodyPart(attachmentPart);
             message.setContent(multipart);
