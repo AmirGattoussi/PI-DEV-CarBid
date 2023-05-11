@@ -370,7 +370,7 @@ public class ReservationDao implements IReservationDao {
 
         try {
             statement = cnx.prepareStatement(
-                    "SELECT u.name, u.phone_number,u.email,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_agent=r.id_agent AND r.id_car=c.id_car WHERE u.id_agent IS NOT NULL AND r.id_user=? AND r.id_car=?;");
+                    "SELECT u.name, u.phone_number,u.email,c.make,c.model,r.date,r.location FROM user u JOIN reservation r JOIN cars c ON u.id_user=r.id_user AND r.id_car=c.id_car WHERE u.id_user IS NOT NULL AND r.id_user=? AND r.id_car=?;");
 
             statement.setInt(1, id_user);
             statement.setInt(2, id_car);
