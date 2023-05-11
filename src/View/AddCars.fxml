@@ -17,7 +17,7 @@
          <top>
             <AnchorPane prefHeight="50.0" prefWidth="1040.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="216.0" layoutY="-77.0" prefHeight="47.0" prefWidth="836.0" style="-fx-background-color: #363948;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane layoutX="216.0" layoutY="-77.0" prefHeight="47.0" prefWidth="836.0" style="-fx-background-color: db2d2e;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button layoutX="21.0" layoutY="32.0" mnemonicParsing="false" text="&lt; Back To Menu" />
                </children>
             </AnchorPane>
@@ -25,7 +25,7 @@
          <left>
             <AnchorPane prefHeight="901.0" prefWidth="216.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="-2.0" layoutY="-67.0" prefHeight="1104.0" prefWidth="221.0" style="-fx-background-color: #363948;" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-67.0">
+                  <AnchorPane layoutX="-2.0" layoutY="-67.0" prefHeight="1104.0" prefWidth="221.0" style="-fx-background-color: db2d2e;" stylesheets="@newCascadeStyleSheet.css" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-67.0">
                      <children>
                         <Line endX="100.0" layoutX="100.0" layoutY="109.0" startX="-100.0" stroke="#efebeb" />
                         <ImageView fitHeight="33.0" fitWidth="29.0" layoutX="20.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
@@ -72,10 +72,10 @@
                               <TextField fx:id="tfFP" layoutX="155.0" layoutY="225.0" prefHeight="26.0" prefWidth="142.0" promptText="FiscalPower: " />
                               <TextField fx:id="tfMileage" layoutX="12.0" layoutY="322.0" prefHeight="26.0" prefWidth="117.0" promptText="mileage:" />
                               <TextField fx:id="tfFt" layoutX="157.0" layoutY="134.0" prefHeight="26.0" prefWidth="139.0" promptText="FuelType:" />
-                              <Button fx:id="btnInsert" layoutX="299.0" layoutY="423.0" mnemonicParsing="false" onAction="#insert" prefHeight="30.0" prefWidth="129.0" text="insert" />
+                              <Button fx:id="btnInsert" layoutX="299.0" layoutY="423.0" mnemonicParsing="false" onAction="#insert" prefHeight="30.0" prefWidth="129.0" style="-fx-background-color: db2d2e;" text="insert" />
                               <TextField fx:id="tfDesc" alignment="TOP_LEFT" layoutX="460.0" layoutY="301.0" prefHeight="152.0" prefWidth="335.0" styleClass="textfield" stylesheets="@newCascadeStyleSheet.css" />
                               <Label layoutX="361.0" layoutY="29.0" prefHeight="18.0" prefWidth="153.0" text="Attach Images (JPG,JPEG)" />
-                              <Button fx:id="btnimport" layoutX="364.0" layoutY="54.0" mnemonicParsing="false" onAction="#Import" prefHeight="33.0" prefWidth="96.0" text="import" textFill="#c4bfbf" />
+                              <Button fx:id="btnimport" layoutX="364.0" layoutY="54.0" mnemonicParsing="false" onAction="#Import" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: db2d2e;" text="import" textFill="#c4bfbf" />
                               <Label layoutX="364.0" layoutY="305.0" prefHeight="17.0" prefWidth="73.0" text="Description" />
                               <ImageView fx:id="imgid" fitHeight="150.0" fitWidth="200.0" layoutX="539.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
                            </children>

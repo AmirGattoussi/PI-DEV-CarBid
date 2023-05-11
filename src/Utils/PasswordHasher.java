@@ -1,8 +1,8 @@
 package Utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-//import org.mindrot.jbcrypt.BCrypt;
+// import java.security.MessageDigest;
+// import java.security.NoSuchAlgorithmException;
+// import org.mindrot.jbcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class PasswordHasher {
