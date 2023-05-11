@@ -73,9 +73,10 @@ public class AdminDao implements IAdminDao {
                 id_admin = resultSet.getInt("id_user");
 //                System.out.println(id_admin);
                 statement3 = cnx.prepareStatement(
-                        "UPDATE user SET id_admin = ? WHERE id_user = ?");
+                        "UPDATE user SET id_admin = ?, roles=? WHERE id_user = ?");
                 statement3.setInt(1, id_admin);
-                statement3.setInt(2, id_admin);
+                statement3.setString(2,"[\"ROLE_ADMIN\"]");
+                statement3.setInt(3, id_admin);
                 statement3.executeUpdate();
 
             }

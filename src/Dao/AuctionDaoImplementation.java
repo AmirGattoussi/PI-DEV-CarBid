@@ -210,7 +210,7 @@ public class AuctionDaoImplementation implements AuctionDao {
 
     }
 
-    @Override
+      @Override
     public void WinnerNotificationMail() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new Runnable() {
@@ -233,7 +233,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                         long minutes = timeLeft.toMinutes() % 60;
                         long seconds = timeLeft.getSeconds() % 60;
                         String remainingTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                         if ((remainingTime.compareTo("32:58:00")==0) && status.equals("open")) {
+                         if ((remainingTime.compareTo("07:18:30")<0) && status.equals("open")) {
                             System.out.println(remainingTime);
                             //System.out.println(remainingTime.compareTo("00:00:00")<0);
                             
@@ -249,7 +249,7 @@ public class AuctionDaoImplementation implements AuctionDao {
                                 statement2.setInt(1, idAuc);
                                 // statement1.setFloat(2, highestBid);
                                 ResultSet resultSet2 = statement1.executeQuery();
-                                //statement2.executeUpdate();
+                                statement2.executeUpdate();
                                 if (resultSet2.next()) {
                                     String winnerEmail = resultSet2.getString("email");
                                     System.out.println(winnerEmail);
@@ -272,7 +272,7 @@ public class AuctionDaoImplementation implements AuctionDao {
         }, 0, 1, TimeUnit.MINUTES);
 
     }
-
+    
     @Override
     public void IncrementBid(int id, int userId, float amount) {
         PreparedStatement statement;
@@ -334,10 +334,10 @@ public class AuctionDaoImplementation implements AuctionDao {
         PreparedStatement statement;
         try {
             statement = cnx.prepareStatement("SELECT idAuction FROM auction WHERE idCar= ?");
-                statement.setInt(1, idCar);
+            statement.setInt(1, idCar);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                int idAuction=resultSet.getInt("idAuction");
+                int idAuction = resultSet.getInt("idAuction");
                 return idAuction;
             } else {
                 System.out.println("error");

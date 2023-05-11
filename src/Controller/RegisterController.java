@@ -56,7 +56,7 @@ public class RegisterController implements Initializable {
     private PasswordField RepeatTextField;
     @FXML
     private ChoiceBox choiceBox;
-    ObservableList<String> accountType = FXCollections.observableArrayList("Standard User", "Admin", "Agent");
+    ObservableList<String> accountType = FXCollections.observableArrayList("Standard User", "Admin");
 
     /**
      * Initializes the controller class.
