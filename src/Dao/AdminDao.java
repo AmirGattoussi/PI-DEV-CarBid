@@ -71,7 +71,7 @@ public class AdminDao implements IAdminDao {
             // Set ID User to ID Admin
             if (resultSet.next()) {
                 id_admin = resultSet.getInt("id_user");
-                System.out.println(id_admin);
+//                System.out.println(id_admin);
                 statement3 = cnx.prepareStatement(
                         "UPDATE user SET id_admin = ? WHERE id_user = ?");
                 statement3.setInt(1, id_admin);

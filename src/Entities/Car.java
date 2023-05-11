@@ -33,6 +33,25 @@ public class Car {
     private float baseprice = 10000;
     private String carImg;
     private User owner;
+    private boolean solde;
+    private boolean archive;
+
+    public boolean isSolde() {
+        return solde;
+    }
+
+    public void setSolde(boolean solde) {
+        this.solde = solde;
+    }
+
+  
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
+    }
 
     public User getOwner() {
         return owner;
